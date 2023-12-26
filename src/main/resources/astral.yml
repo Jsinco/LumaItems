@@ -1,0 +1,11 @@
+# Class name and then chance of item
+item_classes:
+  -
+
+
+
+item_upgrades:
+  swiftset:
+    new-material: NETHERITE
+    increase-enchants-by: 1
+    add-enchants: {mending: 1}

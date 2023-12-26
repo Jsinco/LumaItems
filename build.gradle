@@ -1,0 +1,73 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.20-Beta2'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'dev.jsinco'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+    maven {
+        name = "placeholderapi"
+        url = "https://repo.extendedclip.com/content/repositories/placeholderapi/"
+    }
+    maven {
+        name = "iridiumdevelopment"
+        url = "https://nexus.iridiumdevelopment.net/repository/maven-releases/"
+    }
+}
+
+dependencies {
+    compileOnly "io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT"
+    compileOnly "me.clip:placeholderapi:2.11.3"
+
+    implementation "com.iridium:IridiumColorAPI:1.0.6"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+
+def targetJavaVersion = 17
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+shadowJar {
+    dependencies {
+        include(dependency("org.jetbrains.kotlin:kotlin-stdlib"))
+        include(dependency("com.iridium:IridiumColorAPI:1.0.6"))
+    }
+}
+
+kotlin {
+    jvmToolchain(17)
+}
+build.dependsOn shadowJar

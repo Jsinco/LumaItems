@@ -1,0 +1,123 @@
+relic-materials:
+  lunar:
+    - 'DIAMOND_HELMET'
+    - 'DIAMOND_CHESTPLATE'
+    - 'DIAMOND_LEGGINGS'
+    - 'DIAMOND_BOOTS'
+    - 'DIAMOND_SWORD'
+    - 'DIAMOND_PICKAXE'
+    - 'DIAMOND_AXE'
+    - 'DIAMOND_SHOVEL'
+    - 'DIAMOND_HOE'
+  nova:
+    - 'STONE_SWORD'
+    - 'STONE_PICKAXE'
+    - 'STONE_AXE'
+    - 'STONE_SHOVEL'
+    - 'STONE_HOE'
+    - 'BOW'
+  pulsar:
+      - 'STONE_SWORD'
+      - 'STONE_PICKAXE'
+      - 'STONE_AXE'
+      - 'STONE_HOE'
+      - 'WOODEN_PICKAXE'
+      - 'WOODEN_AXE'
+      - 'WOODEN_SHOVEL'
+      - 'BOW'
+  solar:
+    - 'STONE_SWORD'
+    - 'STONE_PICKAXE'
+    - 'STONE_AXE'
+    - 'STONE_SHOVEL'
+    - 'STONE_HOE'
+    - 'WOODEN_PICKAXE'
+    - 'WOODEN_AXE'
+    - 'WOODEN_SHOVEL'
+    - 'WOODEN_HOE'
+    - 'BOW'
+
+
+
+
+names:
+  prefixes:
+    - 'Bleak'
+    - 'Spotlight'
+    - 'Liar''s'
+    - 'Soul'
+    - 'Apple Slice'
+    - 'Imagination'
+    - 'Candy'
+    - 'White Wool'
+    - 'Lover''s'
+    - 'Telephone'
+    - 'City Pop'
+    - 'Ice Cube'
+    - 'Yam'
+    - 'Circus'
+    - 'Carnival'
+    - 'Phoenix'
+    - 'Reflections'
+    - 'Opera House'
+    - 'Clouded Skies'
+    - 'Zodiac'
+    - 'Blonde'
+    - 'Cotton Candy'
+    - 'Sweet Soul'
+    - 'Egyptian'
+    - 'Utopian'
+    - 'Sakura'
+    - 'Cherry'
+    - 'Oak'
+    - 'Crew'
+    - 'Crimson'
+    - 'Forgotten'
+    - 'Boss'''
+    - 'Green Thumb'
+    - 'Trooper'
+    - 'Smash'
+    - 'Nameless'
+    - 'Soda'
+    - 'Beluga'
+    - 'Jsinco''s'
+  suffixes:
+    - "Vortex"
+    - "Elegance"
+    - "Apex"
+    - "Serenity"
+    - "Panorama"
+    - "Silhouette"
+    - "Opulence"
+    - "Oracle"
+    - "Muse"
+    - "Mosaic"
+    - "Chalice"
+    - "Vestige"
+    - "Paragon"
+    - "Paradox"
+    - "Grace"
+    - "Tranquility"
+    - "Horizon"
+    - "Reverie"
+    - "Echo"
+    - "Enigma"
+    - "Anomaly"
+    - "Aberration"
+    - "Exception"
+    - "Unity"
+    - "Solitude"
+    - "Ascent"
+    - "Mirage"
+    - "Abyss"
+    - "Remnant"
+    - "Whisper"
+    - "Revenant"
+    - "Labyrinth"
+    - "Synchrony"
+    - "Nocturne"
+    - "Nemesis"
+    - "Crescendo"
+    - "Incense"
+    - "Resonance"
+    - "Serenade"
