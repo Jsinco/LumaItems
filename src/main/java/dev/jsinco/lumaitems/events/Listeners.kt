@@ -155,6 +155,24 @@ class Listeners(val plugin: LumaItems) : Listener {
     }
 
     @EventHandler
+    fun onPlayerDamagedByEntity(event: EntityDamageByEntityEvent) {
+        val player = event.entity as? Player ?: return
+
+        val playerData: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
+
+        for (customItem in ItemManager.customItems) {
+            for (dataContainer in playerData) {
+                if (dataContainer.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
+                    val customItemClass = customItem.value
+                    customItemClass.executeAbilities(Ability.PLAYER_DAMAGED_BY_ENTITY, player, event)
+                    break
+                }
+            }
+        }
+    }
+
+
+    @EventHandler
     fun onPlayerDropItem(event: PlayerDropItemEvent) {
         val player = event.player
 

@@ -14,10 +14,11 @@ class GiveItemCommand : SubCommand {
     init {
         for (customItem in customItems) {
             val item: ItemStack = customItem.value.createItem().second
+            if (!item.hasItemMeta()) continue
             customItemsByName[
-                ChatColor.stripColor(item.itemMeta.displayName)!!
-                .replace(" ", "_")
-                .lowercase()
+                ChatColor.stripColor(item.itemMeta.displayName)
+                ?.replace(" ", "_")
+                ?.lowercase() ?: item.type.toString().lowercase()
             ] = item
         }
     }

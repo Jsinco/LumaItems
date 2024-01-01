@@ -1,11 +1,14 @@
 package dev.jsinco.lumaitems.relics
 
+import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.CreateItem
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
+import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemStack
+import org.bukkit.persistence.PersistentDataType
 import kotlin.random.Random
 
 class RelicCreator (
@@ -15,7 +18,8 @@ class RelicCreator (
     private val material: Material
 ) {
     companion object {
-        private const val RELIC_SUFFIX_RGB = "&#F7FFC9"
+        private val plugin: LumaItems = LumaItems.getPlugin()
+        private const val RELIC_SUFFIX_RGB = "&f"
         private val blackListedEnchants: List<Enchantment> = listOf(Enchantment.BINDING_CURSE,  Enchantment.VANISHING_CURSE)
     }
 
@@ -36,10 +40,10 @@ class RelicCreator (
             mutableListOf(),
             mutableListOf(),
             material,
-            mutableListOf("relic"),
+            mutableListOf("relic-item"),
             enchantments.toMutableMap()
         )
-
+        itemCreator.stringPersistentDatas[NamespacedKey(plugin, "relic-rarity")] = rarity.name
         itemCreator.tier = rarity.tier
         itemCreator.addHiddenCharacter = false
     }

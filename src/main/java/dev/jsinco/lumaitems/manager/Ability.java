@@ -25,5 +25,6 @@ public enum Ability {
     MOVE,
     CONSUME_ITEM,
     ENTITY_CHANGE_BLOCK,
-    POTION_EFFECT
+    POTION_EFFECT,
+    PLAYER_DAMAGED_BY_ENTITY,
 }

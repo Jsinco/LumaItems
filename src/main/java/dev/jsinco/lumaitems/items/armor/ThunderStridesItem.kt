@@ -46,7 +46,6 @@ class ThunderStridesItem : CustomItem {
 
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
-
         when (type) {
             Ability.PLAYER_CROUCH -> {
                 if (player.isSneaking || cooldown.contains(player.uniqueId)) return false

@@ -1,12 +1,13 @@
 package dev.jsinco.lumaitems.events
 
-import dev.jsinco.lumaitems.guis.GUI
 import dev.jsinco.lumaitems.guis.GUIHolder
 import dev.jsinco.lumaitems.manager.FileManager
+import dev.jsinco.lumaitems.relics.RelicDisassembler
 import dev.jsinco.lumaitems.relics.Rarity
 import dev.jsinco.lumaitems.relics.RelicCreator
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Monster
@@ -14,6 +15,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntitySpawnEvent
 import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.player.PlayerInteractEvent
 import kotlin.random.Random
 
 class RelicListeners : Listener {
@@ -60,5 +62,19 @@ class RelicListeners : Listener {
 
         val guiHolder = event.inventory.holder as GUIHolder
         guiHolder.guiClass.handleClick(event)
+    }
+
+    @EventHandler
+    fun onDisassemblerInteract(event: PlayerInteractEvent) {
+        if (!RelicDisassembler.disassemblerBlocks.contains(event.clickedBlock ?: return)) return
+        event.isCancelled = true
+        val player = event.player
+        val item = player.inventory.itemInMainHand
+
+        val command = RelicDisassembler.getCommandToExecute(item, event.action, player) ?: return
+
+        item.amount -= 1
+        player.playSound(player.location, Sound.ENTITY_SQUID_SQUIRT, 1f, 0.9f)
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command)
     }
 }

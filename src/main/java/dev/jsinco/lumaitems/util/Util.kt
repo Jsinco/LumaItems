@@ -16,7 +16,7 @@ object Util {
 
     lateinit var prefix: String
     private const val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
-    private val gearTypes: List<String> = listOf("HELMET", "CHESTPLATE", "LEGGINGS", "BOOTS", "SWORD", "AXE", "PICKAXE", "SHOVEL", "HOE")
+    private val gearTypes: List<String> = listOf("Helmet", "Chestplate", "Leggings", "Boots", "Sword", "Pickaxe", "Axe", "Shovel", "Hoe")
     val plugin: LumaItems = LumaItems.getPlugin()
 
     @JvmStatic
@@ -95,10 +95,9 @@ object Util {
 
     fun getAllEquipmentNBT(player: Player): List<PersistentDataContainer> {
         val nbtList: MutableList<PersistentDataContainer> = mutableListOf()
-        player.inventory.helmet?.itemMeta?.persistentDataContainer?.let { nbtList.add(it) }
-        player.inventory.chestplate?.itemMeta?.persistentDataContainer?.let { nbtList.add(it) }
-        player.inventory.leggings?.itemMeta?.persistentDataContainer?.let { nbtList.add(it) }
-        player.inventory.boots?.itemMeta?.persistentDataContainer?.let { nbtList.add(it) }
+        for (equipment in player.equipment.armorContents) {
+            equipment?.itemMeta?.persistentDataContainer?.let { nbtList.add(it) }
+        }
         player.inventory.itemInMainHand.itemMeta?.persistentDataContainer?.let { nbtList.add(it) }
         player.inventory.itemInOffHand.itemMeta?.persistentDataContainer?.let { nbtList.add(it) }
         return nbtList
@@ -132,5 +131,25 @@ object Util {
             if (item.type.toString().contains(gear)) return gear
         }
         return null
+    }
+    fun getGearType(material: Material): String? {
+        for (gear in gearTypes) {
+            if (material.toString().contains(gear, ignoreCase = true)) return gear
+        }
+        return null
+    }
+
+    fun formatMaterialName(material: Material): String {
+        var name = material.toString().lowercase().replace("_", " ")
+        name = name.substring(0, 1).uppercase() + name.substring(1)
+        for (i in name.indices) {
+            if (name[i] == ' ') {
+                name =
+                    name.substring(0, i) + " " + name[i + 1].toString().uppercase() + name.substring(
+                        i + 2
+                    ) // Capitalize first letter of each word
+            }
+        }
+        return name
     }
 }

@@ -11,6 +11,7 @@ import dev.jsinco.lumaitems.manager.GlowManager;
 import dev.jsinco.lumaitems.manager.ItemManager;
 import dev.jsinco.lumaitems.events.AnvilPrevention;
 import dev.jsinco.lumaitems.relics.RelicCrafting;
+import dev.jsinco.lumaitems.relics.RelicDisassembler;
 import dev.jsinco.lumaitems.util.Util;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -41,11 +42,11 @@ public final class LumaItems extends JavaPlugin {
 
         // Relics
         RelicCrafting.registerRecipes();
+        RelicDisassembler.setupDisassemblerBlocks();
 
         getServer().getPluginManager().registerEvents(new Listeners(this), this);
         getServer().getPluginManager().registerEvents(new AnvilPrevention(this), this);
         getServer().getPluginManager().registerEvents(new RelicListeners(), this);
-        getServer().getPluginManager().registerEvents(new StellarDeconstructor(this), this);
 
         getCommand("lumaitems").setExecutor(new CommandManager(this));
 

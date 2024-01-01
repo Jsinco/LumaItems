@@ -2,9 +2,7 @@ package dev.jsinco.lumaitems.commands;
 
 import dev.jsinco.lumaitems.LumaItems;
 import dev.jsinco.lumaitems.guis.AstralUpgradeGUI;
-import dev.jsinco.lumaitems.items.astral.SwiftSet;
-import dev.jsinco.lumaitems.relics.RelicCreator;
-import org.bukkit.Material;
+import dev.jsinco.lumaitems.items.astral.sets.MistralSet;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -26,7 +24,7 @@ public class DebugCommand implements SubCommand {
             player.sendMessage("Debug mode enabled.");
         }*/
 
-        for (ItemStack item : new SwiftSet().setItems()) {
+        for (ItemStack item : new MistralSet().setItems()) {
             player.getInventory().addItem(item);
         }
         AstralUpgradeGUI.INSTANCE.initGui(player);

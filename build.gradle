@@ -25,11 +25,20 @@ repositories {
         name = "iridiumdevelopment"
         url = "https://nexus.iridiumdevelopment.net/repository/maven-releases/"
     }
+    maven {
+        name = "jitpack"
+        url = "https://jitpack.io"
+    }
+    maven {
+        name = "enginehub"
+        url = "https://maven.enginehub.org/repo/"
+    }
 }
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT"
     compileOnly "me.clip:placeholderapi:2.11.3"
+    compileOnly "com.github.Zrips:jobs:4.17.2"
 
     implementation "com.iridium:IridiumColorAPI:1.0.6"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"

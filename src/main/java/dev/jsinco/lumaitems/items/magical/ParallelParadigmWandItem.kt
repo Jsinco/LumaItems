@@ -38,7 +38,7 @@ class ParallelParadigmWandItem : CustomItem {
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
         when (type) {
             Ability.LEFT_CLICK -> {
-                spawnWandProjectile(player)
+                AbilityUtil.spawnSpell(player, Particle.FIREWORKS_SPARK, "parallelparadigmwand", 120L)
             }
 
             Ability.PROJECTILE_LAND -> {
@@ -70,33 +70,6 @@ class ParallelParadigmWandItem : CustomItem {
         return false
     }
 
-    private fun spawnWandProjectile(player: Player) {
-        val snowball = player.launchProjectile(Snowball::class.java)
-        snowball.setGravity(false)
-        snowball.velocity = player.location.direction.multiply(3)
-        snowball.persistentDataContainer.set(NamespacedKey(plugin, "parallelparadigmwand"), PersistentDataType.SHORT, 1)
-        player.hideEntity(plugin, snowball)
-        for (entity in player.getNearbyEntities(65.0, 65.0, 65.0)) {
-            if (entity is Player) {
-                entity.hideEntity(plugin, snowball)
-            }
-        }
-
-        object : BukkitRunnable() {
-            override fun run() {
-                if (snowball.isDead) {
-                    cancel()
-                }
-                snowball.world.spawnParticle(Particle.FIREWORKS_SPARK, snowball.location, 4, 0.1, 0.1, 0.1, 0.0)
-
-            }
-        }.runTaskTimer(plugin, 0, 1)
-        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, {
-            if (!snowball.isDead) {
-                snowball.remove()
-            }
-        }, 120L)
-    }
 
     private fun ingniteEntity(entity: LivingEntity) {
         for (i in 0..60) {
@@ -150,3 +123,31 @@ class ParallelParadigmWandItem : CustomItem {
         }
     }
 }
+
+/*private fun spawnWandProjectile(player: Player) {
+    val snowball = player.launchProjectile(Snowball::class.java)
+    snowball.setGravity(false)
+    snowball.velocity = player.location.direction.multiply(3)
+    snowball.persistentDataContainer.set(NamespacedKey(plugin, "parallelparadigmwand"), PersistentDataType.SHORT, 1)
+    player.hideEntity(plugin, snowball)
+    for (entity in player.getNearbyEntities(65.0, 65.0, 65.0)) {
+        if (entity is Player) {
+            entity.hideEntity(plugin, snowball)
+        }
+    }
+
+    object : BukkitRunnable() {
+        override fun run() {
+            if (snowball.isDead) {
+                cancel()
+            }
+            snowball.world.spawnParticle(Particle.FIREWORKS_SPARK, snowball.location, 4, 0.1, 0.1, 0.1, 0.0)
+
+        }
+    }.runTaskTimer(plugin, 0, 1)
+    Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, {
+        if (!snowball.isDead) {
+            snowball.remove()
+        }
+    }, 120L)
+}*/

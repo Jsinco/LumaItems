@@ -35,7 +35,8 @@ public class ItemManager {
             "dev.jsinco.lumaitems.items.misc",
             "dev.jsinco.lumaitems.items.armor",
             "dev.jsinco.lumaitems.items.magical",
-            "dev.jsinco.lumaitems.items.astral"
+            "dev.jsinco.lumaitems.items.astral",
+            "dev.jsinco.lumaitems.items.astral.sets"
     );
 
     public ItemManager(LumaItems plugin) {
@@ -55,7 +56,7 @@ public class ItemManager {
 
         for (Class clazz : classes) {
             try {
-                if (CustomItem.class.isAssignableFrom(clazz) && !AstralSet.class.isAssignableFrom(clazz)) {
+                if (CustomItem.class.isAssignableFrom(clazz)) {
                     CustomItem item = (CustomItem) clazz.getDeclaredConstructor().newInstance();
                     customItems.put(item.createItem().component1(), item);
                 }

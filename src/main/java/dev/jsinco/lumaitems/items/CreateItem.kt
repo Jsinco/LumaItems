@@ -10,6 +10,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
+import kotlin.reflect.cast
 
 class CreateItem(
     private val name: String,
@@ -30,6 +31,7 @@ class CreateItem(
     var hideEnchants: Boolean = false
     var addHiddenCharacter: Boolean = true
     val attributeModifiers: MutableMap<Attribute, AttributeModifier> = mutableMapOf()
+    val stringPersistentDatas: MutableMap<NamespacedKey, String> = mutableMapOf()
 
     fun createItem(): ItemStack { // TODO: Organize
         val item = ItemStack(material)
@@ -39,6 +41,11 @@ class CreateItem(
         for (name in persistentData) {
             meta.persistentDataContainer.set(NamespacedKey(plugin, name), PersistentDataType.SHORT, 1)
         }
+
+        for (stringPersistentData in stringPersistentDatas) {
+            meta.persistentDataContainer.set(stringPersistentData.key, PersistentDataType.STRING, stringPersistentData.value)
+        }
+
         meta.setDisplayName(Util.colorcode(name))
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ARMOR_TRIM, ItemFlag.HIDE_UNBREAKABLE)
 

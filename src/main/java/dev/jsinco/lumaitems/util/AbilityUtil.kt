@@ -2,16 +2,20 @@ package dev.jsinco.lumaitems.util
 
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.LumaItems
+import dev.jsinco.lumaitems.items.magical.ParallelParadigmWandItem
 import org.bukkit.*
 import org.bukkit.Particle.DustOptions
 import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
+import org.bukkit.entity.Snowball
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.metadata.FixedMetadataValue
+import org.bukkit.persistence.PersistentDataType
+import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Vector
 import java.util.*
 
@@ -164,5 +168,34 @@ object AbilityUtil {
         block.world.spawnParticle(Particle.REDSTONE, block.location, 50, 0.5, 0.5, 0.5, 0.1, DustOptions(Color.fromRGB(255, 121, 209), 2f))
         block.world.playSound(block.location, Sound.ENTITY_FIREWORK_ROCKET_TWINKLE, 1f, 1f)
 
+    }
+
+    fun spawnSpell(player: Player, particle: Particle?, meta: String, ticksAlive: Long) {
+        val snowball = player.launchProjectile(Snowball::class.java)
+        snowball.setGravity(false)
+        snowball.velocity = player.location.direction.multiply(3)
+        snowball.persistentDataContainer.set(NamespacedKey(plugin, meta), PersistentDataType.SHORT, 1)
+        player.hideEntity(plugin, snowball)
+        for (entity in player.getNearbyEntities(65.0, 65.0, 65.0)) {
+            if (entity is Player) {
+                entity.hideEntity(plugin, snowball)
+            }
+        }
+
+        object : BukkitRunnable() {
+            override fun run() {
+                if (snowball.isDead) {
+                    cancel()
+                }
+                if (particle != null) {
+                    snowball.world.spawnParticle(particle, snowball.location, 4, 0.1, 0.1, 0.1, 0.0)
+                }
+            }
+        }.runTaskTimer(plugin, 0, 1)
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, {
+            if (!snowball.isDead) {
+                snowball.remove()
+            }
+        }, ticksAlive)
     }
 }
