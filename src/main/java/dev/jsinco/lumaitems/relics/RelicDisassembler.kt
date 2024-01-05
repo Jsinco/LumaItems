@@ -53,30 +53,22 @@ object RelicDisassembler {
             return null
         }
 
-        val weight = rarity.algorithmWeight * 5
-
-
-        val commands: MutableMap<Int, String> = mutableMapOf()
+        val commands: MutableMap<String, Int> = mutableMapOf()
         val configSec = file.getConfigurationSection("disassembler.commands")?.getKeys(false) ?: return null
         for (key in configSec) {
             val chance = Integer.parseInt(key)
             if (chance == 0) continue
-            commands[chance] = file.getString("disassembler.commands.$key") ?: "non"
+            commands[file.getString("disassembler.commands.$key") ?: "non"] = chance
         }
         if (rarity == Rarity.ASTRAL) {
-            commands[100] = "lumaitems relic %player% core astral"
+            commands["lumaitems relic %player% core astral"] = 100
         }
 
-        // TODO: rework formula
-        val selectedCommand: String
-        for (commandWeight in commands.keys) {
-            if (commandWeight > Random.nextInt(100)) {
-                selectedCommand = commands[commandWeight] ?: continue
-                return selectedCommand.replace("%player%", player.name)
-            }
+        var selectedCommand = commands.keys.random()
+        while (commands[selectedCommand]!! < Random.nextInt(100)) {
+            selectedCommand = commands.keys.random()
         }
-        Bukkit.broadcastMessage("debug")
-        return commands.values.random().replace("%player%", player.name)
+        return selectedCommand.replace("%player%", player.name)
     }
 
     private fun rescheduleCooldownTask(player: Player): Boolean {

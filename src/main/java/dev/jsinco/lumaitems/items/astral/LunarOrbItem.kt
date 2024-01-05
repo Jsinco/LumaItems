@@ -36,7 +36,7 @@ class LunarOrbItem : CustomItem {
 
                 val materials = FileManager("relics.yml").getFileYaml().getStringList("relic-materials.lunar")
 
-                val relicCreator: RelicCreator = RelicCreator(
+                val relicCreator = RelicCreator(
                     rarity.algorithmWeight,
                     7,
                     rarity,

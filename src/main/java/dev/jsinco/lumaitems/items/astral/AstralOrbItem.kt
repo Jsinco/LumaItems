@@ -5,6 +5,7 @@ import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.relics.RelicCrafting
+import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.Sound
@@ -15,10 +16,6 @@ import org.bukkit.persistence.PersistentDataType
 import kotlin.random.Random
 
 class AstralOrbItem : CustomItem {
-    companion object {
-        val plugin = LumaItems.getPlugin()
-    }
-
     override fun createItem(): Pair<String, ItemStack> {
         return Pair("astralorb", RelicCrafting.astralOrb)
     }
@@ -33,30 +30,36 @@ class AstralOrbItem : CustomItem {
 
                 player.inventory.itemInMainHand.amount -= 1
                 player.playSound(player.location, Sound.ENTITY_EVOKER_CAST_SPELL, 1f, 1f)
-
-                val itemClasses = FileManager("relics.yml").generateYamlFile().getConfigurationSection("astral.item_classes")?.getKeys(true)
-                val setsAndWeight: MutableMap<List<ItemStack>, Int> = mutableMapOf()
-
-                if (itemClasses == null) {
-                    return false
+                for (globalPlayer in Bukkit.getOnlinePlayers()) {
+                    globalPlayer.playSound(globalPlayer.location, Sound.ENTITY_EVOKER_CAST_SPELL, 0.9f, 1f)
+                    globalPlayer.sendMessage(Util.colorcode("${Util.prefix} &#F7FFC9${player.name}&#E2E2E2 has revealed a relic inside of a &#fb4d4d&lAstral &#F7FFC9Orb&#E2E2E2!"))
                 }
 
-                for (itemClass in itemClasses) {
-                    val items = RelicCrafting.getItemsFromClass(itemClass)
-                    val weight = FileManager("relics.yml").generateYamlFile().getInt("astral.item_classes.$itemClass")
-                    setsAndWeight[items] = weight
-                }
-
-                var selectedSet = setsAndWeight.keys.toList().random()
-                while (setsAndWeight[selectedSet]!! < Random.nextInt(1, 100)) {
-                    selectedSet = setsAndWeight.keys.toList().random()
-                }
-
-                player.inventory.addItem(selectedSet.random())
+                Util.giveItem(player, getAstralItem() ?: return false)
             }
 
             else -> return false
         }
         return true
+    }
+    private fun getAstralItem(): ItemStack? {
+        val itemClasses = FileManager("relics.yml").generateYamlFile().getConfigurationSection("astral.item_classes")?.getKeys(true)
+        val setsAndWeight: MutableMap<List<ItemStack>, Int> = mutableMapOf()
+
+        if (itemClasses == null) {
+            return null
+        }
+
+        for (itemClass in itemClasses) {
+            val items = RelicCrafting.getItemsFromClass(itemClass)
+            val weight = FileManager("relics.yml").generateYamlFile().getInt("astral.item_classes.$itemClass")
+            setsAndWeight[items] = weight
+        }
+
+        var selectedSet = setsAndWeight.keys.toList().random()
+        while (setsAndWeight[selectedSet]!! < Random.nextInt(1, 100)) {
+            selectedSet = setsAndWeight.keys.toList().random()
+        }
+        return selectedSet.random()
     }
 }
