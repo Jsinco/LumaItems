@@ -20,7 +20,7 @@ class GiveAstralCommand : SubCommand {
     }
 
     override fun tabComplete(plugin: LumaItems, sender: CommandSender, args: Array<out String>): List<String>? {
-        return FileManager("astral.yml").generateYamlFile().getConfigurationSection("item_classes")?.getKeys(false)?.toList()
+        return FileManager("relics.yml").generateYamlFile().getConfigurationSection("astral.item_classes")?.getKeys(false)?.toList()
     }
 
     override fun permission(): String? {
