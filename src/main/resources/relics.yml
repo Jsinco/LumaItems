@@ -12,10 +12,10 @@ disassembler:
   commands:
     #'1': 'lumaitems relic %player% core astral' manually added when salvaging an astral
     '5': 'lumaitems relic %player% core lunar'
-    '10': 'csap box rare %player%'
+    '20': 'csap box rare %player%'
     '29': 'points give %player% 5'
     '30': 'lumaitems relic %player% shard'
-    '31': 'csap box uncommon %player%'
+    #'31': 'csap box uncommon %player%'
     '41': 'csap box common %player%'
     '60': 'give %player% experience_bottle 16'
     '38': 'give %player% netherite_scrap 1'
