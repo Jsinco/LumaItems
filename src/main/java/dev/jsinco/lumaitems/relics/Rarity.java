@@ -6,7 +6,7 @@ import java.util.List;
 
 public enum Rarity {
     ASTRAL("&#fb4d4d", 14, "Astral"),
-    LUNAR("&#6255fb", 8, "Lunar"),
+    LUNAR("&#6255fb", 7, "Lunar"),
     NOVA("&#75c3fb", 3, "Nova"),
     PULSAR("&#c773fb", 2, "Pulsar"),
     SOLAR("&#EEFB5F", 1, "Solar");

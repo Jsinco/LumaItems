@@ -20,7 +20,12 @@ class RelicCreator (
     companion object {
         private val plugin: LumaItems = LumaItems.getPlugin()
         private const val RELIC_SUFFIX_RGB = "&f"
-        private val blackListedEnchants: List<Enchantment> = listOf(Enchantment.BINDING_CURSE,  Enchantment.VANISHING_CURSE)
+        private val blackListedEnchants: List<Enchantment> = listOf(Enchantment.BINDING_CURSE,  Enchantment.VANISHING_CURSE, Enchantment.FROST_WALKER, Enchantment.SWIFT_SNEAK)
+        private val limitedEnchantLevel: Map<Enchantment, Int> = mapOf(
+            Enchantment.SILK_TOUCH to 1,
+            Enchantment.MENDING to 1,
+            Enchantment.ARROW_FIRE to 1,
+        )
     }
 
     private val file = FileManager("relics.yml").generateYamlFile()
@@ -67,8 +72,20 @@ class RelicCreator (
                     containsMendingAndSilk = enchantments.keys.contains(Enchantment.MENDING) && enchantment == Enchantment.SILK_TOUCH || enchantments.keys.contains(Enchantment.SILK_TOUCH) && enchantment == Enchantment.MENDING
                 }
             }
+            // need to give higher numbers less of a likelyhood to be chosen
+            var enchantmentLevel: Int = if (forcedMaxEnchantLevel >= 5) {
+                if (Random.nextInt(100) < 15) {
+                    Random.nextInt(5, forcedMaxEnchantLevel + 1) //
+                } else {
+                    Random.nextInt(1, 5)
+                }
+            } else {
+                Random.nextInt(1, forcedMaxEnchantLevel + 1)
+            }
 
-            val enchantmentLevel: Int = if (forcedMaxEnchantLevel <= 1) 1 else Random.nextInt(1, forcedMaxEnchantLevel)
+            if (limitedEnchantLevel.containsKey(enchantment)) {
+                enchantmentLevel = limitedEnchantLevel[enchantment]!!
+            }
 
             enchantments[enchantment] = enchantmentLevel
         }
