@@ -3,6 +3,7 @@ package dev.jsinco.lumaitems.events
 import com.destroystokyo.paper.event.player.PlayerElytraBoostEvent
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.Util
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent

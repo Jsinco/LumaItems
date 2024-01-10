@@ -8,7 +8,6 @@ import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemStack
-import org.bukkit.persistence.PersistentDataType
 import kotlin.random.Random
 
 class RelicCreator (
@@ -20,7 +19,7 @@ class RelicCreator (
     companion object {
         private val plugin: LumaItems = LumaItems.getPlugin()
         private const val RELIC_SUFFIX_RGB = "&f"
-        private val blackListedEnchants: List<Enchantment> = listOf(Enchantment.BINDING_CURSE,  Enchantment.VANISHING_CURSE, Enchantment.FROST_WALKER, Enchantment.SWIFT_SNEAK)
+        private val blackListedEnchants: List<Enchantment> = listOf(Enchantment.BINDING_CURSE,  Enchantment.VANISHING_CURSE, Enchantment.FROST_WALKER, Enchantment.SWIFT_SNEAK, Enchantment.SOUL_SPEED)
         private val limitedEnchantLevel: Map<Enchantment, Int> = mapOf(
             Enchantment.SILK_TOUCH to 1,
             Enchantment.MENDING to 1,
