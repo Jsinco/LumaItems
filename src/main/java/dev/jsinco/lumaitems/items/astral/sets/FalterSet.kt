@@ -74,7 +74,7 @@ class FalterSet : CustomItem, AstralSet {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        return Pair("falterset", ItemStack(Material.AIR))
+        return Pair("falter-set", ItemStack(Material.AIR))
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {

@@ -73,7 +73,7 @@ class VenomSet : CustomItem, AstralSet {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        return Pair("venomset", ItemStack(Material.AIR))
+        return Pair("venom-set", ItemStack(Material.AIR))
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {

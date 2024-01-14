@@ -19,11 +19,12 @@ class RelicCreator (
     companion object {
         private val plugin: LumaItems = LumaItems.getPlugin()
         private const val RELIC_SUFFIX_RGB = "&f"
-        private val blackListedEnchants: List<Enchantment> = listOf(Enchantment.BINDING_CURSE,  Enchantment.VANISHING_CURSE, Enchantment.FROST_WALKER, Enchantment.SWIFT_SNEAK, Enchantment.SOUL_SPEED)
+        private val blackListedEnchants: List<Enchantment> = listOf(Enchantment.BINDING_CURSE,  Enchantment.VANISHING_CURSE, Enchantment.FROST_WALKER, Enchantment.SWIFT_SNEAK, Enchantment.SOUL_SPEED, Enchantment.LUCK, Enchantment.LURE)
         private val limitedEnchantLevel: Map<Enchantment, Int> = mapOf(
             Enchantment.SILK_TOUCH to 1,
             Enchantment.MENDING to 1,
             Enchantment.ARROW_FIRE to 1,
+            Enchantment.DEPTH_STRIDER to 3,
         )
     }
 

@@ -92,7 +92,7 @@ class MistralSet : CustomItem, AstralSet {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        return Pair("swiftset", ItemStack(Material.AIR))
+        return Pair("swift-set", ItemStack(Material.AIR))
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {

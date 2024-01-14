@@ -74,7 +74,7 @@ class MelukaSet : CustomItem, AstralSet {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        return Pair("melukaset", ItemStack(Material.AIR))
+        return Pair("meluka-set", ItemStack(Material.AIR))
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {

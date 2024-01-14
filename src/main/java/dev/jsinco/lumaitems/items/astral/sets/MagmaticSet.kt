@@ -89,7 +89,7 @@ class MagmaticSet : CustomItem, AstralSet {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        return Pair("magmaticset", ItemStack(Material.AIR))
+        return Pair("magmatic-set", ItemStack(Material.AIR))
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
