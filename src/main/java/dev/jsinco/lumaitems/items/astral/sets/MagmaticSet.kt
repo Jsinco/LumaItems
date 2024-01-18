@@ -96,8 +96,8 @@ class MagmaticSet : CustomItem, AstralSet {
         val material = player.inventory.itemInMainHand.type
         when (type) {
             Ability.RIGHT_CLICK -> {
-                if (material == Material.DIAMOND_SWORD) {
-                    AbilityUtil.spawnSpell(player, Particle.FLAME, "magmaticset", 120L)
+                if (material.name.contains("SWORD") && !cooldown.contains(player.uniqueId)) {
+                    AbilityUtil.spawnSpell(player, Particle.FLAME, "magmatic-set", 120L)
                     cooldownPlayer(player.uniqueId)
                 }
             }
@@ -108,9 +108,9 @@ class MagmaticSet : CustomItem, AstralSet {
             }
             Ability.BREAK_BLOCK -> {
                 event as BlockBreakEvent
-                if (material == Material.DIAMOND_PICKAXE) {
+                if (material.name.contains("PICKAXE")) {
                     if (pickaxeSmelt(event.block, event.block.getDrops(player.inventory.itemInMainHand))) event.isDropItems = false
-                } else if (material == Material.DIAMOND_SHOVEL) {
+                } else if (material.name.contains("SHOVEL")) {
                     if (shovelSmelt(event.block, event.block.getDrops(player.inventory.itemInMainHand))) event.isDropItems = false
                 }
             }

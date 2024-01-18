@@ -8,7 +8,7 @@ import java.util.List;
 public enum ToolType {
     ARMOR(List.of("HELMET", "CHESTPLATE", "LEGGINGS", "BOOTS")),
     WEAPON(List.of("SWORD", "AXE", "BOW", "CROSSBOW", "TRIDENT", "SHIELD")),
-    TOOL(List.of("PICKAXE", "AXE", "SHOVEL", "HOE"));
+    TOOL(List.of("PICKAXE", "AXE", "SHOVEL", "HOE", "ROD"));
 
     private final List<String> gearType;
 

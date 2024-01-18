@@ -19,10 +19,11 @@ import org.bukkit.inventory.ItemStack
 class FalterSet : CustomItem, AstralSet {
 
     companion object {
-        val materials = listOf(
+        private val materials = listOf(
             Material.DIAMOND_PICKAXE,
             Material.DIAMOND_HOE,
-            Material.DIAMOND_AXE
+            Material.DIAMOND_AXE,
+            Material.FISHING_ROD
         )
 
         private val enchantMap: Map<Material, MutableMap<Enchantment, Int>> = mapOf(
@@ -46,12 +47,19 @@ class FalterSet : CustomItem, AstralSet {
                 Enchantment.DIG_SPEED to 9,
                 Enchantment.DURABILITY to 10,
                 Enchantment.MENDING to 1,
-                Enchantment.LOOT_BONUS_BLOCKS to 4)
+                Enchantment.LOOT_BONUS_BLOCKS to 4),
+            Material.FISHING_ROD to mutableMapOf(
+                Enchantment.DAMAGE_ALL to 7,
+                Enchantment.DAMAGE_UNDEAD to 7,
+                Enchantment.LURE to 5,
+                Enchantment.LUCK to 6,
+                Enchantment.MENDING to 1)
         )
         private val lores = mapOf(
             Material.DIAMOND_PICKAXE to "Miner",
             Material.DIAMOND_HOE to "Farmer",
-            Material.DIAMOND_AXE to "Lumberjack"
+            Material.DIAMOND_AXE to "Lumberjack",
+            Material.FISHING_ROD to "Fisherman"
         )
     }
 

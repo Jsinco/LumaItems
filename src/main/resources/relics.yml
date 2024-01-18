@@ -2,25 +2,27 @@ astral:
   # Class name and then chance of item
   item_classes:
     MistralSet: 38
-    ArchaelWings: 60
+    ArchaelWings: 40
     VenomSet: 43
     MagmaticSet: 28
-    FalterSet: 20
+    FalterSet: 22
     MelukaSet: 48
+    ValleySet: 55
 
 disassembler:
   commands:
-    #'1': 'lumaitems relic %player% core astral' manually added when salvaging an astral
     '5': 'lumaitems relic %player% core lunar'
     '20': 'csap box rare %player%'
     '29': 'points give %player% 5'
     '30': 'lumaitems relic %player% shard'
-    #'31': 'csap box uncommon %player%'
+    '40': 'repairtoken give %player% Repair3 1'
     '41': 'csap box common %player%'
     '60': 'give %player% experience_bottle 16'
     '38': 'give %player% netherite_scrap 1'
+    '45': 'repairtoken give %player% Repair2 1'
     '42': 'give %player% diamond 3'
     '48': 'give %player% iron_ingot 5'
+    '52': 'repairtoken give %player% Repair1 1'
     '43': 'give %player% gold_ingot 5'
     '50': 'give %player% coal_block 4'
   blocks:

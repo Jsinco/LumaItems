@@ -16,7 +16,7 @@ object Util {
 
     lateinit var prefix: String
     private const val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
-    private val gearTypes: List<String> = listOf("Helmet", "Chestplate", "Leggings", "Boots", "Sword", "Pickaxe", "Axe", "Shovel", "Hoe")
+    private val gearTypes: List<String> = listOf("Helmet", "Chestplate", "Leggings", "Boots", "Sword", "Pickaxe", "Axe", "Shovel", "Hoe", "Rod")
     val plugin: LumaItems = LumaItems.getPlugin()
 
     @JvmStatic
@@ -127,10 +127,7 @@ object Util {
     }
 
     fun getGearType(item: ItemStack): String? {
-        for (gear in gearTypes) {
-            if (item.type.toString().contains(gear)) return gear
-        }
-        return null
+        return getGearType(item.type)
     }
     fun getGearType(material: Material): String? {
         for (gear in gearTypes) {

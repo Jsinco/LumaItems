@@ -30,7 +30,8 @@ class MistralSet : CustomItem, AstralSet {
             Material.NETHERITE_LEGGINGS,
             Material.NETHERITE_BOOTS,
             Material.NETHERITE_SWORD,
-            Material.NETHERITE_PICKAXE
+            Material.NETHERITE_PICKAXE,
+            Material.FISHING_ROD
         )
         private val enchants: Map<Enchantment, Int> = mapOf(
             Enchantment.PROTECTION_ENVIRONMENTAL to 6,
@@ -41,6 +42,9 @@ class MistralSet : CustomItem, AstralSet {
             Enchantment.SWEEPING_EDGE to 4,
             Enchantment.DIG_SPEED to 8,
             Enchantment.SILK_TOUCH to 1,
+            Enchantment.MENDING to 1,
+            Enchantment.LURE to 4,
+            Enchantment.LUCK to 5
         )
 
         private val lores: Map<ToolType, MutableList<String>> = mapOf(
@@ -65,7 +69,7 @@ class MistralSet : CustomItem, AstralSet {
                 mutableListOf("&#fb4d4dSwift"),
                 lores[ToolType.getToolType(material)] ?: mutableListOf(),
                 material,
-                mutableListOf("swift-set"),
+                mutableListOf("mistral-set"),
                 enchants,
             )
 
@@ -79,6 +83,10 @@ class MistralSet : CustomItem, AstralSet {
                 Material.NETHERITE_SWORD -> {
                     item.attributeModifiers[Attribute.GENERIC_ATTACK_DAMAGE] = ToolAttributes.SWORD.attackDamage
                     item.attributeModifiers[Attribute.GENERIC_ATTACK_SPEED] = ToolAttributes.SWORD.attackSpeed
+                    item.attributeModifiers[Attribute.GENERIC_MOVEMENT_SPEED] = ToolAttributes.getSpeedAttribute()
+                }
+
+                Material.FISHING_ROD -> {
                     item.attributeModifiers[Attribute.GENERIC_MOVEMENT_SPEED] = ToolAttributes.getSpeedAttribute()
                 }
 
@@ -98,7 +106,7 @@ class MistralSet : CustomItem, AstralSet {
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
         when (type) {
             Ability.RUNNABLE -> {
-                if (RelicCrafting.hasFullSet("swiftset", player)) {
+                if (RelicCrafting.hasFullSet("mistral-set", player)) {
                     player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 240, 0, false, false, false))
                 }
             }
