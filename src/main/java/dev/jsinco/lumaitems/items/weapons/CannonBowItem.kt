@@ -3,7 +3,7 @@ package dev.jsinco.lumaitems.items.weapons
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.GlowManager
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent
 import org.bukkit.ChatColor
@@ -26,7 +26,7 @@ class CannonBowItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#090909&lC&#1b1911&la&#2e281a&ln&#403822&ln&#52472b&lo&#645733&ln&#77663b&lB&#897644&lo&#9b854c&lw",
             mutableListOf("&#7E7E7ECannonball"),
             mutableListOf("§fA medieval invention, now in","§fyour hands!","","§fWith an empty offhand, fire a cannonball","§fprojectile that will explode on impact","","§c1 TNT per shot"),

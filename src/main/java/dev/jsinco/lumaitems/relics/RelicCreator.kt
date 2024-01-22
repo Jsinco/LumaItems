@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.relics
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
@@ -40,7 +40,7 @@ class RelicCreator (
     private val relicPrefixes: List<String> = file.getStringList("names.prefixes")
     private val relicSuffixes: List<String> = file.getStringList("names.suffixes")
     private val compatibleEnchants: MutableList<Enchantment> = mutableListOf()
-    private val itemCreator: CreateItem
+    private val itemCreator: ItemFactory
 
     init {
         if (forcedMaxEnchantLevel < 1) forcedMaxEnchantLevel = algorithmWeight
@@ -55,9 +55,9 @@ class RelicCreator (
         val enchantments: Map<Enchantment, Int> = determineEnchants()
         val name: String = determineName()
 
-        itemCreator = CreateItem(
+        itemCreator = ItemFactory(
             name,
-            mutableListOf(),
+            if (rarity != Rarity.LUNAR) mutableListOf("&7Relic I") else mutableListOf(),
             mutableListOf(),
             material,
             mutableListOf("relic-item"),

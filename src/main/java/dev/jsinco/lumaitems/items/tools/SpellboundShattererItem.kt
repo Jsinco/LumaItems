@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
@@ -31,7 +31,7 @@ class SpellboundShattererItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#760075&lS&#840b68&lp&#92155b&le&#a0204e&ll&#ae2b41&ll&#bd3535&lb&#cb4028&lo&#d94b1b&lu&#e7550e&ln&#f56001&ld &#e16501&lS&#cc6a01&lh&#b87001&la&#a37501&lt&#8f7a00&lt&#7a7f00&le&#668500&lr&#518a00&le&#3d8f00&lr",
             mutableListOf("&#f56001B&#e9570cu&#de4f16r&#d24621s&#c73d2bt&#bb3436i&#b02c40n&#a4234bg &#991a55S&#8d1160p&#82096ae&#760075l&#760075l"),
             mutableListOf("&#760075\"&#80086cM&#8a0f62o&#941759u&#9f1f50n&#a92647t&#b32e3da&#bd3634i&#c73d2bn&#d14521s &#dc4d18t&#e6540fr&#f05c06e&#ee6201m&#df6601b&#d06901l&#c16d01e &#b37101b&#a47501e&#957800l&#877c00o&#788000w&#698400.&#5a8700.&#4c8b00.&#3d8f00\"","","Breaking blocks with this pickaxe","grants the chance to shatter" ,"nearby blocks in a 5x5 radius"),

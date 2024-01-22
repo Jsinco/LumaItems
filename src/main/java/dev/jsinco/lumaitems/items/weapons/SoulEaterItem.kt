@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.util.AbilityUtil
@@ -28,7 +28,7 @@ class SoulEaterItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#1d2046&lS&#1c273c&lo&#1c2d32&lu&#1b3427&ll &#1a3a1d&lE&#233428&la&#2c2f33&lt&#34293e&le&#3d2349&lr",
             mutableListOf("&#1e1d56D&#271c4ae&#301b3ev&#391b31o&#421a25u&#4b1919r", "&#1f1f3cH&#401c31o&#611926t&#82161b-&#82161bS&#611926w&#401c31a&#1f1f3cp"),
             mutableListOf("\"&#03263a\"&#09243fD&#102243a&#162048r&#1c1e4dk&#231c51n&#291a56e&#30185as&#36165fs &#3c1464l&#431268u&#49106dr&#431464k&#3e175as &#381b51u&#321e48p&#2d223fo&#272535n &#22292cy&#1c2c23o&#16301au&#113310.&#0b3707\"","","§fPress your swap key (F) to swap between","§fa bow and an axe","","§fUpon killing an entity with this weapon, their soul","§fwill drop, press your drop key (Q) to devour the soul", "§fand overheal based on the strength of the soul"),

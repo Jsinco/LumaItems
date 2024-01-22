@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.Particle
@@ -16,7 +16,7 @@ import java.util.function.Consumer
 
 class MoonstoneMattockItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#477edf&lM&#5f8ae3&lo&#7797e7&lo&#8fa3ec&ln&#a7b0f0&ls&#bfbcf4&lt&#b7b4f3&lo&#b0acf2&ln&#a8a5f0&le &#a19def&lM&#9995ee&la&#9f94e7&lt&#a593e0&lt&#ab93d9&lo&#b192d2&lc&#b791cb&lk",
             mutableListOf("&#90add9M&#98b3dbo&#a0b9ddo&#a8bfdfn &#b0c5e1& &#b9cbe4S&#c1d1e6h&#c9d7e8i&#d1ddean&#d9e3ece"),
             mutableListOf("§fMining ores with this pickaxe grants","§fa chance to substantially increase the","§famount of materials gained","","§fHowever, there is a chance for mined","§fores to drop nothing"),

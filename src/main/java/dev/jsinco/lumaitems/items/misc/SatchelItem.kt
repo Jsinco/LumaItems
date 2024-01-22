@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.GlowManager
 import dev.jsinco.lumaitems.util.AbilityUtil
@@ -21,12 +21,12 @@ class SatchelItem : CustomItem {
 
     companion object {
         private val plugin: LumaItems = LumaItems.getPlugin()
-        lateinit var satchel: CreateItem
+        lateinit var satchel: ItemFactory
     }
 
 
     override fun createItem(): Pair<String, ItemStack> {
-        satchel = CreateItem(
+        satchel = ItemFactory(
             "&#7b5aff&lS&#8769ff&la&#9277ff&lt&#9e86ff&lc&#857afe&lh&#6b6ffd&le&#5263fc&ll",
             mutableListOf("&#5263fcL&#5263fca&#5263fcu&#5263fcn&#5263fcc&#5263fch"),
             mutableListOf("§fUpon landing, this item will explode into", "§fparticles and launch nearby entities","","§fWhen falling, launches are instant"),

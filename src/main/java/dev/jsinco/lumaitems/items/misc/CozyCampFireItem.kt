@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack
 
 class CozyCampFireItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#fb5151&lE&#fb664c&lm&#fb7a46&lb&#fb8f41&le&#fba33b&lr",
             mutableListOf("&#fb941aC&#fbab20o&#fbc326z&#fbda2cy"),
             mutableListOf("§fHolding this campfire will","§fheal you and nearby players"),

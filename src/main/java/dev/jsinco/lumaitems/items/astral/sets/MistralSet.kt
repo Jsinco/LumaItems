@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
@@ -64,7 +64,7 @@ class MistralSet : CustomItem, AstralSet {
                     enchants[enchant.key] = enchant.value
                 }
             }
-            val item = CreateItem(
+            val item = ItemFactory(
                 "&#fb4d4d&lMistral &f${Util.getGearType(material)}",
                 mutableListOf("&#fb4d4dSwift"),
                 lores[ToolType.getToolType(material)] ?: mutableListOf(),

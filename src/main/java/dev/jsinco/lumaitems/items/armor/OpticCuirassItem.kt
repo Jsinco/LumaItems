@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -14,7 +14,7 @@ import org.bukkit.potion.PotionEffectType
 
 class OpticCuirassItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#6b89f6&lO&#6e93f6&lp&#719df6&lt&#74a7f6&li&#77b1f6&lc &#7abbf6&lC&#7cc4f6&lu&#7fcef6&li&#82d8f6&lr&#85e2f6&la&#88ecf6&ls&#8bf6f6&ls",
             mutableListOf("&#084cfbH&#1655fao&#245dfat&#3266f9-&#416ff8S&#4f78f7w&#5d80f7a&#6b89f6p"),
             mutableListOf("&#6a87f3\"&#6a88f3T&#6b8af3h&#6b8bf3e&#6c8df3r&#6c8ef3e&#6d90f3'&#6d91f3s &#6e93f3a &#6e94f3m&#6e96f3a&#6f97f3r&#6f99f3k&#709af3i&#709cf3n&#719df3g &#719ff3o&#72a0f3n &#72a2f3t&#73a3f3h&#73a5f3e &#73a6f3c&#74a8f3e&#74a9f3n&#75abf3t&#75acf3e&#76aef3r &#76aff3t&#77b1f3h&#77b2f3a&#77b4f3t","&#78b5f3l&#78b7f3o&#79b8f3o&#79baf3k&#7abcf3s &#7abdf3l&#7bbff3i&#7bc1f3k&#7cc3f3e &#7cc4f3a&#7dc6f3n &#7dc8f3e&#7ec9f3y&#7ecbf3e&#7ecdf3, &#7fcff3I &#7fd0f3w&#80d2f3o&#80d4f3n&#81d6f3d&#81d7f3e&#82d9f3r &#82dbf3w&#83dcf3h&#83def3a&#84e0f3t &#84e2f3i&#85e3f3t&#85e5f3'&#86e7f3s &#86e9f3f&#87eaf3o&#87ecf3r&#88eef3.&#88f0f3.&#89f1f3.&#89f3f3\"","","§fThis armor gives night vision and","§fresistance to the wearer.","","§fPress your swap key while holding to","§fswap armor types"),

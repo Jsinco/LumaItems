@@ -33,12 +33,17 @@ repositories {
         name = "enginehub"
         url = "https://maven.enginehub.org/repo/"
     }
+    maven {
+        name = "protocolLib"
+        url = "https://repo.dmulloy2.net/repository/public/"
+    }
 }
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT"
     compileOnly "me.clip:placeholderapi:2.11.3"
     compileOnly "com.github.Zrips:jobs:4.17.2"
+    compileOnly "com.comphenix.protocol:ProtocolLib:5.0.0"
 
     implementation "com.iridium:IridiumColorAPI:1.0.6"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"

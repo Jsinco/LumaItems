@@ -3,7 +3,7 @@ package dev.jsinco.lumaitems.items.tools
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.util.Cuboid
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
 import org.bukkit.Material
@@ -20,7 +20,7 @@ import java.util.*
 
 class MistralMattockItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#fff1be&lM&#fee7bc&li&#fedcb9&ls&#fdd2b7&lt&#fdc8b4&lr&#fcbdb2&la&#fbb3af&ll &#fbaeb4&lM&#fbadc0&la&#fbadcc&lt&#fbacd9&lt&#fbace5&lo&#fbabf1&lc&#fbabfd&lk",
             mutableListOf("&#fffba7S&#fef1ade&#fde7b3e&#fddcb9k&#fcd2bfe&#fbc8c5r"),
             mutableListOf("&#e790b5\"&#e593b2B&#e497afe &#e29aadg&#e09daau&#dfa0a7i&#dda4a4d&#dba7a1e&#daaa9fd &#d8ad9cb&#d6b199y &#d4b496t&#d3b794h&#d1ba91e &#cfbe8ew&#cec18bi&#ccc488n&#cac786d&#c9cb83.&#c7ce80\"","","§fSeeks out nearby ores and points the","§fwielder to them","","§fWhen breaking ores, Seeker will try to break", "§fneighboring ores as well"),

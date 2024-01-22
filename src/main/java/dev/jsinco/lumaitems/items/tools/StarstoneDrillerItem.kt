@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType
 
 class StarstoneDrillerItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#fbf8ae&lS&#fbf4a5&lt&#fcf09c&la&#fcec93&lr&#fce98a&ls&#fce581&lt&#fde178&lo&#fddd6f&ln&#fdd967&le &#fdd55e&lD&#fed155&lr&#fecd4c&li&#feca43&ll&#fec63a&ll&#ffc231&le&#ffbe28&lr",
             mutableListOf("&#f7d149H&#f7d149a&#f7d149s&#f7d149t&#f7d149e&#f7d149n"),
             mutableListOf("&#ffbe28\"&#ffc02cF&#ffc231o&#ffc435r&#fec63ag&#fec83ee&#feca43d &#fecc47i&#fecd4cn &#fecf50t&#fed155h&#fed359e &#fdd55eh&#fdd762e&#fdd967a&#fddb6br&#fddd6ft &#fddf74o&#fde178f &#fce37da &#fce581f&#fce786a&#fce98al&#fcea8fl&#fcec93e&#fcee98n &#fcf09cs&#fbf2a1t&#fbf4a5a&#fbf6aar&#fbf8ae\"","","&fGrants different levels of Haste varying","&fon how deep you are underground"),

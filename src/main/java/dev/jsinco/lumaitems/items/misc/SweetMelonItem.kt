@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType
 
 class SweetMelonItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#ff347d&lS&#ff546b&lw&#fe7359&le&#fe9347&le&#fdb235&lt &#ecc930&lM&#c9d639&le&#a6e341&ll&#83f04a&lo&#60fd52&ln",
             mutableListOf("&7Haste II"),
             mutableListOf("§fThis sweet melon just","§freally raises your blood sugar","","§fHolding this melon in your","§foffhand will give you a Haste II boost"),

@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.attribute.Attribute
@@ -14,7 +14,7 @@ import java.util.*
 
 class StarweaveAegisItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#917afb&lS&#8984f8&lt&#808ef5&la&#7899f2&lr&#6fa3ee&lw&#67adeb&le&#5eb7e8&la&#56c2e5&lv&#4dcce2&le &#45d6df&lA&#3ce0db&le&#34ebd8&lg&#2bf5d5&li&#23ffd2&ls",
             mutableListOf("&#6fa3eeS&#60b5e8t&#51c8e3a&#41daddt&#32edd8u&#23ffd2e"),
             mutableListOf("&#8b81f9\"&#8786f7T&#828cf6i&#7e91f4m&#7a96f3e &#759bf1i&#71a1efn &#6da6eem&#68abeco&#64b0eat&#60b6e9i&#5bbbe7o&#57c0e6n&#53c5e4, &#4ecbe2y&#4ad0e1o&#46d5dfu &#41daddi&#3de0dcn &#39e5das&#34ead9t&#30efd7o&#2cf5d5n&#27fad4e&#23ffd2\"","","&fWearing this chestplate will make","&fyou immune to all knockback effects"),

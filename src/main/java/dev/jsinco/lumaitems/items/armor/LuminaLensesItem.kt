@@ -2,12 +2,11 @@ package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.Util
 import net.md_5.bungee.api.ChatMessageType
 import net.md_5.bungee.api.chat.TextComponent
-import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -27,7 +26,7 @@ class LuminaLensesItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#2ca4fb&lL&#2fb1f9&lu&#31bef7&lm&#34cbf4&li&#36d8f2&ln&#39e5f0&la &#3fdef0&lL&#4ac3f2&le&#55a7f4&ln&#608bf7&ls&#6a70f9&le&#7554fb&ls",
             mutableListOf("&#3efeecB&#47e2efa&#50c5f1t&#5aa9f4t&#638df6e&#6c70f9r&#7554fby 100%"),
             mutableListOf("&#7554fb\"&#7358fbH&#725cfaa&#7060far&#6e65fan&#6c69f9e&#6b6df9s&#6971f9s &#6775f8t&#6679f8h&#647df8e &#6282f8e&#6086f7t&#5f8af7e&#5d8ef7r&#5b92f6n&#5a96f6a&#589af6l &#569ff5b&#54a3f5r&#53a7f5i&#51abf4g&#4faff4h&#4eb3f4t&#4cb7f3n&#4abcf3e&#48c0f3s&#47c4f3s &#45c8f2o&#43ccf2f &#42d0f2a &#40d4f1s&#3ed9f1t&#3cddf1a&#3be1f0r&#39e5f0\"","","&fGrants multiple potion buffs while","&fsufficiently charged","","&fThis helmet relies on a charge to function","&fRight-click any amount of raw copper to","&frecharge your helmet"),

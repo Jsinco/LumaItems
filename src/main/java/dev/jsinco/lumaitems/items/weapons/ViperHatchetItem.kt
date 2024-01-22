@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.Ability
 import org.bukkit.Bukkit
@@ -27,7 +27,7 @@ class ViperHatchetItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#a2fc3d&lV&#9bf23c&li&#94e83a&lp&#8ddf39&le&#86d537&lr &#7fcb36&lH&#77c034&la&#6eb431&lt&#64a82e&lc&#5a9c2b&lh&#519029&le&#478426&lt",
             mutableListOf("&#e4fc52V&#d4fc4de&#c3fc48n&#b3fc42o&#a2fc3dm","&#e4fc52F&#d4fc4da&#c3fc48n&#b3fc42g&#a2fc3ds"),
             mutableListOf("&#478426\"&#4a8827T&#4d8c28h&#509028e &#539429v&#56982ae&#599c2bn&#5ca02bo&#5fa42cm &#62a82dh&#65ac2ea&#68b02ei&#6bb42fl&#6eb830s &#71bc31n&#75c032o&#78c432t &#7bc833f&#7ecc34r&#81d035o&#84d435m &#87d836t&#8adc37h&#8de038i&#90e438s &#93e839r&#96ec3ae&#99f03ba&#9cf43bl&#9ff83cm&#a2fc3d\"","","&fEntities attacked with this weapon","&fwill take poison damage","","&fOpponents will have a chance to be bitten","&fand take extra damage"),

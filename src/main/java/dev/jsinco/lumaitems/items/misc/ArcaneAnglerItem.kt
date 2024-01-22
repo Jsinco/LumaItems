@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.*
 import org.bukkit.Particle.DustOptions
@@ -15,7 +15,7 @@ import kotlin.math.max
 
 class ArcaneAnglerItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#cdf9fb&lA&#c5f1fb&lr&#bde8fc&lc&#b5e0fc&la&#add8fc&ln&#a5d0fd&le &#9cc7fd&lA&#94bffe&ln&#8cb7fe&lg&#84affe&ll&#7ca6ff&le&#749eff&lr",
             mutableListOf("&#cdf9fbW&#b7e2fca&#a1ccfdg&#8ab5fee&#749effr"),
             mutableListOf("&#749eff\"&#79a3ffI&#7ea8fft&#83aefes &#88b3fem&#8db8fea&#93bdfeg&#98c2fdi&#9dc8fdc &#a2cdfds&#a7d2fdt&#acd7fca&#b1dcfcb&#b6e2fci&#bbe7fcl&#c0ecfci&#c5f1fbz&#caf6fbe&#caf6fbs &#c5f1fbf&#c0ecfco&#bbe7fcr&#b6e2fct&#b1dcfcu&#acd7fcn&#a7d2fde&#a2cdfd, &#9dc8fdw&#98c2fdi&#93bdfet&#8db8feh &#88b3fev&#83aefeo&#7ea8ffi&#79a3ffd&#749eff\"","","&fWhile fishing with this rod, you will","&fhave the chance to catch a surplus","&fof fish or lose your catch","","&fYour chances of wagering and a","&ffavorable gamble increase with the","&famount of fish you have caught"),

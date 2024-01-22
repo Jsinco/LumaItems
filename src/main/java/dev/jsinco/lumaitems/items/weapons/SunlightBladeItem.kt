@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.GlowManager
 import dev.jsinco.lumaitems.manager.Ability
@@ -25,7 +25,7 @@ class SunlightBladeItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#e3dd45&lS&#e7d240&lu&#ecc73b&ln&#f0bc36&ll&#f4b131&li&#f9a62c&lg&#fd9b27&lh&#fd8a2c&lt &#fc7930&lB&#fc6935&ll&#fc5839&la&#fb473e&ld&#fb3642&le",
             mutableListOf("&#fb473eUndead Hatred", "&#fbd54cS&#fbd34ct&#fcd04ca&#fcce4cr&#fccb4db&#fcc94do&#fdc64du&#fdc44dn&#fdc14dd"),
             mutableListOf("&#e3dd45\"&#e4d745L&#e5d145i&#e6ca45g&#e7c445h&#e7be44t &#e8b844t&#e9b244h&#eaac44e &#eba544s&#ec9f44h&#ed9944a&#ee9344d&#ef8d44o&#ef8643w&#f08043s &#f17a43o&#f27443f &#f36e43t&#f46743h&#f56143e &#f65b43u&#f75543n&#f74f42d&#f84942e&#f94242a&#fa3c42d&#fb3642\"","","&fThis weapon deals significantly more", "&fdamage to mobs that burn in the daylight", "", "&fRight click to summon a star that will", "&ffreeze, damage, and ignite all mobs near it","", "&cCooldown: 15 secs"),

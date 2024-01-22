@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
@@ -37,6 +37,7 @@ class ValleySet : CustomItem, AstralSet {
             Enchantment.DAMAGE_ALL to 6,
             Enchantment.DIG_SPEED to 8,
             Enchantment.LOOT_BONUS_BLOCKS to 5,
+            Enchantment.LOOT_BONUS_MOBS to 5,
             Enchantment.LUCK to 4,
             Enchantment.LURE to 5,
             Enchantment.SWEEPING_EDGE to 4,
@@ -67,7 +68,7 @@ class ValleySet : CustomItem, AstralSet {
                 toolEnchants.remove(Enchantment.DAMAGE_UNDEAD)
             }
 
-            val item = CreateItem(
+            val item = ItemFactory(
                 "&#fb4d4d&lValley &f${Util.getGearType(material.key)}",
                 if (material.value) mutableListOf("&#fb4d4dIlk") else mutableListOf(),
                 lores[material.key] ?: mutableListOf(),

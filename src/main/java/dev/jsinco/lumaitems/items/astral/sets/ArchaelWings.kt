@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.relics.Rarity
 import org.bukkit.Material
@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack
 
 class ArchaelWings : AstralSet {
     override fun setItems(): List<ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#fb4d4d&lArchael &fWings",
             mutableListOf(),
             mutableListOf(),

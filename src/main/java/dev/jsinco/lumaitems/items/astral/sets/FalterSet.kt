@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.astral.sets
 
 import com.gamingmesh.jobs.Jobs
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
@@ -47,7 +47,8 @@ class FalterSet : CustomItem, AstralSet {
                 Enchantment.DIG_SPEED to 9,
                 Enchantment.DURABILITY to 10,
                 Enchantment.MENDING to 1,
-                Enchantment.LOOT_BONUS_BLOCKS to 4),
+                Enchantment.LOOT_BONUS_BLOCKS to 4,
+                Enchantment.LOOT_BONUS_MOBS to 6),
             Material.FISHING_ROD to mutableMapOf(
                 Enchantment.DAMAGE_ALL to 7,
                 Enchantment.DAMAGE_UNDEAD to 7,
@@ -66,7 +67,7 @@ class FalterSet : CustomItem, AstralSet {
     override fun setItems(): List<ItemStack> {
         val items: MutableList<ItemStack> = mutableListOf()
         for (material in materials) {
-            val item = CreateItem(
+            val item = ItemFactory(
                 "&#fb4d4d&lFalter &f${Util.getGearType(material)}",
                 mutableListOf("&#fb4d4dFoster"),
                 mutableListOf("Damage dealt to enemies scales", "with ${lores[material]} Job level"),

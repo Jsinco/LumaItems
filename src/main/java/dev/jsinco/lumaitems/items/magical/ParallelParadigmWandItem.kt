@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.magical
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
@@ -10,10 +10,8 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.*
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
-import org.bukkit.scheduler.BukkitRunnable
 import kotlin.random.Random
 
 class ParallelParadigmWandItem : CustomItem {
@@ -23,7 +21,7 @@ class ParallelParadigmWandItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#349532&lP&#499433&la&#5e9333&lr&#739234&la&#899034&ll&#9e8f35&ll&#b38e35&le&#c88d36&ll &#dd8c36&lP&#f28b37&la&#fb8742&lr&#f68057&la&#f17a6c&ld&#ed7481&li&#e86d96&lg&#e467ab&lm &#df60c0&lW&#da5ad5&la&#d653ea&ln&#d14dff&ld",
             mutableListOf("&#49b12fP&#5ca34da&#70946ar&#838688a&#9778a6d&#aa6ac4i&#be5be1g&#d14dffm"),
             mutableListOf("&#349532\"&#3e913fT&#488c4ch&#518858i&#5b8365n&#657f72g&#6f7a7fs &#79768ca&#837199r&#8c6da5e&#9668b2n&#a064bf'&#aa5fcct &#b45bd9a&#bd56e5l&#c752f2w&#d14dffa&#d251f2y&#d355e6s &#d359d9a&#d45dcds &#d561c0t&#d665b4h&#d669a7e&#d76d9by &#d8708es&#d97481e&#d97875e&#da7c68m&#db805c.&#dc844f.&#dc8843.&#dd8c36\"","","Left-click to cast a spell", "", "Spells from this wand may", "vary, caution is advised!", "", "&c1 Lapis per spell"),

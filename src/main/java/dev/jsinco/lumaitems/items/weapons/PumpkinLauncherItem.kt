@@ -3,7 +3,7 @@ package dev.jsinco.lumaitems.items.weapons
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import org.bukkit.*
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.*
@@ -22,7 +22,7 @@ class PumpkinLauncherItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#fb6c1b&lP&#fb751b&lu&#fb7f1a&lm&#fb881a&lp&#fb921a&lk&#fb9b1a&li&#fba519&ln &#fbae19&lL&#fba519&la&#fb9b1a&lu&#fb921a&ln&#fb881a&lc&#fb7f1a&lh&#fb751b&le&#fb6c1b&lr",
             mutableListOf("&#fb9638J&#fb9a33a&#fb9e2ec&#fba229k&#fba623-&#fbaa1eO&#fbae19'"),
             mutableListOf("&#fb7a43\"&#fb7d42A&#fb8041b&#fb8440s&#fb873eo&#fb8a3dl&#fb8d3cu&#fb913bt&#fb943ae&#fb9739l&#fb9a38y &#fb9e37m&#fba135a&#fba434n&#fba733i&#fbaa32a&#fbae31c&#fbb130a&#fbb42fl&#fbb72d.&#fbbb2c.&#fbbe2b.&#fbc12a\"","","Upon charging and releasing, this","bow will launch a pumpkin that","explodes on impact"),

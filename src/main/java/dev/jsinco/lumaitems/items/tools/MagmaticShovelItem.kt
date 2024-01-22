@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.block.Block
@@ -13,7 +13,7 @@ import java.util.function.Consumer
 
 class MagmaticShovelItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#f52a2a&lV&#f33c32&lo&#f24e39&ll&#f06041&lc&#ef7248&la&#ed8450&ln&#ec9657&li&#e99455&lc &#e47d49&lS&#df663c&lh&#db4f30&lo&#d63924&lv&#d22217&le&#cd0b0b&ll",
             mutableListOf("&#f1892aH&#f27d2ae&#f3722aa&#f4662at&#f55a2bi&#f54e2bn&#f6432bg &#f7372bU&#f82b2bp"),
             mutableListOf("Converts mined sand into glass"),

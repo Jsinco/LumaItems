@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
@@ -35,7 +35,7 @@ class WonderBeanieItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#723d8a&lW&#715b85&lo&#71797f&ln&#70967a&ld&#6fb474&le&#6ed26f&lr &#75db79&lB&#82cf92&le&#8fc3ac&la&#9cb7c5&ln&#a9abdf&li&#b69ff8&le",
             mutableListOf("&#723d8aC&#715486a&#716c81u&#70837dl&#709b79d&#6fb275r&#6fca70o&#6ee16cn", "&#723d8aB&#715e84o&#707f7eo&#709f78s&#6fc072t &#6ee16cI"),
             mutableListOf("&#723d8a\"&#7c4b9aI &#8559a9f&#8f67b9e&#9975c9e&#a383d9l &#ac91e8d&#b69ff8i&#aca8e4z&#a1b2d0z&#97bbbcy&#8dc5a8.&#83ce94.&#78d880.&#6ee16c\"","","This beanie amplifies all consumable", "potion effects you receive", "", "Wearing this beanie grants", "an extra health boost"),

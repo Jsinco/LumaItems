@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.util.AbilityUtil
@@ -26,7 +26,7 @@ class SunlightScytheItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#f8a5a5&lS&#eb9fac&lu&#dd98b2&ln&#d092b9&ll&#c28bbf&li&#b585c6&lg&#a77ecc&lh&#9a78d3&lt &#8c71d9&lS&#7f6be0&lc&#7164e6&ly&#645eed&lt&#5657f3&lh&#4951fa&le",
             mutableListOf("&#4a52fdD&#6260f4a&#796debz&#917be1z&#a888d8l&#c096cfi&#d8a4c6n&#efb1bdg &#fab9b7S&#f9bcb4o&#f7bfb2l&#f5c1afs&#f4c4adt&#f2c7aai&#f1c9a8c&#efcca5e", "&#6369fbU&#7072f3n&#7c7bebd&#8984e4e&#968ddca&#a396d4d &#af9fccH&#bca8c4a&#c9b1bct&#d6bab5r&#e2c3ade&#efcca5d"),
             mutableListOf("§fThis weapon deals significantly more", "§fdamage to mobs that burn in the daylight","","§fRight click to unleash a dazzling barrage","§fof slashes","","§cCooldown: 8 secs"),

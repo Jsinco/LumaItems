@@ -4,7 +4,7 @@ import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.util.AbilityUtil
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.GlowManager
 import org.bukkit.*
 import org.bukkit.Particle.DustOptions
@@ -26,7 +26,7 @@ class RemakerItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#3448b1&lR&#3b48b4&le&#4247b7&lm&#4947ba&la&#5046bd&lk&#5746c0&le&#5e45c3&lr",
             mutableListOf("&#2c1c6aP&#2d2271a&#2e2778r&#2f2d7fa&#313386n&#32398do&#333e94i&#34449ba"),
             mutableListOf("&#160E35\"See nothing.\"","","§fHolding this dagger will passively spawn","§fdark auras around opponents causing","§fthem to waste away","","§fRight click to unleash a bad omen, highlighting", "§fnearby opponents and blinding them","","§cCooldown: 23 secs"),

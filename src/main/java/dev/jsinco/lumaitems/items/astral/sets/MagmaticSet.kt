@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
@@ -39,6 +39,7 @@ class MagmaticSet : CustomItem, AstralSet {
             Enchantment.FIRE_ASPECT to 4,
             Enchantment.DIG_SPEED to 6,
             Enchantment.LOOT_BONUS_BLOCKS to 4,
+            Enchantment.LOOT_BONUS_MOBS to 4,
             Enchantment.PROTECTION_FALL to 5,
             Enchantment.THORNS to 3,
             Enchantment.MENDING to 1,
@@ -73,7 +74,7 @@ class MagmaticSet : CustomItem, AstralSet {
                 }
             }
 
-            val item = CreateItem(
+            val item = ItemFactory(
                 "&#fb4d4d&lMagmatic &f${Util.getGearType(material)}",
                 if (lores.keys.contains(material)) mutableListOf("&#fb4d4dVolcanic") else mutableListOf(),
                 lores[material] ?: mutableListOf(),

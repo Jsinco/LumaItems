@@ -2,7 +2,10 @@ name: LumaItems
 version: '${version}'
 main: dev.jsinco.lumaitems.LumaItems
 api-version: '1.20'
-softdepend: [PlaceHolderAPI, EvenMoreFish] # Softdepending EMF to register listeners after
+softdepend:
+- PlaceHolderAPI
+- EvenMoreFish # Softdepending EMF to register listeners after
+- ProtocolLib
 author: 'Jsinco'
 permissions:
   lumaitems.command.give:

@@ -10,9 +10,8 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
-import kotlin.reflect.cast
 
-class CreateItem(
+class ItemFactory(
     private val name: String,
     private val customEnchants: MutableList<String>,
     private val lore: MutableList<String>,
@@ -25,7 +24,7 @@ class CreateItem(
         private val plugin: LumaItems = LumaItems.getPlugin()
     }
 
-    var tier: String = "&#ffc8c8&lC&#ffcfc8&le&#ffd5c7&ll&#ffdcc7&le&#ffe3c7&ls&#ffe9c6&lt&#fff0c6&li&#fff6c5&la&#fffdc5&ll"
+    var tier: String = "&#fb4d4d&lAstral" //"&#ffc8c8&lC&#ffcfc8&le&#ffd5c7&ll&#ffdcc7&le&#ffe3c7&ls&#ffe9c6&lt&#fff0c6&li&#fff6c5&la&#fffdc5&ll"
 
     var unbreakable: Boolean = false
     var hideEnchants: Boolean = false

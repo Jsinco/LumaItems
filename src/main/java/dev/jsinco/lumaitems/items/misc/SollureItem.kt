@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.Particle
@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType
 
 class SollureItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#7290fb&lS&#869bf3&lo&#9ba6eb&ll&#afb1e3&ll&#c3bcda&lu&#d8c7d2&lr&#ecd2ca&le",
             mutableListOf(
                 "&7Unbreakable",

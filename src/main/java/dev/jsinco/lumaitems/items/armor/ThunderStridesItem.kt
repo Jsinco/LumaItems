@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil.isOnGround
@@ -31,7 +31,7 @@ class ThunderStridesItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#fbe734&lT&#fbe344&lh&#fcde53&lu&#fcda63&ln&#fcd573&ld&#fdd182&le&#fdcc92&lr &#f0c1a2&lS&#d6aeb1&lt&#bc9bc0&lr&#a289cf&li&#8876df&ld&#6e64ee&le&#5451fd&ls",
             mutableListOf("&#fbe734F&#fce835a&#fde937s&#d3cb70t &#949fc4L&#677afda&#5d66fdn&#5451fde"),
             mutableListOf("&#fbe734\"&#fbe43fS&#fbe149u&#fcde54r&#fcdb5fg&#fcd86ae &#fcd574l&#fcd27fi&#fdcf8ak&#fdcc95e &#f4c49fL&#e2b7aai&#d1aab4g&#bf9dbeh&#ad91c9t&#9b84d3n&#8977dei&#786ae8n&#665ef3g&#5451fd\"","","Crouch to activate a speed boost", "during your boost, crouch to slide","","&cCooldown: 16 secs"),

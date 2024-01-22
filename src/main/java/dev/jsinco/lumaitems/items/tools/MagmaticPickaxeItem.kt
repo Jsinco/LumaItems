@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.block.Block
@@ -28,7 +28,7 @@ class MagmaticPickaxeItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#f52a2a&lV&#f43b31&lo&#f24b38&ll&#f15c3f&lc&#ef6d46&la&#ee7e4d&ln&#ec8e54&li&#eb9f5b&lc &#e78a50&lP&#e27544&li&#de6039&lc&#da4a2d&lk&#d63522&la&#d12016&lx&#cd0b0b&le",
             mutableListOf("&#f1892aH&#f27d2ae&#f3722aa&#f4662at&#f55a2bi&#f54e2bn&#f6432bg &#f7372bU&#f82b2bp"),
             mutableListOf("§fConverts mined gold, copper,","§fand iron ore to ingots"),

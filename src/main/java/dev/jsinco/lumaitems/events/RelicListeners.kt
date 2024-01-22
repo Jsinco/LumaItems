@@ -8,6 +8,7 @@ import dev.jsinco.lumaitems.relics.RelicCreator
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Sound
+import org.bukkit.entity.Enemy
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Monster
@@ -32,9 +33,11 @@ class RelicListeners : Listener {
     @EventHandler
     fun onEntitySpawn(event: EntitySpawnEvent) {
         val livingEntity = event.entity as? LivingEntity ?: return
-        if (Random.nextInt(100) > 15) return // 15% chance to spawn a relic
-
         val isBoss = bosses.contains(livingEntity.type)
+
+        if (Random.nextInt(100) > 15 && !isBoss) return // 15% chance to spawn a relic
+
+
 
         val rarity: Rarity = if (isBoss) Rarity.bossRarities[0] else Rarity.genericRarities.random()
         val material: Material = Material.valueOf(FileManager("relics.yml").generateYamlFile().getStringList("relic-materials.${rarity.name.lowercase()}").random())
@@ -49,19 +52,9 @@ class RelicListeners : Listener {
         val item = relicCreator.getRelicItem()
         if (isBoss){
             livingEntity.equipment?.setItemInOffHand(item)
-        } else if (livingEntity is Monster) {
-            livingEntity.equipment.setItemInOffHand(item)
+        } else if (livingEntity is Enemy) {
+            livingEntity.equipment?.setItemInOffHand(item)
         }
-    }
-
-
-    // TODO: Move this
-    @EventHandler
-    fun onInvClick(event: InventoryClickEvent) {
-        if (event.inventory.holder !is GUIHolder) return
-
-        val guiHolder = event.inventory.holder as GUIHolder
-        guiHolder.guiClass.handleClick(event)
     }
 
     @EventHandler

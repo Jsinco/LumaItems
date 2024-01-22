@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.items.CreateItem
+import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -18,7 +18,7 @@ class EtherealWingsItem : CustomItem {
     }
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item = CreateItem(
+        val item = ItemFactory(
             "&#a0e8bb&lE&#a6e6bd&lt&#ace4bf&lh&#b2e2c1&le&#b8e0c3&lr&#bedec4&le&#c4dcc6&la&#cadac8&ll &#d0d8ca&lA&#d5d5cc&lp&#dbd3ce&lp&#e1d1d0&la&#e7cfd2&lr&#edcdd3&la&#f3cbd5&lt&#f9c9d7&lu&#ffc7d9&ls",
             mutableListOf("&#a0e8bbA&#a8e6bce&#b0e4bdr&#b9e1bdi&#c1dfbea&#c9ddbfl &#d1dbc0A&#d9d9c1s&#e1d7c2c&#ead4c2e&#f2d2c3n&#fad0c4t"),
             mutableListOf("§fCrouch while gliding to launch yourself","§fin the direction you're facing", "","§cCooldown: 10 secs"),
