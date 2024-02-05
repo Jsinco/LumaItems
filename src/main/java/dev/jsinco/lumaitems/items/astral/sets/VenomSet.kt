@@ -80,7 +80,7 @@ class VenomSet : CustomItem, AstralSet {
         when (type) {
             Ability.PLAYER_DAMAGED_BY_ENTITY -> {
                 event as EntityDamageByEntityEvent
-                val entity = event.damager as LivingEntity
+                val entity = event.damager as? LivingEntity ?: return false
                 entity.addPotionEffect(PotionEffect(PotionEffectType.POISON, 60, 1, false, false, false))
             }
             Ability.ENTITY_DAMAGE -> {

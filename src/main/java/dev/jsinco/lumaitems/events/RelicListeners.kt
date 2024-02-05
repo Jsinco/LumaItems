@@ -1,21 +1,18 @@
 package dev.jsinco.lumaitems.events
 
-import dev.jsinco.lumaitems.guis.GUIHolder
 import dev.jsinco.lumaitems.manager.FileManager
-import dev.jsinco.lumaitems.relics.RelicDisassembler
 import dev.jsinco.lumaitems.relics.Rarity
 import dev.jsinco.lumaitems.relics.RelicCreator
+import dev.jsinco.lumaitems.relics.RelicDisassembler
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Enemy
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
-import org.bukkit.entity.Monster
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntitySpawnEvent
-import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import kotlin.random.Random
 

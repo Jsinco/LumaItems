@@ -356,7 +356,7 @@ class Listeners(val plugin: LumaItems) : Listener {
         val data: PersistentDataContainer = entity.persistentDataContainer
 
         if (Bukkit.getOnlinePlayers().isEmpty()) return
-        val player = Bukkit.getOnlinePlayers().stream().toList().random()
+        Bukkit.getOnlinePlayers().stream().toList().random()
 
         for (customItem in ItemManager.customItems) {
             if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
@@ -375,10 +375,21 @@ class Listeners(val plugin: LumaItems) : Listener {
         for (customItem in ItemManager.customItems) {
             for (itemData in data) {
                 if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-
                 customItem.value.executeAbilities(Ability.POTION_EFFECT, player, event)
                 break
             }
+        }
+    }
+
+    @EventHandler
+    fun onEntityTargetLivingEntity(event: EntityTargetLivingEntityEvent) {
+        val target = event.target as? Player ?: return
+        val data = event.entity.persistentDataContainer
+
+        for (customItem in ItemManager.customItems) {
+            if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+            customItem.value.executeAbilities(Ability.ENTITY_TARGET_LIVING_ENTITY, target, event)
+            break // Include break?
         }
     }
 }
