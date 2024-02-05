@@ -109,7 +109,7 @@ class ValleySet : CustomItem, AstralSet {
             Ability.BREAK_BLOCK -> {
                 if (player.inventory.itemInMainHand.type.name.contains("HOE") && Random.nextInt(100) < 3) {
                     event as BlockBreakEvent
-                    event.block.type = if (Random.nextBoolean()) Material.WHEAT else Material.GOLDEN_CARROT
+                    event.block.world.dropItem(event.block.location, ItemStack(if (Random.nextBoolean()) Material.WHEAT else Material.GOLDEN_CARROT))
                 }
             }
 
