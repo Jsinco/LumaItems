@@ -3,13 +3,13 @@ package dev.jsinco.lumaitems.events
 import com.destroystokyo.paper.event.player.PlayerElytraBoostEvent
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.Util
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
+import org.bukkit.entity.Projectile
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -140,7 +140,15 @@ class Listeners(val plugin: LumaItems) : Listener {
 
     @EventHandler
     fun onEntityDamageByEntity(event: EntityDamageByEntityEvent) {
-        val player = event.damager as? Player ?: return
+        val player: Player = if (event.damager is Player) {
+            event.damager as Player
+        } else if (event.damager is Projectile) {
+            val projectile = event.damager as Projectile
+            projectile.shooter as? Player ?: return
+        } else {
+            return
+        }
+
         val item = player.inventory.itemInMainHand
         if (!item.hasItemMeta()) return
 
@@ -392,4 +400,5 @@ class Listeners(val plugin: LumaItems) : Listener {
             break // Include break?
         }
     }
+
 }
