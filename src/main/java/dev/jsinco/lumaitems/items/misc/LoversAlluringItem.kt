@@ -22,14 +22,14 @@ class LoversAlluringItem : CustomItem {
 
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
-            "&#fb3535&lL&#f83552&lo&#f5346e&lv&#f2348b&le&#f033a7&lr&#ed33c4&l'&#ea32e0&ls &#e732fd&lA&#ea32e0&ll&#ed33c4&ll&#f033a7&lu&#f2348b&lr&#f5346e&li&#f83552&ln&#fb3535&lg",
-            mutableListOf("&cWorker", "&cCoupled"),
+            "&#fb4d48&lL&#fb5555&lo&#fc5d63&lv&#fc6570&le&#fc6e7e&lr&#fc768b&l'&#fd7e99&ls &#fd86a6&lA&#fa88b2&ll&#f88bbe&ll&#f58dca&lu&#f290d7&lr&#ef92e3&li&#ed95ef&ln&#ea97fb&lg",
+            mutableListOf("&#FD86A6Worker", "&#FD86A6Coupled"),
             mutableListOf("When fishing with this rod, bites", "will automatically be reeled in", "", "Fish caught with this rod have", "a small chance to be doubled"),
             Material.FISHING_ROD,
             mutableListOf("lovers-alluring"),
             mutableMapOf(Enchantment.LURE to 5, Enchantment.LUCK to 5, Enchantment.DURABILITY to 9, Enchantment.MENDING to 1),
         )
-        item.tier = "&#fd4c4c&lB&#fd515e&le&#fd5571&la&#fc5a83&lu &#fc5e96&lH&#fc63a8&le&#fc67bb&la&#fb6ccd&lr&#fb70e0&lt&#fb75f2&ls"
+        item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
         return Pair("lovers-alluring", item.createItem())
     }
 

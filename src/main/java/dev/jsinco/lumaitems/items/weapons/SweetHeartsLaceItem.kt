@@ -32,10 +32,10 @@ class SweetHeartsLaceItem : CustomItem {
         val item = ItemFactory(
             "&#fb5ab6&lS&#fb5db5&lw&#fb61b4&le&#fb64b3&le&#fc68b1&lt&#fc6bb0&lH&#fc6eaf&le&#fc72ae&la&#fc75ad&lr&#fc79ac&lt&#fc7cab&l'&#fc7faa&ls &#fd83a8&lL&#fd86a7&la&#fd8aa6&lc&#fd8da5&le",
             mutableListOf("&#FB5AB6Cupid"),
-            mutableListOf("Shot enemies may be", "temporarily charmed, causing them", "to briefly become passive"),
+            mutableListOf("Shot enemies may be temporarily", "charmed, causing them to", "briefly become passive"),
             Material.BOW,
             mutableListOf("sweetheartslace"),
-            mutableMapOf(Enchantment.ARROW_DAMAGE to 7, Enchantment.ARROW_KNOCKBACK to 3, Enchantment.ARROW_INFINITE to 1, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.ARROW_DAMAGE to 7, Enchantment.KNOCKBACK to 2, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1, Enchantment.LOOT_BONUS_MOBS to 4)
         )
         item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
 
@@ -53,10 +53,10 @@ class SweetHeartsLaceItem : CustomItem {
                 event.entity.remove() // Can remove after we pull its location and velocity
                 snowball.setGravity(false)
 
-                //player.hideEntity(p, snowball)
-                //for (watcher in nearbyWatchers) {
-                //    watcher.hideEntity(p, snowball)
-                //}
+                player.hideEntity(p, snowball)
+                for (watcher in nearbyWatchers) {
+                    watcher.hideEntity(p, snowball)
+                }
                 snowball.persistentDataContainer.set(NamespacedKey(p, "sweetheartslace"), PersistentDataType.SHORT, 1)
                 snowball.shooter = player
                 object : BukkitRunnable() {
@@ -75,15 +75,13 @@ class SweetHeartsLaceItem : CustomItem {
                 event as ProjectileHitEvent
                 val entity = event.hitEntity as? LivingEntity ?: return false
 
-
                 entity.world.spawnParticle(Particle.SPELL_WITCH, entity.location, 30, 0.5, 0.5, 0.5, 0.5)
 
                 if (entity is Enemy && Random.nextInt(100) <= 40) {
-                    val nameSpace = NamespacedKey(p, "sweetheartslace")
-                    entity.persistentDataContainer.set(nameSpace, PersistentDataType.SHORT, 1.toShort())
+                    entity.persistentDataContainer.set(NamespacedKey(p, "sweetheartslace"), PersistentDataType.SHORT, 1.toShort())
                     Bukkit.getScheduler().scheduleSyncDelayedTask(p, {
                         if (entity.isDead) return@scheduleSyncDelayedTask
-                        entity.persistentDataContainer.remove(nameSpace)
+                        entity.persistentDataContainer.remove(NamespacedKey(p, "sweetheartslace"))
                     }, 600L)
                 }
             }
@@ -93,7 +91,7 @@ class SweetHeartsLaceItem : CustomItem {
             }
             Ability.ENTITY_DAMAGE -> {
                 event as EntityDamageByEntityEvent
-                event.damage += 7.0
+                event.damage += 12.0
             }
 
             else -> return false

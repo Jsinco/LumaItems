@@ -43,6 +43,10 @@ public class ItemManager {
         this.plugin = plugin;
     }
 
+    public void clearAllItems() {
+        customItems.clear();
+    }
+
 
     /**
      * Registers all Custom Items in the packages list

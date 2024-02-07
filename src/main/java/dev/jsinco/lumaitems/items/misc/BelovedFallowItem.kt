@@ -5,6 +5,7 @@ import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
+import org.bukkit.Particle
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Animals
 import org.bukkit.entity.Player
@@ -22,7 +23,7 @@ class BelovedFallowItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
             "&#ffa5e3&lB&#ffafe6&le&#ffb8e9&ll&#ffc2ed&lo&#ffcbf0&lv&#ffd5f3&le&#ffdef6&ld &#f9d8f8&lF&#f4d1f9&la&#eecbfb&ll&#e8c5fc&ll&#e3befe&lo&#ddb8ff&lw",
-            mutableListOf("&#aa8df6Breeder"),
+            mutableListOf("&#ddb8ffBreeder"),
             mutableListOf("Right-click while holding", "to breed animals in a 5x5", "radius around you", "", "&cCooldown: 50s"),
             Material.NETHERITE_HOE,
             mutableListOf("belovedfallow"),
@@ -39,6 +40,7 @@ class BelovedFallowItem : CustomItem {
                 val entities = playerLocation.world.getNearbyEntities(playerLocation, 5.0, 5.0, 5.0)
                 for (entity in entities) {
                     if (entity is Animals) {
+                        entity.world.spawnParticle(Particle.HEART, entity.location, 10, 0.5, 0.5, 0.5, 0.0)
                         entity.loveModeTicks = 600 // Normal breeding time
                     }
                 }
