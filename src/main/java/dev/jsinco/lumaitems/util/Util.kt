@@ -21,7 +21,7 @@ object Util {
 
     @JvmStatic
     fun loadUtils() {
-        prefix = colorcode(plugin.config.getString("prefix")!!)
+        prefix = colorcode(plugin.config.getString("prefix") ?: "")
     }
 
     /**

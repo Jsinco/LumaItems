@@ -1,18 +1,24 @@
 package dev.jsinco.lumaitems.commands
 
 import dev.jsinco.lumaitems.LumaItems
+import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.ItemManager
+import dev.jsinco.lumaitems.util.Util
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 class GiveItemCommand : SubCommand {
-    private val customItems = ItemManager.customItems
+    private val customItems: MutableMap<String, CustomItem> = mutableMapOf()
     private val customItemsByName: MutableMap<String, ItemStack> = mutableMapOf()
 
     init {
-        for (customItem in customItems) {
+        refreshItems()
+    }
+
+    fun refreshItems() {
+        for (customItem in ItemManager.customItems) {
             val item: ItemStack = customItem.value.createItem().second
             if (!item.hasItemMeta()) continue
             customItemsByName[
@@ -34,12 +40,13 @@ class GiveItemCommand : SubCommand {
         }
 
         if (item != null) {
-            player.inventory.addItem(item)
+            Util.giveItem(player, item)
         } else {
             for (customItem in customItems) {
-                player.inventory.addItem(customItem.value.createItem().second)
+                Util.giveItem(player, customItem.value.createItem().second)
             }
         }
+        refreshItems()
     }
 
     override fun tabComplete(plugin: LumaItems, sender: CommandSender, args: Array<out String>): List<String> {

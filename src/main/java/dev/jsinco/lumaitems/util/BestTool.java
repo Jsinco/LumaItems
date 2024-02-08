@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import java.util.ArrayList;
 import java.util.List;
 
-// FIXME: God, please fix this
 public class BestTool {
 
     public static final List<Material> AXE = new ArrayList<>();
@@ -16,15 +15,10 @@ public class BestTool {
 
     public void materialMatching() {
         for (Material material : Material.values()) {
+            if (!material.isBlock()) continue;
             String m = material.name().toUpperCase();
 
-            if (!material.isBlock()) continue;
-
-            /*
-             * Update: 10/10/2023, I will be converting this to an enum soon
-             */
-            // I refuse to go the NMS and reflection route
-            // and no, Bukkit does not provide a nice and accurate way to do this otherwise
+            // Is there a better way to do this?
 
             if (!m.contains("POWDER")) {
                 if (m.contains("STONE") || m.contains("GRANITE") || m.contains("DIORITE") || m.contains("ANDESITE") || m.contains("DEEPSLATE") || m.contains("TUFF")

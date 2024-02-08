@@ -1,12 +1,13 @@
 package dev.jsinco.lumaitems.events
 
+import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent
 import com.destroystokyo.paper.event.player.PlayerElytraBoostEvent
+import com.destroystokyo.paper.event.player.PlayerJumpEvent
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.Util
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent
-import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
 import org.bukkit.entity.Projectile
@@ -363,13 +364,9 @@ class Listeners(val plugin: LumaItems) : Listener {
 
         val data: PersistentDataContainer = entity.persistentDataContainer
 
-        if (Bukkit.getOnlinePlayers().isEmpty()) return
-        Bukkit.getOnlinePlayers().stream().toList().random()
-
         for (customItem in ItemManager.customItems) {
             if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-            val customItemClass = customItem.value
-            customItemClass.executeAbilities(Ability.ENTITY_CHANGE_BLOCK, null as Player, event)
+            customItem.value.executeAbilities(Ability.ENTITY_CHANGE_BLOCK, null as Player, event)
             break
         }
     }
@@ -384,7 +381,6 @@ class Listeners(val plugin: LumaItems) : Listener {
             for (itemData in data) {
                 if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
                 customItem.value.executeAbilities(Ability.POTION_EFFECT, player, event)
-                break
             }
         }
     }
@@ -397,8 +393,30 @@ class Listeners(val plugin: LumaItems) : Listener {
         for (customItem in ItemManager.customItems) {
             if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
             customItem.value.executeAbilities(Ability.ENTITY_TARGET_LIVING_ENTITY, target, event)
-            break // Include break?
         }
     }
 
+    //@EventHandler
+    fun onPlayerJump(event: PlayerJumpEvent) {
+        val data = Util.getAllEquipmentNBT(event.player)
+
+        for (customItem in ItemManager.customItems) {
+            for (itemData in data) {
+                if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+                customItem.value.executeAbilities(Ability.JUMP, event.player, event)
+            }
+        }
+    }
+
+    //@EventHandler
+    fun onPlayerArmorSwap(event: PlayerArmorChangeEvent) {
+        val data = Util.getAllEquipmentNBT(event.player)
+
+        for (customItem in ItemManager.customItems) {
+            for (itemData in data) {
+                if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+                customItem.value.executeAbilities(Ability.ARMOR_SWAP, event.player, event)
+            }
+        }
+    }
 }

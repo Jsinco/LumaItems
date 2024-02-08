@@ -4,6 +4,7 @@ import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.enchantments.Enchantment
@@ -17,6 +18,7 @@ class BelovedFallowItem : CustomItem {
     companion object {
         private val cooldown: MutableSet<UUID> = mutableSetOf()
         private val plugin: LumaItems = LumaItems.getPlugin()
+        private val coolDownAnimals: MutableSet<UUID> = mutableSetOf()
     }
 
 
@@ -38,12 +40,24 @@ class BelovedFallowItem : CustomItem {
             Ability.RIGHT_CLICK -> {
                 val playerLocation = player.location
                 val entities = playerLocation.world.getNearbyEntities(playerLocation, 5.0, 5.0, 5.0)
+
+                var affected = 0
                 for (entity in entities) {
-                    if (entity is Animals) {
+                    if (entity is Animals && !coolDownAnimals.contains(entity.uniqueId)) {
                         entity.world.spawnParticle(Particle.HEART, entity.location, 10, 0.5, 0.5, 0.5, 0.0)
                         entity.loveModeTicks = 600 // Normal breeding time
+                        coolDownAnimals.add(entity.uniqueId)
+                        Bukkit.getScheduler().runTaskLater(plugin, Runnable {
+                            coolDownAnimals.remove(entity.uniqueId)
+                        }, 6000L)
+                        affected++
                     }
                 }
+
+                if (affected == 0) {
+                    return false
+                }
+
                 cooldown.add(player.uniqueId)
                 plugin.server.scheduler.runTaskLater(plugin, Runnable {
                     cooldown.remove(player.uniqueId)

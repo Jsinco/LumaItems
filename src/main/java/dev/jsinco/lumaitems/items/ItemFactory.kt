@@ -28,13 +28,13 @@ class ItemFactory(
 
     var unbreakable: Boolean = false
     var hideEnchants: Boolean = false
-    var addHiddenCharacter: Boolean = true
-    val attributeModifiers: MutableMap<Attribute, AttributeModifier> = mutableMapOf()
+    var addSpace: Boolean = true
+    var attributeModifiers: MutableMap<Attribute, AttributeModifier> = mutableMapOf()
     val stringPersistentDatas: MutableMap<NamespacedKey, String> = mutableMapOf()
 
-    fun createItem(): ItemStack { // TODO: Organize
+    fun createItem(): ItemStack {
         val item = ItemStack(material)
-        val meta = item.itemMeta!!
+        val meta = item.itemMeta ?: return item
 
         meta.persistentDataContainer.set(NamespacedKey(plugin, "lumaitem"), PersistentDataType.SHORT, 1)
         for (name in persistentData) {
@@ -50,7 +50,7 @@ class ItemFactory(
 
         val combinedLore: MutableList<String> = mutableListOf()
         combinedLore.addAll(customEnchants)
-        if (addHiddenCharacter) combinedLore.add("§")
+        if (addSpace) combinedLore.add("")
         combinedLore.addAll(lore.map { "&f$it" })
         combinedLore.add("")
         combinedLore.add("&#EEE1D5&m       &r&#EEE1D5⋆⁺₊⋆ ★ ⋆⁺₊⋆&m       ")

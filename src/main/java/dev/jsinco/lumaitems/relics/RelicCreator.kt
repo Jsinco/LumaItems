@@ -65,7 +65,7 @@ class RelicCreator (
         )
         itemCreator.stringPersistentDatas[NamespacedKey(plugin, "relic-rarity")] = rarity.name
         itemCreator.tier = rarity.tier
-        itemCreator.addHiddenCharacter = false
+        itemCreator.addSpace = false
     }
 
 

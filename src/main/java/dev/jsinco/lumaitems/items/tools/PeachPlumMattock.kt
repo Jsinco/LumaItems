@@ -8,6 +8,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
+import kotlin.random.Random
 
 class PeachPlumMattock : CustomItem {
 
@@ -28,6 +29,7 @@ class PeachPlumMattock : CustomItem {
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
         when (type) {
             Ability.LEFT_CLICK -> {
+                if (Random.nextInt(500) > 4) return false
                 event as PlayerInteractEvent
                 var blockName = event.clickedBlock?.type?.name ?: return false
                 if (blockName.endsWith("_ORE")) {

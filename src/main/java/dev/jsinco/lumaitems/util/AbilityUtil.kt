@@ -1,8 +1,7 @@
 package dev.jsinco.lumaitems.util
 
-import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.magical.ParallelParadigmWandItem
+import dev.jsinco.lumaitems.manager.FileManager
 import org.bukkit.*
 import org.bukkit.Particle.DustOptions
 import org.bukkit.block.Block
@@ -52,6 +51,7 @@ object AbilityUtil {
         Material.CAVE_AIR,
         Material.VOID_AIR
     )
+    private val blockedAbility: MutableSet<UUID> = mutableSetOf()
 
     init {
         // Shulker boxes
@@ -88,7 +88,7 @@ object AbilityUtil {
 
     fun breakRelativeBlock(block: Block, player: Player, particle: Particle?, type: String, limiterInitial: Int) {
         var limiter = limiterInitial
-        if (player.hasMetadata("BlockAbility")) return
+        if (blockedAbility.contains(player.uniqueId)) return
         val faces =
             arrayOf(BlockFace.DOWN, BlockFace.UP, BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST)
         //Loop through all block faces (All 6 sides around the block)
@@ -101,9 +101,9 @@ object AbilityUtil {
                     b.world.spawnParticle(Particle.BLOCK_CRACK, b.location, 5, 0.5, 0.5, 0.5, 0.1, b.blockData)
                     b.world.spawnParticle(particle, b.location, 2, 0.5, 0.5, 0.5, 0.1)
                 }
-                player.setMetadata("BlockAbility", FixedMetadataValue(plugin, true))
+                blockedAbility.add(player.uniqueId)
                 player.breakBlock(b)
-                player.removeMetadata("BlockAbility", plugin)
+                blockedAbility.remove(player.uniqueId)
                 block.breakNaturally(player.inventory.itemInMainHand)
                 if (type == "leaves") {
                     limiter++
@@ -118,12 +118,12 @@ object AbilityUtil {
 
     // Usage: DarkMoonMattockItem, DarkMoonShovelItem
     fun breakThreeByThree(block: Block, player: Player, restrict: List<Material?>?) {
-        if (player.hasMetadata("BlockAbility")) return
+        if (blockedAbility.contains(player.uniqueId)) return
         val cube = Cuboid(
             block.location.add(-1.0, -1.0, -1.0),
             block.location.add(1.0, 1.0, 1.0)
         )
-        player.setMetadata("BlockAbility", FixedMetadataValue(plugin, true))
+        blockedAbility.add(player.uniqueId)
         if (restrict != null) {
             for (i in 0 until cube.blockList().size) {
                 val b: Block = cube.blockList()[i]
@@ -140,7 +140,7 @@ object AbilityUtil {
                 player.breakBlock(b)
             }
         }
-        player.removeMetadata("BlockAbility", plugin)
+        blockedAbility.remove(player.uniqueId)
     }
 
     // Usage: Stellaris' Set
