@@ -19,7 +19,7 @@ class MoonstoneMattockItem : CustomItem {
         val item = ItemFactory(
             "&#477edf&lM&#5f8ae3&lo&#7797e7&lo&#8fa3ec&ln&#a7b0f0&ls&#bfbcf4&lt&#b7b4f3&lo&#b0acf2&ln&#a8a5f0&le &#a19def&lM&#9995ee&la&#9f94e7&lt&#a593e0&lt&#ab93d9&lo&#b192d2&lc&#b791cb&lk",
             mutableListOf("&#90add9M&#98b3dbo&#a0b9ddo&#a8bfdfn &#b0c5e1& &#b9cbe4S&#c1d1e6h&#c9d7e8i&#d1ddean&#d9e3ece"),
-            mutableListOf("§fMining ores with this pickaxe grants","§fa chance to substantially increase the","§famount of materials gained","","§fHowever, there is a chance for mined","§fores to drop nothing"),
+            mutableListOf("§fMining ores with this pickaxe grants","§fa chance to substantially increase the","§famount of materials gained","","§fHowever, there is a chance for mined","§for ores to drop nothing"),
             Material.NETHERITE_PICKAXE,
             mutableListOf("moonstonemattock"),
             mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1, Enchantment.LOOT_BONUS_BLOCKS to 5)
@@ -31,7 +31,7 @@ class MoonstoneMattockItem : CustomItem {
         val blockBreakEvent: BlockBreakEvent? = event as? BlockBreakEvent
 
         when (type) {
-            Ability.BREAK_BLOCK -> { // TODO: Fix ExtraStorage dupe glitch
+            Ability.BREAK_BLOCK -> {
                 blockBreakEvent!!.isDropItems = gamblersRemark(blockBreakEvent.block, blockBreakEvent.block.drops)
             }
             else -> return false

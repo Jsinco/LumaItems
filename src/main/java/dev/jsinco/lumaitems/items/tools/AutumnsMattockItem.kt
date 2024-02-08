@@ -16,9 +16,9 @@ import kotlin.random.Random
 class AutumnsMattockItem : CustomItem {
 
     companion object {
-        val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getPlugin()
 
-        val oreColors: Map<Material, Color> = mapOf(
+        private val oreColors: Map<Material, Color> = mapOf(
             Material.COAL to Color.fromRGB(33, 34, 31),
             Material.RAW_COPPER to Color.fromRGB(179, 92, 62),
             Material.LAPIS_LAZULI to Color.fromRGB(16, 67, 169),

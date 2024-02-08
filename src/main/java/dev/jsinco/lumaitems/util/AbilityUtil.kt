@@ -62,8 +62,9 @@ object AbilityUtil {
         }
     }
 
+    @JvmStatic
     fun noDamagePermission(attacker: Player, damagee: Entity): Boolean {
-        val event = EntityDamageByEntityEvent(attacker, damagee, EntityDamageEvent.DamageCause.ENTITY_ATTACK, 1.0)
+        val event = EntityDamageByEntityEvent(attacker, damagee, EntityDamageEvent.DamageCause.ENTITY_ATTACK, 0.1)
         Bukkit.getPluginManager().callEvent(event)
         return event.isCancelled
     }
