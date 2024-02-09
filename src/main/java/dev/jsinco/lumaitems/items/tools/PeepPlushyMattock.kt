@@ -37,7 +37,7 @@ class PeepPlushyMattock : CustomItem {
         val item = ItemFactory(
             "&#aca1ff&lP&#bbabff&le&#cab4ff&le&#dabeff&lp &#e9c7ff&lP&#f8d1ff&ll&#fdcaf6&lu&#febbe9&ls&#feacdc&lh&#fe9ccf&ly &#ff8dc2&lM&#ff81b4&la&#ff7aa4&lt&#ff7493&lt&#ff6d83&lo&#ff6773&lc&#ff6063&lk",
             mutableListOf("&#ACA1FFSnuggly Luck"),
-            mutableListOf("Mining ores with this pickaxe grants","a chance to substantially increase the","amount of materials gained","","However, there is a chance for mined","for ores to drop nothing"),
+            mutableListOf("Mining ores with this pickaxe grants","a chance to substantially increase the","amount of materials gained","","However, there is a chance for mined","ores to drop nothing"),
             Material.NETHERITE_PICKAXE,
             mutableListOf("peepplushymattock"),
             mutableMapOf(Enchantment.MENDING to 1, Enchantment.DURABILITY to 10, Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 5)

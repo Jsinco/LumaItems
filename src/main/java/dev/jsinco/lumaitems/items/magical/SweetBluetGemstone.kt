@@ -150,7 +150,7 @@ class SweetBluetGemstone : CustomItem {
         snowball.world.spawnParticle(Particle.ELECTRIC_SPARK, snowball.location, 30, 0.7, 0.7, 0.7, 0.8)
         activeSnowballs.remove(player.uniqueId)
         for (entity in affected) {
-            if (!AbilityUtil.noDamagePermission(player, entity)) {
+            if (!AbilityUtil.noDamagePermission(player, entity) && entity != player) {
                 entity.damage(22.0, player)
             }
         }
@@ -199,7 +199,7 @@ class SweetBluetGemstone : CustomItem {
         snowball.world.spawnParticle(Particle.EXPLOSION_HUGE, snowball.location, 1, 0.0, 0.0, 0.0, 0.0)
         snowball.world.spawnParticle(Particle.SOUL_FIRE_FLAME, snowball.location, 100, 0.5, 0.5, 0.5, 0.8)
         snowball.getNearbyEntities(10.0,10.0,10.0).mapNotNull { it as? LivingEntity }.forEach {
-            if (!AbilityUtil.noDamagePermission(snowball.shooter as Player, it)) {
+            if (!AbilityUtil.noDamagePermission(snowball.shooter as Player, it) && it != snowball.shooter) {
                 it.damage(60.0, snowball.shooter as Player)
             }
         }

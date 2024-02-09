@@ -17,7 +17,7 @@ class GiveItemCommand : SubCommand {
         refreshItems()
     }
 
-    fun refreshItems() {
+    private fun refreshItems() {
         for (customItem in ItemManager.customItems) {
             val item: ItemStack = customItem.value.createItem().second
             if (!item.hasItemMeta()) continue
@@ -30,7 +30,11 @@ class GiveItemCommand : SubCommand {
     }
 
     override fun execute(plugin: LumaItems, sender: CommandSender, args: Array<out String>) {
-        val player = sender as Player
+        val player = if (args.size == 3) {
+            plugin.server.getPlayerExact(args[2]) ?: return
+        } else {
+            sender as Player
+        }
 
 
         val item = if (args[1] != "all") {
@@ -49,10 +53,15 @@ class GiveItemCommand : SubCommand {
         refreshItems()
     }
 
-    override fun tabComplete(plugin: LumaItems, sender: CommandSender, args: Array<out String>): List<String> {
-        val list: MutableList<String> = customItemsByName.keys.toMutableList()
-        list.add("all")
-        return list
+    override fun tabComplete(plugin: LumaItems, sender: CommandSender, args: Array<out String>): List<String>? {
+        when (args.size) {
+            2 -> {
+                val list: MutableList<String> = customItemsByName.keys.toMutableList()
+                list.add("all")
+                return list
+            }
+        }
+        return null
     }
 
     override fun permission(): String {
