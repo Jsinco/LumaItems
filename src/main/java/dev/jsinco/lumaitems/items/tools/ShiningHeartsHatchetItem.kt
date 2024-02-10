@@ -22,7 +22,7 @@ class ShiningHeartsHatchetItem : CustomItem {
             mutableListOf("Grants a chance to drop additional", "logs when cutting trees down", "", "When attacking, nearby enemies have", "a chance to be damaged as well"),
             Material.NETHERITE_AXE,
             mutableListOf("shiningheartshatchet"),
-            mutableMapOf(Enchantment.MENDING to 1, Enchantment.DURABILITY to 10, Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 5, Enchantment.SWEEPING_EDGE to 4)
+            mutableMapOf(Enchantment.MENDING to 1, Enchantment.DURABILITY to 10, Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 5, Enchantment.SWEEPING_EDGE to 4, Enchantment.DAMAGE_ALL to 7)
         )
         item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
         return Pair("shiningheartshatchet", item.createItem())
