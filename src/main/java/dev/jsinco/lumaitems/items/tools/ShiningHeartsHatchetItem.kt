@@ -18,7 +18,7 @@ class ShiningHeartsHatchetItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
             "&#fbbdb7&lS&#fbb8b7&lh&#fbb4b7&li&#fcafb7&ln&#fcabb7&li&#fca6b6&ln&#fca2b6&lg &#fc9db6&lH&#fd99b6&le&#fd94b6&la&#fd90b1&lr&#fd8ba8&lt&#fd869f&ls &#fd8196&lH&#fd7d8d&la&#fd7884&lt&#fd737b&lc&#fd6e72&lh&#fd6a69&le&#fd6560&lt",
-            mutableListOf("&#FD6560Lover's Present"),
+            mutableListOf("&#fd8ba8Lover's Present"),
             mutableListOf("Grants a chance to drop additional", "logs when cutting trees down", "", "When attacking, nearby enemies have", "a chance to be damaged as well"),
             Material.NETHERITE_AXE,
             mutableListOf("shiningheartshatchet"),

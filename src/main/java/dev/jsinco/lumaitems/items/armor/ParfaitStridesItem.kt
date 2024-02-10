@@ -48,9 +48,9 @@ class ParfaitStridesItem : CustomItem {
                 nearbyPlayers.add(player)
 
                 for (nearbyPlayer in nearbyPlayers) {
-                    nearbyPlayer.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 800, 1))
-                    nearbyPlayer.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 800, 0))
-                    nearbyPlayer.addPotionEffect(PotionEffect(PotionEffectType.FAST_DIGGING, 800, 1))
+                    nearbyPlayer.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 450, 1))
+                    nearbyPlayer.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 450, 0))
+                    nearbyPlayer.addPotionEffect(PotionEffect(PotionEffectType.FAST_DIGGING, 450, 1))
                 }
 
                 cooldown.add(player.uniqueId)

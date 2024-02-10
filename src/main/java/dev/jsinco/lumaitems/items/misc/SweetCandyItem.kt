@@ -16,7 +16,7 @@ class SweetCandyItem : CustomItem {
             "&#ce8efb&lS&#d891fa&lw&#e395f9&le&#ed98f8&le&#f89bf7&lt &#fda1f7&lC&#fea8f8&la&#feb0f9&ln&#ffb7fa&ld&#ffbffb&ly",
             mutableListOf("&7Haste II"),
             mutableListOf("This sweet candy just","really raises your blood sugar","","Holding this candy will","give you a Haste II boost"),
-            Material.GLISTERING_MELON_SLICE,
+            Material.MAGENTA_DYE,
             mutableListOf("sweetcandy"),
             mutableMapOf(Enchantment.DURABILITY to 10)
         )
