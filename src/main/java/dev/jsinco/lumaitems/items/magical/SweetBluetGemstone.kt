@@ -37,7 +37,7 @@ class SweetBluetGemstone : CustomItem {
                 "${AbilityType.RIGHTEOUS_DOWNFALL.friendlyName} &7-&f Launches a spell", "overhead that damages on impact",
                 "${AbilityType.STORM.friendlyName} &7-&f Strikes a target with", "multiple lightning bolts, &c20s cooldown",
                 "${AbilityType.GLACIER_BREAKAGE.friendlyName} &7-&f Launches a spell", "that explodes upon impact, &c1m cooldown",
-                "", "&c7 lapis per spell"),
+                "", "&c4 lapis per spell"),
             Material.DIAMOND,
             mutableListOf("sweetbluetgemstone"),
             mutableMapOf(Enchantment.DURABILITY to 9, Enchantment.FIRE_ASPECT to 5, Enchantment.THORNS to 4)
@@ -71,7 +71,7 @@ class SweetBluetGemstone : CustomItem {
                     event.item?.itemMeta = meta
 
                     player.sendMessage(Util.colorcode("${Util.prefix} Changed to ${newAbilityType.friendlyName} &#E2E2E2spell"))
-                } else if (player.inventory.containsAtLeast(ItemStack(Material.LAPIS_LAZULI), 7)) {
+                } else if (player.inventory.containsAtLeast(ItemStack(Material.LAPIS_LAZULI), 4)) {
 
                     runAbilityType(activeAbilityType, player)
                 }
@@ -110,14 +110,15 @@ class SweetBluetGemstone : CustomItem {
 
     private fun magicalDownFall(player: Player) {
         if (activeSnowballs.contains(player.uniqueId)) return
-        player.inventory.removeItem(ItemStack(Material.LAPIS_LAZULI, 7))
+        val targetBlock = player.getTargetBlockExact(170) ?: return
 
+        player.inventory.removeItem(ItemStack(Material.LAPIS_LAZULI, 4))
         val snowball = player.world.spawn(player.location.add(0.0,17.0,0.0), Snowball::class.java)
         player.hideEntity(plugin, snowball)
         for (watcher in player.getNearbyEntities(80.0, 80.0, 80.0).mapNotNull { it as? Player }) {
             watcher.hideEntity(plugin, snowball)
         }
-        val vector: Vector = AbilityUtil.getDirectionBetweenLocations(snowball.location, player.getTargetBlockExact(170)?.location ?: return)
+        val vector: Vector = AbilityUtil.getDirectionBetweenLocations(snowball.location, targetBlock.location)
 
         snowball.velocity = vector.multiply(0.1).normalize()
         snowball.setMetadata("MAGIC_DOWNFALL", FixedMetadataValue(plugin, "MAGIC_DOWNFALL"))
@@ -161,7 +162,7 @@ class SweetBluetGemstone : CustomItem {
         if (cooldownGlacier.contains(player.uniqueId)) {
             return
         }
-        player.inventory.removeItem(ItemStack(Material.LAPIS_LAZULI, 7))
+        player.inventory.removeItem(ItemStack(Material.LAPIS_LAZULI, 4))
 
         val snowball = player.launchProjectile(Snowball::class.java)
         player.hideEntity(plugin, snowball)
@@ -207,7 +208,7 @@ class SweetBluetGemstone : CustomItem {
 
     private fun stormAbility(player: Player, livingEntity: LivingEntity) {
         if (AbilityUtil.noDamagePermission(player, livingEntity) || cooldownStorm.contains(player.uniqueId)) return
-        player.inventory.removeItem(ItemStack(Material.LAPIS_LAZULI, 7))
+        player.inventory.removeItem(ItemStack(Material.LAPIS_LAZULI, 4))
 
         livingEntity.fireTicks = 140
         for (i in 0..6) {

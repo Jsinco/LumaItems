@@ -69,6 +69,6 @@ class GiveItemCommand : SubCommand {
     }
 
     override fun playerOnly(): Boolean {
-        return true
+        return false
     }
 }

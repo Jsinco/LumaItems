@@ -27,7 +27,7 @@ class ParfaitStridesItem : CustomItem {
         val item = ItemFactory(
             "&#9a8a88&lP&#b19a95&la&#c7a9a3&lr&#deb9b0&lf&#f4c9be&la&#fcd1c6&li&#fcd6cb&lt &#fddcd0&lS&#fde1d5&lt&#fde5da&lr&#fbe8dd&li&#faebe1&ld&#f9eee4&le&#f8f1e7&ls",
             mutableListOf("&#FCCEC2Spillover", "&#FCCEC2Beacon"),
-            mutableListOf("Passively grants the wearer", "extra health while wearing", "", "While wearing, crouch to grant", "all nearby players a potion buff", "for a short duration", "", "&cCooldown: 3m"),
+            mutableListOf("Passively grants the wearer", "extra health while wearing", "", "While wearing, crouch and", "right-click to grant all nearbys", "a buff for a short duration", "", "&cCooldown: 1m"),
             Material.NETHERITE_LEGGINGS,
             mutableListOf("parfaitstrides"),
             mutableMapOf(Enchantment.PROTECTION_EXPLOSIONS to 8, Enchantment.PROTECTION_ENVIRONMENTAL to 7, Enchantment.DURABILITY to 8, Enchantment.MENDING to 1)
@@ -41,8 +41,8 @@ class ParfaitStridesItem : CustomItem {
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.PLAYER_CROUCH -> {
-                if (cooldown.contains(player.uniqueId)) return false
+            Ability.RIGHT_CLICK -> {
+                if (cooldown.contains(player.uniqueId) || !player.isSneaking) return false
 
                 val nearbyPlayers: MutableList<Player> = player.getNearbyEntities(10.0, 10.0, 10.0).mapNotNull { it as? Player }.toMutableList()
                 nearbyPlayers.add(player)
@@ -56,7 +56,7 @@ class ParfaitStridesItem : CustomItem {
                 cooldown.add(player.uniqueId)
                 plugin.server.scheduler.scheduleSyncDelayedTask(plugin, {
                     cooldown.remove(player.uniqueId)
-                }, 3600L)
+                }, 1200L)
             }
 
             else -> return false

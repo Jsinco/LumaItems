@@ -32,7 +32,7 @@ class SweetHeartsLaceItem : CustomItem {
         val item = ItemFactory(
             "&#fb5ab6&lS&#fb5db5&lw&#fb61b4&le&#fb64b3&le&#fc68b1&lt&#fc6bb0&lH&#fc6eaf&le&#fc72ae&la&#fc75ad&lr&#fc79ac&lt&#fc7cab&l'&#fc7faa&ls &#fd83a8&lL&#fd86a7&la&#fd8aa6&lc&#fd8da5&le",
             mutableListOf("&#FB5AB6Cupid"),
-            mutableListOf("Shot enemies may be temporarily", "charmed, causing them to", "briefly become passive"),
+            mutableListOf("Shot enemies may be briefly", "charmed, causing them to", "shortly become passive"),
             Material.BOW,
             mutableListOf("sweetheartslace"),
             mutableMapOf(Enchantment.ARROW_DAMAGE to 7, Enchantment.KNOCKBACK to 2, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1, Enchantment.LOOT_BONUS_MOBS to 4)

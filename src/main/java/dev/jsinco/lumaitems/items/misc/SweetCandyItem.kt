@@ -10,18 +10,19 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-class SweetMelonItem : CustomItem {
+class SweetCandyItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
-            "&#ff347d&lS&#ff546b&lw&#fe7359&le&#fe9347&le&#fdb235&lt &#ecc930&lM&#c9d639&le&#a6e341&ll&#83f04a&lo&#60fd52&ln",
+            "&#ce8efb&lS&#d891fa&lw&#e395f9&le&#ed98f8&le&#f89bf7&lt &#fda1f7&lC&#fea8f8&la&#feb0f9&ln&#ffb7fa&ld&#ffbffb&ly",
             mutableListOf("&7Haste II"),
-            mutableListOf("§fThis sweet melon just","§freally raises your blood sugar","","§fHolding this melon in your","§foffhand will give you a Haste II boost"),
+            mutableListOf("This sweet candy just","really raises your blood sugar","","Holding this candy will","give you a Haste II boost"),
             Material.GLISTERING_MELON_SLICE,
-            mutableListOf("sweetmelon"),
-            mutableMapOf(Enchantment.DURABILITY to 1)
+            mutableListOf("sweetcandy"),
+            mutableMapOf(Enchantment.DURABILITY to 10)
         )
         item.hideEnchants = true
-        return Pair("sweetmelon", item.createItem())
+        item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
+        return Pair("sweetcandy", item.createItem())
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {

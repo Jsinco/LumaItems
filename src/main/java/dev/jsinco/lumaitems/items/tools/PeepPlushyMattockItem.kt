@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack
 import java.util.*
 import java.util.function.Consumer
 
-class PeepPlushyMattock : CustomItem {
+class PeepPlushyMattockItem : CustomItem {
 
     companion object {
         private val oreColors: Map<Material, Color> = mapOf(
@@ -37,7 +37,7 @@ class PeepPlushyMattock : CustomItem {
         val item = ItemFactory(
             "&#aca1ff&lP&#bbabff&le&#cab4ff&le&#dabeff&lp &#e9c7ff&lP&#f8d1ff&ll&#fdcaf6&lu&#febbe9&ls&#feacdc&lh&#fe9ccf&ly &#ff8dc2&lM&#ff81b4&la&#ff7aa4&lt&#ff7493&lt&#ff6d83&lo&#ff6773&lc&#ff6063&lk",
             mutableListOf("&#ACA1FFSnuggly Luck"),
-            mutableListOf("Mining ores with this pickaxe grants","a chance to substantially increase the","amount of materials gained","","However, there is a chance for mined","ores to drop nothing"),
+            mutableListOf("Mining ores with this pickaxe grants","a chance to substantially increase","the amount of materials gained","","However, there is a chance for","mined ores to drop nothing"),
             Material.NETHERITE_PICKAXE,
             mutableListOf("peepplushymattock"),
             mutableMapOf(Enchantment.MENDING to 1, Enchantment.DURABILITY to 10, Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 5)
@@ -60,16 +60,16 @@ class PeepPlushyMattock : CustomItem {
     private fun snugluck(block: Block, drops: Collection<ItemStack>): Boolean {
         if (!block.type.toString().endsWith("_ORE")) return false
         val chance = Random().nextInt(100)
-        if (chance <= 10) {
+        if (chance <= 17) {
             val dropMaterial = drops.iterator().next().type
             drops.forEach(Consumer { drop: ItemStack -> drop.amount *= 8 })
             for (i in drops.indices) {
                 block.world.dropItemNaturally(block.location, drops.iterator().next())
             }
             block.world.playSound(block.location, Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST_FAR, 1f, 1f)
-            block.world.spawnParticle(Particle.REDSTONE, block.location, 50, 0.5, 0.5, 0.5, 0.1, DustOptions(oreColors[dropMaterial] ?: return true, 1f))
+            block.world.spawnParticle(Particle.REDSTONE, block.location, 35, 0.5, 0.5, 0.5, 0.1, DustOptions(oreColors[dropMaterial] ?: return true, 1f))
             return true
-        } else if (chance <= 20) {
+        } else if (chance <= 24) {
             drops.forEach(Consumer { drop: ItemStack -> drop.amount = 0 })
             block.world.playSound(block.location, Sound.BLOCK_END_PORTAL_SPAWN, 0.2f, 1f)
             return true

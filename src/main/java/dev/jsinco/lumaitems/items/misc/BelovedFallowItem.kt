@@ -18,7 +18,6 @@ class BelovedFallowItem : CustomItem {
     companion object {
         private val cooldown: MutableSet<UUID> = mutableSetOf()
         private val plugin: LumaItems = LumaItems.getPlugin()
-        private val coolDownAnimals: MutableSet<UUID> = mutableSetOf()
     }
 
 
@@ -26,7 +25,7 @@ class BelovedFallowItem : CustomItem {
         val item = ItemFactory(
             "&#ffa5e3&lB&#ffafe6&le&#ffb8e9&ll&#ffc2ed&lo&#ffcbf0&lv&#ffd5f3&le&#ffdef6&ld &#f9d8f8&lF&#f4d1f9&la&#eecbfb&ll&#e8c5fc&ll&#e3befe&lo&#ddb8ff&lw",
             mutableListOf("&#ddb8ffBreeder"),
-            mutableListOf("Right-click while holding", "to breed animals in a 5x5", "radius around you", "", "&cCooldown: 50s"),
+            mutableListOf("Right-click while holding", "to breed animals in a 5x5", "radius around you", "", "&cCooldown: 2m"),
             Material.NETHERITE_HOE,
             mutableListOf("belovedfallow"),
             mutableMapOf(Enchantment.MENDING to 1, Enchantment.DURABILITY to 10, Enchantment.DIG_SPEED to 6, Enchantment.LOOT_BONUS_BLOCKS to 5)
@@ -43,13 +42,13 @@ class BelovedFallowItem : CustomItem {
 
                 var affected = 0
                 for (entity in entities) {
-                    if (entity is Animals && !coolDownAnimals.contains(entity.uniqueId)) {
-                        entity.world.spawnParticle(Particle.HEART, entity.location, 10, 0.5, 0.5, 0.5, 0.0)
+                    if (entity is Animals) {
+                        if (!entity.canBreed()) {
+                            continue
+                        }
+
+                        entity.world.spawnParticle(Particle.HEART, entity.location, 4, 0.2, 0.5, 0.2, 0.0)
                         entity.loveModeTicks = 600 // Normal breeding time
-                        coolDownAnimals.add(entity.uniqueId)
-                        Bukkit.getScheduler().runTaskLater(plugin, Runnable {
-                            coolDownAnimals.remove(entity.uniqueId)
-                        }, 6000L)
                         affected++
                     }
                 }
@@ -61,7 +60,7 @@ class BelovedFallowItem : CustomItem {
                 cooldown.add(player.uniqueId)
                 plugin.server.scheduler.runTaskLater(plugin, Runnable {
                     cooldown.remove(player.uniqueId)
-                }, 1000L)
+                }, 2400L)
             }
             else -> return false
         }
