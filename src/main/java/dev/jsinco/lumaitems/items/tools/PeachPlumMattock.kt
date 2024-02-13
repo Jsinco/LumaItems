@@ -32,8 +32,9 @@ class PeachPlumMattock : CustomItem {
                 if (Random.nextInt(500) > 4) return false
                 event as PlayerInteractEvent
                 var blockName = event.clickedBlock?.type?.name ?: return false
-                if (blockName.endsWith("_ORE")) {
+                if (blockName.endsWith("_ORE") && !blockName.contains("NETHER_")) {
                     blockName = blockName.replace("_ORE", "_BLOCK")
+                        .replace("DEEPSLATE_", "").trim()
                 }
                 event.clickedBlock?.type = Material.valueOf(blockName)
             }
