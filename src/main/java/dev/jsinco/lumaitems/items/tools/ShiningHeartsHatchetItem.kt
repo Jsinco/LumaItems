@@ -56,6 +56,7 @@ class ShiningHeartsHatchetItem : CustomItem {
                 event.entity.world.playSound(event.entity.location, Sound.ITEM_AXE_STRIP, 1f, 0.9f)
                 event.entity.world.playSound(event.entity.location, Sound.ENTITY_PLAYER_ATTACK_SWEEP, 0.7f, 0.9f)
                 for (entity in entities.mapNotNull { it as? LivingEntity }) {
+                    if (entity == player) continue
                     entity.world.spawnParticle(Particle.SWEEP_ATTACK, entity.location, 3, 0.5, 0.5, 0.5, 0.1)
                     entity.damage(6.0, player)
                 }
