@@ -3,6 +3,7 @@ package dev.jsinco.lumaitems.items.tools
 import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
+import dev.jsinco.lumaitems.util.AbilityUtil
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound
@@ -45,9 +46,10 @@ class ShiningHeartsHatchetItem : CustomItem {
                 player.world.playSound(event.block.location, Sound.ENTITY_FIREWORK_ROCKET_BLAST_FAR, 0.7f, 1.0f)
             }
 
-            Ability.ENTITY_DAMAGE -> {
+            /*Ability.ENTITY_DAMAGE -> {
                 if (Random.nextInt(100) > 45) return false
                 event as EntityDamageByEntityEvent
+                if (AbilityUtil.noDamagePermission(player, event.entity)) return false
 
                 val entities = event.entity.getNearbyEntities(6.0, 6.0, 6.0)
                 entities.add(event.entity)
@@ -56,11 +58,11 @@ class ShiningHeartsHatchetItem : CustomItem {
                 event.entity.world.playSound(event.entity.location, Sound.ITEM_AXE_STRIP, 1f, 0.9f)
                 event.entity.world.playSound(event.entity.location, Sound.ENTITY_PLAYER_ATTACK_SWEEP, 0.7f, 0.9f)
                 for (entity in entities.mapNotNull { it as? LivingEntity }) {
-                    if (entity == player) continue
+                    if (entity == player || AbilityUtil.noDamagePermission(player, entity)) continue
                     entity.world.spawnParticle(Particle.SWEEP_ATTACK, entity.location, 3, 0.5, 0.5, 0.5, 0.1)
-                    entity.damage(6.0, player)
+                    entity.damage(6.0)
                 }
-            }
+            }*/
 
             else -> return false
         }
