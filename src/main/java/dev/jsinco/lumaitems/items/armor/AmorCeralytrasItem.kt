@@ -64,7 +64,7 @@ class AmorCeralytrasItem : CustomItem {
                 if (player.isSneaking || player.isFlying || AbilityUtil.isOnGround(player) ||
                     (boostCounter.contains(player.uniqueId) && boostCounter[player.uniqueId]!! >= 2)) return false
 
-                player.velocity = player.location.direction.multiply(0.8).setY(1.0)
+                player.velocity = player.location.direction.multiply(0.6).setY(0.7)
                 boostCounter[player.uniqueId] = boostCounter.getOrDefault(player.uniqueId, 0) + 1
             }
             Ability.MOVE -> {

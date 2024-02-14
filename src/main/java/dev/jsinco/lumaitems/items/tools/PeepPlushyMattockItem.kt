@@ -58,7 +58,7 @@ class PeepPlushyMattockItem : CustomItem {
     }
 
     private fun snugluck(block: Block, drops: Collection<ItemStack>): Boolean {
-        if (!block.type.toString().endsWith("_ORE")) return false
+        if (!block.type.toString().endsWith("_ORE")) return true
         val chance = Random().nextInt(100)
         if (chance <= 17) {
             val dropMaterial = drops.iterator().next().type
@@ -68,12 +68,12 @@ class PeepPlushyMattockItem : CustomItem {
             }
             block.world.playSound(block.location, Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST_FAR, 1f, 1f)
             block.world.spawnParticle(Particle.REDSTONE, block.location, 35, 0.5, 0.5, 0.5, 0.1, DustOptions(oreColors[dropMaterial] ?: return true, 1f))
-            return true
+            return false
         } else if (chance <= 24) {
             drops.forEach(Consumer { drop: ItemStack -> drop.amount = 0 })
             block.world.playSound(block.location, Sound.BLOCK_END_PORTAL_SPAWN, 0.2f, 1f)
-            return true
+            return false
         }
-        return false
+        return true
     }
 }

@@ -5,6 +5,7 @@ import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.GlowManager
+import dev.jsinco.lumaitems.util.AbilityUtil
 import org.bukkit.*
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Fireball
@@ -64,7 +65,7 @@ class FlamingHeartsEstoc : CustomItem {
                 event as ProjectileHitEvent
 
                 event.entity.getNearbyEntities(7.3, 7.3, 7.3).forEach {
-                    if (it !is LivingEntity || it == player) return@forEach
+                    if (it !is LivingEntity || it == player || AbilityUtil.noDamagePermission(player, it)) return@forEach
                     // knockback entity away from fireball
                     it.velocity = it.location.toVector().subtract(event.entity.location.toVector()).add(Vector(0.0,5.0,0.0)).multiply(23.5).normalize()
                     it.fireTicks = 100
