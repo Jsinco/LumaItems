@@ -7,15 +7,22 @@ import dev.jsinco.lumaitems.util.AbilityUtil
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound
+import org.bukkit.block.Block
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.inventory.ItemStack
+import java.util.UUID
 import kotlin.random.Random
 
 class ShiningHeartsHatchetItem : CustomItem {
+
+    companion object {
+        private val blockAbility: MutableSet<UUID> = mutableSetOf() // recursive block break
+    }
+
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
             "&#fbbdb7&lS&#fbb8b7&lh&#fbb4b7&li&#fcafb7&ln&#fcabb7&li&#fca6b6&ln&#fca2b6&lg &#fc9db6&lH&#fd99b6&le&#fd94b6&la&#fd90b1&lr&#fd8ba8&lt&#fd869f&ls &#fd8196&lH&#fd7d8d&la&#fd7884&lt&#fd737b&lc&#fd6e72&lh&#fd6a69&le&#fd6560&lt",
@@ -32,37 +39,46 @@ class ShiningHeartsHatchetItem : CustomItem {
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
         when (type) {
             Ability.BREAK_BLOCK -> {
-                if (Random.nextInt(100) > 5) return false
+                if (Random.nextInt(100) > 3) return false
                 event as BlockBreakEvent
 
+
                 val drops = event.block.drops
+                var block: Block? = null
                 for (drop in drops) {
                     if (drop.type.name.endsWith("_LOG")) {
                         event.block.world.dropItemNaturally(event.block.location, ItemStack(drop.type, 14))
+                        block = event.block
                         break
                     }
                 }
-                player.world.spawnParticle(Particle.SPELL_WITCH, event.block.location, 10, 0.5, 0.5, 0.5, 0.0)
-                player.world.playSound(event.block.location, Sound.ENTITY_FIREWORK_ROCKET_BLAST_FAR, 0.7f, 1.0f)
+                if (block == null) return false
+
+                block.world.spawnParticle(Particle.SPELL_WITCH, event.block.location, 10, 0.5, 0.5, 0.5, 0.0)
+                block.world.playSound(event.block.location, Sound.ENTITY_FIREWORK_ROCKET_BLAST_FAR, 0.7f, 1.0f)
             }
 
-            /*Ability.ENTITY_DAMAGE -> {
-                if (Random.nextInt(100) > 45) return false
+            Ability.ENTITY_DAMAGE -> {
+                if (Random.nextInt(100) > 45 || blockAbility.contains(player.uniqueId)) return false
                 event as EntityDamageByEntityEvent
-                if (AbilityUtil.noDamagePermission(player, event.entity)) return false
+                val entity = event.entity as? LivingEntity ?: return false
+                if (AbilityUtil.noDamagePermission(player, entity)) return false
 
-                val entities = event.entity.getNearbyEntities(6.0, 6.0, 6.0)
-                entities.add(event.entity)
+                val entities = event.entity.getNearbyEntities(6.0, 6.0, 6.0) .mapNotNull { it as? LivingEntity }.toMutableSet()
+                entities.add(entity)
 
 
-                event.entity.world.playSound(event.entity.location, Sound.ITEM_AXE_STRIP, 1f, 0.9f)
-                event.entity.world.playSound(event.entity.location, Sound.ENTITY_PLAYER_ATTACK_SWEEP, 0.7f, 0.9f)
-                for (entity in entities.mapNotNull { it as? LivingEntity }) {
-                    if (entity == player || AbilityUtil.noDamagePermission(player, entity)) continue
-                    entity.world.spawnParticle(Particle.SWEEP_ATTACK, entity.location, 3, 0.5, 0.5, 0.5, 0.1)
-                    entity.damage(6.0)
+                entity.world.playSound(entity.location, Sound.ITEM_AXE_STRIP, 1f, 0.9f)
+                entity.world.playSound(entity.location, Sound.ENTITY_PLAYER_ATTACK_SWEEP, 0.7f, 0.9f)
+
+                blockAbility.add(player.uniqueId)
+                for (entity1 in entities) {
+                    if (entity1 == player || AbilityUtil.noDamagePermission(player, entity1)) continue
+                    entity1.world.spawnParticle(Particle.SWEEP_ATTACK, entity.location, 3, 0.5, 0.5, 0.5, 0.1)
+                    entity1.damage(6.0, player)
                 }
-            }*/
+                blockAbility.remove(player.uniqueId)
+            }
 
             else -> return false
         }
