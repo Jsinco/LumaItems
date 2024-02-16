@@ -47,15 +47,15 @@ class ShiningHeartsHatchetItem : CustomItem {
                 var block: Block? = null
                 for (drop in drops) {
                     if (drop.type.name.endsWith("_LOG")) {
-                        event.block.world.dropItemNaturally(event.block.location, ItemStack(drop.type, 14))
                         block = event.block
+                        block.world.dropItemNaturally(block.location, ItemStack(drop.type, 14))
                         break
                     }
                 }
                 if (block == null) return false
 
-                block.world.spawnParticle(Particle.SPELL_WITCH, event.block.location, 10, 0.5, 0.5, 0.5, 0.0)
-                block.world.playSound(event.block.location, Sound.ENTITY_FIREWORK_ROCKET_BLAST_FAR, 0.7f, 1.0f)
+                block.world.spawnParticle(Particle.SPELL_WITCH, block.location, 10, 0.5, 0.5, 0.5, 0.0)
+                block.world.playSound(block.location, Sound.ENTITY_FIREWORK_ROCKET_BLAST_FAR, 0.7f, 1.0f)
             }
 
             Ability.ENTITY_DAMAGE -> {
