@@ -46,6 +46,28 @@ relic-materials:
     - 'DIAMOND_SHOVEL'
     - 'DIAMOND_HOE'
   nova:
+    - 'GOLDEN_HELMET'
+    - 'GOLDEN_CHESTPLATE'
+    - 'GOLDEN_LEGGINGS'
+    - 'GOLDEN_BOOTS'
+    - 'GOLDEN_SWORD'
+    - 'GOLDEN_PICKAXE'
+    - 'GOLDEN_AXE'
+    - 'GOLDEN_SHOVEL'
+    - 'GOLDEN_HOE'
+    - 'IRON_SWORD'
+    - 'IRON_PICKAXE'
+    - 'IRON_AXE'
+    - 'IRON_SHOVEL'
+    - 'IRON_HOE'
+    - 'CHAINMAIL_HELMET'
+    - 'CHAINMAIL_CHESTPLATE'
+    - 'CHAINMAIL_LEGGINGS'
+    - 'CHAINMAIL_BOOTS'
+    - 'LEATHER_HELMET'
+    - 'LEATHER_CHESTPLATE'
+    - 'LEATHER_LEGGINGS'
+    - 'LEATHER_BOOTS'
     - 'STONE_SWORD'
     - 'STONE_PICKAXE'
     - 'STONE_AXE'
@@ -53,15 +75,45 @@ relic-materials:
     - 'STONE_HOE'
     - 'BOW'
   pulsar:
-      - 'STONE_SWORD'
-      - 'STONE_PICKAXE'
-      - 'STONE_AXE'
-      - 'STONE_HOE'
-      - 'WOODEN_PICKAXE'
-      - 'WOODEN_AXE'
-      - 'WOODEN_SHOVEL'
-      - 'BOW'
+    - 'GOLDEN_HELMET'
+    - 'GOLDEN_CHESTPLATE'
+    - 'GOLDEN_LEGGINGS'
+    - 'GOLDEN_BOOTS'
+    - 'GOLDEN_SWORD'
+    - 'GOLDEN_PICKAXE'
+    - 'GOLDEN_AXE'
+    - 'GOLDEN_SHOVEL'
+    - 'GOLDEN_HOE'
+    - 'IRON_SWORD'
+    - 'IRON_PICKAXE'
+    - 'IRON_AXE'
+    - 'IRON_SHOVEL'
+    - 'IRON_HOE'
+    - 'CHAINMAIL_HELMET'
+    - 'CHAINMAIL_CHESTPLATE'
+    - 'CHAINMAIL_LEGGINGS'
+    - 'CHAINMAIL_BOOTS'
+    - 'LEATHER_HELMET'
+    - 'LEATHER_CHESTPLATE'
+    - 'LEATHER_LEGGINGS'
+    - 'LEATHER_BOOTS'
+    - 'STONE_SWORD'
+    - 'STONE_PICKAXE'
+    - 'STONE_AXE'
+    - 'STONE_HOE'
+    - 'WOODEN_PICKAXE'
+    - 'WOODEN_AXE'
+    - 'WOODEN_SHOVEL'
+    - 'BOW'
   solar:
+    - 'CHAINMAIL_HELMET'
+    - 'CHAINMAIL_CHESTPLATE'
+    - 'CHAINMAIL_LEGGINGS'
+    - 'CHAINMAIL_BOOTS'
+    - 'LEATHER_HELMET'
+    - 'LEATHER_CHESTPLATE'
+    - 'LEATHER_LEGGINGS'
+    - 'LEATHER_BOOTS'
     - 'STONE_SWORD'
     - 'STONE_PICKAXE'
     - 'STONE_AXE'
@@ -116,7 +168,88 @@ names:
     - 'Nameless'
     - 'Soda'
     - 'Beluga'
-    - 'Jsinco''s'
+    - "J's"
+    - "Witch's"
+    - "Rats'"
+    - "Saiyan's"
+    - "Sugar Apple"
+    - "Lightwater"
+    - "Plastic"
+    - "Lasting"
+    - "Deni's"
+    - "Kujo's"
+    - "Kat's"
+    - "Unreal"
+    - "Didi's"
+    - "Rat"
+    - "Psycho"
+    - "Dim's"
+    - "Bayleaf's"
+    - "Limz's"
+    - "Kek's"
+    - "Mystic"
+    - "King's"
+    - "Queen's"
+    - "Pauper"
+    - "PC's"
+    - "Bjorn's"
+    - "WitchBiscuit's"
+    - "Nerdy"
+    - "Potato"
+    - "Winlo's"
+    - "Drew's"
+    - "Cobra"
+    - "Magician's"
+    - "Last"
+    - "Nebula"
+    - "Tidal Wave"
+    - "Beach House"
+    - "Saxaphone"
+    - "Angelic"
+    - "Friction"
+    - "Party"
+    - "Bounce House"
+    - "Fruitful"
+    - "Note"
+    - "Fantasy Dream"
+    - "Fantasia"
+    - "Rojo"
+    - "Diamond"
+    - "Shadow"
+    - "Material"
+    - "Greek"
+    - "Flagged"
+    - "Luma"
+    - "Luna"
+    - "Jaunty"
+    - "Janty"
+    - "Lumin"
+    - "Mayor's"
+    - "Peasant"
+    - "Snowy"
+    - "Car"
+    - "Breathing"
+    - "Hot Air"
+    - "Cold Sweat"
+    - "Smiling"
+    - "Happy Day"
+    - "Cherry"
+    - "Blossom"
+    - "Lost"
+    - "Insanity"
+    - "Spotted"
+    - "Spooder"
+    - "Dotted"
+    - "Caught"
+    - "Soft Smile"
+    - "Osh's"
+    - "Lily's"
+    - "Rose"
+    - "Rock"
+    - "Ugly Sweater"
+    - "Tree"
+    - "Stinky"
+    - "Coffee's"
   suffixes:
     - "Vortex"
     - "Elegance"
@@ -157,3 +290,32 @@ names:
     - "Incense"
     - "Resonance"
     - "Serenade"
+    - "Calling"
+    - "Brewing"
+    - "Everlasting"
+    - "Nest"
+    - "Nexus"
+    - "Package"
+    - "Class"
+    - "Junction"
+    - "Methoding"
+    - "Drink"
+    - "Cheating"
+    - "Fastening"
+    - "Speed"
+    - "Longevity"
+    - "Vitality"
+    - "Heart"
+    - "Bently"
+    - "LightSaber"
+    - "Shinings"
+    - "Savings"
+    - "Forgetfulness"
+    - "Happiness"
+    - "Job"
+    - "Feelings"
+    - "Power"
+    - "Might"
+    - "Chance"
+    - "Lumin's"
+    - "Smile"

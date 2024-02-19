@@ -5,7 +5,9 @@ import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
+import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataContainer
@@ -17,6 +19,7 @@ object Util {
     lateinit var prefix: String
     private const val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
     private val gearTypes: List<String> = listOf("Helmet", "Chestplate", "Leggings", "Boots", "Sword", "Pickaxe", "Axe", "Shovel", "Hoe", "Rod")
+    val armorEquipmentSlots: List<EquipmentSlot> = listOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
     val plugin: LumaItems = LumaItems.getPlugin()
 
     @JvmStatic
@@ -148,5 +151,27 @@ object Util {
             }
         }
         return name
+    }
+
+    fun splitRandomList(list: MutableList<*>, retain: Int): MutableList<*> {
+        val newList: MutableList<Any> = mutableListOf()
+        for (i in 0 until retain) {
+            val random = list.indices.random()
+            list[random]?.let { newList.add(it) }
+            list.removeAt(random)
+        }
+        return newList
+    }
+
+    fun setEntityEquipment(entity: LivingEntity, item: ItemStack, slot: EquipmentSlot) {
+        when (slot) {
+            EquipmentSlot.HEAD -> entity.equipment?.helmet = item
+            EquipmentSlot.CHEST -> entity.equipment?.chestplate = item
+            EquipmentSlot.LEGS -> entity.equipment?.leggings = item
+            EquipmentSlot.FEET -> entity.equipment?.boots = item
+            EquipmentSlot.HAND -> entity.equipment?.setItemInMainHand(item)
+            EquipmentSlot.OFF_HAND -> entity.equipment?.setItemInOffHand(item)
+            else -> return
+        }
     }
 }

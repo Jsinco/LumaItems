@@ -47,7 +47,7 @@ class Listeners(val plugin: LumaItems) : Listener {
         }
     }
 
-    @EventHandler // TODO: Offhand support
+    @EventHandler
     fun onProjectileLaunch(event: ProjectileLaunchEvent) {
         val player = event.entity.shooter as? Player ?: return
 
@@ -139,7 +139,7 @@ class Listeners(val plugin: LumaItems) : Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     fun onEntityDamageByEntity(event: EntityDamageByEntityEvent) {
         val player: Player = if (event.damager is Player) {
             event.damager as Player
@@ -200,7 +200,7 @@ class Listeners(val plugin: LumaItems) : Listener {
         }
     }
 
-    @EventHandler (priority = EventPriority.LOWEST)
+    @EventHandler (priority = EventPriority.HIGH, ignoreCancelled = true)
     fun onPlayerBreakBlock(event: BlockBreakEvent) {
         val player = event.player
 

@@ -4,6 +4,8 @@ import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.relics.Rarity
 import dev.jsinco.lumaitems.relics.RelicCreator
 import dev.jsinco.lumaitems.relics.RelicDisassembler
+import dev.jsinco.lumaitems.util.EntityArmor
+import dev.jsinco.lumaitems.util.ToolType
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.Sound
@@ -32,25 +34,23 @@ class RelicListeners : Listener {
         val livingEntity = event.entity as? LivingEntity ?: return
         val isBoss = bosses.contains(livingEntity.type)
 
-        if (Random.nextInt(100) > 15 && !isBoss) return // 15% chance to spawn a relic
-
-
+        if (Random.nextInt(100) > 15 || livingEntity !is Enemy) return // 15% chance to spawn a relic
 
         val rarity: Rarity = if (isBoss) Rarity.bossRarities[0] else Rarity.genericRarities.random()
         val material: Material = Material.valueOf(FileManager("relics.yml").generateYamlFile().getStringList("relic-materials.${rarity.name.lowercase()}").random())
 
-        val relicCreator = RelicCreator(
+        val relic = RelicCreator(
             rarity.algorithmWeight,
             -1,
             rarity,
             material
-        )
+        ).getRelicItem()
 
-        val item = relicCreator.getRelicItem()
-        if (isBoss){
-            livingEntity.equipment?.setItemInOffHand(item)
-        } else if (livingEntity is Enemy) {
-            livingEntity.equipment?.setItemInOffHand(item)
+        if (ToolType.getToolType(relic.type) == ToolType.ARMOR) {
+            val entityArmor = EntityArmor.getEquipmentSlotFromType(relic.type)
+            entityArmor?.setEntityArmorSlot(livingEntity, relic)
+        } else {
+            livingEntity.equipment?.setItemInOffHand(relic)
         }
     }
 

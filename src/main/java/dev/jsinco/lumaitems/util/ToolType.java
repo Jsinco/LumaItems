@@ -1,6 +1,10 @@
 package dev.jsinco.lumaitems.util;
 
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -41,6 +45,22 @@ public enum ToolType {
         }
         for (String string :  ToolType.getWeaponStrings()) {
             if (material.toString().contains(string)) return ToolType.WEAPON;
+        }
+        return null;
+    }
+
+
+    public EquipmentSlot getEquipmentSlot() {
+        switch (this) {
+            case ARMOR -> {
+                return EquipmentSlot.CHEST;
+            }
+            case WEAPON -> {
+                return EquipmentSlot.HAND;
+            }
+            case TOOL -> {
+                return EquipmentSlot.HAND;
+            }
         }
         return null;
     }
