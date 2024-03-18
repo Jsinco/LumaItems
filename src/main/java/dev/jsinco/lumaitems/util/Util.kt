@@ -1,5 +1,6 @@
 package dev.jsinco.lumaitems.util
 
+import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent
 import dev.jsinco.lumaitems.LumaItems
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -173,5 +174,9 @@ object Util {
             EquipmentSlot.OFF_HAND -> entity.equipment?.setItemInOffHand(item)
             else -> return
         }
+    }
+
+    fun isItemInSlot(identifier: String, slot: EquipmentSlot, player: Player): Boolean {
+        return player.equipment.getItem(slot).itemMeta?.persistentDataContainer?.has(NamespacedKey(plugin, identifier), PersistentDataType.SHORT) == true
     }
 }

@@ -6,8 +6,8 @@ import dev.jsinco.lumaitems.commands.CommandManager;
 import dev.jsinco.lumaitems.events.Listeners;
 import dev.jsinco.lumaitems.events.PassiveListeners;
 import dev.jsinco.lumaitems.events.RelicListeners;
-import dev.jsinco.lumaitems.hooks.GlowColorPlaceholder;
-import dev.jsinco.lumaitems.hooks.PAPIManager;
+import dev.jsinco.lumaitems.placeholders.TeamColorPlaceholder;
+import dev.jsinco.lumaitems.placeholders.PAPIManager;
 import dev.jsinco.lumaitems.manager.FileManager;
 import dev.jsinco.lumaitems.manager.GlowManager;
 import dev.jsinco.lumaitems.manager.ItemManager;
@@ -24,7 +24,7 @@ public final class LumaItems extends JavaPlugin {
 
     private static LumaItems plugin;
     private static boolean withProtocolLib;
-    private final PAPIManager papiManager = new PAPIManager();
+    private static PAPIManager papiManager;
 
     @Override
     public void onEnable() {
@@ -52,18 +52,20 @@ public final class LumaItems extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new Listeners(this), this);
         getServer().getPluginManager().registerEvents(new AnvilPrevention(this), this);
-        getServer().getPluginManager().registerEvents(new RelicListeners(), this);
+        getServer().getPluginManager().registerEvents(new RelicListeners(this), this);
 
         getCommand("lumaitems").setExecutor(new CommandManager(this));
 
-        papiManager.addPlaceholder(new GlowColorPlaceholder());
-        papiManager.registerPlaceholders();
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            papiManager = new PAPIManager(this);
+            papiManager.register();
+        }
     }
 
     @Override
     public void onDisable() {
-        if (papiManager.hasRegisteredPlaceholders()){
-            papiManager.unregisterPlaceholders();
+        if (papiManager != null) {
+            papiManager.unregister();
         }
     }
 

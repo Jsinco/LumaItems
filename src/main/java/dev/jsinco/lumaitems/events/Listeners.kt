@@ -408,9 +408,9 @@ class Listeners(val plugin: LumaItems) : Listener {
         }
     }
 
-    //@EventHandler
+    @EventHandler
     fun onPlayerArmorSwap(event: PlayerArmorChangeEvent) {
-        val data = Util.getAllEquipmentNBT(event.player)
+        val data = listOf(event.oldItem, event.newItem).mapNotNull { it?.itemMeta?.persistentDataContainer }
 
         for (customItem in ItemManager.customItems) {
             for (itemData in data) {

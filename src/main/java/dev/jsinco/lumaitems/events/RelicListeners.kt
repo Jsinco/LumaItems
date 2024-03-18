@@ -1,5 +1,6 @@
 package dev.jsinco.lumaitems.events
 
+import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.relics.Rarity
 import dev.jsinco.lumaitems.relics.RelicCreator
@@ -18,7 +19,7 @@ import org.bukkit.event.entity.EntitySpawnEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import kotlin.random.Random
 
-class RelicListeners : Listener {
+class RelicListeners(val plugin: LumaItems) : Listener {
 
     companion object {
         private val bosses: List<EntityType> = listOf(
@@ -36,22 +37,26 @@ class RelicListeners : Listener {
 
         if (Random.nextInt(100) > 15 || livingEntity !is Enemy) return // 15% chance to spawn a relic
 
-        val rarity: Rarity = if (isBoss) Rarity.bossRarities[0] else Rarity.genericRarities.random()
-        val material: Material = Material.valueOf(FileManager("relics.yml").generateYamlFile().getStringList("relic-materials.${rarity.name.lowercase()}").random())
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
+            val rarity: Rarity = if (isBoss) Rarity.bossRarities[0] else Rarity.genericRarities.random()
+            val material: Material = Material.valueOf(FileManager("relics.yml").generateYamlFile().getStringList("relic-materials.${rarity.name.lowercase()}").random())
 
-        val relic = RelicCreator(
-            rarity.algorithmWeight,
-            -1,
-            rarity,
-            material
-        ).getRelicItem()
+            val relic = RelicCreator(
+                rarity.algorithmWeight,
+                -1,
+                rarity,
+                material
+            ).getRelicItem()
 
-        if (ToolType.getToolType(relic.type) == ToolType.ARMOR) {
-            val entityArmor = EntityArmor.getEquipmentSlotFromType(relic.type)
-            entityArmor?.setEntityArmorSlot(livingEntity, relic)
-        } else {
-            livingEntity.equipment?.setItemInOffHand(relic)
-        }
+            Bukkit.getScheduler().runTask(plugin, Runnable {
+                if (ToolType.getToolType(relic.type) == ToolType.ARMOR) {
+                    val entityArmor = EntityArmor.getEquipmentSlotFromType(relic.type)
+                    entityArmor?.setEntityArmorSlot(livingEntity, relic)
+                } else {
+                    livingEntity.equipment?.setItemInOffHand(relic)
+                }
+            })
+        })
     }
 
     @EventHandler
