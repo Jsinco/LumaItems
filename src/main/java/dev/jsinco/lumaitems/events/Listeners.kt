@@ -27,14 +27,7 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent
 import org.bukkit.event.entity.EntityTeleportEvent
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
-import org.bukkit.event.player.AsyncPlayerChatEvent
-import org.bukkit.event.player.PlayerDropItemEvent
-import org.bukkit.event.player.PlayerFishEvent
-import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.event.player.PlayerItemConsumeEvent
-import org.bukkit.event.player.PlayerMoveEvent
-import org.bukkit.event.player.PlayerSwapHandItemsEvent
-import org.bukkit.event.player.PlayerToggleSneakEvent
+import org.bukkit.event.player.*
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
 
@@ -45,9 +38,12 @@ import org.bukkit.persistence.PersistentDataType
  * Or have our listeners fire every single executeAbilities() method every time we need to grab data from a block
  */
 class Listeners(val plugin: LumaItems) : Listener {
-
+// You may not find the prettiest code in this class. The code in here is designed to be
+// optimized and functional
 
     companion object {
+        // This exists because Kotlin doesn't allow null values unless the variable is nullable, and I'm not going to edit 70 classes
+        // Maybe replace with a class that implements player sometime?
         private var player: Player? = null
         fun getDummyPlayer(): Player? {
             if (player == null && Bukkit.getOnlinePlayers().isNotEmpty()) {
@@ -174,10 +170,7 @@ class Listeners(val plugin: LumaItems) : Listener {
             else -> return
         }
 
-        val item = player.inventory.itemInMainHand
-        if (!item.hasItemMeta()) return
-
-        val data: PersistentDataContainer = item.itemMeta!!.persistentDataContainer
+        val data: PersistentDataContainer = player.inventory.itemInMainHand.itemMeta?.persistentDataContainer ?: return
 
         for (customItem in ItemManager.customItems) {
             if (data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
@@ -205,6 +198,31 @@ class Listeners(val plugin: LumaItems) : Listener {
         }
     }
 
+    @EventHandler
+    fun onEntityDamage(event: EntityDamageEvent) {
+        val entity = event.entity
+        val data: List<PersistentDataContainer>? = if (entity is Player) Util.getAllEquipmentNBT(entity) else null
+
+
+        if (data != null) {
+            for (customItem in ItemManager.customItems) {
+                for (itemData in data) {
+                    if (itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
+                        customItem.value.executeAbilities(Ability.PLAYER_DAMAGE_BY_SELF, entity as Player, event)
+                        break
+                    }
+                }
+            }
+        } else {
+            val entityData = entity.persistentDataContainer
+            for (customItem in ItemManager.customItems) {
+                if (entityData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
+                    customItem.value.executeAbilities(Ability.ENTITY_DAMAGED_GENERIC, (getDummyPlayer() ?: return), event)
+                    break
+                }
+            }
+        }
+    }
 
     @EventHandler
     fun onPlayerDropItem(event: PlayerDropItemEvent) {
@@ -311,23 +329,7 @@ class Listeners(val plugin: LumaItems) : Listener {
                 if (itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
                     val customItemClass = customItem.value
                     customItemClass.executeAbilities(Ability.PLACE_BLOCK, player, event)
-                    break
-                }
-            }
-        }
-    }
-
-    @EventHandler
-    fun onEntityDamage(event: EntityDamageEvent) {
-        val player = event.entity as? Player ?: return
-        val data: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
-
-        for (customItem in ItemManager.customItems) {
-            for (itemData in data) {
-                if (itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                    val customItemClass = customItem.value
-                    customItemClass.executeAbilities(Ability.ENTITY_DAMAGE_BY_SELF, player, event)
-                    break
+                    return
                 }
             }
         }
@@ -404,6 +406,7 @@ class Listeners(val plugin: LumaItems) : Listener {
             for (itemData in data) {
                 if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
                 customItem.value.executeAbilities(Ability.POTION_EFFECT, player, event)
+                return
             }
         }
     }
@@ -427,6 +430,7 @@ class Listeners(val plugin: LumaItems) : Listener {
             for (itemData in data) {
                 if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
                 customItem.value.executeAbilities(Ability.JUMP, event.player, event)
+                break
             }
         }
     }

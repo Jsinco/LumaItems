@@ -25,7 +25,7 @@ import org.bukkit.potion.PotionEffectType
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Transformation
 import org.joml.Vector3f
-import java.util.*
+import java.util.UUID
 
 class YolkPlaidYataghanItem : CustomItem {
 
@@ -114,7 +114,7 @@ class YolkPlaidYataghanItem : CustomItem {
         }.runTaskTimer(plugin, 0L, 20L)
     }
 
-    fun cooldownTaskPlayer(player: Player): Boolean {
+    private fun cooldownTaskPlayer(player: Player): Boolean {
         val amt = cooldown[player.uniqueId] ?: 0
         if (amt >= 2) {
             return false

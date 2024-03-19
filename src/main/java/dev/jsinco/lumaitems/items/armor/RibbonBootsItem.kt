@@ -28,7 +28,7 @@ class RibbonBootsItem : CustomItem {
         val entityDamage: EntityDamageEvent? = event as? EntityDamageEvent
 
         when (type) {
-            Ability.ENTITY_DAMAGE_BY_SELF -> {
+            Ability.PLAYER_DAMAGE_BY_SELF -> {
                 if (entityDamage!!.cause == EntityDamageEvent.DamageCause.FALL) {
                     entityDamage.isCancelled = true
                 }

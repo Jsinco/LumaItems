@@ -20,7 +20,7 @@ public enum Ability {
     ARMOR_SWAP,
     RUNNABLE, // Mapped, full equipment support
     PLAYER_CROUCH, // Mapped, full equipment support
-    ENTITY_DAMAGE_BY_SELF,
+    PLAYER_DAMAGE_BY_SELF,
     CHAT,
     MOVE,
     CONSUME_ITEM,
@@ -30,5 +30,8 @@ public enum Ability {
     ENTITY_TARGET_LIVING_ENTITY,
     JUMP,
     ENTITY_MOVE,
-    ENTITY_TELEPORT
+    ENTITY_TELEPORT,
+    ENTITY_DAMAGED_GENERIC,
+    PLAYER_INTERACT_ENTITY
+
 }
