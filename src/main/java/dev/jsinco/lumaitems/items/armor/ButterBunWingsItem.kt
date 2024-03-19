@@ -1,11 +1,9 @@
 package dev.jsinco.lumaitems.items.armor
 
-import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent
 import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.Util
-import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player

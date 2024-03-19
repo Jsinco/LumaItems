@@ -1,7 +1,8 @@
 package dev.jsinco.lumaitems.util
 
-import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent
+import com.destroystokyo.paper.profile.ProfileProperty
 import dev.jsinco.lumaitems.LumaItems
+import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -11,8 +12,10 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
+import java.util.*
 
 
 object Util {
@@ -178,5 +181,15 @@ object Util {
 
     fun isItemInSlot(identifier: String, slot: EquipmentSlot, player: Player): Boolean {
         return player.equipment.getItem(slot).itemMeta?.persistentDataContainer?.has(NamespacedKey(plugin, identifier), PersistentDataType.SHORT) == true
+    }
+
+    fun playerHeadFromBase64(base64: String, amt: Int): ItemStack {
+        val item = ItemStack(Material.PLAYER_HEAD, amt)
+        val meta = item.itemMeta as SkullMeta
+        val profile = Bukkit.createProfile(UUID.randomUUID())
+        profile.properties.add(ProfileProperty("textures", base64))
+        meta.playerProfile = profile
+        item.setItemMeta(meta)
+        return item
     }
 }

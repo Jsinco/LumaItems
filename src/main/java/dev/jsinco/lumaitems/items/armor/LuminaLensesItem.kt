@@ -1,8 +1,8 @@
 package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.items.ItemFactory
+import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.Util
 import net.md_5.bungee.api.ChatMessageType
@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
-import java.util.UUID
+import java.util.*
 
 class LuminaLensesItem : CustomItem {
 

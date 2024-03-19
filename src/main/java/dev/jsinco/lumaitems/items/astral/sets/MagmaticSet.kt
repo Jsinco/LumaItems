@@ -8,7 +8,11 @@ import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.relics.Rarity
 import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.Util
-import org.bukkit.*
+import org.bukkit.Bukkit
+import org.bukkit.Material
+import org.bukkit.NamespacedKey
+import org.bukkit.Particle
+import org.bukkit.Sound
 import org.bukkit.block.Block
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.ExperienceOrb
@@ -17,7 +21,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
-import java.util.UUID
+import java.util.*
 
 class MagmaticSet : CustomItem, AstralSet {
 

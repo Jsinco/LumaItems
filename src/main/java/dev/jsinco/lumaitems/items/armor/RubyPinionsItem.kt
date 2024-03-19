@@ -2,11 +2,15 @@ package dev.jsinco.lumaitems.items.armor
 
 import com.destroystokyo.paper.event.player.PlayerElytraBoostEvent
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.items.ItemFactory
+import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
-import org.bukkit.*
+import org.bukkit.Bukkit
+import org.bukkit.Color
+import org.bukkit.Material
+import org.bukkit.Particle
 import org.bukkit.Particle.DustOptions
+import org.bukkit.Sound
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -55,7 +59,8 @@ class RubyPinionsItem : CustomItem {
             }
         }
         val task = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, {
-            player.world.spawnParticle(Particle.REDSTONE, player.location.add(0.0, 1.0, 0.0), 1, 0.5, 0.5, 0.5, 0.1, DustOptions(Color.fromRGB(255, 83, 114), 2f))
+            player.world.spawnParticle(Particle.REDSTONE, player.location.add(0.0, 1.0, 0.0), 1, 0.5, 0.5, 0.5, 0.1, DustOptions(
+                Color.fromRGB(255, 83, 114), 2f))
             player.world.spawnParticle(Particle.REDSTONE, player.location.add(0.0, 1.0, 0.0), 1, 0.5, 0.5, 0.5, 0.1, DustOptions(Color.fromRGB(207, 74, 253), 2f))
         }, 0L, 1L)
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, { Bukkit.getScheduler().cancelTask(task) }, 35L)

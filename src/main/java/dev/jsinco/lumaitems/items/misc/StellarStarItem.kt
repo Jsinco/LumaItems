@@ -1,10 +1,10 @@
 package dev.jsinco.lumaitems.items.misc
 
 import com.iridium.iridiumcolorapi.IridiumColorAPI
-import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
+import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
 import org.bukkit.NamespacedKey

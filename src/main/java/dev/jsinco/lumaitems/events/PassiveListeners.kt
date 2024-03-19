@@ -1,12 +1,11 @@
 package dev.jsinco.lumaitems.events
 
-import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
-import org.bukkit.event.Listener
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
 

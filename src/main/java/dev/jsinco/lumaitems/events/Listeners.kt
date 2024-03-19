@@ -8,6 +8,8 @@ import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.Util
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent
+import io.papermc.paper.event.entity.EntityMoveEvent
+import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
 import org.bukkit.entity.Projectile
@@ -16,8 +18,23 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
-import org.bukkit.event.entity.*
-import org.bukkit.event.player.*
+import org.bukkit.event.entity.EntityChangeBlockEvent
+import org.bukkit.event.entity.EntityDamageByEntityEvent
+import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.entity.EntityDeathEvent
+import org.bukkit.event.entity.EntityPotionEffectEvent
+import org.bukkit.event.entity.EntityTargetLivingEntityEvent
+import org.bukkit.event.entity.EntityTeleportEvent
+import org.bukkit.event.entity.ProjectileHitEvent
+import org.bukkit.event.entity.ProjectileLaunchEvent
+import org.bukkit.event.player.AsyncPlayerChatEvent
+import org.bukkit.event.player.PlayerDropItemEvent
+import org.bukkit.event.player.PlayerFishEvent
+import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerItemConsumeEvent
+import org.bukkit.event.player.PlayerMoveEvent
+import org.bukkit.event.player.PlayerSwapHandItemsEvent
+import org.bukkit.event.player.PlayerToggleSneakEvent
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
 
@@ -29,6 +46,16 @@ import org.bukkit.persistence.PersistentDataType
  */
 class Listeners(val plugin: LumaItems) : Listener {
 
+
+    companion object {
+        private var player: Player? = null
+        fun getDummyPlayer(): Player? {
+            if (player == null && Bukkit.getOnlinePlayers().isNotEmpty()) {
+                player = Bukkit.getOnlinePlayers().random()
+            }
+            return player
+        }
+    }
 
     @EventHandler
     fun onCrossbowLoad(event: EntityLoadCrossbowEvent) {
@@ -141,13 +168,10 @@ class Listeners(val plugin: LumaItems) : Listener {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     fun onEntityDamageByEntity(event: EntityDamageByEntityEvent) {
-        val player: Player = if (event.damager is Player) {
-            event.damager as Player
-        } else if (event.damager is Projectile) {
-            val projectile = event.damager as Projectile
-            projectile.shooter as? Player ?: return
-        } else {
-            return
+        val player: Player = when (event.damager) {
+            is Player -> event.damager as Player
+            is Projectile -> (event.damager as Projectile).shooter as? Player ?: return
+            else -> return
         }
 
         val item = player.inventory.itemInMainHand
@@ -326,13 +350,12 @@ class Listeners(val plugin: LumaItems) : Listener {
     @EventHandler
     fun onPlayerMove(event: PlayerMoveEvent) {
         if (!event.hasChangedPosition()) return
-        val player = event.player
-        val data: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
+
         for (customItem in ItemManager.customItems) {
-            for (itemData in data) {
+            for (itemData in Util.getAllEquipmentNBT(event.player)) {
                 if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
                 val customItemClass = customItem.value
-                customItemClass.executeAbilities(Ability.MOVE, player, event)
+                customItemClass.executeAbilities(Ability.MOVE, event.player, event)
                 break
             }
         }
@@ -358,7 +381,7 @@ class Listeners(val plugin: LumaItems) : Listener {
      * I currently only need to grab the entity for this one.
      * This event does not require a player, so we use a dummy player for it
      */
-    @EventHandler
+    //@EventHandler
     fun onEntityChangeBlock(event: EntityChangeBlockEvent) {
         val entity = event.entity
 
@@ -366,7 +389,7 @@ class Listeners(val plugin: LumaItems) : Listener {
 
         for (customItem in ItemManager.customItems) {
             if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-            customItem.value.executeAbilities(Ability.ENTITY_CHANGE_BLOCK, null as Player, event)
+            customItem.value.executeAbilities(Ability.ENTITY_CHANGE_BLOCK, Bukkit.getOnlinePlayers().random(), event)
             break
         }
     }
@@ -417,6 +440,24 @@ class Listeners(val plugin: LumaItems) : Listener {
                 if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
                 customItem.value.executeAbilities(Ability.ARMOR_SWAP, event.player, event)
             }
+        }
+    }
+
+    @EventHandler
+    fun onEntityMoveEvent(event: EntityMoveEvent) {
+        if (!event.hasChangedPosition()) return
+
+        for (customItem in ItemManager.customItems) {
+            if (!event.entity.persistentDataContainer.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+            customItem.value.executeAbilities(Ability.ENTITY_MOVE, (getDummyPlayer() ?: return), event)
+        }
+    }
+
+    @EventHandler
+    fun onEntityTeleport(event: EntityTeleportEvent) {
+        for (customItem in ItemManager.customItems) {
+            if (!event.entity.persistentDataContainer.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+            customItem.value.executeAbilities(Ability.ENTITY_TELEPORT, (getDummyPlayer() ?: return), event)
         }
     }
 }

@@ -15,7 +15,7 @@ import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffect
-import java.util.UUID
+import java.util.*
 import kotlin.random.Random
 
 class WonderBeanieItem : CustomItem {

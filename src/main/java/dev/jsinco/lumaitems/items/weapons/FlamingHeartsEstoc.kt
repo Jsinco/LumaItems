@@ -6,7 +6,11 @@ import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.GlowManager
 import dev.jsinco.lumaitems.util.AbilityUtil
-import org.bukkit.*
+import org.bukkit.ChatColor
+import org.bukkit.Material
+import org.bukkit.NamespacedKey
+import org.bukkit.Particle
+import org.bukkit.Sound
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Fireball
 import org.bukkit.entity.LivingEntity

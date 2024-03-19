@@ -8,10 +8,9 @@ import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
-import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
-import java.util.UUID
+import java.util.*
 
 class LoreEditTagItem : CustomItem {
 
