@@ -8,26 +8,23 @@ import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
+import org.bukkit.scheduler.BukkitRunnable
 
 /**
  * This class is used to listen for passive events
  */
-class PassiveListeners(val plugin: LumaItems) {
+class PassiveListeners(val plugin: LumaItems) : BukkitRunnable() {
 
-    // TODO: turn to abstract class and use a runnable manager?
+    override fun run() {
+        for (player in Bukkit.getOnlinePlayers()) {
+            val dataList: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
 
-    fun startMainRunnable() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, {
-            for (player in Bukkit.getOnlinePlayers()) {
-                val datas: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
-                for (data in datas) {
-                    for (customItem in ItemManager.customItems) {
-                        if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT))  continue
-                        val customItemClass = customItem.value
-                        customItemClass.executeAbilities(Ability.RUNNABLE, player, 0)
-                    }
+            for (data: PersistentDataContainer in dataList) {
+                for (customItem in ItemManager.customItems) {
+                    if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+                    customItem.value.executeAbilities(Ability.RUNNABLE, player, 0)
                 }
             }
-        }, 0L, 70L)
+        }
     }
 }

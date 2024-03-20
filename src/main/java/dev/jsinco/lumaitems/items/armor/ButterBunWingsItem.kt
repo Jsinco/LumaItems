@@ -30,14 +30,14 @@ class ButterBunWingsItem : CustomItem {
         when (type) {
             Ability.RUNNABLE -> {
                 if (Util.isItemInSlot("butterbunwings", EquipmentSlot.CHEST, player)) {
-                    player.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 320, 0, false, false, false))
+                    player.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 340, 0, false, false, false))
                 }
             }
             Ability.ARMOR_SWAP -> {
                 if (!Util.isItemInSlot("butterbunwings", EquipmentSlot.CHEST, player)) {
                     player.removePotionEffect(PotionEffectType.GLOWING)
                 } else {
-                    player.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 320, 0, false, false, false))
+                    player.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 340, 0, false, false, false))
                 }
             }
             else -> return false
