@@ -2,7 +2,6 @@ package dev.jsinco.lumaitems.manager;
 
 import com.google.common.reflect.ClassPath;
 import dev.jsinco.lumaitems.LumaItems;
-import dev.jsinco.lumaitems.items.astral.AstralSet;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
