@@ -69,11 +69,11 @@ class RubyLongbowItem : CustomItem {
             proj2 = null
         }
         val task = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, {
-            proj.world.spawnParticle(Particle.REDSTONE, proj.location.add(0.0, 0.0, 0.0), 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(255, 83, 114), 1f))
-            proj.world.spawnParticle(Particle.REDSTONE, proj.location.add(0.0, 0.0, 0.0), 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(207, 74, 253), 1f))
+            proj.world.spawnParticle(Particle.REDSTONE, proj.location, 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(255, 83, 114), 1f))
+            proj.world.spawnParticle(Particle.REDSTONE, proj.location, 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(207, 74, 253), 1f))
             if (proj2 != null) {
-                proj2.world.spawnParticle(Particle.REDSTONE, proj2.location.add(0.0, 0.0, 0.0), 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(255, 83, 114), 1f))
-                proj2.world.spawnParticle(Particle.REDSTONE, proj2.location.add(0.0, 0.0, 0.0), 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(207, 74, 253), 1f))
+                proj2.world.spawnParticle(Particle.REDSTONE, proj2.location, 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(255, 83, 114), 1f))
+                proj2.world.spawnParticle(Particle.REDSTONE, proj2.location, 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(207, 74, 253), 1f))
             }
         }, 0L, 1L)
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, { Bukkit.getScheduler().cancelTask(task) }, 45L)

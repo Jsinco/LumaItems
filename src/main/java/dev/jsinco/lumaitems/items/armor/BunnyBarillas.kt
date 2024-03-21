@@ -33,7 +33,7 @@ class BunnyBarillas : CustomItem {
                     player.addPotionEffect(PotionEffect(PotionEffectType.JUMP, 340, 2, false, false, false))
                 }
             }
-            Ability.ARMOR_SWAP -> {
+            Ability.ARMOR_CHANGE -> {
                 if (!Util.isItemInSlot("bunnybarillas", EquipmentSlot.FEET, player)) {
                     player.removePotionEffect(PotionEffectType.JUMP)
                 } else {

@@ -33,8 +33,8 @@ public final class LumaItems extends JavaPlugin {
         withProtocolLib = getServer().getPluginManager().getPlugin("ProtocolLib") != null;
 
 
-        PassiveListeners passiveListeners = new PassiveListeners(this);
-        ItemManager itemManager = new ItemManager(this);
+        final PassiveListeners passiveListeners = new PassiveListeners(this);
+        final ItemManager itemManager = new ItemManager(this);
         passiveListeners.runTaskTimer(this, 0L, 70L);
         try {
             itemManager.registerItems();

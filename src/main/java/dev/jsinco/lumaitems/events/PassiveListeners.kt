@@ -14,7 +14,6 @@ import org.bukkit.scheduler.BukkitRunnable
  * This class is used to listen for passive events
  */
 class PassiveListeners(val plugin: LumaItems) : BukkitRunnable() {
-
     override fun run() {
         for (player in Bukkit.getOnlinePlayers()) {
             val dataList: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
@@ -27,4 +26,5 @@ class PassiveListeners(val plugin: LumaItems) : BukkitRunnable() {
             }
         }
     }
+
 }

@@ -33,7 +33,7 @@ class ButterBunWingsItem : CustomItem {
                     player.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 340, 0, false, false, false))
                 }
             }
-            Ability.ARMOR_SWAP -> {
+            Ability.ARMOR_CHANGE -> {
                 if (!Util.isItemInSlot("butterbunwings", EquipmentSlot.CHEST, player)) {
                     player.removePotionEffect(PotionEffectType.GLOWING)
                 } else {

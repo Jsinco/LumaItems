@@ -85,7 +85,7 @@ class SweetHeartsLaceItem : CustomItem {
                     }, 600L)
                 }
             }
-            Ability.ENTITY_TARGET_LIVING_ENTITY -> {
+            Ability.ENTITY_TARGET_PLAYER -> {
                 event as EntityTargetLivingEntityEvent
                 event.isCancelled = true
             }

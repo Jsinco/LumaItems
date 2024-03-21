@@ -10,18 +10,18 @@ import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
 
-class ColorfulPickaxeItem : CustomItem {
+class ShattergemPickaxeItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
-            "&#F29595&lC&#F2A58F&lo&#F1B58A&ll&#F1C584&lo&#F1D282&lr&#F1DF7F&lf&#E6E77E&lu&#C9E881&ll &#ACE983&lP&#A0E39C&li&#9DDAC4&lc&#9BD0EC&lk&#B3C0F2&la&#D1AFF0&lx&#F09DED&le",
-            mutableListOf("&#f09dedForgiving Touch"),
+            "&#5D5BF8&lS&#6863F6&lh&#726AF4&la&#7D72F2&lt&#8879F0&lt&#9281EE&le&#9D88EC&lr&#A790EA&lg&#B297E8&le&#AF97E8&lm &#AB98E8&lP&#A898E8&li&#A598E8&lc&#A198E8&lk&#9E99E8&la&#9A99E8&lx&#9799E8&le",
+            mutableListOf("&#9799E8Forgiving Touch"),
             mutableListOf("Grants the user the ability to", "silk touch budding amethyst"),
             Material.NETHERITE_PICKAXE,
-            mutableListOf("colorfulpickaxe"),
+            mutableListOf("shattergempickaxe"),
             mutableMapOf(Enchantment.DIG_SPEED to 7, Enchantment.SILK_TOUCH to 1, Enchantment.DURABILITY to 10, Enchantment. MENDING to 1)
         )
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"
-        return Pair("colorfulpickaxe", item.createItem())
+        return Pair("shattergempickaxe", item.createItem())
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {

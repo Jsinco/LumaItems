@@ -4,6 +4,7 @@ import com.destroystokyo.paper.profile.ProfileProperty
 import dev.jsinco.lumaitems.LumaItems
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.Color
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
@@ -191,5 +192,13 @@ object Util {
         meta.playerProfile = profile
         item.setItemMeta(meta)
         return item
+    }
+
+    fun hex2BukkitColor(colorStr: String): Color {
+        return Color.fromRGB(
+            colorStr.substring(1, 3).toInt(16),
+            colorStr.substring(3, 5).toInt(16),
+            colorStr.substring(5, 7).toInt(16)
+        )
     }
 }
