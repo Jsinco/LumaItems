@@ -6,6 +6,7 @@ import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.manager.GlowManager
+import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
@@ -25,7 +26,7 @@ import org.bukkit.potion.PotionEffectType
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Transformation
 import org.joml.Vector3f
-import java.util.UUID
+import java.util.*
 
 class YolkPlaidYataghanItem : CustomItem {
 
@@ -53,6 +54,8 @@ class YolkPlaidYataghanItem : CustomItem {
             Ability.RIGHT_CLICK -> {
                 val livingEntity: LivingEntity = player.getTargetEntity(35) as? LivingEntity ?: return false
                 if (livingEntity is Player) {
+                    return false
+                } else if (AbilityUtil.noDamagePermission(player, livingEntity)) {
                     return false
                 }
                 if (cooldownTaskPlayer(player)) {

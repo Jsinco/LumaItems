@@ -2,17 +2,24 @@ package dev.jsinco.lumaitems.util
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.FileManager
-import org.bukkit.*
+import org.bukkit.Bukkit
+import org.bukkit.Color
+import org.bukkit.Location
+import org.bukkit.Material
+import org.bukkit.NamespacedKey
+import org.bukkit.Particle
 import org.bukkit.Particle.DustOptions
+import org.bukkit.Sound
 import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.entity.Snowball
+import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
-import org.bukkit.metadata.FixedMetadataValue
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Vector
@@ -65,6 +72,13 @@ object AbilityUtil {
     @JvmStatic
     fun noDamagePermission(attacker: Player, damagee: Entity): Boolean {
         val event = EntityDamageByEntityEvent(attacker, damagee, EntityDamageEvent.DamageCause.ENTITY_ATTACK, 0.1)
+        Bukkit.getPluginManager().callEvent(event)
+        return event.isCancelled
+    }
+
+    @JvmStatic
+    fun noBuildPermission(player: Player, block: Block): Boolean {
+        val event = BlockPlaceEvent(block, block.state, block.getRelative(BlockFace.DOWN), ItemStack(Material.AIR), player, true, EquipmentSlot.HAND)
         Bukkit.getPluginManager().callEvent(event)
         return event.isCancelled
     }
