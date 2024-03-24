@@ -63,10 +63,7 @@ class BallisticBunnyMattockItem : CustomItem {
                 if (player.isSneaking) {
                     detonateCarrots(player)
                     return true
-                } else if (AbilityUtil.noBuildPermission(player, event.clickedBlock ?: return false)) {
-                    return false
                 }
-
                 stickCarrot(event.clickedBlock ?: return false, event.blockFace, player)
             }
             Ability.ENTITY_DAMAGED_GENERIC -> {
@@ -90,6 +87,10 @@ class BallisticBunnyMattockItem : CustomItem {
         if (!cooldownPlayer(player.uniqueId, false)) {
             return
         }
+        if (AbilityUtil.noBuildPermission(player, block)) {
+            return
+        }
+
         val double = Random.nextInt(15) == 5
 
 
