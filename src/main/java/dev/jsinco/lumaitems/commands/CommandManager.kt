@@ -19,6 +19,7 @@ class CommandManager(val plugin: LumaItems) : CommandExecutor, TabCompleter {
         commands["relic"] = RelicCommand()
         commands["giveastral"] = GiveAstralCommand()
         commands["hotswapp"] = HotSwappCommand()
+        commands["addtier"] = AddTier()
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
