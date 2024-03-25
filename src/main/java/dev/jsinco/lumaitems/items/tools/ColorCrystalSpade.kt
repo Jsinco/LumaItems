@@ -53,6 +53,7 @@ class ColorCrystalSpade : CustomItem {
                 val block = event.block
                 if (block.type == Material.SAND || block.type == Material.RED_SAND) {
                     block.world.dropItemNaturally(block.location, ItemStack(glassTypes.random()))
+                    event.isDropItems = false
                 }
             }
             else -> return false
