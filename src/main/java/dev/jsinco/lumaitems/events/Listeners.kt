@@ -352,11 +352,10 @@ class Listeners(val plugin: LumaItems) : Listener {
     fun onPlayerMove(event: PlayerMoveEvent) {
         if (!event.hasChangedPosition()) return
 
-        for (customItem in ItemManager.customItems) {
-            for (itemData in Util.getAllEquipmentNBT(event.player)) {
-                if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-                val customItemClass = customItem.value
-                customItemClass.executeAbilities(Ability.MOVE, event.player, event)
+        for (customData in Util.getAllEquipmentNBT(event.player)) {
+            for (customItem in ItemManager.customItems) {
+                if (!customData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+                customItem.value.executeAbilities(Ability.MOVE, event.player, event)
                 break
             }
         }
