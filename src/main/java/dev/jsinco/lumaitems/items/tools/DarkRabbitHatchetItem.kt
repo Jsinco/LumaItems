@@ -21,13 +21,13 @@ class DarkRabbitHatchetItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
             "&#1B1024&lD&#33243F&la&#4B375A&lr&#634B75&lk &#7B5F91&lR&#9372AC&la&#AB86C7&lb&#C399E2&lb&#DBADFD&li&#DAA7FA&lt &#D9A2F7&lH&#D89CF3&la&#D796F0&lt&#D590ED&lc&#D48BEA&lh&#D385E6&le&#D27FE3&lt",
-            mutableListOf("&#7B5F91Chancity"),
+            mutableListOf("&#C399E2Chancity"),
             mutableListOf("Upon breaking blocks, drops will", "randomly be converted to charcoal", "or they will be multiplied."),
             Material.NETHERITE_AXE,
             mutableListOf("darkrabbithatchet"),
             mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.DURABILITY to 9, Enchantment.SILK_TOUCH to 1, Enchantment.MENDING to 1, Enchantment.DAMAGE_UNDEAD to 5)
         )
-        item.addQuote("&#7B5F91\"Eugh, it's got charcoal all over it!\"")
+        item.addQuote("&#C399E2\"Eugh, it's got charcoal all over it!\"")
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"
         return Pair("darkrabbithatchet", item.createItem())
     }

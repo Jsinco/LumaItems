@@ -5,6 +5,7 @@ import com.destroystokyo.paper.event.player.PlayerElytraBoostEvent
 import com.destroystokyo.paper.event.player.PlayerJumpEvent
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.Util
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent
@@ -44,6 +45,7 @@ import org.bukkit.persistence.PersistentDataType
  * Blocks cannot store persistent data so we will have to store in a file (if needed for long term)
  * Or have our listeners fire every single executeAbilities() method every time we need to grab data from a block
  */
+// TODO: Convert these to use the fire event method
 class Listeners(val plugin: LumaItems) : Listener {
 // You may not find the prettiest code in this class. The code in here is designed to be
 // optimized and functional
@@ -60,18 +62,30 @@ class Listeners(val plugin: LumaItems) : Listener {
         }
     }
 
+    fun fire(data: PersistentDataContainer, ability: Ability, player: Player, event: Any) {
+        for (customItem: MutableMap.MutableEntry<String, CustomItem> in ItemManager.customItems) {
+            if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+            customItem.value.executeAbilities(ability, player, event)
+            break
+        }
+    }
+
+    fun fire(data: List<PersistentDataContainer>, ability: Ability, player: Player, event: Any) {
+        for (itemData: PersistentDataContainer in data) {
+            for (customItem: MutableMap.MutableEntry<String, CustomItem> in ItemManager.customItems) {
+                if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+                customItem.value.executeAbilities(ability, player, event)
+                break
+            }
+        }
+    }
+
     @EventHandler
     fun onCrossbowLoad(event: EntityLoadCrossbowEvent) {
         val player = event.entity as? Player ?: return
         val data: PersistentDataContainer = player.inventory.itemInMainHand.itemMeta?.persistentDataContainer ?: return
 
-        for (customItem in ItemManager.customItems) {
-            if (data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                val customItemClass = customItem.value
-                customItemClass.executeAbilities(Ability.CROSSBOW_LOAD, player, event)
-                break
-            }
-        }
+        fire(data, Ability.CROSSBOW_LOAD, player, event)
     }
 
     @EventHandler
@@ -105,13 +119,7 @@ class Listeners(val plugin: LumaItems) : Listener {
         val player = event.entity.shooter as? Player ?: return
 
         val data = event.entity.persistentDataContainer
-        for (customItemsClass in ItemManager.customItems) {
-            if (data.has(NamespacedKey(plugin, customItemsClass.key), PersistentDataType.SHORT)) {
-                val customItemClass = customItemsClass.value
-                customItemClass.executeAbilities(Ability.PROJECTILE_LAND, player, event)
-                break
-            }
-        }
+        fire(data, Ability.PROJECTILE_LAND, player, event)
     }
 
     @EventHandler
@@ -173,15 +181,9 @@ class Listeners(val plugin: LumaItems) : Listener {
             else -> return
         }
 
-        val data: PersistentDataContainer = player.inventory.itemInMainHand.itemMeta?.persistentDataContainer ?: return
+        val data: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
 
-        for (customItem in ItemManager.customItems) {
-            if (data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                val customItemClass = customItem.value
-                customItemClass.executeAbilities(Ability.ENTITY_DAMAGE, player, event)
-                break
-            }
-        }
+        fire(data, Ability.ENTITY_DAMAGE, player, event)
     }
 
     @EventHandler(ignoreCancelled = true)

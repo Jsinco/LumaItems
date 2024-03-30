@@ -3,6 +3,7 @@ package dev.jsinco.lumaitems.manager;
 public enum Ability {
 
     RUNNABLE, // When the global LumaItems runnable calls. Tick rate is every 70 ticks. This runnable is in sync with the main thread and is thread safe.
+    ASYNC_RUNNABLE, // When the global LumaItems runnable calls. Tick rate is every 70 ticks. This runnable is async and is not thread safe.
 
     CROSSBOW_LOAD,  // When a player loads a crossbow in their main hand
     PROJECTILE_LAUNCH, // WHen a player launches a projectile from their main or offhand

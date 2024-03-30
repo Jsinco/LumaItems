@@ -1,4 +1,4 @@
-package dev.jsinco.lumaitems.items.misc
+package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Ability

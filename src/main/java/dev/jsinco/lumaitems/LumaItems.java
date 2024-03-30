@@ -7,6 +7,7 @@ import dev.jsinco.lumaitems.events.AnvilPrevention;
 import dev.jsinco.lumaitems.events.Listeners;
 import dev.jsinco.lumaitems.events.PassiveListeners;
 import dev.jsinco.lumaitems.events.RelicListeners;
+import dev.jsinco.lumaitems.manager.Ability;
 import dev.jsinco.lumaitems.manager.FileManager;
 import dev.jsinco.lumaitems.manager.GlowManager;
 import dev.jsinco.lumaitems.manager.ItemManager;
@@ -33,14 +34,16 @@ public final class LumaItems extends JavaPlugin {
         withProtocolLib = getServer().getPluginManager().getPlugin("ProtocolLib") != null;
 
 
-        final PassiveListeners passiveListeners = new PassiveListeners(this);
+
         final ItemManager itemManager = new ItemManager(this);
-        passiveListeners.runTaskTimer(this, 0L, 70L);
+        final PassiveListeners passiveListeners = new PassiveListeners(this);
         try {
             itemManager.registerItems();
         } catch (Exception e) {
             getLogger().log(Level.SEVERE, "An error occurred while registering items", e);
         }
+        passiveListeners.getPassiveListener(Ability.RUNNABLE).runTaskTimer(this, 0L, PassiveListeners.DEFAULT_PASSIVE_LISTENER_TICKS);
+        passiveListeners.getPassiveListener(Ability.ASYNC_RUNNABLE).runTaskTimerAsynchronously(this, 0L, PassiveListeners.ASYNC_PASSIVE_LISTENER_TICKS);
 
 
         GlowManager.initGlowTeams();
