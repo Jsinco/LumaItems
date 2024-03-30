@@ -1,5 +1,6 @@
 package dev.jsinco.lumaitems.items
 
+import com.iridium.iridiumcolorapi.IridiumColorAPI
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
@@ -31,6 +32,17 @@ class ItemFactory(
     var addSpace: Boolean = true
     var attributeModifiers: MutableMap<Attribute, AttributeModifier> = mutableMapOf()
     val stringPersistentDatas: MutableMap<NamespacedKey, String> = mutableMapOf()
+    var quotes: MutableList<String> = mutableListOf()
+
+    fun addQuote(s: String) {
+        quotes.add(s)
+    }
+
+    fun addGradientQuote(s: String, color1: String, color2: String) {
+        val strippedColor1 = color1.replace("#", "").replace("&", "").trim()
+        val strippedColor2 = color2.replace("#", "").replace("&", "").trim()
+        quotes.add(IridiumColorAPI.process("<GRADIENT:$strippedColor1>\"$s\"</GRADIENT:$strippedColor2>"))
+    }
 
     fun createItem(): ItemStack {
         val item = ItemStack(material)
@@ -50,7 +62,11 @@ class ItemFactory(
 
         val combinedLore: MutableList<String> = mutableListOf()
         combinedLore.addAll(customEnchants)
-        if (addSpace) combinedLore.add("")
+        if (addSpace || quotes.isNotEmpty()) combinedLore.add("")
+        if (quotes.isNotEmpty()) {
+            combinedLore.addAll(quotes)
+            combinedLore.add("")
+        }
         combinedLore.addAll(lore.map { "&f$it" })
         combinedLore.add("")
         combinedLore.add("&#EEE1D5&m       &r&#EEE1D5⋆⁺₊⋆ ★ ⋆⁺₊⋆&m       ")

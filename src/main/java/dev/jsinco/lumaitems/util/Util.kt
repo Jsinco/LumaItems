@@ -2,11 +2,15 @@ package dev.jsinco.lumaitems.util
 
 import com.destroystokyo.paper.profile.ProfileProperty
 import dev.jsinco.lumaitems.LumaItems
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.material.MapColor
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Color
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.block.Block
+import org.bukkit.craftbukkit.v1_20_R3.block.CraftBlock
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
@@ -200,5 +204,16 @@ object Util {
             colorStr.substring(3, 5).toInt(16),
             colorStr.substring(5, 7).toInt(16)
         )
+    }
+
+    fun getColor(block: Block): java.awt.Color {
+        val cb: CraftBlock = block as CraftBlock
+        val bs: BlockState = cb.nms
+        val mc: MapColor = bs.getMapColor(cb.craftWorld.handle, cb.position)
+        return java.awt.Color(mc.col)
+    }
+
+    fun javaAwtColorToBukkitColor(color: java.awt.Color): Color {
+        return Color.fromARGB(color.alpha, color.red, color.green, color.blue)
     }
 }

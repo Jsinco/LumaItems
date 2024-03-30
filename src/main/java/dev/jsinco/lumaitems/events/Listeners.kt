@@ -49,10 +49,10 @@ class Listeners(val plugin: LumaItems) : Listener {
 // optimized and functional
 
     companion object {
-        // This exists because Kotlin doesn't allow null values unless the variable is nullable, and I'm not going to edit 70 classes
+        // This exists because Kotlin doesn't allow null values unless the variable is nullable, and I'm not going to edit 75+ classes
         // Maybe replace with a class that implements player sometime?
         private var player: Player? = null
-        fun getDummyPlayer(): Player? {
+        private fun getDummyPlayer(): Player? {
             if (player == null && Bukkit.getOnlinePlayers().isNotEmpty()) {
                 player = Bukkit.getOnlinePlayers().random()
             }
@@ -186,17 +186,13 @@ class Listeners(val plugin: LumaItems) : Listener {
 
     @EventHandler(ignoreCancelled = true)
     fun onPlayerDamagedByEntity(event: EntityDamageByEntityEvent) {
-        val player = event.entity as? Player ?: return
+        val player: Player = event.entity as? Player ?: return
 
-        val playerData: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
-
-        for (customItem in ItemManager.customItems) {
-            for (dataContainer in playerData) {
-                if (dataContainer.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                    val customItemClass = customItem.value
-                    customItemClass.executeAbilities(Ability.PLAYER_DAMAGED_BY_ENTITY, player, event)
-                    break
-                }
+        for (dataContainer in Util.getAllEquipmentNBT(player)) {
+            for (customItem in ItemManager.customItems) {
+                if (!dataContainer.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+                customItem.value.executeAbilities(Ability.PLAYER_DAMAGED_BY_ENTITY, player, event)
+                break
             }
         }
     }
@@ -366,8 +362,11 @@ class Listeners(val plugin: LumaItems) : Listener {
     fun onEntityMoveEvent(event: EntityMoveEvent) {
         if (!event.hasChangedPosition()) return
 
+        val container: PersistentDataContainer = event.entity.persistentDataContainer
+        if (container.isEmpty) return
+
         for (customItem in ItemManager.customItems) {
-            if (!event.entity.persistentDataContainer.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+            if (!container.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
             customItem.value.executeAbilities(Ability.ENTITY_MOVE, (getDummyPlayer() ?: return), event)
         }
     }

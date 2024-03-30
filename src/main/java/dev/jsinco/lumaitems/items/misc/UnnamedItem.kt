@@ -21,7 +21,7 @@ import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 import kotlin.random.Random
 
-class Unnamed : CustomItem {
+class UnnamedItem : CustomItem {
 
     companion object {
         private val plugin: LumaItems = LumaItems.getPlugin()

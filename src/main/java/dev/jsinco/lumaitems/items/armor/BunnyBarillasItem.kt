@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-class BunnyBarillas : CustomItem {
+class BunnyBarillasItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
                 "&#E7934F&lB&#EBA454&lu&#EFB658&ln&#F3C75D&ln&#F7D861&ly &#FBEA66&lB&#FFFB6A&la&#E5F461&lr&#CAED58&li&#B0E64F&ll&#95DF45&ll&#7BD83C&la&#60D133&ls",

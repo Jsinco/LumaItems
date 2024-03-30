@@ -10,7 +10,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ItemManager {
@@ -51,13 +55,13 @@ public class ItemManager {
      * Registers all Custom Items in the packages list
      */
     public void registerItems() throws IOException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        List<Class> classes = new ArrayList<>();
+        List<Class<?>> classes = new ArrayList<>();
 
         for (String packagee : packages) {
             classes.addAll(findClasses(packagee));
         }
 
-        for (Class clazz : classes) {
+        for (Class<?> clazz : classes) {
             try {
                 if (CustomItem.class.isAssignableFrom(clazz)) {
                     CustomItem item = (CustomItem) clazz.getDeclaredConstructor().newInstance();
@@ -78,7 +82,7 @@ public class ItemManager {
      * @return Set of classes in the package
      * Credit: <a href="https://www.spigotmc.org/threads/register-all-listeners-in-package.399219/">...</a>
      */
-    private Set<Class> findClasses(String packageName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, IOException {
+    private Set<Class<?>> findClasses(String packageName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, IOException {
         Method getFileMethod = JavaPlugin.class.getDeclaredMethod("getFile");
         getFileMethod.setAccessible(true);
         File file = (File) getFileMethod.invoke(plugin);

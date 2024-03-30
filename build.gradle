@@ -2,10 +2,13 @@ plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.9.20-Beta2'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id "io.papermc.paperweight.userdev" version "1.5.12" // PaperWeight
 }
 
+def projectName = 'LumaItems'
 group = 'dev.jsinco'
 version = '1.0.0'
+
 
 repositories {
     mavenCentral()
@@ -40,13 +43,20 @@ repositories {
 }
 
 dependencies {
-    compileOnly "io.papermc.paper:paper-api:1.20-R0.1-SNAPSHOT"
+    compileOnly "io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT"
     compileOnly "me.clip:placeholderapi:2.11.3"
     compileOnly "com.github.Zrips:jobs:4.17.2"
     compileOnly "com.comphenix.protocol:ProtocolLib:5.0.0"
 
     implementation "com.iridium:IridiumColorAPI:1.0.6"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    // PaperWeight
+    paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
+}
+
+paperweight {
+    jar.archiveClassifier
 }
 
 def targetJavaVersion = 17
@@ -74,14 +84,40 @@ processResources {
     }
 }
 
-shadowJar {
-    dependencies {
-        include(dependency("org.jetbrains.kotlin:kotlin-stdlib"))
-        include(dependency("com.iridium:IridiumColorAPI:1.0.6"))
-    }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }
 
 kotlin {
     jvmToolchain(17)
 }
-build.dependsOn shadowJar
+
+// PaperWeight
+tasks.assemble {
+    dependsOn(reobfJar)
+}
+
+jar {
+    version = null
+    enabled = true
+}
+
+shadowJar {
+    dependencies {
+        include(dependency("com.iridium:IridiumColorAPI"))
+        //include(dependency("org.jetbrains.kotlin:kotlin-stdlib")) I have other plugins that use kotlin on Luma
+    }
+    archiveClassifier.set('')
+}
+
+build {
+    dependsOn shadowJar
+}
+
+// PaperWeight
+reobfJar {
+    // This is an example of how you might change the output location for reobfJar. It's recommended not to do this
+    // for a variety of reasons, however it's asked frequently enough that an example of how to do it is included here.
+    outputJar.set(layout.buildDirectory.file("${projectDir}\\build\\libs\\${projectName}.jar"))
+}
+
