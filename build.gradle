@@ -40,6 +40,10 @@ repositories {
         name = "protocolLib"
         url = "https://repo.dmulloy2.net/repository/public/"
     }
+    maven {
+        name = "mythiccraft"
+        url = "https://mvn.lumine.io/repository/maven-public/"
+    }
 }
 
 dependencies {
@@ -47,6 +51,7 @@ dependencies {
     compileOnly "me.clip:placeholderapi:2.11.3"
     compileOnly "com.github.Zrips:jobs:4.17.2"
     compileOnly "com.comphenix.protocol:ProtocolLib:5.0.0"
+    compileOnly "io.lumine:Mythic-Dist:5.6.1"
 
     implementation "com.iridium:IridiumColorAPI:1.0.6"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"

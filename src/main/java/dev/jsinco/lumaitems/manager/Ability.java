@@ -15,6 +15,7 @@ public enum Ability {
     ENTITY_DEATH, // When a living entity dies and the killer is a player
     ENTITY_DAMAGE, // When a player or a projectile shot by a player damages a living entity
     PLAYER_DAMAGED_BY_ENTITY, // When a player is damaged by a living entity
+    PLAYER_DAMAGED_WHILE_BLOCKING, // When a player is damaged while blocking with a shield
     PLAYER_DAMAGE_BY_SELF, // When a player damages themselves <-- FOR REMOVAL
     ENTITY_DAMAGED_GENERIC, // When a living entity is damaged from ANYTHING and not just other living entities
     DROP_ITEM, // When a player drops an item

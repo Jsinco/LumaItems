@@ -8,7 +8,6 @@ import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.manager.GlowManager
 import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.Util
-import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -33,7 +32,7 @@ class YolkPlaidYataghanItem : CustomItem {
     companion object {
         private val eggTextures: List<String> = FileManager("heads.yml").generateYamlFile().getStringList("easter-egg")
         private val plugin: LumaItems = LumaItems.getPlugin()
-        private val cooldown: MutableMap<UUID, Short> = mutableMapOf()
+        private val coolingDownEggs: MutableMap<UUID, Int> = mutableMapOf()
     }
 
     override fun createItem(): Pair<String, ItemStack> {
@@ -118,18 +117,26 @@ class YolkPlaidYataghanItem : CustomItem {
     }
 
     private fun cooldownTaskPlayer(player: Player): Boolean {
-        val amt = cooldown[player.uniqueId] ?: 0
-        if (amt >= 2) {
+        val amountOfCoolingDownEggs = coolingDownEggs[player.uniqueId] ?: 0
+        if (amountOfCoolingDownEggs >= 2) {
             return false
-        }
+        } else {
+            coolingDownEggs[player.uniqueId] = amountOfCoolingDownEggs + 1
+            object: BukkitRunnable() {
+                override fun run() {
+                    var coolingDownEggsAmount = coolingDownEggs[player.uniqueId] ?: return
+                    coolingDownEggsAmount -= 1
 
-        cooldown[player.uniqueId] = (amt + 1).toShort()
-        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, {
-            cooldown[player.uniqueId] = (amt - 1).toShort()
-            if (cooldown[player.uniqueId] == 0.toShort()) {
-                cooldown.remove(player.uniqueId)
-            }
-        }, 400L)
+                    if (coolingDownEggsAmount > 0) {
+                        coolingDownEggs[player.uniqueId] = coolingDownEggsAmount
+                    } else {
+                        coolingDownEggs.remove(player.uniqueId)
+                    }
+                }
+            }.runTaskLater(plugin, 400)
+        }
         return true
     }
+
+
 }

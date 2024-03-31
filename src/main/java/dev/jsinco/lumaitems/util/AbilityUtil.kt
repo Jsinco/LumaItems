@@ -2,6 +2,7 @@ package dev.jsinco.lumaitems.util
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.FileManager
+import io.lumine.mythic.bukkit.MythicBukkit
 import org.bukkit.Bukkit
 import org.bukkit.Color
 import org.bukkit.Location
@@ -24,6 +25,7 @@ import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Vector
 import java.util.*
+
 
 object AbilityUtil {
 
@@ -73,7 +75,7 @@ object AbilityUtil {
     fun noDamagePermission(attacker: Player, damagee: Entity): Boolean {
         val event = EntityDamageByEntityEvent(attacker, damagee, EntityDamageEvent.DamageCause.ENTITY_ATTACK, 0.1)
         Bukkit.getPluginManager().callEvent(event)
-        return event.isCancelled
+        return event.isCancelled || isMythicMob(damagee)
     }
 
     @JvmStatic
@@ -82,6 +84,15 @@ object AbilityUtil {
         Bukkit.getPluginManager().callEvent(event)
         return event.isCancelled
     }
+
+    @JvmStatic
+    fun isMythicMob(bukkitEntity: Entity): Boolean {
+        if (!LumaItems.isWithMythicMobs()) {
+            return false
+        }
+        return MythicBukkit.inst().mobManager.isMythicMob(bukkitEntity)
+    }
+
 
     fun getDirectionBetweenLocations(start: Location, end: Location): Vector {
         val from = start.toVector()

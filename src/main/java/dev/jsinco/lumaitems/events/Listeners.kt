@@ -131,8 +131,7 @@ class Listeners(val plugin: LumaItems) : Listener {
         for (customItem in ItemManager.customItems) {
             for (dataContainer in dataContainers) {
                 if (dataContainer.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                    val customItemClass = customItem.value
-                    customItemClass.executeAbilities(ability, player, event)
+                    customItem.value.executeAbilities(ability, player, event)
                     break
                 }
             }
@@ -183,6 +182,7 @@ class Listeners(val plugin: LumaItems) : Listener {
 
         val data: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
 
+        // TODO: Add special Ability type for when players are damaging an entity with no permission to damage them
         fire(data, Ability.ENTITY_DAMAGE, player, event)
     }
 
@@ -193,7 +193,7 @@ class Listeners(val plugin: LumaItems) : Listener {
         for (dataContainer in Util.getAllEquipmentNBT(player)) {
             for (customItem in ItemManager.customItems) {
                 if (!dataContainer.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-                customItem.value.executeAbilities(Ability.PLAYER_DAMAGED_BY_ENTITY, player, event)
+                customItem.value.executeAbilities(if (player.isBlocking) Ability.PLAYER_DAMAGED_WHILE_BLOCKING else Ability.PLAYER_DAMAGED_BY_ENTITY, player, event)
                 break
             }
         }

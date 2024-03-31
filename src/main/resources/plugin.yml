@@ -6,6 +6,7 @@ softdepend:
 - PlaceHolderAPI
 - EvenMoreFish # Softdepending EMF to register listeners after it
 - ProtocolLib
+- MythicMobs
 author: 'Jsinco'
 permissions:
   lumaitems.command.give:

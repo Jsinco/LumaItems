@@ -15,6 +15,7 @@ import dev.jsinco.lumaitems.placeholders.PAPIManager;
 import dev.jsinco.lumaitems.relics.RelicCrafting;
 import dev.jsinco.lumaitems.relics.RelicDisassembler;
 import dev.jsinco.lumaitems.util.Util;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,6 +25,7 @@ public final class LumaItems extends JavaPlugin {
 
     private static LumaItems plugin;
     private static boolean withProtocolLib;
+    private static boolean withMythicMobs;
     private static PAPIManager papiManager;
 
     @Override
@@ -32,6 +34,7 @@ public final class LumaItems extends JavaPlugin {
         FileManager.generateDefaultFiles();
         Util.loadUtils();
         withProtocolLib = getServer().getPluginManager().getPlugin("ProtocolLib") != null;
+        withMythicMobs = getServer().getPluginManager().getPlugin("MythicMobs") != null;
 
 
 
@@ -67,6 +70,7 @@ public final class LumaItems extends JavaPlugin {
         if (papiManager != null) {
             papiManager.unregister();
         }
+        HandlerList.unregisterAll(this);
     }
 
     public static LumaItems getPlugin() {
@@ -76,5 +80,9 @@ public final class LumaItems extends JavaPlugin {
     @Nullable
     public static ProtocolManager getProtocolManager() {
         return withProtocolLib ? ProtocolLibrary.getProtocolManager() : null;
+    }
+
+    public static boolean isWithMythicMobs() {
+        return withMythicMobs;
     }
 }

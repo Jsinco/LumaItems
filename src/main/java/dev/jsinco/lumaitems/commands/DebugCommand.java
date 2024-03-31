@@ -1,10 +1,7 @@
 package dev.jsinco.lumaitems.commands;
 
 import dev.jsinco.lumaitems.LumaItems;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,9 +13,6 @@ public class DebugCommand implements SubCommand {
     public void execute(@NotNull LumaItems plugin, @NotNull CommandSender sender, @NotNull String[] args) {
         if (!(sender instanceof Player player)) return;
 
-        Ghast ghast = (Ghast) player.getWorld().spawnEntity(player.getLocation(), EntityType.GHAST);
-        ghast.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(300);
-        ghast.setHealth(300);
     }
 
     @Nullable

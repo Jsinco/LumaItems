@@ -21,7 +21,7 @@ class PetalPrismAegisItem : CustomItem {
         val item = ItemFactory(
             "&#E899E9&lP&#E399E8&le&#DE98E6&lt&#D998E5&la&#D398E4&ll &#CE98E3&lP&#C997E1&lr&#C497E0&li&#C28EE0&ls&#BF84DF&lm &#BD7BDF&lA&#BB72DE&le&#B969DE&lg&#B65FDD&li&#B456DD&ls",
             mutableListOf("&#C497E0Reflections"),
-            mutableListOf("Any damage received while", "blocking will be stored and", "dealt back upon the user's", "next attack."),
+            mutableListOf("Any damage received while", "blocking will be stored and", "dealt back upon the user's", "next attack.", "", "&cMax storable: 15❤"),
             Material.SHIELD,
             mutableListOf("petalprismaegis"),
             mutableMapOf(Enchantment.DURABILITY to 6, Enchantment.MENDING to 1, Enchantment.KNOCKBACK to 3)
@@ -33,7 +33,7 @@ class PetalPrismAegisItem : CustomItem {
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.PLAYER_DAMAGED_BY_ENTITY -> {
+            Ability.PLAYER_DAMAGED_WHILE_BLOCKING -> {
                 if (!player.isBlocking) {
                     return false
                 }
@@ -42,9 +42,9 @@ class PetalPrismAegisItem : CustomItem {
                 val blockedDamage = blockedDamages[player.uniqueId] ?: BlockedDamage()
                 blockedDamage.timeStamp = System.currentTimeMillis()
 
-                //if (blockedDamage.damage < 30.0) {
+                if (blockedDamage.damage < 25.0) {
                     blockedDamage.damage += event.damage
-                //}
+                }
 
                 blockedDamages[player.uniqueId] = blockedDamage
             }
@@ -65,7 +65,7 @@ class PetalPrismAegisItem : CustomItem {
 
 
                 val blockedDamage = blockedDamages[player.uniqueId] ?: return false
-                event.damage = blockedDamage.damage//.coerceAtMost(30.0)
+                event.damage = blockedDamage.damage.coerceAtMost(25.0)
                 blockedDamages.remove(player.uniqueId)
             }
 
