@@ -16,7 +16,7 @@ class PassiveListeners(val plugin: LumaItems) {
 
     companion object {
         const val DEFAULT_PASSIVE_LISTENER_TICKS: Long = 70
-        const val ASYNC_PASSIVE_LISTENER_TICKS: Long = 70
+        const val ASYNC_PASSIVE_LISTENER_TICKS: Long = 30
     }
 
 
@@ -29,7 +29,6 @@ class PassiveListeners(val plugin: LumaItems) {
             }
         }
     }
-
 
 
     fun fire(dataList: List<PersistentDataContainer>, player: Player, ability: Ability) {
