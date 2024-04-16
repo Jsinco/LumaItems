@@ -63,9 +63,11 @@ class ValleySet : AstralSet {
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+        val tool = GenericMCToolType.getToolType(player.inventory.itemInMainHand)
+
         when (type) {
             Ability.LEFT_CLICK, Ability.RIGHT_CLICK -> {
-                if (GenericMCToolType.getToolType(player.inventory.itemInMainHand) != GenericMCToolType.SHOVEL) return false
+                if (tool != GenericMCToolType.SHOVEL) return false
                 val targetBlock = player.getTargetBlockExact(45, FluidCollisionMode.ALWAYS) ?: return false
 
                 if (targetBlock.type.name.contains("WATER")) {
@@ -74,7 +76,7 @@ class ValleySet : AstralSet {
             }
 
             Ability.ENTITY_DAMAGE -> {
-                if (!player.inventory.itemInMainHand.type.name.contains("SWORD")) return false
+                if (tool != GenericMCToolType.SWORD) return false
                 event as EntityDamageByEntityEvent
                 if (event.entity !is Monster) return false
                 player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 100, 0, false, false, false))
@@ -82,9 +84,10 @@ class ValleySet : AstralSet {
             }
 
             Ability.BREAK_BLOCK -> {
-                if (player.inventory.itemInMainHand.type.name.contains("HOE") && Random.nextInt(100) < 3) {
+                if (tool == GenericMCToolType.HOE && Random.nextInt(100) < 3) {
                     event as BlockBreakEvent
-                    event.block.world.dropItem(event.block.location, ItemStack(if (Random.nextBoolean()) Material.WHEAT else Material.GOLDEN_CARROT))
+                    event.block.world.dropItem(event.block.location,
+                        ItemStack(if (Random.nextBoolean()) Material.WHEAT else Material.GOLDEN_CARROT))
                 }
             }
 

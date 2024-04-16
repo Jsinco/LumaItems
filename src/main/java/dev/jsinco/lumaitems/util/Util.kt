@@ -27,9 +27,11 @@ object Util {
 
     lateinit var prefix: String
     private const val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
-    private val gearTypes: List<String> = listOf("Helmet", "Chestplate", "Leggings", "Boots", "Sword", "Pickaxe", "Axe", "Shovel", "Hoe", "Rod")
     val armorEquipmentSlots: List<EquipmentSlot> = listOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
-    val plugin: LumaItems = LumaItems.getPlugin()
+
+    private val plugin: LumaItems = LumaItems.getPlugin()
+    private val gearTypes: List<String> = listOf("Helmet", "Chestplate", "Leggings", "Boots", "Sword", "Pickaxe", "Axe", "Shovel", "Hoe", "Rod")
+    @JvmStatic val staticUUID: UUID = UUID.fromString("1c786ebf-50f7-408d-9bc6-02defd41c0a8")
 
     @JvmStatic
     fun loadUtils() {

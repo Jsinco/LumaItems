@@ -4,27 +4,31 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Enum for generic Minecraft tool types.
+ * Determine their type without regard for the type of material.
+ */
 public enum GenericMCToolType {
 
-    HELMET("HELMET"),
-    CHESTPLATE("CHESTPLATE"),
-    LEGGINGS("LEGGINGS"),
-    BOOTS("BOOTS"),
-    SWORD("SWORD"),
-    AXE("AXE"),
-    PICKAXE("PICKAXE"),
-    SHOVEL("SHOVEL"),
-    HOE("HOE"),
-    BOW("BOW"),
-    CROSSBOW("CROSSBOW"),
-    TRIDENT("TRIDENT"),
-    SHIELD("SHIELD"),
-    FISHING_ROD("FISHING_ROD");
+    HELMET,
+    CHESTPLATE,
+    LEGGINGS,
+    BOOTS,
+    SWORD,
+    AXE,
+    PICKAXE,
+    SHOVEL,
+    HOE,
+    BOW,
+    CROSSBOW,
+    TRIDENT,
+    SHIELD,
+    FISHING_ROD;
 
     private final String toolTypeAsGenericString;
 
-    GenericMCToolType(String string) {
-        this.toolTypeAsGenericString = string;
+    GenericMCToolType() {
+        this.toolTypeAsGenericString = this.toString();
     }
 
     public String getToolTypeAsGenericString() {
@@ -44,7 +48,9 @@ public enum GenericMCToolType {
         string = string.toUpperCase();
 
         for (GenericMCToolType toolType : GenericMCToolType.values()) {
-            if (toolType.getToolTypeAsGenericString().contains(string)) return toolType;
+            if (toolType.getToolTypeAsGenericString().contains(string)) {
+                return toolType;
+            }
         }
         return null;
     }
