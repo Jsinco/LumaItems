@@ -63,7 +63,7 @@ public class ItemManager {
 
         for (Class<?> clazz : classes) {
             try {
-                if (CustomItem.class.isAssignableFrom(clazz)) {
+                if (CustomItem.class.isAssignableFrom(clazz) && !clazz.isInterface()) {
                     CustomItem item = (CustomItem) clazz.getDeclaredConstructor().newInstance();
                     customItems.put(item.createItem().component1(), item);
                 }

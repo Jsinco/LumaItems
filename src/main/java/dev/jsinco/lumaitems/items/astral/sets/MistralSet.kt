@@ -15,7 +15,7 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
-import java.util.UUID
+import java.util.*
 
 class MistralSet : AstralSet {
 
@@ -48,16 +48,21 @@ class MistralSet : AstralSet {
                     mutableListOf("Grants extra speed", "while held")
                 },
 
-                if (genericMCToolType == GenericMCToolType.SWORD) {
-                    DefaultAttributes.NETHERITE_SWORD.appendThenGetAttributes(
-                        Attribute.GENERIC_MOVEMENT_SPEED, AttributeModifier(UUID.randomUUID(), "movementSpeed", 0.025, AttributeModifier.Operation.ADD_NUMBER)
-                    )
-                } else if (genericMCToolType == GenericMCToolType.PICKAXE) {
-                    DefaultAttributes.NETHERITE_PICKAXE.appendThenGetAttributes(
-                        Attribute.GENERIC_MOVEMENT_SPEED, AttributeModifier(UUID.randomUUID(), "movementSpeed", 0.025, AttributeModifier.Operation.ADD_NUMBER)
-                    )
-                } else {
-                    mutableMapOf(Attribute.GENERIC_MOVEMENT_SPEED to AttributeModifier(UUID.randomUUID(), "movementSpeed", 0.025, AttributeModifier.Operation.ADD_NUMBER))
+                when (genericMCToolType) {
+                    GenericMCToolType.SWORD -> {
+                        DefaultAttributes.NETHERITE_SWORD.appendThenGetAttributes(
+                            Attribute.GENERIC_MOVEMENT_SPEED, AttributeModifier(UUID.randomUUID(), "movementSpeed", 0.025, AttributeModifier.Operation.ADD_NUMBER)
+                        )
+                    }
+                    GenericMCToolType.PICKAXE -> {
+                        DefaultAttributes.NETHERITE_PICKAXE.appendThenGetAttributes(
+                            Attribute.GENERIC_MOVEMENT_SPEED, AttributeModifier(UUID.randomUUID(), "movementSpeed", 0.025, AttributeModifier.Operation.ADD_NUMBER)
+                        )
+                    }
+                    GenericMCToolType.FISHING_ROD -> {
+                        mutableMapOf(Attribute.GENERIC_MOVEMENT_SPEED to AttributeModifier(UUID.randomUUID(), "movementSpeed", 0.025, AttributeModifier.Operation.ADD_NUMBER))
+                    }
+                    else -> null
                 }
             )
         }
