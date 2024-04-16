@@ -7,6 +7,7 @@ import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.ItemManager
+import dev.jsinco.lumaitems.util.FireForAllNBT
 import dev.jsinco.lumaitems.util.Util
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent
 import io.papermc.paper.event.entity.EntityMoveEvent
@@ -42,7 +43,7 @@ import org.bukkit.persistence.PersistentDataType
 /**
  * Main listeners class for LumaItems
  * We use persistent data containers to store the custom item data and listen for it
- * Blocks cannot store persistent data so we will have to store in a file (if needed for long term)
+ * Blocks cannot store persistent data, so we will have to store in a file (if needed for long term)
  * Or have our listeners fire every single executeAbilities() method every time we need to grab data from a block
  */
 // TODO: Convert these to use the fire event method
@@ -62,7 +63,7 @@ class Listeners(val plugin: LumaItems) : Listener {
         }
     }
 
-    fun fire(data: PersistentDataContainer, ability: Ability, player: Player, event: Any) {
+    private fun fire(data: PersistentDataContainer, ability: Ability, player: Player, event: Any) {
         for (customItem: MutableMap.MutableEntry<String, CustomItem> in ItemManager.customItems) {
             if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
             customItem.value.executeAbilities(ability, player, event)
@@ -70,7 +71,7 @@ class Listeners(val plugin: LumaItems) : Listener {
         }
     }
 
-    fun fire(data: List<PersistentDataContainer>, ability: Ability, player: Player, event: Any) {
+    private fun fire(data: List<PersistentDataContainer>, ability: Ability, player: Player, event: Any) {
         for (itemData: PersistentDataContainer in data) {
             for (customItem: MutableMap.MutableEntry<String, CustomItem> in ItemManager.customItems) {
                 if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
@@ -122,56 +123,35 @@ class Listeners(val plugin: LumaItems) : Listener {
         fire(data, Ability.PROJECTILE_LAND, player, event)
     }
 
+    @FireForAllNBT
     @EventHandler
     fun onPlayerInteract(event: PlayerInteractEvent) {
         val player = event.player
         val dataContainers: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
         val ability: Ability = if (event.action.isLeftClick) Ability.LEFT_CLICK else if (event.action.isRightClick) Ability.RIGHT_CLICK else Ability.GENERIC_INTERACT
 
-        for (customItem in ItemManager.customItems) {
-            for (dataContainer in dataContainers) {
-                if (dataContainer.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                    customItem.value.executeAbilities(ability, player, event)
-                    break
-                }
-            }
-        }
+        fire(dataContainers, ability, player, event)
     }
 
     @EventHandler
     fun onPlayerSwapHandItems(event: PlayerSwapHandItemsEvent) {
         val player = event.player
+        val item = event.offHandItem
+        val data: PersistentDataContainer = item.itemMeta?.persistentDataContainer ?: return
 
-        val item = event.offHandItem ?: return
-        if (!item.hasItemMeta()) return
-
-        val data: PersistentDataContainer = item.itemMeta!!.persistentDataContainer
-
-        for (customItem in ItemManager.customItems) {
-            if (data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                val customItemClass = customItem.value
-                customItemClass.executeAbilities(Ability.SWAP_HAND, player, event)
-                break
-            }
-        }
+        fire(data, Ability.SWAP_HAND, player, event)
     }
 
     @EventHandler
     fun onEntityDeath(event: EntityDeathEvent) {
         val player: Player = event.entity.killer ?: return
         val item = player.inventory.itemInMainHand
-        if (!item.hasItemMeta()) return
+        val data: PersistentDataContainer = item.itemMeta?.persistentDataContainer ?: return
 
-        val data: PersistentDataContainer = item.itemMeta!!.persistentDataContainer
-        for (customItem in ItemManager.customItems) {
-            if (data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                val customItemClass = customItem.value
-                customItemClass.executeAbilities(Ability.ENTITY_DEATH, player, event)
-                break
-            }
-        }
+        fire(data, Ability.ENTITY_DEATH, player, event)
     }
 
+    @FireForAllNBT
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     fun onEntityDamageByEntity(event: EntityDamageByEntityEvent) {
         val player: Player = when (event.damager) {
@@ -189,14 +169,9 @@ class Listeners(val plugin: LumaItems) : Listener {
     @EventHandler(ignoreCancelled = true)
     fun onPlayerDamagedByEntity(event: EntityDamageByEntityEvent) {
         val player: Player = event.entity as? Player ?: return
+        val ability = if (player.isBlocking) Ability.PLAYER_DAMAGED_WHILE_BLOCKING else Ability.PLAYER_DAMAGED_BY_ENTITY
 
-        for (dataContainer in Util.getAllEquipmentNBT(player)) {
-            for (customItem in ItemManager.customItems) {
-                if (!dataContainer.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-                customItem.value.executeAbilities(if (player.isBlocking) Ability.PLAYER_DAMAGED_WHILE_BLOCKING else Ability.PLAYER_DAMAGED_BY_ENTITY, player, event)
-                break
-            }
-        }
+        fire(Util.getAllEquipmentNBT(player), ability, player, event)
     }
 
     @EventHandler
@@ -206,72 +181,42 @@ class Listeners(val plugin: LumaItems) : Listener {
 
 
         if (data != null) {
-            for (customItem in ItemManager.customItems) {
-                for (itemData in data) {
-                    if (itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                        customItem.value.executeAbilities(Ability.PLAYER_DAMAGE_BY_SELF, entity as Player, event)
-                        break
-                    }
-                }
-            }
+            fire(data, Ability.PLAYER_DAMAGE_BY_SELF, entity as Player, event)
         } else {
-            val entityData = entity.persistentDataContainer
-            for (customItem in ItemManager.customItems) {
-                if (entityData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                    customItem.value.executeAbilities(Ability.ENTITY_DAMAGED_GENERIC, (getDummyPlayer() ?: return), event)
-                    break
-                }
-            }
+            fire(entity.persistentDataContainer, Ability.ENTITY_DAMAGED_GENERIC, (getDummyPlayer() ?: return), event)
         }
+
+        //for (customItem in ItemManager.customItems) {
+        //                if (entityData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
+        //                    customItem.value.executeAbilities(Ability.ENTITY_DAMAGED_GENERIC, (getDummyPlayer() ?: return), event)
+        //                    break
+        //                }
+        //            }
     }
 
     @EventHandler
     fun onPlayerDropItem(event: PlayerDropItemEvent) {
         val player = event.player
-
         val data: PersistentDataContainer = event.itemDrop.itemStack.itemMeta?.persistentDataContainer ?: return
 
-        for (customItem in ItemManager.customItems) {
-            if (data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                val customItemClass = customItem.value
-                customItemClass.executeAbilities(Ability.DROP_ITEM, player, event)
-                break
-            }
-        }
+        fire(data, Ability.DROP_ITEM, player, event)
     }
 
-    @EventHandler (priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     fun onPlayerBreakBlock(event: BlockBreakEvent) {
         val player = event.player
+        val data: PersistentDataContainer = player.inventory.itemInMainHand.itemMeta?.persistentDataContainer ?: return
 
-        val item = player.inventory.itemInMainHand
-        if (!item.hasItemMeta()) return
-
-        val data: PersistentDataContainer = item.itemMeta!!.persistentDataContainer
-
-        for (customItem in ItemManager.customItems) {
-            if (data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                val customItemClass = customItem.value
-                customItemClass.executeAbilities(Ability.BREAK_BLOCK, player, event)
-                break
-            }
-        }
+        fire(data, Ability.BREAK_BLOCK, player, event)
     }
 
+    @FireForAllNBT
     @EventHandler
     fun onPlayerPlaceBlock(event: BlockPlaceEvent) {
         val player = event.player
         val data: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
 
-        for (customItem in ItemManager.customItems) {
-            for (itemData in data) {
-                if (itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                    val customItemClass = customItem.value
-                    customItemClass.executeAbilities(Ability.PLACE_BLOCK, player, event)
-                    return
-                }
-            }
-        }
+        fire(data, Ability.PLACE_BLOCK, player, event)
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -285,7 +230,6 @@ class Listeners(val plugin: LumaItems) : Listener {
 
         val data: PersistentDataContainer? = item.itemMeta?.persistentDataContainer
         val offHandData: PersistentDataContainer? = offHandItem.itemMeta?.persistentDataContainer
-
         for (customItem in ItemManager.customItems) {
             if (data?.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT) == true) {
                 val customItemClass = customItem.value
@@ -306,29 +250,14 @@ class Listeners(val plugin: LumaItems) : Listener {
         val elytra = player.inventory.chestplate ?: return
         val data: PersistentDataContainer = elytra.itemMeta?.persistentDataContainer ?: return
 
-        for (customItem in ItemManager.customItems) {
-            if (data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                val customItemClass = customItem.value
-                customItemClass.executeAbilities(Ability.ELYTRA_BOOST, player, event)
-                break
-            }
-        }
+        fire(data, Ability.ELYTRA_BOOST, player, event)
     }
 
+    @FireForAllNBT
     @EventHandler
     fun onPlayerCrouch(event: PlayerToggleSneakEvent) {
         val player = event.player
-        val data: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
-
-        for (customItem in ItemManager.customItems) {
-            for (itemData in data) {
-                if (itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) {
-                    val customItemClass = customItem.value
-                    customItemClass.executeAbilities(Ability.PLAYER_CROUCH, player, event)
-                    break
-                }
-            }
-        }
+        fire(Util.getAllEquipmentNBT(player), Ability.PLAYER_CROUCH, player, event)
     }
 
 
@@ -338,25 +267,15 @@ class Listeners(val plugin: LumaItems) : Listener {
 
         val data: PersistentDataContainer = player.persistentDataContainer
 
-        for (customItem in ItemManager.customItems) {
-            if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-            val customItemClass = customItem.value
-            customItemClass.executeAbilities(Ability.ASYNC_CHAT, player, event)
-            break
-        }
+        fire(data, Ability.ASYNC_CHAT, player, event)
     }
 
+    @FireForAllNBT
     @EventHandler
     fun onPlayerMove(event: PlayerMoveEvent) {
         if (!event.hasChangedPosition()) return
 
-        for (customData in Util.getAllEquipmentNBT(event.player)) {
-            for (customItem in ItemManager.customItems) {
-                if (!customData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-                customItem.value.executeAbilities(Ability.MOVE, event.player, event)
-                break
-            }
-        }
+        fire(Util.getAllEquipmentNBT(event.player), Ability.MOVE, event.player, event)
     }
 
 
@@ -367,10 +286,7 @@ class Listeners(val plugin: LumaItems) : Listener {
         val container: PersistentDataContainer = event.entity.persistentDataContainer
         if (container.isEmpty) return
 
-        for (customItem in ItemManager.customItems) {
-            if (!container.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-            customItem.value.executeAbilities(Ability.ENTITY_MOVE, (getDummyPlayer() ?: return), event)
-        }
+        fire(container, Ability.ENTITY_MOVE, (getDummyPlayer() ?: return), event)
     }
 
     //@EventHandler
@@ -403,31 +319,16 @@ class Listeners(val plugin: LumaItems) : Listener {
     fun onPlayerConsumeItem(event: PlayerItemConsumeEvent) {
         val player = event.player
         val item = event.item
-        if (!item.hasItemMeta()) return
+        val data: PersistentDataContainer = item.itemMeta?.persistentDataContainer ?: return
 
-        val data: PersistentDataContainer = item.itemMeta!!.persistentDataContainer
-
-        for (customItem in ItemManager.customItems) {
-            if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-            val customItemClass = customItem.value
-            customItemClass.executeAbilities(Ability.CONSUME_ITEM, player, event)
-            break
-        }
+        fire(data, Ability.CONSUME_ITEM, player, event)
     }
 
+    @FireForAllNBT
     @EventHandler
     fun onEntityPotionEffect(event: EntityPotionEffectEvent) {
         val player = event.entity as? Player ?: return
-
-        val data = Util.getAllEquipmentNBT(player)
-
-        for (customItem in ItemManager.customItems) {
-            for (itemData in data) {
-                if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-                customItem.value.executeAbilities(Ability.POTION_EFFECT, player, event)
-                return
-            }
-        }
+        fire(Util.getAllEquipmentNBT(player), Ability.POTION_EFFECT, player, event)
     }
 
     @EventHandler
@@ -435,30 +336,19 @@ class Listeners(val plugin: LumaItems) : Listener {
         val target = event.target as? Player ?: return
         val data = event.entity.persistentDataContainer
 
-        for (customItem in ItemManager.customItems) {
-            if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-            customItem.value.executeAbilities(Ability.ENTITY_TARGET_PLAYER, target, event)
-        }
+        fire(data, Ability.ENTITY_TARGET_PLAYER, target, event)
     }
 
 
     @EventHandler
     fun onPlayerArmorSwap(event: PlayerArmorChangeEvent) {
-        val data = listOf(event.oldItem, event.newItem).mapNotNull { it?.itemMeta?.persistentDataContainer }
+        val data = listOf(event.oldItem, event.newItem).mapNotNull { it.itemMeta?.persistentDataContainer }
 
-        for (customItem in ItemManager.customItems) {
-            for (itemData in data) {
-                if (!itemData.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-                customItem.value.executeAbilities(Ability.ARMOR_CHANGE, event.player, event)
-            }
-        }
+        fire(data, Ability.ARMOR_CHANGE, event.player, event)
     }
 
     @EventHandler
     fun onEntityTeleport(event: EntityTeleportEvent) {
-        for (customItem in ItemManager.customItems) {
-            if (!event.entity.persistentDataContainer.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-            customItem.value.executeAbilities(Ability.ENTITY_TELEPORT, (getDummyPlayer() ?: return), event)
-        }
+        fire(event.entity.persistentDataContainer, Ability.ENTITY_TELEPORT, (getDummyPlayer() ?: return), event)
     }
 }

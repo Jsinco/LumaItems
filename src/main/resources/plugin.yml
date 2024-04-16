@@ -7,6 +7,7 @@ softdepend:
 - EvenMoreFish # Softdepending EMF to register listeners after it
 - ProtocolLib
 - MythicMobs
+- Jobs
 author: 'Jsinco'
 permissions:
   lumaitems.command.give:

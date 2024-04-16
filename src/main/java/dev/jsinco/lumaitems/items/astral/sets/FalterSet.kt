@@ -1,89 +1,56 @@
 package dev.jsinco.lumaitems.items.astral.sets
 
 import com.gamingmesh.jobs.Jobs
-import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.items.astral.AstralSet
+import dev.jsinco.lumaitems.items.astral.AstralSetFactory
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.manager.CustomItem
-import dev.jsinco.lumaitems.relics.Rarity
-import dev.jsinco.lumaitems.util.Util
+import dev.jsinco.lumaitems.util.GenericMCToolType
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.inventory.ItemStack
 
 
-class FalterSet : CustomItem, AstralSet {
-
-    companion object {
-        private val materials = listOf(
-            Material.DIAMOND_PICKAXE,
-            Material.DIAMOND_HOE,
-            Material.DIAMOND_AXE,
-            Material.FISHING_ROD
-        )
-
-        private val enchantMap: Map<Material, MutableMap<Enchantment, Int>> = mapOf(
-            Material.DIAMOND_PICKAXE to mutableMapOf(
-                Enchantment.DAMAGE_ALL to 7,
-                Enchantment.DAMAGE_UNDEAD to 7,
-                Enchantment.DIG_SPEED to 10,
-                Enchantment.DURABILITY to 9,
-                Enchantment.MENDING to 1,
-                Enchantment.LOOT_BONUS_BLOCKS to 5),
-            Material.DIAMOND_HOE to mutableMapOf(
-                Enchantment.DAMAGE_ALL to 7,
-                Enchantment.DAMAGE_UNDEAD to 7,
-                Enchantment.DIG_SPEED to 7,
-                Enchantment.DURABILITY to 10,
-                Enchantment.MENDING to 1,
-                Enchantment.LOOT_BONUS_BLOCKS to 5),
-            Material.DIAMOND_AXE to mutableMapOf(
-                Enchantment.DAMAGE_ALL to 7,
-                Enchantment.DAMAGE_UNDEAD to 7,
-                Enchantment.DIG_SPEED to 9,
-                Enchantment.DURABILITY to 10,
-                Enchantment.MENDING to 1,
-                Enchantment.LOOT_BONUS_BLOCKS to 4,
-                Enchantment.LOOT_BONUS_MOBS to 6),
-            Material.FISHING_ROD to mutableMapOf(
-                Enchantment.DAMAGE_ALL to 7,
-                Enchantment.DAMAGE_UNDEAD to 7,
-                Enchantment.LURE to 5,
-                Enchantment.LUCK to 6,
-                Enchantment.MENDING to 1)
-        )
-        private val lores = mapOf(
-            Material.DIAMOND_PICKAXE to "Miner",
-            Material.DIAMOND_HOE to "Farmer",
-            Material.DIAMOND_AXE to "Lumberjack",
-            Material.FISHING_ROD to "Fisherman"
-        )
-    }
+class FalterSet : AstralSet {
 
     override fun setItems(): List<ItemStack> {
-        val items: MutableList<ItemStack> = mutableListOf()
-        for (material in materials) {
-            val item = ItemFactory(
-                "&#fb4d4d&lFalter &f${Util.getGearType(material)}",
-                mutableListOf("&#fb4d4dFoster"),
-                mutableListOf("Damage dealt to enemies scales", "with ${lores[material]} Job level"),
-                material,
-                mutableListOf("falter-set"),
-                enchantMap[material] ?: mutableMapOf()
-            )
-            item.tier = "&#fb4d4d&lAstral"
-            item.stringPersistentDatas[NamespacedKey(LumaItems.getPlugin(), "relic-rarity")] = Rarity.ASTRAL.name
-            items.add(item.createItem())
-        }
-        return items
+        val astralSetFactory = AstralSetFactory("Falter", mutableListOf("&#fb4d4dFoster"))
+        val commonLore = mutableListOf("Damage dealt to enemies scales", "with %s Job level")
+
+        astralSetFactory.commonEnchants = mutableMapOf(
+            Enchantment.DAMAGE_ALL to 7,
+            Enchantment.DAMAGE_UNDEAD to 7,
+            Enchantment.DURABILITY to 10,
+            Enchantment.MENDING to 1
+        )
+
+        astralSetFactory.astralSetItem(
+            Material.DIAMOND_PICKAXE,
+            mutableMapOf(Enchantment.DIG_SPEED to 10, Enchantment.DURABILITY to 9, Enchantment.LOOT_BONUS_BLOCKS to 5),
+            commonLore.map { it.format("Miner") }
+        )
+        astralSetFactory.astralSetItem(
+            Material.DIAMOND_HOE,
+            mutableMapOf(Enchantment.DIG_SPEED to 7,Enchantment.LOOT_BONUS_BLOCKS to 5),
+            commonLore.map { it.format("Farmer") }
+        )
+        astralSetFactory.astralSetItem(
+            Material.DIAMOND_AXE,
+            mutableMapOf(Enchantment.DIG_SPEED to 9, Enchantment.DURABILITY to 10, Enchantment.LOOT_BONUS_BLOCKS to 4, Enchantment.LOOT_BONUS_MOBS to 6),
+            commonLore.map { it.format("Lumberjack") }
+        )
+        astralSetFactory.astralSetItem(
+            Material.FISHING_ROD,
+            mutableMapOf(Enchantment.LURE to 5, Enchantment.LUCK to 6),
+            commonLore.map { it.format("Fisherman") }
+        )
+
+        return astralSetFactory.createdAstralItems
     }
 
-    override fun createItem(): Pair<String, ItemStack> {
-        return Pair("falter-set", ItemStack(Material.AIR))
+    override fun identifier(): String {
+        return "falter-set"
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
@@ -100,10 +67,13 @@ class FalterSet : CustomItem, AstralSet {
 
     private fun getJobLevel(material: Material, player: Player): Int {
         val jobsPlayer = Jobs.getPlayerManager().getJobsPlayer(player)
-        val job = when (material) {
-            Material.DIAMOND_PICKAXE -> Jobs.getJob("Miner")
-            Material.DIAMOND_HOE -> Jobs.getJob("Farmer")
-            Material.DIAMOND_AXE -> Jobs.getJob("Lumberjack")
+
+        val genericMCToolType = GenericMCToolType.getToolType(material)
+        val job = when (genericMCToolType) {
+            GenericMCToolType.PICKAXE -> Jobs.getJob("Miner")
+            GenericMCToolType.HOE -> Jobs.getJob("Farmer")
+            GenericMCToolType.AXE -> Jobs.getJob("Lumberjack")
+            GenericMCToolType.FISHING_ROD -> Jobs.getJob("Fisherman")
             else -> return 0
         }
         return if (jobsPlayer.isInJob(job)) jobsPlayer.getJobProgression(job).level else 0

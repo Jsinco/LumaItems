@@ -115,6 +115,17 @@ object Util {
         return nbtList
     }
 
+    fun isWearingWithNBT(player: Player, identifier: String): Boolean {
+        val armorDatas: List<PersistentDataContainer?> =
+            armorEquipmentSlots.map { player.equipment.getItem(it).itemMeta?.persistentDataContainer }
+
+        for (data in armorDatas) {
+            if (data != null && data.has(NamespacedKey(plugin, identifier), PersistentDataType.SHORT)) return true
+        }
+
+        return false
+    }
+
 
     fun createBasicItem(
         name: String,

@@ -72,8 +72,8 @@ class VenomSet : CustomItem, AstralSet {
         return items
     }
 
-    override fun createItem(): Pair<String, ItemStack> {
-        return Pair("venom-set", ItemStack(Material.AIR))
+    override fun identifier(): String {
+        return "venom-set"
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {

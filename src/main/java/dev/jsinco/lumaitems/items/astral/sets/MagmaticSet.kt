@@ -4,15 +4,10 @@ import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.relics.Rarity
 import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.Util
-import org.bukkit.Bukkit
-import org.bukkit.Material
-import org.bukkit.NamespacedKey
-import org.bukkit.Particle
-import org.bukkit.Sound
+import org.bukkit.*
 import org.bukkit.block.Block
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.ExperienceOrb
@@ -21,9 +16,9 @@ import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
-import java.util.*
+import java.util.UUID
 
-class MagmaticSet : CustomItem, AstralSet {
+class MagmaticSet : AstralSet {
 
     companion object {
         private val materials: List<Material> = listOf(
@@ -93,8 +88,8 @@ class MagmaticSet : CustomItem, AstralSet {
         return items
     }
 
-    override fun createItem(): Pair<String, ItemStack> {
-        return Pair("magmatic-set", ItemStack(Material.AIR))
+    override fun identifier(): String {
+        return "magmatic-set"
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {

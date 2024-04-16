@@ -21,7 +21,7 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import java.util.*
 
-class MistralSet : CustomItem, AstralSet {
+class MistralSet : AstralSet {
 
     companion object {
         private val materials: List<Material> = listOf(
@@ -99,10 +99,9 @@ class MistralSet : CustomItem, AstralSet {
         return items
     }
 
-    override fun createItem(): Pair<String, ItemStack> {
-        return Pair("swift-set", ItemStack(Material.AIR))
+    override fun identifier(): String {
+        return "swift-set"
     }
-
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
         when (type) {
             Ability.RUNNABLE -> {
