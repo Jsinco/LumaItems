@@ -28,7 +28,7 @@ disassembler:
     '50': 'give %player% coal_block 4'
   blocks:
     spawnDec:
-      world: 'spawn'
+      world: 'world'
       x: 199
       y: 61
       z: 215

@@ -110,13 +110,9 @@ jar {
 shadowJar {
     dependencies {
         include(dependency("com.iridium:IridiumColorAPI"))
-        //include(dependency("org.jetbrains.kotlin:kotlin-stdlib")) I have other plugins that use kotlin on Luma
+        include(dependency("org.jetbrains.kotlin:kotlin-stdlib"))
     }
     archiveClassifier.set('')
-}
-
-build {
-    dependsOn shadowJar
 }
 
 // PaperWeight
@@ -124,5 +120,17 @@ reobfJar {
     // This is an example of how you might change the output location for reobfJar. It's recommended not to do this
     // for a variety of reasons, however it's asked frequently enough that an example of how to do it is included here.
     outputJar.set(layout.buildDirectory.file("${projectDir}\\build\\libs\\${projectName}.jar"))
+}
+
+
+tasks.register('copyJar', Copy) {
+    from reobfJar // Shortcut for jar.outputs.files
+    into "C:\\Users\\jonah\\server\\plugins" // Specify your desired destination folder
+}
+
+
+build {
+    dependsOn shadowJar
+    dependsOn("copyJar")
 }
 

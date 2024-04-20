@@ -9,4 +9,7 @@ class AstralUpgradeTier(
     val tierNumber: Int,
     val maxTier: Boolean
 ) {
+    override fun toString(): String {
+        return "AstralUpgradeTier(tierName='$tierName', newMaterial=$newMaterial, newEnchantments=$newEnchantments, tierNumber=$tierNumber, maxTier=$maxTier)"
+    }
 }

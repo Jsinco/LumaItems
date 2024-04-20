@@ -7,12 +7,12 @@ import org.bukkit.enchantments.Enchantment
 
 open class AstralSetUpgradeManager {
     companion object {
-        val upgrades: MutableMap<String, AstralUpgradeTier> = mutableMapOf()
+        @JvmStatic val upgrades: MutableMap<String, MutableList<AstralUpgradeTier>> = mutableMapOf()
         val plugin: LumaItems = LumaItems.getPlugin()
     }
 
     init {
-        reloadUpgrades()
+        //reloadUpgrades()
     }
 
     fun reloadUpgrades() {
@@ -24,7 +24,7 @@ open class AstralSetUpgradeManager {
             for (setTier in setTierSectionList) {
                 val astralMaterial = AstralMaterial.valueOf(setTierSection.getString("$setTier.material") ?: "IRON")
                 val enchantsListString = setTierSection.getStringList("$setTier.enchants")
-                val setTierNumber = setTier.replace("-tier", "").trim().toInt()
+                val setTierNumber = setTier.replace("tier-", "").trim().toInt()
 
                 val astralUpgradeTier = AstralUpgradeTier(
                     setKey,
@@ -33,7 +33,7 @@ open class AstralSetUpgradeManager {
                     setTierNumber,
                     setTierSectionList.last() == setTier
                 )
-                upgrades["$setKey-$setTierNumber"] = astralUpgradeTier
+                upgrades["$setKey-$setTierNumber"] = mutableListOf(astralUpgradeTier)
             }
         }
     }
