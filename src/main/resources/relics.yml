@@ -9,6 +9,7 @@ astral:
     MelukaSet: 48
     ValleySet: 55
 
+
 disassembler:
   commands:
     '5': 'lumaitems relic %player% core lunar'

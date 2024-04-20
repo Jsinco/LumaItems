@@ -57,7 +57,7 @@ class FalterSet : AstralSet {
         when (type) {
             Ability.ENTITY_DAMAGE -> {
                 event as EntityDamageByEntityEvent
-                event.damage += getJobLevel(player.inventory.itemInMainHand.type, player) / 10
+                event.damage += (getJobLevel(player.inventory.itemInMainHand.type, player) / 2.0)
             }
             else -> return false
         }
