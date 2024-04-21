@@ -21,9 +21,8 @@ class AstralSetUpgradeFactory (val item: ItemStack) : AstralSetUpgradeManager() 
         val dataContainer = item.itemMeta?.persistentDataContainer ?: return null
         for (upgrade in upgrades) {
             val tierNumber = dataContainer.get(NamespacedKey(plugin, upgrade.key), PersistentDataType.SHORT) ?: continue
-
-            for (upgradeTier in upgrade.value) {
-                if (upgradeTier.tierNumber == tierNumber.toInt()) {
+            for (upgradeTier: AstralUpgradeTier in upgrade.value) {
+                if (upgradeTier.tierNumber == tierNumber.toInt() + 1) {
                     return upgradeTier
                 }
             }
@@ -33,8 +32,8 @@ class AstralSetUpgradeFactory (val item: ItemStack) : AstralSetUpgradeManager() 
 
     companion object {
         fun upgradeAstralItem(item: ItemStack, upgradeTier: AstralUpgradeTier) {
-            val originalGearType = item.type.toString().split("_")[0]
-            item.type = Material.valueOf("${originalGearType}_${originalGearType}")
+            val originalGearType = item.type.toString().split("_")[1]
+            item.type = Material.valueOf("${upgradeTier.newMaterial}_${originalGearType}")
 
             val meta = item.itemMeta ?: return
 

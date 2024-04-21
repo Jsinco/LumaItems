@@ -20,9 +20,3 @@ astral-upgrades:
       enchants:
         - 'protection/2'
         - 'unbreaking/1'
-
-item_upgrades:
-  swiftset:
-    new-material: NETHERITE
-    increase-enchants-by: 1
-    add-enchants: {mending: 1}

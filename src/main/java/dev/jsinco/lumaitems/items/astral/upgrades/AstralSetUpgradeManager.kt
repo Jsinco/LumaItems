@@ -33,7 +33,12 @@ open class AstralSetUpgradeManager {
                     setTierNumber,
                     setTierSectionList.last() == setTier
                 )
-                upgrades["$setKey-$setTierNumber"] = mutableListOf(astralUpgradeTier)
+
+                if (upgrades.contains(setKey)) {
+                    upgrades[setKey]?.add(astralUpgradeTier)
+                } else {
+                    upgrades[setKey] = mutableListOf(astralUpgradeTier)
+                }
             }
         }
     }
