@@ -20,18 +20,18 @@ import java.util.*
 class MistralSet : AstralSet {
 
     override fun setItems(): List<ItemStack> {
-        val astralSetFactory = AstralSetFactory("Mistral", mutableListOf("&#fb4d4dSwift"))
+        val astralSetFactory = AstralSetFactory("Mistral", mutableListOf("&#E97979Swift"))
 
         astralSetFactory.commonEnchants = mutableMapOf(
-            Enchantment.PROTECTION_ENVIRONMENTAL to 6, Enchantment.PROTECTION_PROJECTILE to 7, Enchantment.PROTECTION_FALL to 5,
-            Enchantment.DAMAGE_ALL to 7, Enchantment.DURABILITY to 8, Enchantment.SWEEPING_EDGE to 4,
-            Enchantment.DIG_SPEED to 8, Enchantment.SILK_TOUCH to 1, Enchantment.MENDING to 1,
-            Enchantment.LURE to 4, Enchantment.LUCK to 5
+            Enchantment.PROTECTION_ENVIRONMENTAL to 4, Enchantment.PROTECTION_PROJECTILE to 5, Enchantment.PROTECTION_FALL to 5,
+            Enchantment.DAMAGE_ALL to 6, Enchantment.DURABILITY to 7, Enchantment.SWEEPING_EDGE to 4,
+            Enchantment.DIG_SPEED to 6, Enchantment.SILK_TOUCH to 1, //Enchantment.MENDING to 1,
+            Enchantment.LURE to 4, Enchantment.LUCK to 4
         )
 
         val materials: List<Material> = listOf(
-            Material.NETHERITE_HELMET, Material.NETHERITE_CHESTPLATE, Material.NETHERITE_LEGGINGS,
-            Material.NETHERITE_BOOTS, Material.NETHERITE_SWORD, Material.NETHERITE_PICKAXE,
+            Material.IRON_HELMET, Material.IRON_CHESTPLATE, Material.IRON_LEGGINGS,
+            Material.IRON_BOOTS, Material.IRON_SWORD, Material.IRON_PICKAXE,
             Material.FISHING_ROD
         )
 
@@ -45,7 +45,7 @@ class MistralSet : AstralSet {
                 if (toolType == ToolType.ARMOR) {
                     mutableListOf("&6Set Bonus:&7 Speed I")
                 } else {
-                    mutableListOf("Grants extra speed", "while held")
+                    mutableListOf("Grants extra speed", "while being held")
                 },
 
                 when (genericMCToolType) {

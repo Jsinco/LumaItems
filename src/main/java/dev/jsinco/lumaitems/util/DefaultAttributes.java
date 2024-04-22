@@ -4,6 +4,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlot;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -37,7 +38,7 @@ public enum DefaultAttributes {
 
     DefaultAttributes(Map<Attribute, AttributeModifier> defaultAttributes) {
         this.defaultAttributes = defaultAttributes;
-        this.attributeModifierMap = defaultAttributes;
+        this.attributeModifierMap = new HashMap<>(defaultAttributes);
     }
 
     public void setAttributes(Map<Attribute, AttributeModifier> attributes) {

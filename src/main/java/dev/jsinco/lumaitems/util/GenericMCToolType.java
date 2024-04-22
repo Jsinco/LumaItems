@@ -15,8 +15,8 @@ public enum GenericMCToolType {
     LEGGINGS,
     BOOTS,
     SWORD,
-    AXE,
     PICKAXE,
+    AXE,
     SHOVEL,
     HOE,
     BOW,
@@ -25,30 +25,22 @@ public enum GenericMCToolType {
     SHIELD,
     FISHING_ROD;
 
-    private final String toolTypeAsGenericString;
-
-    GenericMCToolType() {
-        this.toolTypeAsGenericString = this.toString();
-    }
-
-    public String getToolTypeAsGenericString() {
-        return toolTypeAsGenericString;
-    }
-
     @Nullable
     public static GenericMCToolType getToolType(ItemStack item) {
         return getToolType(item.getType().toString());
     }
+
     @Nullable
     public static GenericMCToolType getToolType(Material material) {
         return getToolType(material.toString());
     }
+
     @Nullable
     public static GenericMCToolType getToolType(String string) {
         string = string.toUpperCase();
 
         for (GenericMCToolType toolType : GenericMCToolType.values()) {
-            if (toolType.getToolTypeAsGenericString().contains(string)) {
+            if (string.contains(toolType.toString())) {
                 return toolType;
             }
         }

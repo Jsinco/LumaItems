@@ -15,29 +15,29 @@ import org.bukkit.inventory.ItemStack
 class FalterSet : AstralSet {
 
     override fun setItems(): List<ItemStack> {
-        val astralSetFactory = AstralSetFactory("Falter", mutableListOf("&#fb4d4dFoster"))
+        val astralSetFactory = AstralSetFactory("Falter", mutableListOf("&#E97979Foster"))
         val commonLore = mutableListOf("Damage dealt to enemies scales", "with %s Job level")
 
         astralSetFactory.commonEnchants = mutableMapOf(
             Enchantment.DAMAGE_ALL to 7,
             Enchantment.DAMAGE_UNDEAD to 7,
-            Enchantment.DURABILITY to 10,
+            Enchantment.DURABILITY to 8,
             Enchantment.MENDING to 1
         )
 
         astralSetFactory.astralSetItem(
             Material.DIAMOND_PICKAXE,
-            mutableMapOf(Enchantment.DIG_SPEED to 10, Enchantment.DURABILITY to 9, Enchantment.LOOT_BONUS_BLOCKS to 5),
+            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 5),
             commonLore.map { it.format("Miner") }
         )
         astralSetFactory.astralSetItem(
             Material.DIAMOND_HOE,
-            mutableMapOf(Enchantment.DIG_SPEED to 7,Enchantment.LOOT_BONUS_BLOCKS to 5),
+            mutableMapOf(Enchantment.DIG_SPEED to 8,Enchantment.LOOT_BONUS_BLOCKS to 5),
             commonLore.map { it.format("Farmer") }
         )
         astralSetFactory.astralSetItem(
             Material.DIAMOND_AXE,
-            mutableMapOf(Enchantment.DIG_SPEED to 9, Enchantment.DURABILITY to 10, Enchantment.LOOT_BONUS_BLOCKS to 4, Enchantment.LOOT_BONUS_MOBS to 6),
+            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 4, Enchantment.LOOT_BONUS_MOBS to 6),
             commonLore.map { it.format("Lumberjack") }
         )
         astralSetFactory.astralSetItem(

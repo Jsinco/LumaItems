@@ -33,7 +33,7 @@ object RelicCrafting {
     )
 
     val astralCore: ItemStack = Util.createBasicItem(
-        "&#fb4d4d&lAstral &#F7FFC9Core",
+        "&#E97979&lAstral &#F7FFC9Core",
         mutableListOf(),
         Material.PRISMARINE_SHARD,
         mutableListOf("astralcore"),
@@ -49,7 +49,7 @@ object RelicCrafting {
     )
 
     val astralOrb: ItemStack = Util.createBasicItem(
-        "&#fb4d4d&lAstral &#F7FFC9Orb",
+        "&#E97979&lAstral &#F7FFC9Orb",
         mutableListOf("&7Right-click to redeem"),
         Material.ENDER_EYE,
         mutableListOf("astralorb"),

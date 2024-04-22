@@ -1,11 +1,8 @@
 package dev.jsinco.lumaitems.commands;
 
 import dev.jsinco.lumaitems.LumaItems;
-import dev.jsinco.lumaitems.items.astral.sets.FalterSet;
-import dev.jsinco.lumaitems.items.astral.sets.MistralSet;
 import dev.jsinco.lumaitems.items.astral.upgrades.AstralSetUpgradeFactory;
 import dev.jsinco.lumaitems.items.astral.upgrades.AstralSetUpgradeManager;
-import dev.jsinco.lumaitems.items.astral.upgrades.AstralUpgradeTier;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -13,25 +10,21 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Map;
 
 public class DebugCommand implements SubCommand {
     @Override
     public void execute(@NotNull LumaItems plugin, @NotNull CommandSender sender, @NotNull String[] args) {
-        MistralSet mistralSet = new MistralSet();
-        ItemStack itemOG = mistralSet.setItems().get(0).clone();
-        ItemStack item = itemOG.clone();
+
 
         AstralSetUpgradeManager astralSetUpgradeManager = new AstralSetUpgradeManager();
         astralSetUpgradeManager.reloadUpgrades();
 
-        AstralSetUpgradeFactory astralSetUpgradeFactory = new AstralSetUpgradeFactory(item);
-        System.out.println(astralSetUpgradeFactory.upgrade());
+        Player player = (Player) sender;
 
-        if (sender instanceof Player player) {
-            player.getInventory().addItem(itemOG);
-            player.getInventory().addItem(item);
-        }
+        ItemStack item = player.getInventory().getItemInMainHand();
+
+        AstralSetUpgradeFactory factory = new AstralSetUpgradeFactory(item);
+        System.out.println(factory.upgrade());
     }
 
     @Nullable
@@ -48,6 +41,6 @@ public class DebugCommand implements SubCommand {
 
     @Override
     public boolean playerOnly() {
-        return false;
+        return true;
     }
 }

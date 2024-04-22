@@ -2,11 +2,17 @@ package dev.jsinco.lumaitems.items.astral.upgrades
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.FileManager
+import dev.jsinco.lumaitems.util.GenericMCToolType
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 
 open class AstralSetUpgradeManager {
     companion object {
+        val modifiableMaterials: List<GenericMCToolType> = listOf(
+            GenericMCToolType.HELMET, GenericMCToolType.CHESTPLATE, GenericMCToolType.LEGGINGS, GenericMCToolType.BOOTS,
+            GenericMCToolType.SWORD, GenericMCToolType.PICKAXE, GenericMCToolType.AXE, GenericMCToolType.SHOVEL, GenericMCToolType.HOE
+        )
+
         @JvmStatic val upgrades: MutableMap<String, MutableList<AstralUpgradeTier>> = mutableMapOf()
         val plugin: LumaItems = LumaItems.getPlugin()
     }
@@ -43,13 +49,21 @@ open class AstralSetUpgradeManager {
         }
     }
 
-    fun getEnchantsFromStringList(stringEnchants: MutableList<String>): Map<Enchantment, Int> {
-        val enchants: MutableMap<Enchantment, Int> = mutableMapOf()
+    fun getEnchantsFromStringList(stringEnchants: MutableList<String>): List<AstralUpgradeEnchantment> {
+        val enchants: MutableList<AstralUpgradeEnchantment> = mutableListOf()
         for (stringEnchant in stringEnchants) {
-            val split = stringEnchant.split("/")
+            var force = false
+            var finalStringEnchant = stringEnchant
+
+            if (finalStringEnchant.contains("-force")) {
+                force = true
+                finalStringEnchant = finalStringEnchant.replace("-force", "").replace(" ", "").trim()
+            }
+
+            val split = finalStringEnchant.split("/")
 
             val enchantment: Enchantment = Enchantment.getByKey(NamespacedKey.minecraft(split[0])) ?: continue
-            enchants[enchantment] = split[1].toInt()
+            enchants.add(AstralUpgradeEnchantment(enchantment, split[1].toInt(), force))
         }
         return enchants
     }

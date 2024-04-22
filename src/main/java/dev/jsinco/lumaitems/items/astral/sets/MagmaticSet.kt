@@ -79,14 +79,14 @@ class MagmaticSet : AstralSet {
             }
 
             val item = ItemFactory(
-                "&#fb4d4d&lMagmatic &f${Util.getGearType(material)}",
-                if (lores.keys.contains(material)) mutableListOf("&#fb4d4dVolcanic") else mutableListOf(),
+                "&#E97979&lMagmatic &f${Util.getGearType(material)}",
+                if (lores.keys.contains(material)) mutableListOf("&#E97979Volcanic") else mutableListOf(),
                 lores[material] ?: mutableListOf(),
                 material,
                 mutableListOf("magmatic-set"),
                 toolEnchants,
             )
-            item.tier = "&#fb4d4d&lAstral"
+            item.tier = "&#E97979&lAstral"
             item.stringPersistentDatas[NamespacedKey(LumaItems.getPlugin(), "relic-rarity")] = Rarity.ASTRAL.name
             items.add(item.createItem())
         }

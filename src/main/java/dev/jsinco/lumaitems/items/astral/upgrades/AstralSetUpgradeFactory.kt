@@ -1,5 +1,8 @@
 package dev.jsinco.lumaitems.items.astral.upgrades
 
+import dev.jsinco.lumaitems.util.GenericMCToolType
+import dev.jsinco.lumaitems.util.Util
+import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
@@ -13,9 +16,12 @@ class AstralSetUpgradeFactory (val item: ItemStack) : AstralSetUpgradeManager() 
     fun upgrade(): Boolean {
         val upgradeTier: AstralUpgradeTier = determineUpgradeTier() ?: return false
         upgradeAstralItem(item, upgradeTier)
+        if (upgradeTier.maxTier) {
+            updateAstralItemTier(item)
+        }
         return true
     }
-
+    
 
     private fun determineUpgradeTier(): AstralUpgradeTier? {
         val dataContainer = item.itemMeta?.persistentDataContainer ?: return null
@@ -30,15 +36,38 @@ class AstralSetUpgradeFactory (val item: ItemStack) : AstralSetUpgradeManager() 
         return null
     }
 
+    private fun updateAstralItemTier(item: ItemStack) {
+        val meta = item.itemMeta ?: return
+
+        val currentLore = meta.lore ?: return
+        for ((i, loreLine) in currentLore.withIndex()) {
+            val loreLineStripped = ChatColor.stripColor(loreLine) ?: continue
+            if (loreLineStripped.contains("Tier • Astral")) {
+                currentLore[i] = Util.colorcode("&#EEE1D5Tier • &#E97979&lAstral&c+")
+                break
+            }
+        }
+
+        meta.lore = currentLore
+        item.itemMeta = meta
+    }
+
     companion object {
         fun upgradeAstralItem(item: ItemStack, upgradeTier: AstralUpgradeTier) {
-            val originalGearType = item.type.toString().split("_")[1]
-            item.type = Material.valueOf("${upgradeTier.newMaterial}_${originalGearType}")
+
+            if (modifiableMaterials.contains(GenericMCToolType.getToolType(item))) {
+                // TODO: Look more into exactly why this is deprecated. Haven't experienced any of the issues mentioned
+                val originalGearType = item.type.toString().split("_")[1]
+                item.type = Material.valueOf("${upgradeTier.newMaterial}_${originalGearType}")
+            }
 
             val meta = item.itemMeta ?: return
 
-            for (enchant in upgradeTier.newEnchantments) {
-                meta.addEnchant(enchant.key, enchant.value, true)
+            for (astralUpgradeEnchant in upgradeTier.newEnchantments) {
+                val enchantment = astralUpgradeEnchant.enchantment
+                if (enchantment.canEnchantItem(item) || astralUpgradeEnchant.force) {
+                    meta.addEnchant(enchantment, astralUpgradeEnchant.level, true)
+                }
             }
 
             meta.persistentDataContainer.set(NamespacedKey(plugin, upgradeTier.tierName), PersistentDataType.SHORT, upgradeTier.tierNumber.toShort())

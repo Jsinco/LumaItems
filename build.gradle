@@ -124,8 +124,8 @@ reobfJar {
 
 
 tasks.register('copyJar', Copy) {
-    from reobfJar // Shortcut for jar.outputs.files
-    into "C:\\Users\\jonah\\server\\plugins" // Specify your desired destination folder
+    from reobfJar
+    into "C:\\Users\\jonah\\paper-server\\plugins"
 }
 
 

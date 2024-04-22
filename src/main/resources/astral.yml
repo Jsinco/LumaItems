@@ -14,9 +14,27 @@ astral-upgrades:
     tier-2:
       material: DIAMOND
       enchants:
-        - 'protection/1'
+        - 'protection/6'
+        - 'projectile_protection/7'
+        - 'sharpness/7'
+        - 'efficiency/7'
+        - 'mending/1'
     tier-3:
       material: NETHERITE
       enchants:
-        - 'protection/2'
-        - 'unbreaking/1'
+        - 'unbreaking/8'
+        - 'efficiency/8'
+        - 'luck_of_the_sea/5'
+  falter-set:
+    tier-2:
+      material: NETHERITE
+      enchants:
+        - 'efficiency/10'
+        - 'unbreaking/10'
+  valley-set:
+    tier-2:
+      material: DIAMOND
+      enchants: []
+    tier-3:
+      material: NETHERITE
+      enchants: []
