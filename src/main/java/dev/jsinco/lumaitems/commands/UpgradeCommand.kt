@@ -7,7 +7,9 @@ import org.bukkit.entity.Player
 
 class UpgradeCommand : SubCommand {
 
-    private val astralUpgradeGui = AstralUpgradeGui()
+    companion object {
+        val astralUpgradeGui = AstralUpgradeGui()
+    }
     override fun execute(plugin: LumaItems, sender: CommandSender, args: Array<out String>) {
         sender as Player
         sender.openInventory(astralUpgradeGui.getInventory())
