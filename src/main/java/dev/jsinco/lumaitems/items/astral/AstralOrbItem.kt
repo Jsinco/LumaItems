@@ -43,7 +43,9 @@ class AstralOrbItem : CustomItem {
         return true
     }
     private fun getAstralItem(): ItemStack? {
-        val itemClasses = FileManager("relics.yml").generateYamlFile().getConfigurationSection("astral.item_classes")?.getKeys(true)
+        val file = FileManager("astral.yml").generateYamlFile()
+
+        val itemClasses = file.getConfigurationSection("astral-orb-raritiess")?.getKeys(true)
         val setsAndWeight: MutableMap<List<ItemStack>, Int> = mutableMapOf()
 
         if (itemClasses == null) {
@@ -52,7 +54,7 @@ class AstralOrbItem : CustomItem {
 
         for (itemClass in itemClasses) {
             val items = RelicCrafting.getItemsFromClass(itemClass)
-            val weight = FileManager("relics.yml").generateYamlFile().getInt("astral.item_classes.$itemClass")
+            val weight = file.getInt("astral-orb-rarities.$itemClass")
             setsAndWeight[items] = weight
         }
 

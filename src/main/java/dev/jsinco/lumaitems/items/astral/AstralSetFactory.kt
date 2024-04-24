@@ -35,7 +35,11 @@ class AstralSetFactory (val name: String, val customEnchantNames: List<String>?)
     }
 
     fun astralSetItem(material: Material, vanillaEnchants: MutableMap<Enchantment, Int>, lore: List<String>, includeCommonEnchants: Boolean): ItemStack {
-        return astralSetItem(material, vanillaEnchants, lore, includeCommonEnchants, null)
+        return astralSetItem(material, vanillaEnchants, lore, includeCommonEnchants, null, null)
+    }
+
+    fun astralSetItem(material: Material, vanillaEnchants: MutableMap<Enchantment, Int>, lore: List<String>, includeCommonEnchants: Boolean, attributeModifiers: MutableMap<Attribute, AttributeModifier>?): ItemStack {
+        return astralSetItem(material, vanillaEnchants, lore, includeCommonEnchants, attributeModifiers, null)
     }
 
     fun astralSetItem(
@@ -43,7 +47,8 @@ class AstralSetFactory (val name: String, val customEnchantNames: List<String>?)
         vanillaEnchants: MutableMap<Enchantment, Int>,
         lore: List<String>,
         includeCommonEnchants: Boolean,
-        attributeModifiers: MutableMap<Attribute, AttributeModifier>?): ItemStack {
+        attributeModifiers: MutableMap<Attribute, AttributeModifier>?,
+        customName: String?): ItemStack {
 
 
         // override common enchants
@@ -54,7 +59,7 @@ class AstralSetFactory (val name: String, val customEnchantNames: List<String>?)
         }
 
         val item = ItemFactory(
-            "&#E97979&l$name &f${Util.getGearType(material)}",
+            customName ?: "&#E97979&l$name &f${Util.getGearType(material)}",
             customEnchantNames?.toMutableList() ?: mutableListOf(),
             lore.toMutableList(),
             material,

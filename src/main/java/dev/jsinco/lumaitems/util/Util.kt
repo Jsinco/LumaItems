@@ -30,7 +30,7 @@ object Util {
     val armorEquipmentSlots: List<EquipmentSlot> = listOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
 
     private val plugin: LumaItems = LumaItems.getPlugin()
-    private val gearTypes: List<String> = listOf("Helmet", "Chestplate", "Leggings", "Boots", "Sword", "Pickaxe", "Axe", "Shovel", "Hoe", "Rod")
+    private val gearTypes: List<String> = listOf("Helmet", "Chestplate", "Leggings", "Boots", "Sword", "Pickaxe", "Axe", "Shovel", "Hoe", "Rod", "Elytra", "Shield")
     @JvmStatic val staticUUID: UUID = UUID.fromString("1c786ebf-50f7-408d-9bc6-02defd41c0a8")
 
     @JvmStatic

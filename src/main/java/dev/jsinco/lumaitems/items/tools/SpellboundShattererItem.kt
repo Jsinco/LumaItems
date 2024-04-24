@@ -5,7 +5,7 @@ import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
-import dev.jsinco.lumaitems.util.Cuboid
+import dev.jsinco.lumaitems.obj.Cuboid
 import org.bukkit.Color
 import org.bukkit.Material
 import org.bukkit.Particle
@@ -60,7 +60,10 @@ class SpellboundShattererItem : CustomItem {
     private fun shatterNearbyBlocks(block: Block, player: Player) {
         if (player.hasMetadata("shattering")) return // Prevents infinite recursion
 
-        val cuboid = Cuboid(block.location.add(2.0,2.0,2.0), block.location.add(-2.0,-2.0,-2.0))
+        val cuboid = Cuboid(
+            block.location.add(2.0, 2.0, 2.0),
+            block.location.add(-2.0, -2.0, -2.0)
+        )
         block.world.playSound(block.location, Sound.ENTITY_WITCH_AMBIENT, 0.5f, 1f)
         block.world.playSound(block.location, Sound.ENTITY_GENERIC_EXPLODE, 0.2f, 1f)
 

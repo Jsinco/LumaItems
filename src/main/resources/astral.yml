@@ -7,6 +7,7 @@ astral-orb-rarities:
   FalterSet: 15
   MelukaSet: 48
   ValleySet: 55
+  BlitzSet: 60
 
 # All sets, by default, start from tier 1
 astral-upgrades:
@@ -31,6 +32,22 @@ astral-upgrades:
       enchants:
         - 'efficiency/10'
         - 'unbreaking/10'
+  blitz-set:
+    tier-2:
+      material: NETHERITE
+      enchants:
+        - 'sharpness/7'
+        - 'looting/4'
+        - 'efficiency/8'
+        - 'mending/1'
+  reforged-set:
+    tier-2:
+      material: NETHERITE
+      enchants:
+        - 'protection/8'
+        - 'soul_speed/3'
+        - 'aqua_affinity/1'
+        - 'unbreaking/7'
   valley-set:
     tier-2:
       material: DIAMOND

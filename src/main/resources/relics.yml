@@ -8,6 +8,7 @@ astral:
     FalterSet: 15
     MelukaSet: 48
     ValleySet: 55
+    BlitzSet: 60
 
 
 disassembler:

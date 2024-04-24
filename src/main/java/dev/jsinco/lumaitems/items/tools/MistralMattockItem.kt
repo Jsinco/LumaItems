@@ -5,7 +5,7 @@ import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
-import dev.jsinco.lumaitems.util.Cuboid
+import dev.jsinco.lumaitems.obj.Cuboid
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound

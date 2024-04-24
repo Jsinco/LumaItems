@@ -1,4 +1,4 @@
-package dev.jsinco.lumaitems.util;
+package dev.jsinco.lumaitems.obj;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;

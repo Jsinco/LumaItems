@@ -4,9 +4,10 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import dev.jsinco.lumaitems.commands.CommandManager;
 import dev.jsinco.lumaitems.events.AnvilPrevention;
+import dev.jsinco.lumaitems.events.GeneralListeners;
 import dev.jsinco.lumaitems.events.Listeners;
 import dev.jsinco.lumaitems.events.PassiveListeners;
-import dev.jsinco.lumaitems.events.RelicListeners;
+import dev.jsinco.lumaitems.guis.AbstractGui;
 import dev.jsinco.lumaitems.manager.Ability;
 import dev.jsinco.lumaitems.manager.FileManager;
 import dev.jsinco.lumaitems.manager.GlowManager;
@@ -15,6 +16,8 @@ import dev.jsinco.lumaitems.placeholders.PAPIManager;
 import dev.jsinco.lumaitems.relics.RelicCrafting;
 import dev.jsinco.lumaitems.relics.RelicDisassembler;
 import dev.jsinco.lumaitems.util.Util;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Nullable;
@@ -37,7 +40,6 @@ public final class LumaItems extends JavaPlugin {
         withMythicMobs = getServer().getPluginManager().getPlugin("MythicMobs") != null;
 
 
-
         final ItemManager itemManager = new ItemManager(this);
         final PassiveListeners passiveListeners = new PassiveListeners(this);
         try {
@@ -55,7 +57,7 @@ public final class LumaItems extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new Listeners(this), this);
         getServer().getPluginManager().registerEvents(new AnvilPrevention(this), this);
-        getServer().getPluginManager().registerEvents(new RelicListeners(this), this);
+        getServer().getPluginManager().registerEvents(new GeneralListeners(this), this);
 
         getCommand("lumaitems").setExecutor(new CommandManager(this));
 
@@ -69,6 +71,11 @@ public final class LumaItems extends JavaPlugin {
     public void onDisable() {
         if (papiManager != null) {
             papiManager.unregister();
+        }
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player.getOpenInventory().getTopInventory().getHolder(false) instanceof AbstractGui) {
+                player.closeInventory();
+            }
         }
         HandlerList.unregisterAll(this);
     }

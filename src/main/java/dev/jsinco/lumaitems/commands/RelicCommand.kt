@@ -24,6 +24,13 @@ class RelicCommand : SubCommand {
 
                 Util.giveItem(player, item)
             }
+            "upgradecore" -> {
+                amount = if (args.size < 4) 1 else args[3].toIntOrNull() ?: 1
+                val item = RelicCrafting.astralUpgradeCore.clone()
+                item.amount = amount
+
+                Util.giveItem(player, item)
+            }
             "core" -> {
                 when (args[3]) {
                     "lunar" -> {
@@ -73,7 +80,7 @@ class RelicCommand : SubCommand {
     override fun tabComplete(plugin: LumaItems, sender: CommandSender, args: Array<out String>): List<String>? {
         when (args.size) {
             3 -> {
-                return mutableListOf("shard", "core", "orb")
+                return mutableListOf("shard", "core", "orb", "upgradecore")
             }
 
             4 -> {

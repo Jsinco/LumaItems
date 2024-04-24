@@ -19,8 +19,16 @@ object RelicCrafting {
     val relicShard: ItemStack = Util.createBasicItem(
         "&#AC87FB&lRelic &#F7FFC9Shard",
         mutableListOf(),
-        Material.ECHO_SHARD,
+        Material.AMETHYST_SHARD,
         mutableListOf("relicshard"),
+        true
+    )
+
+    val astralUpgradeCore: ItemStack = Util.createBasicItem(
+        "&#E97979&lAstral &#F7FFC9Upgrade Core",
+        mutableListOf(),
+        Material.AMETHYST_CLUSTER,
+        mutableListOf("astralupgradecore"),
         true
     )
 
@@ -60,9 +68,11 @@ object RelicCrafting {
     fun registerRecipes() {
         val lunarKey = NamespacedKey(plugin, "lunarorb")
         val astralKey = NamespacedKey(plugin, "astralorb")
+        val upgradeCoreKey = NamespacedKey(plugin, "astralupgradecore")
 
         if (Bukkit.getRecipe(lunarKey) != null) Bukkit.removeRecipe(lunarKey)
         if (Bukkit.getRecipe(astralKey) != null) Bukkit.removeRecipe(astralKey)
+        if (Bukkit.getRecipe(upgradeCoreKey) != null) Bukkit.removeRecipe(upgradeCoreKey)
 
 
         val lunarRecipe = ShapedRecipe(lunarKey, lunarOrb)
@@ -82,6 +92,14 @@ object RelicCrafting {
         astralRecipe.setIngredient('A', relicShard)
         astralRecipe.setIngredient('B', astralCore)
         Bukkit.addRecipe(astralRecipe)
+
+        val upgradeCoreRecipe = ShapedRecipe(upgradeCoreKey, astralUpgradeCore)
+        upgradeCoreRecipe.shape(
+            "AAA",
+            "ABA",
+            "AAA")
+        upgradeCoreRecipe.setIngredient('A', relicShard)
+        Bukkit.addRecipe(upgradeCoreRecipe)
     }
 
     fun getItemsFromClass(className: String): List<ItemStack> {
