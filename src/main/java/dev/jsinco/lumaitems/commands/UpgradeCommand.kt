@@ -10,6 +10,7 @@ class UpgradeCommand : SubCommand {
     companion object {
         val astralUpgradeGui = AstralUpgradeGui()
     }
+
     override fun execute(plugin: LumaItems, sender: CommandSender, args: Array<out String>) {
         sender as Player
         sender.openInventory(astralUpgradeGui.getInventory())

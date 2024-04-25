@@ -51,7 +51,11 @@ astral-upgrades:
   valley-set:
     tier-2:
       material: DIAMOND
-      enchants: []
+      enchants:
+        - 'efficiency/7 -apply:axe,pickaxe,shovel,hoe'
+        - 'unbreaking/7'
     tier-3:
       material: NETHERITE
-      enchants: []
+      enchants:
+        - 'efficiency/8 -apply:axe,pickaxe,shovel,hoe'
+        - 'lure/5'

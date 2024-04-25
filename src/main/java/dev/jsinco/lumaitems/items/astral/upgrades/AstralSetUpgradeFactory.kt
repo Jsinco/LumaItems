@@ -54,8 +54,9 @@ class AstralSetUpgradeFactory (val item: ItemStack) : AstralSetUpgradeManager() 
 
     companion object {
         fun upgradeAstralItem(item: ItemStack, upgradeTier: AstralUpgradeTier) {
+            val genericMCToolType = GenericMCToolType.getToolType(item)
 
-            if (modifiableMaterials.contains(GenericMCToolType.getToolType(item))) {
+            if (modifiableMaterials.contains(genericMCToolType)) {
                 // TODO: Look more into exactly why this is deprecated. Haven't experienced any of the issues mentioned
                 val originalGearType = item.type.toString().split("_")[1]
                 item.type = Material.valueOf("${upgradeTier.newMaterial}_${originalGearType}")
@@ -65,7 +66,9 @@ class AstralSetUpgradeFactory (val item: ItemStack) : AstralSetUpgradeManager() 
 
             for (astralUpgradeEnchant in upgradeTier.newEnchantments) {
                 val enchantment = astralUpgradeEnchant.enchantment
-                if (enchantment.canEnchantItem(item) || astralUpgradeEnchant.force) {
+                if (astralUpgradeEnchant.applyTo != null && astralUpgradeEnchant.applyTo.contains(genericMCToolType)) {
+                    meta.addEnchant(enchantment, astralUpgradeEnchant.level, true)
+                } else if (enchantment.canEnchantItem(item)) {
                     meta.addEnchant(enchantment, astralUpgradeEnchant.level, true)
                 }
             }

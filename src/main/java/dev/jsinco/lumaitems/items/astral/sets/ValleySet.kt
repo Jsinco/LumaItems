@@ -22,36 +22,36 @@ class ValleySet : AstralSet {
         val astralSetFactory = AstralSetFactory("Valley", mutableListOf("&#E97979Ilk"))
         astralSetFactory.commonEnchants = mutableMapOf(
             Enchantment.MENDING to 1,
-            Enchantment.DURABILITY to 7
+            Enchantment.DURABILITY to 5,
         )
 
         astralSetFactory.astralSetItem(
-            Material.DIAMOND_SHOVEL,
-            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 5),
+            Material.GOLDEN_SHOVEL,
+            mutableMapOf(Enchantment.DIG_SPEED to 6, Enchantment.LOOT_BONUS_BLOCKS to 5),
             mutableListOf("Has the ability to remove", "water from the direction the", "user is looking")
         )
 
         astralSetFactory.astralSetItem(
-            Material.DIAMOND_SWORD,
+            Material.GOLDEN_SWORD,
             mutableMapOf(Enchantment.DAMAGE_ALL to 6, Enchantment.DAMAGE_UNDEAD to 6, Enchantment.SWEEPING_EDGE to 4),
             mutableListOf("Grants the user potion buffs", "upon damaging an enemy")
         )
 
         astralSetFactory.astralSetItem(
-            Material.DIAMOND_AXE,
-            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 5),
+            Material.GOLDEN_AXE,
+            mutableMapOf(Enchantment.DIG_SPEED to 6, Enchantment.LOOT_BONUS_BLOCKS to 5),
             mutableListOf()
         )
 
         astralSetFactory.astralSetItem(
-            Material.DIAMOND_HOE,
-            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 5),
+            Material.GOLDEN_HOE,
+            mutableMapOf(Enchantment.DIG_SPEED to 6, Enchantment.LOOT_BONUS_BLOCKS to 5),
             mutableListOf("Has a chance to drop rare", "crops when breaking blocks")
         )
 
         astralSetFactory.astralSetItem(
             Material.FISHING_ROD,
-            mutableMapOf(Enchantment.LURE to 5, Enchantment.LUCK to 4),
+            mutableMapOf(Enchantment.LURE to 4, Enchantment.LUCK to 4),
             mutableListOf()
         )
 

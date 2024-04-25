@@ -62,11 +62,16 @@ class ItemFactory(
 
         val combinedLore: MutableList<String> = mutableListOf()
         combinedLore.addAll(customEnchants)
+
+        if (lore.isEmpty()) addSpace = false
         if (addSpace || quotes.isNotEmpty()) combinedLore.add("")
+
         if (quotes.isNotEmpty()) {
             combinedLore.addAll(quotes)
             combinedLore.add("")
         }
+
+
         combinedLore.addAll(lore.map { "&f$it" })
         combinedLore.add("")
         combinedLore.add("&#EEE1D5&m       &r&#EEE1D5⋆⁺₊⋆ ★ ⋆⁺₊⋆&m       ")

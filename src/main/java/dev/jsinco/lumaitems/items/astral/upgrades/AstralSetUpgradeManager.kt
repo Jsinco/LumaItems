@@ -52,18 +52,15 @@ open class AstralSetUpgradeManager {
     fun getEnchantsFromStringList(stringEnchants: MutableList<String>): List<AstralUpgradeEnchantment> {
         val enchants: MutableList<AstralUpgradeEnchantment> = mutableListOf()
         for (stringEnchant in stringEnchants) {
-            var force = false
-            var finalStringEnchant = stringEnchant
+            val pair = AstralUpgradeEnchantment.deserializeAndRemoveApplyTo(stringEnchant)
 
-            if (finalStringEnchant.contains("-force")) {
-                force = true
-                finalStringEnchant = finalStringEnchant.replace("-force", "").replace(" ", "").trim()
-            }
+            val toolsToApplyTo: List<GenericMCToolType>? = pair.first
+            val finalStringEnchant = pair.second
 
             val split = finalStringEnchant.split("/")
 
             val enchantment: Enchantment = Enchantment.getByKey(NamespacedKey.minecraft(split[0])) ?: continue
-            enchants.add(AstralUpgradeEnchantment(enchantment, split[1].toInt(), force))
+            enchants.add(AstralUpgradeEnchantment(enchantment, split[1].toInt(), toolsToApplyTo))
         }
         return enchants
     }

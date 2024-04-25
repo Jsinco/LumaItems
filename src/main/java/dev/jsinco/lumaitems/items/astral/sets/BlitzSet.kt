@@ -4,7 +4,6 @@ import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.obj.HollowSphere
-import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerInteractEvent
