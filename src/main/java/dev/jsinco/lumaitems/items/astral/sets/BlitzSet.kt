@@ -3,22 +3,23 @@ package dev.jsinco.lumaitems.items.astral.sets
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.obj.HollowSphere
 import dev.jsinco.lumaitems.util.GenericMCToolType
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 
 class BlitzSet : AstralSet {
 
     override fun setItems(): List<ItemStack> {
-        val factory = AstralSetFactory("Blitz", mutableListOf("&#E97979<Unknown>"))
+        val factory = AstralSetFactory("Blitz", mutableListOf("&#AC87FBSwift"))
 
         factory.commonEnchants = mutableMapOf(
             Enchantment.DURABILITY to 9
-        ) // TODO: Change to sphere which picks up nearby items?
+        )
 
         factory.astralSetItem(
             Material.DIAMOND_AXE,
@@ -49,16 +50,14 @@ class BlitzSet : AstralSet {
         val genericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand)
 
         when (type) {
-            Ability.LEFT_CLICK -> {
+            Ability.RUNNABLE -> {
                 if (genericMCToolType == GenericMCToolType.AXE) {
-
+                    player.addPotionEffect(PotionEffect(PotionEffectType.FAST_DIGGING, 220, 0, false, false, true))
                 }
-
-
-                return true
             }
             else -> return false
         }
+        return true
     }
 
     private fun handleCast(event: PlayerInteractEvent, player: Player) {

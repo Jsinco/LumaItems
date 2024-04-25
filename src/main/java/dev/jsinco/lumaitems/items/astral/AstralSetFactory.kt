@@ -59,7 +59,7 @@ class AstralSetFactory (val name: String, val customEnchantNames: List<String>?)
         }
 
         val item = ItemFactory(
-            customName ?: "&#E97979&l$name &f${Util.getGearType(material)}",
+            customName ?: "&#AC87FB&l$name &f${Util.getGearType(material)}",
             customEnchantNames?.toMutableList() ?: mutableListOf(),
             lore.toMutableList(),
             material,

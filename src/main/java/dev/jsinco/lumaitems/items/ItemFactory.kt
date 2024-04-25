@@ -25,7 +25,7 @@ class ItemFactory(
         private val plugin: LumaItems = LumaItems.getPlugin()
     }
 
-    var tier: String = "&#E97979&lAstral" //"&#ffc8c8&lC&#ffcfc8&le&#ffd5c7&ll&#ffdcc7&le&#ffe3c7&ls&#ffe9c6&lt&#fff0c6&li&#fff6c5&la&#fffdc5&ll"
+    var tier: String = "&#AC87FB&lAstral" //"&#ffc8c8&lC&#ffcfc8&le&#ffd5c7&ll&#ffdcc7&le&#ffe3c7&ls&#ffe9c6&lt&#fff0c6&li&#fff6c5&la&#fffdc5&ll"
 
     var unbreakable: Boolean = false
     var hideEnchants: Boolean = false
@@ -63,8 +63,8 @@ class ItemFactory(
         val combinedLore: MutableList<String> = mutableListOf()
         combinedLore.addAll(customEnchants)
 
-        if (lore.isEmpty()) addSpace = false
-        if (addSpace || quotes.isNotEmpty()) combinedLore.add("")
+
+        if ((addSpace && lore.isNotEmpty()) || quotes.isNotEmpty()) combinedLore.add("")
 
         if (quotes.isNotEmpty()) {
             combinedLore.addAll(quotes)

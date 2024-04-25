@@ -43,7 +43,7 @@ class AstralSetUpgradeFactory (val item: ItemStack) : AstralSetUpgradeManager() 
         for ((i, loreLine) in currentLore.withIndex()) {
             val loreLineStripped = ChatColor.stripColor(loreLine) ?: continue
             if (loreLineStripped.contains("Tier • Astral")) {
-                currentLore[i] = Util.colorcode("&#EEE1D5Tier • &#E97979&lAstral&c+")
+                currentLore[i] = Util.colorcode("&#EEE1D5Tier • &#AC87FB&lAstral&#CAB5F6+")
                 break
             }
         }

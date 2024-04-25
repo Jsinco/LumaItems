@@ -20,7 +20,7 @@ import java.util.*
 class MistralSet : AstralSet {
 
     override fun setItems(): List<ItemStack> {
-        val astralSetFactory = AstralSetFactory("Mistral", mutableListOf("&#E97979Swift"))
+        val astralSetFactory = AstralSetFactory("Mistral", mutableListOf("&#AC87FBSwift"))
 
         astralSetFactory.commonEnchants = mutableMapOf(
             Enchantment.PROTECTION_ENVIRONMENTAL to 4, Enchantment.PROTECTION_PROJECTILE to 5, Enchantment.PROTECTION_FALL to 5,

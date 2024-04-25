@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack
 class FalterSet : AstralSet {
 
     override fun setItems(): List<ItemStack> {
-        val astralSetFactory = AstralSetFactory("Falter", mutableListOf("&#E97979Foster"))
+        val astralSetFactory = AstralSetFactory("Falter", mutableListOf("&#AC87FBFoster"))
         val commonLore = mutableListOf("Damage dealt to enemies scales", "with %s Job level")
 
         astralSetFactory.commonEnchants = mutableMapOf(

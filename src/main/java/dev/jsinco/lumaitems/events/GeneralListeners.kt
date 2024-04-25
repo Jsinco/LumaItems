@@ -20,7 +20,6 @@ import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
-import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntitySpawnEvent
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -50,7 +49,8 @@ class GeneralListeners(val plugin: LumaItems) : Listener {
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
             val rarity: Rarity = if (isBoss) Rarity.bossRarities[0] else Rarity.genericRarities.random()
-            val material: Material = Material.valueOf(relicFile.getStringList("relic-materials.${rarity.name.lowercase()}").random())
+            val material: Material =
+                Material.valueOf(relicFile.getStringList("relic-materials.${rarity.name.lowercase()}").random())
 
             val relic = RelicCreator(
                 rarity.algorithmWeight,
@@ -84,15 +84,40 @@ class GeneralListeners(val plugin: LumaItems) : Listener {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command)
     }
 
-    /*@EventHandler
+    @EventHandler
+    fun onInventoryClick(event: InventoryClickEvent) {
+        if (event.inventory.getHolder(false) is AbstractGui) {
+            (event.inventory.holder as AbstractGui).onInventoryClick(event)
+        }
+
+        val item = event.currentItem ?: return // TEMPORARY: Upgrade Relic Shards
+        if (item.itemMeta?.persistentDataContainer?.has(
+                NamespacedKey(plugin, "relicshard"),
+                PersistentDataType.SHORT
+            ) == true && item.type != Material.AMETHYST_SHARD
+        ) {
+            val amount = item.amount.also { item.amount = 0 }
+            Util.giveItem(event.whoClicked as Player, RelicCrafting.relicShard.clone().also { it.amount = amount })
+        }
+    }
+
+    @EventHandler
+    fun onInventoryClick(event: InventoryCloseEvent) {
+        if (event.inventory.getHolder(false) !is AbstractGui) return
+        (event.inventory.holder as AbstractGui).onInventoryClose(event)
+    }
+
+
+    @EventHandler
     fun onJobsPrePayment(event: JobsPrePaymentEvent) {
-        if (Random.nextInt(1000) > 1) return
+        if (Random.nextInt(3000) > 2 || event.job.name == "Hunter") return
         val player = event.player?.player ?: return
 
 
         Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
             val rarity = Rarity.genericRarities.random()
-            val material: Material = Material.valueOf(relicFile.getStringList("relic-materials.${rarity.name.lowercase()}").random())
+            val material: Material =
+                Material.valueOf(relicFile.getStringList("relic-materials.${rarity.name.lowercase()}").random())
 
             val relic = RelicCreator(
                 rarity.algorithmWeight,
@@ -105,24 +130,5 @@ class GeneralListeners(val plugin: LumaItems) : Listener {
                 Util.giveItem(player, relic)
             })
         })
-    }*/
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    fun onInventoryClick(event: InventoryClickEvent) {
-        if (event.inventory.getHolder(false) is AbstractGui) {
-            (event.inventory.holder as AbstractGui).onInventoryClick(event)
-        }
-
-        val item = event.currentItem ?: return // TEMPORARY: Upgrade Relic Shards
-        if (item.itemMeta?.persistentDataContainer?.has(NamespacedKey(plugin, "relicshard"), PersistentDataType.SHORT) == true && item.type != Material.AMETHYST_SHARD) {
-            val amount = item.amount.also { item.amount = 0 }
-            Util.giveItem(event.whoClicked as Player, RelicCrafting.relicShard.clone().also { it.amount = amount })
-        }
-    }
-
-    @EventHandler
-    fun onInventoryClick(event: InventoryCloseEvent) {
-        if (event.inventory.getHolder(false) !is AbstractGui) return
-        (event.inventory.holder as AbstractGui).onInventoryClose(event)
     }
 }

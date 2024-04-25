@@ -14,14 +14,14 @@ import org.bukkit.inventory.ItemStack
 class ArchaelWings : AstralSet {
     override fun setItems(): List<ItemStack> {
         val item = ItemFactory(
-            "&#E97979&lArchael &fWings",
+            "&#AC87FB&lArchael &fWings",
             mutableListOf(),
             mutableListOf(),
             Material.ELYTRA,
             mutableListOf("archael-set"),
             mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 6, Enchantment.PROTECTION_PROJECTILE to 5, Enchantment.DURABILITY to 5, Enchantment.PROTECTION_FALL to 4, Enchantment.MENDING to 1)
         )
-        item.tier = "&#E97979&lAstral"
+        item.tier = "&#AC87FB&lAstral"
         item.stringPersistentDatas[NamespacedKey(LumaItems.getPlugin(), "relic-rarity")] = Rarity.ASTRAL.name
         return listOf(item.createItem())
     }

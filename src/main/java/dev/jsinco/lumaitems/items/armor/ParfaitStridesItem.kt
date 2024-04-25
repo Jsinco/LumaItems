@@ -33,8 +33,9 @@ class ParfaitStridesItem : CustomItem {
             mutableMapOf(Enchantment.PROTECTION_EXPLOSIONS to 8, Enchantment.PROTECTION_ENVIRONMENTAL to 7, Enchantment.DURABILITY to 8, Enchantment.MENDING to 1)
         )
         item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
-        item.attributeModifiers = DefaultAttributes.NETHERITE_LEGGINGS.defaultAttributes.toMutableMap()
-            .run { this[Attribute.GENERIC_MAX_HEALTH] = AttributeModifier(UUID.randomUUID(), "genericMaxHealth", 4.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.LEGS); this }
+        item.attributeModifiers = DefaultAttributes.NETHERITE_LEGGINGS.appendThenGetAttributes(
+            Attribute.GENERIC_MAX_HEALTH, AttributeModifier(UUID.randomUUID(), "genericMaxHealth", 4.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.LEGS)
+        )
 
         return Pair("parfaitstrides", item.createItem())
     }

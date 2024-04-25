@@ -17,7 +17,7 @@ object RelicCrafting {
     private val plugin: LumaItems = LumaItems.getPlugin()
 
     val relicShard: ItemStack = Util.createBasicItem(
-        "&#AC87FB&lRelic &#F7FFC9Shard",
+        "&#E97979&lRelic &#F7FFC9Shard",
         mutableListOf(),
         Material.AMETHYST_SHARD,
         mutableListOf("relicshard"),
@@ -25,7 +25,7 @@ object RelicCrafting {
     )
 
     val astralUpgradeCore: ItemStack = Util.createBasicItem(
-        "&#E97979&lAstral &#F7FFC9Upgrade Core",
+        "&#AC87FB&lAstral &#F7FFC9Upgrade Core",
         mutableListOf(),
         Material.AMETHYST_CLUSTER,
         mutableListOf("astralupgradecore"),
@@ -41,7 +41,7 @@ object RelicCrafting {
     )
 
     val astralCore: ItemStack = Util.createBasicItem(
-        "&#E97979&lAstral &#F7FFC9Core",
+        "&#AC87FB&lAstral &#F7FFC9Core",
         mutableListOf(),
         Material.PRISMARINE_SHARD,
         mutableListOf("astralcore"),
@@ -57,7 +57,7 @@ object RelicCrafting {
     )
 
     val astralOrb: ItemStack = Util.createBasicItem(
-        "&#E97979&lAstral &#F7FFC9Orb",
+        "&#AC87FB&lAstral &#F7FFC9Orb",
         mutableListOf("&7Right-click to redeem"),
         Material.ENDER_EYE,
         mutableListOf("astralorb"),

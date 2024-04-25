@@ -5,7 +5,7 @@ import dev.jsinco.lumaitems.util.Util;
 import java.util.List;
 
 public enum Rarity {
-    ASTRAL("&#E97979", 14, "Astral"),
+    ASTRAL("&#AC87FB", 14, "Astral"),
     LUNAR("&#6255fb", 7, "Lunar"),
     NOVA("&#75c3fb", 2, "Nova"),
     PULSAR("&#c773fb", 1, "Pulsar"),

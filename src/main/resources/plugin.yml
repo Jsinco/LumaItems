@@ -26,4 +26,8 @@ commands:
   lumaitems:
     description: LumaItems command
     permission: lumaitems.command
+    usage: /<command> <subcommand>
+  upgrade:
+    description: Upgrade an astral item
+    permission: lumaitems.command.upgrade
     usage: /<command>

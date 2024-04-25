@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType
 class VenomSet : AstralSet {
 
     override fun setItems(): List<ItemStack> {
-        val astralSetFactory = AstralSetFactory("Viper", mutableListOf("&#E97979Venom"))
+        val astralSetFactory = AstralSetFactory("Viper", mutableListOf("&#AC87FBVenom"))
         astralSetFactory.identifier = "venom-set"
 
         astralSetFactory.commonEnchants = mutableMapOf(

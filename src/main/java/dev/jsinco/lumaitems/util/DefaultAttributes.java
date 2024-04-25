@@ -3,62 +3,79 @@ package dev.jsinco.lumaitems.util;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlot;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 public enum DefaultAttributes {
 
-    NETHERITE_HELMET(Map.of(
-            Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "genericArmor", 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD),
-            Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "genericArmorToughness", 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD),
-            Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "genericKnockbackResistance", 1.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD))),
-    NETHERITE_CHESTPLATE(Map.of(
-            Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "genericArmor", 8.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST),
-            Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "genericArmorToughness", 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST),
-            Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "genericKnockbackResistance", 1.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST))),
-    NETHERITE_LEGGINGS(Map.of(
-            Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "genericArmor", 6.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.LEGS),
-            Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "genericArmorToughness", 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.LEGS),
-            Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "genericKnockbackResistance", 1.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.LEGS))),
-    NETHERITE_BOOTS(Map.of(
-            Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "genericArmor", 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.FEET),
-            Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(), "genericArmorToughness", 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.FEET),
-            Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(), "genericKnockbackResistance", 1.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.FEET))),
-    NETHERITE_SWORD(Map.of(
-            Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "attackDamage", 8.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND),
-            Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "attackSpeed", 1.6, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND))),
-    NETHERITE_PICKAXE(Map.of(
-            Attribute.GENERIC_ATTACK_DAMAGE, new AttributeModifier(UUID.randomUUID(), "attackDamage", 6.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND),
-            Attribute.GENERIC_ATTACK_SPEED, new AttributeModifier(UUID.randomUUID(), "attackSpeed", 1.2, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND)));
+    NETHERITE_HELMET(List.of(
+            new AttributeContainer(Attribute.GENERIC_ARMOR, 3.0, EquipmentSlot.HEAD),
+            new AttributeContainer(Attribute.GENERIC_ARMOR_TOUGHNESS, 3.0, EquipmentSlot.HEAD),
+            new AttributeContainer(Attribute.GENERIC_KNOCKBACK_RESISTANCE, 1.0, EquipmentSlot.HEAD))
+    ),
+    NETHERITE_CHESTPLATE(List.of(
+            new AttributeContainer(Attribute.GENERIC_ARMOR, 8.0, EquipmentSlot.CHEST),
+            new AttributeContainer(Attribute.GENERIC_ARMOR_TOUGHNESS, 3.0, EquipmentSlot.CHEST),
+            new AttributeContainer(Attribute.GENERIC_KNOCKBACK_RESISTANCE, 1.0, EquipmentSlot.CHEST))
+    ),
+    NETHERITE_LEGGINGS(List.of(
+            new AttributeContainer(Attribute.GENERIC_ARMOR, 6.0, EquipmentSlot.LEGS),
+            new AttributeContainer(Attribute.GENERIC_ARMOR_TOUGHNESS, 2.0, EquipmentSlot.LEGS),
+            new AttributeContainer(Attribute.GENERIC_KNOCKBACK_RESISTANCE, 1.0, EquipmentSlot.LEGS))
+    ),
+    NETHERITE_BOOTS(List.of(
+            new AttributeContainer(Attribute.GENERIC_ARMOR, 3.0, EquipmentSlot.FEET),
+            new AttributeContainer(Attribute.GENERIC_ARMOR_TOUGHNESS, 3.0, EquipmentSlot.FEET),
+            new AttributeContainer(Attribute.GENERIC_KNOCKBACK_RESISTANCE, 1.0, EquipmentSlot.FEET))
+    ),
+    NETHERITE_SWORD(List.of(
+            new AttributeContainer(Attribute.GENERIC_ATTACK_DAMAGE, 8.0, EquipmentSlot.HAND),
+            new AttributeContainer(Attribute.GENERIC_ATTACK_SPEED, 1.6, EquipmentSlot.HAND))
+    ),
+    NETHERITE_PICKAXE(List.of(
+            new AttributeContainer(Attribute.GENERIC_ATTACK_DAMAGE, 6.0, EquipmentSlot.HAND),
+            new AttributeContainer(Attribute.GENERIC_ATTACK_SPEED, 1.2, EquipmentSlot.HAND))
+    );
 
-    private final Map<Attribute, AttributeModifier> defaultAttributes;
-    private Map<Attribute, AttributeModifier> attributeModifierMap;
 
-    DefaultAttributes(Map<Attribute, AttributeModifier> defaultAttributes) {
-        this.defaultAttributes = defaultAttributes;
-        this.attributeModifierMap = new HashMap<>(defaultAttributes);
-    }
 
-    public void setAttributes(Map<Attribute, AttributeModifier> attributes) {
-        this.attributeModifierMap = attributes;
-    }
+    private final List<AttributeContainer> attributeContainers;
 
-    public void addAttribute(Attribute attribute, AttributeModifier attributeModifier) {
-        attributeModifierMap.put(attribute, attributeModifier);
-    }
-
-    public Map<Attribute, AttributeModifier> getDefaultAttributes() {
-        return defaultAttributes;
+    DefaultAttributes(List<AttributeContainer> attributeContainers) {
+        this.attributeContainers = new ArrayList<>(attributeContainers);
     }
 
     public Map<Attribute, AttributeModifier> getAttributes() {
+        final Map<Attribute, AttributeModifier> attributeModifierMap = new HashMap<>();
+
+        for (AttributeContainer attributeContainer : attributeContainers) {
+            attributeModifierMap.put(attributeContainer.attribute, new AttributeModifier(
+                    UUID.randomUUID(),
+                    attributeContainer.attribute.name(),
+                    attributeContainer.amount,
+                    AttributeModifier.Operation.ADD_NUMBER, // TODO: Mutable operations
+                    attributeContainer.slot
+            ));
+        }
+
         return attributeModifierMap;
     }
 
+    public void addAttribute(Attribute attribute, AttributeModifier attributeModifier) {
+        attributeContainers.add(new AttributeContainer(attribute, attributeModifier.getAmount(), attributeModifier.getSlot()));
+    }
+
     public Map<Attribute, AttributeModifier> appendThenGetAttributes(Attribute attribute, AttributeModifier attributeModifier) {
-        attributeModifierMap.put(attribute, attributeModifier);
-        return attributeModifierMap;
+        addAttribute(attribute, attributeModifier);
+        return getAttributes();
+    }
+
+
+    private record AttributeContainer(Attribute attribute, double amount, @Nullable EquipmentSlot slot) {
     }
 }

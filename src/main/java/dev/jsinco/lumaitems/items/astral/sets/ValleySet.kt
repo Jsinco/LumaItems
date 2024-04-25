@@ -19,7 +19,7 @@ import kotlin.random.Random
 class ValleySet : AstralSet {
 
     override fun setItems(): List<ItemStack> {
-        val astralSetFactory = AstralSetFactory("Valley", mutableListOf("&#E97979Ilk"))
+        val astralSetFactory = AstralSetFactory("Valley", mutableListOf("&#AC87FBIlk"))
         astralSetFactory.commonEnchants = mutableMapOf(
             Enchantment.MENDING to 1,
             Enchantment.DURABILITY to 5,

@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType
 class MelukaSet : AstralSet {
 
     override fun setItems(): List<ItemStack> {
-        val astralSetFactory = AstralSetFactory("Meluka", mutableListOf("&#E97979Marine"))
+        val astralSetFactory = AstralSetFactory("Meluka", mutableListOf("&#AC87FBMarine"))
 
         val materials = listOf(
             Material.NETHERITE_HELMET, Material.NETHERITE_CHESTPLATE, Material.NETHERITE_LEGGINGS,
