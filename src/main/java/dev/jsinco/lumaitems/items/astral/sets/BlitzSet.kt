@@ -4,6 +4,8 @@ import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.obj.HollowSphere
+import dev.jsinco.lumaitems.util.GenericMCToolType
+import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerInteractEvent
@@ -17,6 +19,12 @@ class BlitzSet : AstralSet {
         factory.commonEnchants = mutableMapOf(
             Enchantment.DURABILITY to 9
         ) // TODO: Change to sphere which picks up nearby items?
+
+        factory.astralSetItem(
+            Material.DIAMOND_AXE,
+            mutableMapOf(Enchantment.DIG_SPEED to 5, Enchantment.LOOT_BONUS_BLOCKS to 3),
+            mutableListOf("Grants haste while", "being held")
+        )
 
         /*factory.astralSetItem(
             Material.DIAMOND_SWORD,
@@ -38,9 +46,13 @@ class BlitzSet : AstralSet {
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+        val genericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand)
+
         when (type) {
             Ability.LEFT_CLICK -> {
-                val sphere = HollowSphere(player.eyeLocation, 3.0, 0.5, false)
+                if (genericMCToolType == GenericMCToolType.AXE) {
+
+                }
 
 
                 return true

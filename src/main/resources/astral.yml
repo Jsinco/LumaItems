@@ -32,14 +32,6 @@ astral-upgrades:
       enchants:
         - 'efficiency/10'
         - 'unbreaking/10'
-  blitz-set:
-    tier-2:
-      material: NETHERITE
-      enchants:
-        - 'sharpness/7'
-        - 'looting/4'
-        - 'efficiency/8'
-        - 'mending/1'
   reforged-set:
     tier-2:
       material: NETHERITE
@@ -59,3 +51,9 @@ astral-upgrades:
       enchants:
         - 'efficiency/8 -apply:axe,pickaxe,shovel,hoe'
         - 'lure/5'
+  blitz-set:
+    tier-2:
+      material: NETHERITE
+      enchants:
+        - 'efficiency/7 -apply:axe'
+        - 'fortune/4 -apply:axe'
