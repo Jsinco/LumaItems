@@ -6,6 +6,7 @@ import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.manager.Ability
 import dev.jsinco.lumaitems.relics.Rarity
 import dev.jsinco.lumaitems.util.AbilityUtil
+import dev.jsinco.lumaitems.util.GenericMCToolType
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -19,6 +20,7 @@ import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.entity.ProjectileHitEvent
+import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import java.util.*
 
@@ -98,10 +100,11 @@ class MagmaticSet : AstralSet {
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
-        val material = player.inventory.itemInMainHand.type
+        val genericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand)
         when (type) {
             Ability.RIGHT_CLICK -> {
-                if (material.name.contains("SWORD") && !cooldown.contains(player.uniqueId)) {
+                // poorly written but im in a rush
+                if ((Util.isItemInSlot("magmatic-set", EquipmentSlot.HAND, player)|| Util.isItemInSlot("magmatic-set", EquipmentSlot.OFF_HAND, player)) && genericMCToolType == GenericMCToolType.SWORD && !cooldown.contains(player.uniqueId)) {
                     AbilityUtil.spawnSpell(player, Particle.FLAME, "magmatic-set", 120L)
                     cooldownPlayer(player.uniqueId)
                 }
@@ -113,9 +116,9 @@ class MagmaticSet : AstralSet {
             }
             Ability.BREAK_BLOCK -> {
                 event as BlockBreakEvent
-                if (material.name.contains("PICKAXE")) {
+                if (genericMCToolType == GenericMCToolType.PICKAXE) {
                     if (pickaxeSmelt(event.block, event.block.getDrops(player.inventory.itemInMainHand))) event.isDropItems = false
-                } else if (material.name.contains("SHOVEL")) {
+                } else if (genericMCToolType == GenericMCToolType.SHOVEL) {
                     if (shovelSmelt(event.block, event.block.getDrops(player.inventory.itemInMainHand))) event.isDropItems = false
                 }
             }

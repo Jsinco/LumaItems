@@ -16,6 +16,7 @@ import org.bukkit.persistence.PersistentDataType
 import kotlin.random.Random
 
 class AstralOrbItem : CustomItem {
+
     override fun createItem(): Pair<String, ItemStack> {
         return Pair("astralorb", RelicCrafting.astralOrb)
     }
@@ -45,7 +46,7 @@ class AstralOrbItem : CustomItem {
     private fun getAstralItem(): ItemStack? {
         val file = FileManager("astral.yml").generateYamlFile()
 
-        val itemClasses = file.getConfigurationSection("astral-orb-raritiess")?.getKeys(true)
+        val itemClasses = file.getConfigurationSection("astral-orb-rarities")?.getKeys(true)
         val setsAndWeight: MutableMap<List<ItemStack>, Int> = mutableMapOf()
 
         if (itemClasses == null) {
