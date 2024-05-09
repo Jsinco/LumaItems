@@ -38,6 +38,32 @@ object RelicDisassembler {
         }
     }
 
+    fun getCommandToExecute(itemStack: ItemStack, player: Player): String? {
+        val rarity = Rarity.valueOf(
+            itemStack.itemMeta?.persistentDataContainer?.get(
+                NamespacedKey(plugin, "relic-rarity"),
+                PersistentDataType.STRING
+            ) ?: return null
+        )
+
+        val commands: MutableMap<String, Int> = mutableMapOf()
+        val configSec = file.getConfigurationSection("disassembler.commands")?.getKeys(false) ?: return null
+        for (key in configSec) {
+            val chance = Integer.parseInt(key)
+            if (chance == 0) continue
+            commands[file.getString("disassembler.commands.$key") ?: "non"] = chance
+        }
+        if (rarity == Rarity.ASTRAL) {
+            commands["lumaitems relic %player% core astral"] = 100
+        }
+
+        var selectedCommand = commands.keys.random()
+        while (commands[selectedCommand]!! < Random.nextInt(100)) {
+            selectedCommand = commands.keys.random()
+        }
+        return selectedCommand.replace("%player%", player.name)
+    }
+
     // returns a command to be executed
     fun getCommandToExecute(itemStack: ItemStack, action: Action, player: Player): String? {
         val rarity = Rarity.valueOf(
@@ -48,7 +74,7 @@ object RelicDisassembler {
         )
         if (!rescheduleCooldownTask(player)) {
             return null
-        } else if (rarity == Rarity.ASTRAL && !action.isLeftClick) {
+        } else if (rarity == Rarity.ASTRAL && action.isLeftClick) {
             player.sendMessage(Util.colorcode("${Util.prefix} You must left click to disassemble &#F7FFC9Astral &#E2E2E2Relics"))
             return null
         }

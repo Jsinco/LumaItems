@@ -22,6 +22,9 @@ permissions:
   lumaitems.command.giveastral:
     description: Command to give a player an Astral Item
     default: op
+  lumaitems.disassemblergui:
+    description: Permission to open the disassembler GUI
+    default: op
 commands:
   lumaitems:
     description: LumaItems command

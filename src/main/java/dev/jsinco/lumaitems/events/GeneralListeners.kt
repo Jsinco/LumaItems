@@ -3,9 +3,9 @@ package dev.jsinco.lumaitems.events
 import com.gamingmesh.jobs.api.JobsPrePaymentEvent
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.guis.AbstractGui
+import dev.jsinco.lumaitems.guis.DisassemblerGui
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.relics.Rarity
-import dev.jsinco.lumaitems.relics.RelicCrafting
 import dev.jsinco.lumaitems.relics.RelicCreator
 import dev.jsinco.lumaitems.relics.RelicDisassembler
 import dev.jsinco.lumaitems.util.EntityArmor
@@ -13,19 +13,16 @@ import dev.jsinco.lumaitems.util.ToolType
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
 import org.bukkit.Sound
 import org.bukkit.entity.Enemy
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
-import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntitySpawnEvent
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.persistence.PersistentDataType
 import kotlin.random.Random
 
 class GeneralListeners(val plugin: LumaItems) : Listener {
@@ -73,9 +70,16 @@ class GeneralListeners(val plugin: LumaItems) : Listener {
     @EventHandler
     fun onDisassemblerInteract(event: PlayerInteractEvent) {
         if (!RelicDisassembler.disassemblerBlocks.contains(event.clickedBlock ?: return)) return
+
         event.isCancelled = true
         val player = event.player
         val item = player.inventory.itemInMainHand
+
+        if (event.action.isLeftClick && player.hasPermission("lumaitems.disassemblergui")) {
+            val gui = DisassemblerGui()
+            player.openInventory(gui.getInventory())
+            return
+        }
 
         val command = RelicDisassembler.getCommandToExecute(item, event.action, player) ?: return
 
@@ -88,16 +92,6 @@ class GeneralListeners(val plugin: LumaItems) : Listener {
     fun onInventoryClick(event: InventoryClickEvent) {
         if (event.inventory.getHolder(false) is AbstractGui) {
             (event.inventory.holder as AbstractGui).onInventoryClick(event)
-        }
-
-        val item = event.currentItem ?: return // TEMPORARY: Upgrade Relic Shards
-        if (item.itemMeta?.persistentDataContainer?.has(
-                NamespacedKey(plugin, "relicshard"),
-                PersistentDataType.SHORT
-            ) == true && item.type != Material.AMETHYST_SHARD
-        ) {
-            val amount = item.amount.also { item.amount = 0 }
-            Util.giveItem(event.whoClicked as Player, RelicCrafting.relicShard.clone().also { it.amount = amount })
         }
     }
 

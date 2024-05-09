@@ -37,7 +37,7 @@ class MelukaSet : AstralSet {
             }
 
             astralSetFactory.astralSetItemGenericEnchantOnly(
-                Material.NETHERITE_HELMET,
+                material,
                 lore
             )
         }
@@ -54,7 +54,7 @@ class MelukaSet : AstralSet {
         when (type) {
             Ability.RUNNABLE -> {
                 if (Util.isWearingWithNBT(player, "meluka-set")) {
-                    player.addPotionEffect(PotionEffect(PotionEffectType.WATER_BREATHING, 240, 0, false, false, false))
+                    player.addPotionEffect(PotionEffect(PotionEffectType.DOLPHINS_GRACE, 240, 0, false, false, false))
                 }
             }
             Ability.BREAK_BLOCK -> {
