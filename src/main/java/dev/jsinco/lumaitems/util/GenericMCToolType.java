@@ -4,6 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 /**
  * Enum for generic Minecraft tool types.
  * Determine their type without regard for the type of material.
@@ -23,7 +25,10 @@ public enum GenericMCToolType {
     CROSSBOW,
     TRIDENT,
     SHIELD,
-    FISHING_ROD;
+    FISHING_ROD,
+    MAGICAL;
+
+    public static final List<String> magicMaterials = List.of("BLAZE_ROD");
 
     @Nullable
     public static GenericMCToolType getToolType(ItemStack item) {
@@ -38,6 +43,9 @@ public enum GenericMCToolType {
     @Nullable
     public static GenericMCToolType getToolType(String string) {
         string = string.toUpperCase();
+        if (magicMaterials.contains(string)) {
+            return MAGICAL;
+        }
 
         for (GenericMCToolType toolType : GenericMCToolType.values()) {
             if (string.contains(toolType.toString())) {

@@ -20,23 +20,22 @@ class VenomSet : AstralSet {
         astralSetFactory.identifier = "venom-set"
 
         astralSetFactory.commonEnchants = mutableMapOf(
-            Enchantment.PROTECTION_ENVIRONMENTAL to 6, Enchantment.DAMAGE_ALL to 7, Enchantment.DURABILITY to 5,
-            Enchantment.SWEEPING_EDGE to 4, Enchantment.THORNS to 5, Enchantment.PROTECTION_FALL to 4,
-            Enchantment.MENDING to 1
+            Enchantment.PROTECTION_ENVIRONMENTAL to 5, Enchantment.DAMAGE_ALL to 6, Enchantment.DURABILITY to 5,
+            Enchantment.SWEEPING_EDGE to 4, Enchantment.THORNS to 4, Enchantment.PROTECTION_FALL to 4,
         )
 
         val materials: List<Material> = listOf(
-            Material.NETHERITE_HELMET, Material.NETHERITE_CHESTPLATE, Material.NETHERITE_LEGGINGS,
-            Material.NETHERITE_BOOTS, Material.NETHERITE_SWORD, Material.NETHERITE_AXE
+            Material.DIAMOND_HELMET, Material.DIAMOND_CHESTPLATE, Material.DIAMOND_LEGGINGS,
+            Material.DIAMOND_BOOTS, Material.DIAMOND_SWORD, Material.DIAMOND_AXE
         )
 
         for (material in materials) {
             astralSetFactory.astralSetItemGenericEnchantOnly(
                 material,
                 if (ToolType.getToolType(material) == ToolType.WEAPON) {
-                    mutableListOf("Upon striking an enemy,", "they will be poisoned", "for a short duration")
+                    mutableListOf("Upon striking an enemy,", "they will be poisoned", "for a short duration.")
                 } else {
-                    mutableListOf("Upon being struck, your", "attacker will be poisoned", "for a short duration")
+                    mutableListOf("Upon being struck, your", "attacker will be poisoned", "for a short duration.")
                 }
             )
         }

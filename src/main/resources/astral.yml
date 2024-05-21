@@ -1,17 +1,66 @@
 astral-orb-rarities:
   # Class name and then chance of item
   MistralSet: 38
-  ArchaelWings: 40
+  ArchaelSet: 32
   VenomSet: 43
-  MagmaticSet: 13
+  MagmaticSet: 1
   FalterSet: 15
   MelukaSet: 48
   ValleySet: 55
   BlitzSet: 10
   ReforgedSet: 20
+  KazkanSet: 13
 
 # All sets, by default, start from tier 1
 astral-upgrades:
+  magmatic-set:
+    tier-2:
+      material: NETHERITE
+      enchants:
+        - 'mending/1'
+        - 'fire_aspect/4'
+        - 'efficiency/6'
+        - 'looting/4'
+        - 'fortune/4'
+        - 'unbreaking/8'
+        - 'feather_falling/5'
+  venom-set:
+    tier-2:
+      material: NETHERITE
+      enchants:
+        - 'mending/1'
+        - 'protection/6'
+        - 'sharpness/7'
+        - 'unbreaking/6'
+        - 'thorns/5'
+  meluka-set:
+    tier-2:
+      material: IRON
+      enchants:
+        - 'efficiency/5'
+        - 'unbreaking/5'
+        - 'respiration/4'
+        - 'depth_strider/4'
+        - 'protection/6'
+    tier-3:
+      material: DIAMOND
+      enchants:
+        - 'mending/1'
+        - 'unbreaking/6'
+        - 'respiration/5'
+    tier-4:
+      material: NETHERITE
+      enchants:
+        - 'unbreaking/7'
+        - 'respiration/6'
+        - 'protection/7'
+  archael-set:
+    tier-2:
+      material: NETHERITE
+      enchants:
+        - 'mending/1'
+        - 'unbreaking/6'
+        - 'projectile_protection/6'
   mistral-set:
     tier-2:
       material: DIAMOND
@@ -56,6 +105,29 @@ astral-upgrades:
     tier-2:
       material: NETHERITE
       enchants:
+        - 'mending/1'
+        - 'unbreaking/7'
         - 'efficiency/6 -apply:axe'
         - 'fortune/4 -apply:axe'
-        - 'mending/1 -apply:axe'
+        - 'feather_falling/5 -apply:elytra'
+        - 'blast_protection/4 -apply:elytra'
+  kazkan-set:
+    tier-2:
+      material: DIAMOND
+      enchants:
+        - 'unbreaking/8'
+        - 'mending/1'
+        - 'sharpness/7 -apply:axe'
+        - 'looting/4 -apply:axe'
+        - 'bane_of_arthropods/6 -apply:axe'
+        - 'quick_charge/3 -apply:crossbow'
+        - 'piercing/5 -apply:crossbow'
+    tier-3:
+      material: NETHERITE
+      enchants:
+        - 'unbreaking/9'
+        - 'sharpness/8 -apply:axe'
+        - 'looting/5 -apply:axe'
+        - 'bane_of_arthropods/7 -apply:axe'
+        - 'quick_charge/4 -apply:crossbow'
+        - 'piercing/6 -apply:crossbow'

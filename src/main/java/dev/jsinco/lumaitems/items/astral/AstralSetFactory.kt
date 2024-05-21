@@ -13,6 +13,8 @@ import org.bukkit.inventory.ItemStack
 
 class AstralSetFactory (val name: String, val customEnchantNames: List<String>?) {
 
+    constructor(name: String) : this(name, null)
+
     companion object {
         private val plugin: LumaItems = LumaItems.getPlugin()
     }
@@ -35,12 +37,14 @@ class AstralSetFactory (val name: String, val customEnchantNames: List<String>?)
     }
 
     fun astralSetItem(material: Material, vanillaEnchants: MutableMap<Enchantment, Int>, lore: List<String>, includeCommonEnchants: Boolean): ItemStack {
-        return astralSetItem(material, vanillaEnchants, lore, includeCommonEnchants, null, null)
+        return astralSetItem(material, vanillaEnchants, lore, includeCommonEnchants, null, null, null)
     }
 
     fun astralSetItem(material: Material, vanillaEnchants: MutableMap<Enchantment, Int>, lore: List<String>, includeCommonEnchants: Boolean, attributeModifiers: MutableMap<Attribute, AttributeModifier>?): ItemStack {
-        return astralSetItem(material, vanillaEnchants, lore, includeCommonEnchants, attributeModifiers, null)
+        return astralSetItem(material, vanillaEnchants, lore, includeCommonEnchants, attributeModifiers, null, null)
     }
+
+
 
     fun astralSetItem(
         material: Material,
@@ -48,7 +52,8 @@ class AstralSetFactory (val name: String, val customEnchantNames: List<String>?)
         lore: List<String>,
         includeCommonEnchants: Boolean,
         attributeModifiers: MutableMap<Attribute, AttributeModifier>?,
-        customName: String?): ItemStack {
+        customName: String?,
+        customEnchants: List<String>?): ItemStack {
 
 
         // override common enchants
@@ -60,7 +65,7 @@ class AstralSetFactory (val name: String, val customEnchantNames: List<String>?)
 
         val item = ItemFactory(
             customName ?: "&#AC87FB&l$name &f${Util.getGearType(material)}",
-            customEnchantNames?.toMutableList() ?: mutableListOf(),
+            customEnchants?.toMutableList() ?: (this.customEnchantNames?.toMutableList() ?: mutableListOf()),
             lore.toMutableList(),
             material,
             mutableListOf(identifier),

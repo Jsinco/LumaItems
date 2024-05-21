@@ -1,16 +1,14 @@
 package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.items.astral.AstralSet
+import dev.jsinco.lumaitems.items.astral.AstralSetFactory
 import dev.jsinco.lumaitems.manager.Ability
-import dev.jsinco.lumaitems.relics.Rarity
 import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.GenericMCToolType
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
 import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.block.Block
@@ -24,75 +22,48 @@ import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import java.util.*
 
-// TODO
 class MagmaticSet : AstralSet {
 
     companion object {
-        private val materials: List<Material> = listOf(
-            Material.DIAMOND_HELMET,
-            Material.DIAMOND_CHESTPLATE,
-            Material.DIAMOND_LEGGINGS,
-            Material.DIAMOND_BOOTS,
-            Material.DIAMOND_SWORD,
-            Material.DIAMOND_PICKAXE,
-            Material.DIAMOND_SHOVEL
-        )
-        private val enchants: Map<Enchantment, Int> = mapOf(
-            Enchantment.PROTECTION_ENVIRONMENTAL to 5,
-            Enchantment.DAMAGE_ALL to 6,
-            Enchantment.DURABILITY to 8,
-            Enchantment.SWEEPING_EDGE to 4,
-            Enchantment.FIRE_ASPECT to 4,
-            Enchantment.DIG_SPEED to 6,
-            Enchantment.LOOT_BONUS_BLOCKS to 4,
-            Enchantment.LOOT_BONUS_MOBS to 4,
-            Enchantment.PROTECTION_FALL to 5,
-            Enchantment.THORNS to 3,
-            Enchantment.MENDING to 1,
-        )
-
-        private var smeltOreTypes = listOf(
-            Material.GOLD_ORE,
-            Material.DEEPSLATE_GOLD_ORE,
-            Material.NETHER_GOLD_ORE,
-            Material.IRON_ORE,
-            Material.DEEPSLATE_IRON_ORE,
-            Material.COPPER_ORE,
-            Material.DEEPSLATE_COPPER_ORE,
-            Material.ANCIENT_DEBRIS
-        )
-
-        private val lores: Map<Material, MutableList<String>> = mapOf(
-            Material.DIAMOND_PICKAXE to mutableListOf("Breaking ores with this", "tool will automatically", "smelt them"),
-            Material.DIAMOND_SHOVEL to mutableListOf("Breaking sand with this", "tool will automatically", "convert it to glass"),
-            Material.DIAMOND_SWORD to mutableListOf("Right-click to send out flames", "and ignite entities", "", "&cCooldown: 10s")
-        )
         private val cooldown: MutableList<UUID> = mutableListOf()
+        private val smeltOreTypes = listOf(
+            Material.GOLD_ORE, Material.DEEPSLATE_GOLD_ORE, Material.NETHER_GOLD_ORE,
+            Material.IRON_ORE, Material.DEEPSLATE_IRON_ORE, Material.COPPER_ORE,
+            Material.DEEPSLATE_COPPER_ORE, Material.ANCIENT_DEBRIS
+        )
     }
 
     override fun setItems(): List<ItemStack> {
-        val items: MutableList<ItemStack> = mutableListOf()
+        val factory = AstralSetFactory("Magmatic", mutableListOf("&#AC87FBVolcanic"))
+
+        factory.commonEnchants = mutableMapOf(
+            Enchantment.PROTECTION_ENVIRONMENTAL to 5, Enchantment.DAMAGE_ALL to 6, Enchantment.DURABILITY to 6,
+            Enchantment.SWEEPING_EDGE to 4, Enchantment.FIRE_ASPECT to 3, Enchantment.DIG_SPEED to 5,
+            Enchantment.LOOT_BONUS_BLOCKS to 3, Enchantment.LOOT_BONUS_MOBS to 3, Enchantment.PROTECTION_FALL to 4,
+            Enchantment.THORNS to 3
+        )
+
+        val materials: List<Material> = listOf(
+            Material.DIAMOND_HELMET, Material.DIAMOND_CHESTPLATE, Material.DIAMOND_LEGGINGS,
+            Material.DIAMOND_BOOTS, Material.DIAMOND_SWORD, Material.DIAMOND_PICKAXE, Material.DIAMOND_SHOVEL
+        )
+
         for (material in materials) {
-            val toolEnchants = mutableMapOf<Enchantment, Int>()
-            for (enchant in enchants) {
-                if (enchant.key.canEnchantItem(ItemStack(material))) {
-                    toolEnchants[enchant.key] = enchant.value
-                }
+            val type = GenericMCToolType.getToolType(material) ?: continue
+            val lore = when (type) {
+                GenericMCToolType.PICKAXE -> mutableListOf("Breaking ores with this", "tool will automatically", "smelt them")
+                GenericMCToolType.SHOVEL -> mutableListOf("Breaking sand with this", "tool will automatically", "convert it to glass")
+                GenericMCToolType.SWORD -> mutableListOf("Right-click to send out flames", "and ignite entities", "", "&cCooldown: 10s")
+                else -> mutableListOf()
             }
 
-            val item = ItemFactory(
-                "&#AC87FB&lMagmatic &f${Util.getGearType(material)}",
-                if (lores.keys.contains(material)) mutableListOf("&#AC87FBVolcanic") else mutableListOf(),
-                lores[material] ?: mutableListOf(),
+            factory.astralSetItemGenericEnchantOnly(
                 material,
-                mutableListOf("magmatic-set"),
-                toolEnchants,
+                lore
             )
-            item.tier = "&#AC87FB&lAstral"
-            item.stringPersistentDatas[NamespacedKey(LumaItems.getPlugin(), "relic-rarity")] = Rarity.ASTRAL.name
-            items.add(item.createItem())
         }
-        return items
+
+        return factory.createdAstralItems
     }
 
     override fun identifier(): String {
@@ -167,7 +138,7 @@ class MagmaticSet : AstralSet {
         return true
     }
 
-    fun cooldownPlayer(uuid: UUID) {
+    private fun cooldownPlayer(uuid: UUID) {
         cooldown.add(uuid)
         Bukkit.getScheduler().scheduleSyncDelayedTask(LumaItems.getPlugin(), {
             cooldown.remove(uuid)

@@ -224,4 +224,12 @@ object AbilityUtil {
             }
         }, ticksAlive)
     }
+
+    fun takeSpellLapisCost(player: Player, amount: Int): Boolean {
+        if (player.inventory.contains(Material.LAPIS_LAZULI, amount)) {
+            player.inventory.removeItem(ItemStack(Material.LAPIS_LAZULI, amount))
+            return true
+        }
+        return false
+    }
 }

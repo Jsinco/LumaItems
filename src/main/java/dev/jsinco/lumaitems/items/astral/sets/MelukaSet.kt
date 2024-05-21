@@ -19,14 +19,14 @@ class MelukaSet : AstralSet {
         val astralSetFactory = AstralSetFactory("Meluka", mutableListOf("&#AC87FBMarine"))
 
         val materials = listOf(
-            Material.NETHERITE_HELMET, Material.NETHERITE_CHESTPLATE, Material.NETHERITE_LEGGINGS,
-            Material.NETHERITE_BOOTS, Material.NETHERITE_PICKAXE, Material.NETHERITE_SHOVEL
+            Material.GOLDEN_HELMET, Material.GOLDEN_CHESTPLATE, Material.GOLDEN_LEGGINGS,
+            Material.GOLDEN_BOOTS, Material.GOLDEN_PICKAXE, Material.GOLDEN_SHOVEL
         )
 
         astralSetFactory.commonEnchants = mutableMapOf(
-            Enchantment.PROTECTION_ENVIRONMENTAL to 6, Enchantment.DAMAGE_ALL to 5, Enchantment.DURABILITY to 7,
-            Enchantment.SWEEPING_EDGE to 3, Enchantment.DIG_SPEED to 7, Enchantment.SILK_TOUCH to 1, Enchantment.MENDING to 1,
-            Enchantment.DEPTH_STRIDER to 4, Enchantment.WATER_WORKER to 2, Enchantment.OXYGEN to 5
+            Enchantment.PROTECTION_ENVIRONMENTAL to 5, Enchantment.DAMAGE_ALL to 5, Enchantment.DURABILITY to 5,
+            Enchantment.SWEEPING_EDGE to 3, Enchantment.DIG_SPEED to 4, Enchantment.SILK_TOUCH to 1,
+            Enchantment.DEPTH_STRIDER to 3, Enchantment.WATER_WORKER to 2, Enchantment.OXYGEN to 3
         )
 
         for (material in materials) {
@@ -43,10 +43,6 @@ class MelukaSet : AstralSet {
         }
 
         return astralSetFactory.createdAstralItems
-    }
-
-    override fun identifier(): String {
-        return "meluka-set"
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
@@ -72,5 +68,9 @@ class MelukaSet : AstralSet {
             else -> return false
         }
         return true
+    }
+
+    override fun identifier(): String {
+        return "meluka-set"
     }
 }
