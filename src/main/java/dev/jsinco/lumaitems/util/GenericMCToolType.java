@@ -21,10 +21,11 @@ public enum GenericMCToolType {
     AXE,
     SHOVEL,
     HOE,
-    BOW,
     CROSSBOW,
+    BOW,
     TRIDENT,
     SHIELD,
+    ELYTRA,
     FISHING_ROD,
     MAGICAL;
 

@@ -32,7 +32,7 @@ class KazkanSet : AstralSet {
         private val plugin: LumaItems = LumaItems.getPlugin()
 
         private val holdingPlayers: ConcurrentLinkedQueue<ClickHoldingPlayer> = ConcurrentLinkedQueue()
-        private val playerLinkedArrows: ConcurrentHashMap<Player, List<Projectile>> = ConcurrentHashMap()
+        private val playerLinkedArrows: ConcurrentHashMap<Player, List<Arrow>> = ConcurrentHashMap()
     }
 
     override fun setItems(): List<ItemStack> {
@@ -70,12 +70,12 @@ class KazkanSet : AstralSet {
 
         factory.astralSetItem(
             Material.SHIELD,
-            mutableMapOf(Enchantment.MENDING to 1, Enchantment.FIRE_ASPECT to 4),
+            mutableMapOf(Enchantment.MENDING to 1, Enchantment.FIRE_ASPECT to 4, Enchantment.DAMAGE_ALL to 5),
             mutableListOf(),
             includeCommonEnchants = true,
             attributeModifiers = null,
             customName = null,
-            customEnchants = null
+            customEnchants = mutableListOf()
         )
 
         return factory.createdAstralItems
@@ -86,10 +86,10 @@ class KazkanSet : AstralSet {
     }
 
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
-        val genericMCToolType: GenericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand) ?: return false
-
         when (type) {
             Ability.RIGHT_CLICK -> {
+                val genericMCToolType: GenericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand) ?: return false
+
                 if (genericMCToolType == GenericMCToolType.AXE) {
                     val holdingPlayer = holdingPlayers.find { it.player.uniqueId == player.uniqueId }
                         ?: ClickHoldingPlayer(player).also { holdingPlayers.add(it) }
@@ -103,6 +103,7 @@ class KazkanSet : AstralSet {
             }
 
             Ability.LEFT_CLICK -> {
+                val genericMCToolType: GenericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand) ?: return false
                 if (genericMCToolType == GenericMCToolType.CROSSBOW) {
                     handleArrowFiring(player)
                 } else if (genericMCToolType == GenericMCToolType.MAGICAL) {
@@ -114,6 +115,7 @@ class KazkanSet : AstralSet {
             }
 
             Ability.ENTITY_DAMAGE -> {
+                val genericMCToolType: GenericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand) ?: return false
                 event as EntityDamageByEntityEvent
                 if (genericMCToolType != GenericMCToolType.AXE) return false
                 val holdingPlayer = holdingPlayers.find { it.player.uniqueId == player.uniqueId } ?: return false
@@ -150,7 +152,7 @@ class KazkanSet : AstralSet {
                 projectile.isPersistent = false
                 projectile.isCritical = false
 
-                val linkedArrows: MutableList<Projectile> = playerLinkedArrows[player]?.toMutableList() ?: mutableListOf()
+                val linkedArrows: MutableList<Arrow> = playerLinkedArrows[player]?.toMutableList() ?: mutableListOf()
                 if (linkedArrows.size >= 5) {
                     linkedArrows[0].setGravity(true)
                     linkedArrows.removeAt(0)
@@ -185,7 +187,6 @@ class KazkanSet : AstralSet {
 
             else -> return false
         }
-
         return true
     }
 
@@ -208,11 +209,12 @@ class KazkanSet : AstralSet {
 
     fun handleArrowFiring(player: Player) {
         val linkedArrows = playerLinkedArrows[player] ?: return
-        val arrow = if (linkedArrows.isNotEmpty()) linkedArrows.first() else {
+        val arrow: Arrow = if (linkedArrows.isNotEmpty()) linkedArrows.first() else {
             playerLinkedArrows.remove(player)
             return
         }
         adjustArrowDirection(arrow, player)
+        arrow.isCritical = true
         playerLinkedArrows[player] = linkedArrows.drop(1)
     }
 

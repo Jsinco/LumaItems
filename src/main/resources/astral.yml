@@ -115,8 +115,9 @@ astral-upgrades:
     tier-2:
       material: DIAMOND
       enchants:
-        - 'unbreaking/8'
-        - 'mending/1'
+        - 'unbreaking/8 -apply:axe,crossbow,magical,shield'
+        - 'mending/1 -apply:axe,crossbow,magical,shield'
+        - 'fire_aspect/3 -apply:magical'
         - 'sharpness/7 -apply:axe'
         - 'looting/4 -apply:axe'
         - 'bane_of_arthropods/6 -apply:axe'
@@ -126,6 +127,8 @@ astral-upgrades:
       material: NETHERITE
       enchants:
         - 'unbreaking/9'
+        - 'fire_aspect/5 -apply:magical'
+        - 'knockback/3 -apply:magical'
         - 'sharpness/8 -apply:axe'
         - 'looting/5 -apply:axe'
         - 'bane_of_arthropods/7 -apply:axe'
