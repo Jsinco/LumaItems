@@ -90,13 +90,13 @@ class GeneralListeners(val plugin: LumaItems) : Listener {
 
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
-        if (event.inventory.getHolder(false) is AbstractGui) {
-            (event.inventory.holder as AbstractGui).onInventoryClick(event)
-        }
+        if (event.inventory.getHolder(false) !is AbstractGui) return
+        (event.inventory.holder as AbstractGui).onInventoryClick(event)
     }
 
+
     @EventHandler
-    fun onInventoryClick(event: InventoryCloseEvent) {
+    fun onInventoryClose(event: InventoryCloseEvent) {
         if (event.inventory.getHolder(false) !is AbstractGui) return
         (event.inventory.holder as AbstractGui).onInventoryClose(event)
     }
