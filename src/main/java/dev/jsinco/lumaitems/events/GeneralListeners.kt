@@ -13,16 +13,20 @@ import dev.jsinco.lumaitems.util.ToolType
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.NamespacedKey
 import org.bukkit.Sound
 import org.bukkit.entity.Enemy
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntitySpawnEvent
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
+import org.bukkit.event.inventory.InventoryType
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.persistence.PersistentDataType
 import kotlin.random.Random
 
 class GeneralListeners(val plugin: LumaItems) : Listener {
@@ -90,6 +94,20 @@ class GeneralListeners(val plugin: LumaItems) : Listener {
 
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {
+        val player = event.whoClicked as Player
+        val data = player.itemOnCursor.itemMeta?.persistentDataContainer
+        if (data?.has(NamespacedKey(plugin, "autohat"), PersistentDataType.SHORT) == true) { // TODO: Organize
+            if (event.inventory.type != InventoryType.CRAFTING || event.slotType != InventoryType.SlotType.ARMOR) return
+            val cursorItem = player.itemOnCursor.clone()
+            val hatItem = player.inventory.helmet
+
+            if (cursorItem.type == Material.AIR || cursorItem == player.inventory.helmet) return
+            event.isCancelled = true
+            player.setItemOnCursor(hatItem);player.inventory.helmet = cursorItem;player.playSound(player.location, Sound.ITEM_ARMOR_EQUIP_LEATHER, 1f, 1f)
+            return
+        }
+
+
         if (event.inventory.getHolder(false) !is AbstractGui) return
         (event.inventory.holder as AbstractGui).onInventoryClick(event)
     }

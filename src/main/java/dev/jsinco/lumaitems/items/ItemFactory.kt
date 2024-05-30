@@ -30,6 +30,7 @@ class ItemFactory(
     var unbreakable: Boolean = false
     var hideEnchants: Boolean = false
     var addSpace: Boolean = true
+    var autoHat: Boolean = false
     var attributeModifiers: MutableMap<Attribute, AttributeModifier> = mutableMapOf()
     val stringPersistentDatas: MutableMap<NamespacedKey, String> = mutableMapOf()
     var quotes: MutableList<String> = mutableListOf()
@@ -90,6 +91,10 @@ class ItemFactory(
         }
         meta.isUnbreakable = unbreakable
         if (hideEnchants) meta.addItemFlags(ItemFlag.HIDE_ENCHANTS)
+
+        if (autoHat) {
+            meta.persistentDataContainer.set(NamespacedKey(plugin, "autohat"), PersistentDataType.SHORT, 1)
+        }
 
         item.itemMeta = meta
 
