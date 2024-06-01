@@ -20,6 +20,7 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
+import org.bukkit.event.block.BlockShearEntityEvent
 import org.bukkit.event.entity.EntityChangeBlockEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
@@ -35,6 +36,7 @@ import org.bukkit.event.player.PlayerFishEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerItemConsumeEvent
 import org.bukkit.event.player.PlayerMoveEvent
+import org.bukkit.event.player.PlayerShearEntityEvent
 import org.bukkit.event.player.PlayerSwapHandItemsEvent
 import org.bukkit.event.player.PlayerToggleSneakEvent
 import org.bukkit.persistence.PersistentDataContainer
@@ -350,5 +352,20 @@ class Listeners(val plugin: LumaItems) : Listener {
     @EventHandler
     fun onEntityTeleport(event: EntityTeleportEvent) {
         fire(event.entity.persistentDataContainer, Ability.ENTITY_TELEPORT, (getDummyPlayer() ?: return), event)
+    }
+
+    @EventHandler
+    fun onShearEntity(event: PlayerShearEntityEvent) {
+        val player = event.player
+        val data: PersistentDataContainer = player.inventory.itemInMainHand.itemMeta?.persistentDataContainer ?: return
+
+        fire(data, Ability.SHEAR_ENTITY, player, event)
+    }
+
+    @EventHandler
+    fun onBlockShearEntity(event: BlockShearEntityEvent) {
+        val data: PersistentDataContainer = event.tool.itemMeta?.persistentDataContainer ?: return
+
+        fire(data, Ability.BLOCK_SHEAR_ENTITY, getDummyPlayer() ?: return, event)
     }
 }

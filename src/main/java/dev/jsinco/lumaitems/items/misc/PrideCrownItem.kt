@@ -12,6 +12,7 @@ import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
+import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import java.util.UUID
@@ -20,21 +21,21 @@ class PrideCrownItem : CustomItem {
 
     companion object {
         val colors: List<DustOptions> = listOf(
-            DustOptions(Util.hex2BukkitColor("#F36B6B"), 0.6f),
-            DustOptions(Util.hex2BukkitColor("#F3B36B"), 0.6f),
-            DustOptions(Util.hex2BukkitColor("#F3EA6B"), 0.6f),
-            DustOptions(Util.hex2BukkitColor("#89E280"), 0.6f),
-            DustOptions(Util.hex2BukkitColor("#7485E3"), 0.6f),
-            DustOptions(Util.hex2BukkitColor("#A374E3"), 0.6f),
-            DustOptions(Util.hex2BukkitColor("#D179DE"), 0.6f),
+            DustOptions(Util.hex2BukkitColor("#F36B6B"), 0.9f),
+            DustOptions(Util.hex2BukkitColor("#F3B36B"), 0.9f),
+            DustOptions(Util.hex2BukkitColor("#F3EA6B"), 0.9f),
+            DustOptions(Util.hex2BukkitColor("#89E280"), 0.9f),
+            DustOptions(Util.hex2BukkitColor("#7485E3"), 0.9f),
+            DustOptions(Util.hex2BukkitColor("#A374E3"), 0.9f),
+            DustOptions(Util.hex2BukkitColor("#D179DE"), 0.9f),
         )
     }
 
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
-            "&#BA6BF3&lP&#BE6FF2&lr&#C273F1&li&#C778F0&ld&#CB7CEF&le &#CF80ED&lC&#D384EC&lr&#D889EB&lo&#DC8DEA&lw&#E091E9&ln",
+            "&#F49595&lP&#F9EB97&lr&#C6F9AC&li&#A8D9F6&ld&#E2BBFD&le &f&lCrown",
             mutableListOf(),
-            mutableListOf(),
+            mutableListOf("&7Legends whisper the &#F49595&lP&#F9EB97&lr&#C6F9AC&li&#A8D9F6&ld&#E2BBFD&le &f&lCrown", "&7reveals unseen beauty within, coaxing", "&7a blossoming of confidence and charm", "&7that captivates all who witness it."),
             Material.LARGE_AMETHYST_BUD,
             mutableListOf("pridecrown"),
             mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 8)
@@ -50,10 +51,28 @@ class PrideCrownItem : CustomItem {
     override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
         when (type) {
             Ability.RUNNABLE -> {
-                for (element in colors) {
+                for (i in 0..2) {
                     player.world.spawnParticle(
-                        Particle.REDSTONE, player.eyeLocation.add(0.0, 0.49, 0.0), 2, 0.2, 0.0, 0.2, element
-                    )
+                        Particle.REDSTONE, player.eyeLocation.add(0.0, 0.45, 0.0), 2, 0.2, 0.0, 0.2, colors.random())
+                }
+
+                player.world.spawnParticle(
+                    Particle.END_ROD, player.eyeLocation.add(0.0, 0.45, 0.0), 1, 0.2, 0.0, 0.2, 0.01
+                )
+
+            }
+
+            Ability.RIGHT_CLICK -> {
+                event as PlayerInteractEvent
+                if (!Util.isItemInSlot("pridecrown", EquipmentSlot.HAND, player)) {
+                    return false
+                }
+                event.isCancelled = true
+
+                val item = event.item ?: return false
+                if (player.equipment.helmet == null) {
+                    player.equipment.helmet = item
+                    item.amount = 0
                 }
             }
             else -> return false

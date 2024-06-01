@@ -35,6 +35,8 @@ public enum Ability {
     ARMOR_CHANGE, // When a player changes their armor
     ENTITY_TELEPORT, // When a living entity with a specific persistent data teleports
     PLAYER_INTERACT_ENTITY, // When a player interacts at a living entity (Unused, No listener)
-    INVENTORY_CLICK // When a player clicks in their inventory
+    INVENTORY_CLICK, // When a player clicks in their inventory
+    SHEAR_ENTITY, // When a player shears a living entity
+    BLOCK_SHEAR_ENTITY, // When a block shears a living entity
 
 }
