@@ -91,30 +91,11 @@ class Listeners(val plugin: LumaItems) : Listener {
         fire(data, Ability.CROSSBOW_LOAD, player, event)
     }
 
+    @FireForAllNBT
     @EventHandler
     fun onProjectileLaunch(event: ProjectileLaunchEvent) {
-        val player = event.entity.shooter as? Player ?: return
-
-        val item = player.inventory.itemInMainHand
-        val offHandItem = player.inventory.itemInOffHand
-
-        if (!item.hasItemMeta() && !offHandItem.hasItemMeta()) return
-
-        val data: PersistentDataContainer? = item.itemMeta?.persistentDataContainer
-        val offHandData: PersistentDataContainer? = offHandItem.itemMeta?.persistentDataContainer
-
-
-        for (customItem in ItemManager.customItems) {
-            if (data?.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT) == true) {
-                val customItemClass = customItem.value
-                customItemClass.executeAbilities(Ability.PROJECTILE_LAUNCH, player, event)
-                return
-            } else if (offHandData?.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT) == true) {
-                val customItemClass = customItem.value
-                customItemClass.executeAbilities(Ability.PROJECTILE_LAUNCH, player, event)
-                return
-            }
-        }
+        val player: Player = event.entity.shooter as? Player ?: return
+        fire(Util.getAllEquipmentNBT(player), Ability.PROJECTILE_LAUNCH, player, event)
     }
 
     @EventHandler
@@ -319,11 +300,9 @@ class Listeners(val plugin: LumaItems) : Listener {
 
     @EventHandler
     fun onPlayerConsumeItem(event: PlayerItemConsumeEvent) {
-        val player = event.player
-        val item = event.item
-        val data: PersistentDataContainer = item.itemMeta?.persistentDataContainer ?: return
+        val data: PersistentDataContainer = event.item.itemMeta?.persistentDataContainer ?: return
 
-        fire(data, Ability.CONSUME_ITEM, player, event)
+        fire(data, Ability.CONSUME_ITEM, event.player, event)
     }
 
     @FireForAllNBT

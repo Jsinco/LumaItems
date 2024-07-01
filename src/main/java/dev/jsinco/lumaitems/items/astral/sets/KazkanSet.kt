@@ -190,7 +190,7 @@ class KazkanSet : AstralSet {
         return true
     }
 
-    fun adjustArrowDirection(arrow: Projectile, player: Player) {
+    private fun adjustArrowDirection(arrow: Projectile, player: Player) {
         // adjust arrows direction based on where player is looking
         // loc.setDirection(player.location.toVector().subtract(armorStand.location.toVector()).normalize());
         val targetEntity = player.getTargetEntity(75)
@@ -207,7 +207,7 @@ class KazkanSet : AstralSet {
         arrow.setGravity(true)
     }
 
-    fun handleArrowFiring(player: Player) {
+    private fun handleArrowFiring(player: Player) {
         val linkedArrows = playerLinkedArrows[player] ?: return
         val arrow: Arrow = if (linkedArrows.isNotEmpty()) linkedArrows.first() else {
             playerLinkedArrows.remove(player)

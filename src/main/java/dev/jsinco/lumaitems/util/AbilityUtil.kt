@@ -25,7 +25,8 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Vector
-import java.util.*
+import java.util.UUID
+import kotlin.random.Random
 
 
 object AbilityUtil {
@@ -72,6 +73,7 @@ object AbilityUtil {
         }
     }
 
+    @Suppress("deprecation", "removal")
     @JvmStatic
     fun noDamagePermission(attacker: Player, damagee: Entity): Boolean {
         val event = EntityDamageByEntityEvent(attacker, damagee, EntityDamageEvent.DamageCause.ENTITY_ATTACK, 0.1)
@@ -122,7 +124,7 @@ object AbilityUtil {
         // edit this
         for (face in faces) {
             val b = block.getRelative(face)
-            if (b.type.toString().lowercase(Locale.getDefault()).contains(type)) {
+            if (b.type.toString().lowercase().contains(type)) {
                 if (particle != null) {
                     b.world.spawnParticle(Particle.BLOCK_CRACK, b.location, 5, 0.5, 0.5, 0.5, 0.1, b.blockData)
                     b.world.spawnParticle(particle, b.location, 2, 0.5, 0.5, 0.5, 0.1)
@@ -171,13 +173,13 @@ object AbilityUtil {
 
     // Usage: Stellaris' Set
     fun pinataAbility(block: Block) {
-        if (Random().nextInt(32000) >= 14) return
+        if (Random.nextInt(32000) >= 14) return
 
         val pinataFile = FileManager("saves/pinata.yml").getFileYaml()
         val items = pinataFile.getConfigurationSection("items")!!.getKeys(false)
         val rareItems = pinataFile.getConfigurationSection("rare-items")!!.getKeys(false)
 
-        val item = if (Random().nextInt(20) <= 5) {
+        val item = if (Random.nextInt(20) <= 5) {
             val item = rareItems.random()
             val itemStack = pinataFile.getItemStack("rare-items.$item")
             itemStack

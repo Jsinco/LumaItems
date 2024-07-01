@@ -46,9 +46,11 @@ class GeneralListeners(val plugin: LumaItems) : Listener {
         val livingEntity = event.entity as? LivingEntity ?: return
         val isBoss = bosses.contains(livingEntity.type)
 
-        if (Random.nextInt(100) > 15 || livingEntity !is Enemy) return // 15% chance to spawn a relic
+        if (Random.nextInt(100) > 8 || livingEntity !is Enemy) return // 8% chance to spawn a relic
 
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
+        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, Runnable {
+            if (livingEntity.hasMetadata("NO_RELIC")) return@Runnable
+
             val rarity: Rarity = if (isBoss) Rarity.bossRarities[0] else Rarity.genericRarities.random()
             val material: Material =
                 Material.valueOf(relicFile.getStringList("relic-materials.${rarity.name.lowercase()}").random())
@@ -68,7 +70,7 @@ class GeneralListeners(val plugin: LumaItems) : Listener {
                     livingEntity.equipment?.setItemInOffHand(relic)
                 }
             })
-        })
+        }, 1L)
     }
 
     @EventHandler

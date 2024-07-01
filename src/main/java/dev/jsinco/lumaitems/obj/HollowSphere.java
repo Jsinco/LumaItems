@@ -31,7 +31,7 @@ public class HollowSphere {
     private void init() {
         for (double x = -radius; x < radius; x += density) {
             for (double z = -radius; z < radius; z += density) {
-                final double y = Math.sqrt(radius*radius - x*x - z*z); // TODO: Resource intensive?
+                final double y = Math.sqrt(radius*radius - x*x - z*z);
                 locations.add(center.clone().subtract(-x, y, -z));
                 locations.add(center.clone().add(-x, y, -z));
             }

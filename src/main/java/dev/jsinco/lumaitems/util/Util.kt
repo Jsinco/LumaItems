@@ -20,7 +20,8 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
-import java.util.*
+import java.util.UUID
+import net.md_5.bungee.api.ChatColor as BungeeChatColor
 
 
 object Util {
@@ -53,7 +54,7 @@ object Util {
                 //get the next string
                 i++
                 if (texts[i][0] == '#') {
-                    finalText.append(net.md_5.bungee.api.ChatColor.of(texts[i].substring(0, 7)).toString() + texts[i].substring(7))
+                    finalText.append(BungeeChatColor.of(texts[i].substring(0, 7)).toString() + texts[i].substring(7))
                 } else {
                     finalText.append(ChatColor.translateAlternateColorCodes('&', "&" + texts[i]))
                 }
