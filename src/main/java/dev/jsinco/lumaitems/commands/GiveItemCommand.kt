@@ -45,6 +45,7 @@ class GiveItemCommand : SubCommand {
 
         if (item != null) {
             Util.giveItem(player, item)
+            player.sendMessage("${Util.prefix} You have been given ${item.itemMeta.displayName}")
         } else {
             for (customItem in customItems) {
                 Util.giveItem(player, customItem.value.createItem().second)

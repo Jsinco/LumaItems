@@ -40,7 +40,7 @@ class LoreEditTagItem : CustomItem {
                 //if (player.inventory.itemInMainHand.itemMeta.persistentDataContainer.has(NamespacedKey(RenameTagItem.plugin, "newloretag"), PersistentDataType.SHORT)) {
                 //    startEditingLore(player)
                 //}
-                player.sendMessage(Util.colorcode("${Util.prefix} Redeem by making a ticket on &#a8ff92https://discord.gg/solacemc"))
+                player.sendMessage(Util.colorcode("${Util.prefix} Redeem by making a ticket on &#a8ff92https://lumamc.net/discord"))
             }
             /*
             Ability.CHAT -> {

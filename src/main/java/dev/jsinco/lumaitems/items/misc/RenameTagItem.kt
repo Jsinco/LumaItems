@@ -37,7 +37,7 @@ class RenameTagItem : CustomItem {
                 //if (player.inventory.itemInMainHand.itemMeta.persistentDataContainer.has(NamespacedKey(plugin, "renametag"), PersistentDataType.SHORT)) {
                 //    startRenamingPlayer(player) // Check if the item is in the MAIN HAND, not just anywhere :P
                 //}
-                player.sendMessage(Util.colorcode("${Util.prefix} Redeem by making a ticket on &#a8ff92https://discord.gg/solacemc"))
+                player.sendMessage(Util.colorcode("${Util.prefix} Redeem by making a ticket on &#a8ff92https://lumamc.net/discord"))
             }
             /*
             Ability.CHAT -> {
