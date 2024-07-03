@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.util.ToolType
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -47,14 +47,14 @@ class VenomSet : AstralSet {
         return "venom-set"
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.PLAYER_DAMAGED_BY_ENTITY -> {
+            Action.PLAYER_DAMAGED_BY_ENTITY -> {
                 event as EntityDamageByEntityEvent
                 val entity = event.damager as? LivingEntity ?: return false
                 entity.addPotionEffect(PotionEffect(PotionEffectType.POISON, 60, 1, false, false, false))
             }
-            Ability.ENTITY_DAMAGE -> {
+            Action.ENTITY_DAMAGE -> {
                 event as EntityDamageByEntityEvent
                 val entity = event.entity as LivingEntity
                 entity.addPotionEffect(PotionEffect(PotionEffectType.POISON, 60, 1, false, false, false))

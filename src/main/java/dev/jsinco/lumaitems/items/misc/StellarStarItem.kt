@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.misc
 
 import com.iridium.iridiumcolorapi.IridiumColorAPI
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.util.Util
@@ -48,9 +48,9 @@ class StellarStarItem : CustomItem {
         return Pair("stellarstar", stellarStar)
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 if (player.inventory.itemInMainHand.itemMeta.persistentDataContainer.has(NamespacedKey(plugin, "stellarstar"), PersistentDataType.SHORT)) {
                     val item = getStellarTool()
                     item.itemMeta = generateDecals(item)

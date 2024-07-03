@@ -3,7 +3,7 @@ package dev.jsinco.lumaitems.items.armor
 import com.destroystokyo.paper.event.player.PlayerElytraBoostEvent
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Bukkit
 import org.bukkit.Color
@@ -14,7 +14,7 @@ import org.bukkit.Sound
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import java.util.*
+import java.util.Random
 
 class RubyPinionsItem : CustomItem {
 
@@ -34,11 +34,11 @@ class RubyPinionsItem : CustomItem {
         return Pair("rubypinions", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val elytraBoostEvent: PlayerElytraBoostEvent? = event as? PlayerElytraBoostEvent
 
         when (type) {
-            Ability.ELYTRA_BOOST -> {
+            Action.ELYTRA_BOOST -> {
                 velocity(player)
                 elytraBoostEvent!!.isCancelled = true
             }

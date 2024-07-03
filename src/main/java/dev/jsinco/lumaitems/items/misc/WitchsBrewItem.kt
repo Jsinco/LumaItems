@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Bukkit
 import org.bukkit.Color
@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.PotionMeta
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
-import java.util.*
+import java.util.UUID
 import kotlin.random.Random
 
 class WitchsBrewItem : CustomItem {
@@ -68,9 +68,9 @@ class WitchsBrewItem : CustomItem {
         return Pair("witchsbrew", potion)
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.CONSUME_ITEM -> {
+            Action.CONSUME_ITEM -> {
                 event as PlayerItemConsumeEvent
 
                 event.isCancelled = true

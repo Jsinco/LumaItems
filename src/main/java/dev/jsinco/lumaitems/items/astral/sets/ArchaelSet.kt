@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
@@ -28,7 +28,7 @@ class ArchaelSet : AstralSet {
 
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         return false
     }
 

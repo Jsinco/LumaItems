@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.Particle
@@ -11,7 +11,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
-import java.util.*
+import java.util.Random
 import java.util.function.Consumer
 
 class MoonstoneMattockItem : CustomItem {
@@ -27,11 +27,11 @@ class MoonstoneMattockItem : CustomItem {
         return Pair("moonstonemattock", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val blockBreakEvent: BlockBreakEvent? = event as? BlockBreakEvent
 
         when (type) {
-            Ability.BREAK_BLOCK -> {
+            Action.BREAK_BLOCK -> {
                 blockBreakEvent!!.isDropItems = gamblersRemark(blockBreakEvent.block, blockBreakEvent.block.drops)
             }
             else -> return false

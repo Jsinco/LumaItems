@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Bukkit
 import org.bukkit.Color
@@ -18,7 +18,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.metadata.FixedMetadataValue
 import org.bukkit.persistence.PersistentDataType
-import java.util.*
+import java.util.Random
 
 class RubyLongbowItem : CustomItem {
 
@@ -38,15 +38,15 @@ class RubyLongbowItem : CustomItem {
         return Pair("rubylongbow", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val projectileLaunch: ProjectileLaunchEvent? = event as? ProjectileLaunchEvent
         val projectileHit: ProjectileHitEvent? = event as? ProjectileHitEvent
 
         when (type) {
-            Ability.PROJECTILE_LAUNCH -> {
+            Action.PROJECTILE_LAUNCH -> {
                 velocity(player, projectileLaunch!!.entity)
             }
-            Ability.PROJECTILE_LAND -> {
+            Action.PROJECTILE_LAND -> {
                 despawnArrow(projectileHit!!.entity)
             }
             else -> return false

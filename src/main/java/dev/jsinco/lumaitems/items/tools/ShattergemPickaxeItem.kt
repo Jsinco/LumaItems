@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -24,9 +24,9 @@ class ShattergemPickaxeItem : CustomItem {
         return Pair("shattergempickaxe", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.BREAK_BLOCK -> {
+            Action.BREAK_BLOCK -> {
                 event as BlockBreakEvent
                 if (event.block.type == Material.BUDDING_AMETHYST && player.gameMode != GameMode.CREATIVE) {
                     event.block.world.dropItemNaturally(event.block.location, ItemStack(Material.BUDDING_AMETHYST))

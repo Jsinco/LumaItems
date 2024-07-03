@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.astral
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.relics.RelicCrafting
@@ -21,9 +21,9 @@ class AstralOrbItem : CustomItem {
         return Pair("astralorb", RelicCrafting.astralOrb)
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 event as PlayerInteractEvent
                 event.isCancelled = true
 

@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.Particle
@@ -36,14 +36,14 @@ class SollureItem : CustomItem {
         return Pair("sollure", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val fishEvent: PlayerFishEvent? = event as? PlayerFishEvent
         when (type) {
-            Ability.RUNNABLE -> {
+            Action.RUNNABLE -> {
                 player.addPotionEffect(PotionEffect(PotionEffectType.LUCK, 220, 1, false, false, false))
             }
 
-            Ability.FISH -> {
+            Action.FISH -> {
                 if (fishEvent!!.state == PlayerFishEvent.State.CAUGHT_FISH) {
                     sollureFish(fishEvent.hook, fishEvent.caught!!, false)
                 } else if (fishEvent.state == PlayerFishEvent.State.FISHING) {

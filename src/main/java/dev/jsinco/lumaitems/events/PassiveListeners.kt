@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.events
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
@@ -19,24 +19,29 @@ class PassiveListeners(val plugin: LumaItems) {
         const val ASYNC_PASSIVE_LISTENER_TICKS: Long = 30
     }
 
-
-    fun getPassiveListener(ability: Ability): BukkitRunnable {
-        return object: BukkitRunnable() {
-            override fun run() {
-                for (player in Bukkit.getOnlinePlayers()) {
-                    fire(Util.getAllEquipmentNBT(player), player, ability)
-                }
+    private fun fire(dataList: List<PersistentDataContainer>, player: Player, action: Action) {
+        for (data: PersistentDataContainer in dataList) {
+            for (customItem in ItemManager.customItems) {
+                if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+                customItem.value.executeAbilities(action, player, 0)
             }
         }
     }
 
 
-    fun fire(dataList: List<PersistentDataContainer>, player: Player, ability: Ability) {
-        for (data: PersistentDataContainer in dataList) {
-            for (customItem in ItemManager.customItems) {
-                if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
-                customItem.value.executeAbilities(ability, player, 0)
+    fun getPassiveListener(action: Action): BukkitRunnable {
+        return object: BukkitRunnable() {
+            override fun run() {
+                for (player in Bukkit.getOnlinePlayers()) {
+                    fire(Util.getAllEquipmentNBT(player), player, action)
+                }
             }
+        }
+    }
+
+    fun onPluginAction(action: Action) {
+        for (player in Bukkit.getOnlinePlayers()) {
+            fire(Util.getAllEquipmentNBT(player), player, action)
         }
     }
 

@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.GlowManager
 import dev.jsinco.lumaitems.util.AbilityUtil
@@ -41,12 +41,12 @@ class RemakerItem : CustomItem {
         return Pair("remaker", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RUNNABLE -> {
+            Action.RUNNABLE -> {
                 paranoia(player)
             }
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 nearSightEnemies(player)
             }
             else -> return false

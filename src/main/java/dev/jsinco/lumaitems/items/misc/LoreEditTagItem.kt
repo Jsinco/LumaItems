@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.Util
@@ -10,7 +10,7 @@ import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
-import java.util.*
+import java.util.UUID
 
 class LoreEditTagItem : CustomItem {
 
@@ -32,11 +32,11 @@ class LoreEditTagItem : CustomItem {
         return Pair("newloretag", loreEditTag)
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         //val chatMessageEvent: AsyncPlayerChatEvent? = event as? AsyncPlayerChatEvent
 
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 //if (player.inventory.itemInMainHand.itemMeta.persistentDataContainer.has(NamespacedKey(RenameTagItem.plugin, "newloretag"), PersistentDataType.SHORT)) {
                 //    startEditingLore(player)
                 //}

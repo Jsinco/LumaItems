@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Color
@@ -42,9 +42,9 @@ class CottonTailCrossbowItem : CustomItem {
         return Pair("cottontailcrossbow", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.PROJECTILE_LAUNCH -> {
+            Action.PROJECTILE_LAUNCH -> {
                 event as ProjectileLaunchEvent
 
                 val arrow: Arrow = event.entity as Arrow

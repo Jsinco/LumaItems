@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.DefaultAttributes
 import org.bukkit.Material
@@ -14,7 +14,7 @@ import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
-import java.util.*
+import java.util.UUID
 
 class ParfaitStridesItem : CustomItem {
 
@@ -40,9 +40,9 @@ class ParfaitStridesItem : CustomItem {
         return Pair("parfaitstrides", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 if (cooldown.contains(player.uniqueId) || !player.isSneaking) return false
 
                 val nearbyPlayers: MutableList<Player> = player.getNearbyEntities(10.0, 10.0, 10.0).mapNotNull { it as? Player }.toMutableList()

@@ -1,10 +1,22 @@
 package dev.jsinco.lumaitems.manager;
 
-public enum Ability {
+/**
+ * Enum for different actions that can be performed by LumaItems listeners.
+ * This enum is expanded as events are added.
+ */
+public enum Action {
 
+    /**
+     * Global actions that effect every player. Called from LumaItems main class or a runnable.
+     */
     RUNNABLE, // When the global LumaItems runnable calls. Tick rate is every 70 ticks. This runnable is in sync with the main thread and is thread safe.
     ASYNC_RUNNABLE, // When the global LumaItems runnable calls. Tick rate is every 30 ticks. This runnable is async and is not thread safe.
+    PLUGIN_ENABLE, // When the plugin is enabled
+    PLUGIN_DISABLE, // When the plugin is disabled
 
+    /**
+     * Player actions that effect a specific player. Called by a listener.
+     */
     CROSSBOW_LOAD, // When a player loads a crossbow in their main hand
     PROJECTILE_LAUNCH, // WHen a player launches a projectile from their main or offhand
     PROJECTILE_LAND, // When a projectile that was shot by a player and has a specific persistent data lands
@@ -20,6 +32,7 @@ public enum Ability {
     ENTITY_DAMAGED_GENERIC, // When a living entity is damaged from ANYTHING and not just other living entities
     DROP_ITEM, // When a player drops an item
     BREAK_BLOCK, // When a player breaks a block
+    CACHED_BLOCK_BREAK, // When a player breaks a block and the block is cached <-- Edit description
     PLACE_BLOCK, // When a player places a block
     FISH, // When a player fishes in their main or offhand
     ELYTRA_BOOST, // When a player boosts themselves with an item while gliding with an elytra
@@ -38,5 +51,7 @@ public enum Ability {
     INVENTORY_CLICK, // When a player clicks in their inventory
     SHEAR_ENTITY, // When a player shears a living entity
     BLOCK_SHEAR_ENTITY, // When a block shears a living entity
+    PLAYER_TELEPORT, // When a player teleports
+    PLAYER_QUIT, // When a player quits the server
 
 }

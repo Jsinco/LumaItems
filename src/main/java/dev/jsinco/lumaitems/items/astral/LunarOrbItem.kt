@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.astral
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.relics.Rarity
@@ -26,9 +26,9 @@ class LunarOrbItem : CustomItem {
         return Pair("lunarorb", RelicCrafting.lunarOrb)
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 if (!player.inventory.itemInMainHand.itemMeta.persistentDataContainer.has(NamespacedKey(LumaItems.getPlugin(), "lunarorb"), PersistentDataType.SHORT)) return false
 
                 event as PlayerInteractEvent

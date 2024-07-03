@@ -1,7 +1,8 @@
 package dev.jsinco.lumaitems.commands;
 
 import dev.jsinco.lumaitems.LumaItems;
-import dev.jsinco.lumaitems.obj.HollowSphere;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -14,19 +15,21 @@ public class DebugCommand implements SubCommand {
     public void execute(@NotNull LumaItems plugin, @NotNull CommandSender sender, @NotNull String[] args) {
         Player player = (Player) sender;
 
+        int size = Integer.parseInt(args[1]);
+        int seg = Integer.parseInt(args[2]);
+        spawnCircle(size, player.getLocation(), seg);
+    }
 
-
-        /*
-        AstralSetUpgradeManager astralSetUpgradeManager = new AstralSetUpgradeManager();
-        astralSetUpgradeManager.reloadUpgrades();
-
-        Player player = (Player) sender;
-
-        ItemStack item = player.getInventory().getItemInMainHand();
-
-        AstralSetUpgradeFactory factory = new AstralSetUpgradeFactory(item);
-        System.out.println(factory.upgrade());
-         */
+    public void spawnCircle(int size, Location center, int segment){
+        for (int radius = 0; radius < size; radius++) {
+            for (int i = 0; i < 360; i += 360 / segment) {
+                double angle = (i * Math.PI / 180);
+                double x = Math.round(radius * Math.cos(angle));
+                double z = Math.round(radius * Math.sin(angle));
+                Location loc = center.clone().add(x, -1, z);
+                loc.getBlock().setType(Material.DIAMOND_BLOCK);
+            }
+        }
     }
 
     @Nullable

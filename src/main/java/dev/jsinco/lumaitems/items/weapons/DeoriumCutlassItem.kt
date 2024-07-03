@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
 import org.bukkit.Bukkit
@@ -20,7 +20,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.bukkit.util.Vector
-import java.util.*
+import java.util.UUID
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -44,9 +44,9 @@ class DeoriumCutlassItem  : CustomItem {
         return Pair("deoriumcutlass", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 if (cooldown.contains(player.uniqueId)) return false
                 val block = player.getTargetBlockExact(50) ?: return false
                 createPullVoid(block.location.add(0.0,1.0,0.0), player)

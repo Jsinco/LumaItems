@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.BestTool
@@ -25,11 +25,11 @@ class DarkMoonShovelItem : CustomItem {
         return Pair("darkmoonshovel", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val blockBreakEvent: BlockBreakEvent? = event as? BlockBreakEvent
 
         when (type) {
-            Ability.BREAK_BLOCK -> {
+            Action.BREAK_BLOCK -> {
                 AbilityUtil.breakThreeByThree(blockBreakEvent!!.block, player, BestTool.SHOVEL)
             }
             else -> return false

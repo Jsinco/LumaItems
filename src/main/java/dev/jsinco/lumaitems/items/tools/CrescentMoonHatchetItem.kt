@@ -2,10 +2,10 @@ package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
-import dev.jsinco.lumaitems.util.AbilityUtil.breakRelativeBlock
 import dev.jsinco.lumaitems.obj.Cuboid
+import dev.jsinco.lumaitems.util.AbilityUtil.breakRelativeBlock
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.block.Block
@@ -33,11 +33,11 @@ class CrescentMoonHatchetItem : CustomItem {
         return Pair("crescentmoonhatchet", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val blockBreakEvent: BlockBreakEvent? = event as? BlockBreakEvent
 
         when (type) {
-            Ability.BREAK_BLOCK -> {
+            Action.BREAK_BLOCK -> {
                 treeFeller(blockBreakEvent!!.block, player)
             }
             else -> return false

@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -10,7 +10,7 @@ import org.bukkit.Particle
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import java.util.*
+import java.util.UUID
 
 class DarkWickShieldItem : CustomItem {
 
@@ -32,12 +32,12 @@ class DarkWickShieldItem : CustomItem {
         return Pair("darkwickshield", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 countdownLighter(player)
             }
-            Ability.PLAYER_CROUCH -> {
+            Action.PLAYER_CROUCH -> {
                 countdownLighter(player)
             }
             else -> return false

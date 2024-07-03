@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
@@ -26,14 +26,14 @@ class ButterBunWingsItem : CustomItem {
         return Pair("butterbunwings", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RUNNABLE -> {
+            Action.RUNNABLE -> {
                 if (Util.isItemInSlot("butterbunwings", EquipmentSlot.CHEST, player)) {
                     player.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 340, 0, false, false, false))
                 }
             }
-            Ability.ARMOR_CHANGE -> {
+            Action.ARMOR_CHANGE -> {
                 if (!Util.isItemInSlot("butterbunwings", EquipmentSlot.CHEST, player)) {
                     player.removePotionEffect(PotionEffectType.GLOWING)
                 } else {

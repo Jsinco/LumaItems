@@ -3,7 +3,7 @@ package dev.jsinco.lumaitems.items.astral.sets
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.GenericMCToolType
 import dev.jsinco.lumaitems.util.Util
@@ -85,9 +85,9 @@ class KazkanSet : AstralSet {
         return "kazkan-set"
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 val genericMCToolType: GenericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand) ?: return false
 
                 if (genericMCToolType == GenericMCToolType.AXE) {
@@ -102,7 +102,7 @@ class KazkanSet : AstralSet {
                 }
             }
 
-            Ability.LEFT_CLICK -> {
+            Action.LEFT_CLICK -> {
                 val genericMCToolType: GenericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand) ?: return false
                 if (genericMCToolType == GenericMCToolType.CROSSBOW) {
                     handleArrowFiring(player)
@@ -114,7 +114,7 @@ class KazkanSet : AstralSet {
 
             }
 
-            Ability.ENTITY_DAMAGE -> {
+            Action.ENTITY_DAMAGE -> {
                 val genericMCToolType: GenericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand) ?: return false
                 event as EntityDamageByEntityEvent
                 if (genericMCToolType != GenericMCToolType.AXE) return false
@@ -124,7 +124,7 @@ class KazkanSet : AstralSet {
                 event.damage += (holdingPlayer.totalUpdates / 4).coerceAtMost(14)
             }
 
-            Ability.ASYNC_RUNNABLE -> {
+            Action.ASYNC_RUNNABLE -> {
                 for (holdingPlayer in holdingPlayers) {
                     if (!holdingPlayer.isHolding()) {
                         holdingPlayers.remove(holdingPlayer)
@@ -142,7 +142,7 @@ class KazkanSet : AstralSet {
                 }
             }
 
-            Ability.PROJECTILE_LAUNCH -> {
+            Action.PROJECTILE_LAUNCH -> {
                 event as ProjectileLaunchEvent
 
                 val projectile = event.entity as? Arrow ?: return false
@@ -170,7 +170,7 @@ class KazkanSet : AstralSet {
                 }, 150)
             }
 
-            Ability.PROJECTILE_LAND -> {
+            Action.PROJECTILE_LAND -> {
                 event as ProjectileHitEvent
                 val entity = event.hitEntity as? LivingEntity ?: return false
                 if (AbilityUtil.noDamagePermission(player, entity)) return false

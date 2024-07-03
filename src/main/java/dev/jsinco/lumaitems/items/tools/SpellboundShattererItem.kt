@@ -2,10 +2,10 @@ package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
-import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.obj.Cuboid
+import dev.jsinco.lumaitems.util.AbilityUtil
 import org.bukkit.Color
 import org.bukkit.Material
 import org.bukkit.Particle
@@ -17,7 +17,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.metadata.FixedMetadataValue
-import java.util.*
+import java.util.Random
 
 class SpellboundShattererItem : CustomItem {
 
@@ -43,11 +43,11 @@ class SpellboundShattererItem : CustomItem {
         return Pair("spellboundshatterer", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         if (Random().nextInt(200) >= 3) return false
 
         when (type) {
-            Ability.BREAK_BLOCK -> {
+            Action.BREAK_BLOCK -> {
                 event as BlockBreakEvent
                 shatterNearbyBlocks(event.block, player)
 

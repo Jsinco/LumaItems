@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Color
 import org.bukkit.Material
@@ -14,7 +14,7 @@ import org.bukkit.entity.Item
 import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerFishEvent
 import org.bukkit.inventory.ItemStack
-import java.util.*
+import java.util.Random
 import kotlin.math.max
 
 class ArcaneAnglerItem : CustomItem {
@@ -30,11 +30,11 @@ class ArcaneAnglerItem : CustomItem {
         return Pair("arcaneangler", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val playerFishEvent: PlayerFishEvent? = event as? PlayerFishEvent
 
         when (type) {
-            Ability.FISH -> {
+            Action.FISH -> {
                 if (playerFishEvent!!.state == PlayerFishEvent.State.CAUGHT_FISH) {
                     wager(player, playerFishEvent.caught as Item)
                 }

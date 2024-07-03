@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
@@ -25,9 +25,9 @@ class PastelShearsItem : CustomItem {
         return Pair("pastelshears", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.LEFT_CLICK -> {
+            Action.LEFT_CLICK -> {
                 if (!Util.isItemInSlot("pastelshears", EquipmentSlot.HAND, player)) {
                     return false
                 }

@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Color
 import org.bukkit.Material
@@ -13,7 +13,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
-import java.util.*
+import java.util.Random
 import java.util.function.Consumer
 
 class PeepPlushyMattockItem : CustomItem {
@@ -46,9 +46,9 @@ class PeepPlushyMattockItem : CustomItem {
         return Pair("peepplushymattock", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.BREAK_BLOCK -> {
+            Action.BREAK_BLOCK -> {
                 event as BlockBreakEvent
                 event.isDropItems = snugluck(event.block, event.block.drops)
             }

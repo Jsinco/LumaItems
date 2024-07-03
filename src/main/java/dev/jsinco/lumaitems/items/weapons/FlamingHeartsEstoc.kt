@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.GlowManager
 import dev.jsinco.lumaitems.util.AbilityUtil
@@ -21,7 +21,7 @@ import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.bukkit.util.Vector
-import java.util.*
+import java.util.UUID
 
 class FlamingHeartsEstoc : CustomItem {
     companion object {
@@ -43,9 +43,9 @@ class FlamingHeartsEstoc : CustomItem {
         return Pair("flamingheartssword", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 if (cooldown.contains(player.uniqueId)) return false
 
                 val fireBall: Fireball = player.launchProjectile(Fireball::class.java)
@@ -65,7 +65,7 @@ class FlamingHeartsEstoc : CustomItem {
                 }, 600L)
             }
 
-            Ability.PROJECTILE_LAND -> {
+            Action.PROJECTILE_LAND -> {
                 event as ProjectileHitEvent
 
                 event.entity.getNearbyEntities(7.3, 7.3, 7.3).forEach {
@@ -80,7 +80,7 @@ class FlamingHeartsEstoc : CustomItem {
                 event.entity.world.spawnParticle(Particle.EXPLOSION_HUGE, event.entity.location, 1, 0.0, 0.0, 0.0, 0.0)
                 event.entity.world.playSound(event.entity.location, Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 2.0f)
             }
-            Ability.ENTITY_DAMAGE -> {
+            Action.ENTITY_DAMAGE -> {
                 player.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 220, 3, false, false, true))
                 player.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 220, 0, false, false, true))
             }

@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.magical
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.Util
@@ -24,12 +24,13 @@ import org.bukkit.metadata.FixedMetadataValue
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Vector
-import java.util.*
+import java.util.UUID
 
 class SweetBluetGemstone : CustomItem {
 
     companion object {
         private val plugin: LumaItems = LumaItems.getPlugin()
+        // Todo: why the hell do i have 3 lists for this...
         private val activeSnowballs: MutableSet<UUID> = mutableSetOf()
         private val cooldownStorm: MutableSet<UUID> = mutableSetOf()
         private val cooldownGlacier: MutableSet<UUID> = mutableSetOf()
@@ -38,23 +39,24 @@ class SweetBluetGemstone : CustomItem {
         val item = ItemFactory(
             "&#fb9ee8&lS&#efa6eb&lw&#e3aeed&le&#d8b6f0&le&#ccbef3&lt &#c0c6f6&lB&#b4cef8&ll&#a9d6fb&lu&#9ddefe&le&#96e4fb&lt &#95e7f2&lG&#94eaea&le&#92ede1&lm&#91f0d9&ls&#90f3d0&lt&#8ff7c8&lo&#8dfabf&ln&#8cfdb7&le",
             mutableListOf("&#97E2FFTrifecta"),
-            mutableListOf("Grants the ability to cast three", "different spells", "", "Sneak and right-click to change", "the current spell", "",
-                "${AbilityType.RIGHTEOUS_DOWNFALL.friendlyName} &7-&f Launches a spell", "overhead that damages on impact",
-                "${AbilityType.STORM.friendlyName} &7-&f Strikes a target with", "multiple lightning bolts, &c20s cooldown",
+            mutableListOf("Hold sneak and right-click", "to change spells.", "",
+                "${AbilityType.RIGHTEOUS_DOWNFALL.friendlyName} &7-&f Launches a spell", "overhead that damages on impact", "",
+                "${AbilityType.STORM.friendlyName} &7-&f Strikes a target with", "multiple lightning bolts, &c20s cooldown", "",
                 "${AbilityType.GLACIER_BREAKAGE.friendlyName} &7-&f Launches a spell", "that explodes upon impact, &c1m cooldown",
                 "", "&c4 lapis per spell"),
             Material.DIAMOND,
             mutableListOf("sweetbluetgemstone"),
-            mutableMapOf(Enchantment.DURABILITY to 9, Enchantment.FIRE_ASPECT to 5, Enchantment.THORNS to 4)
+            mutableMapOf(Enchantment.DURABILITY to 9, Enchantment.FIRE_ASPECT to 5, Enchantment.THORNS to 4, Enchantment.DAMAGE_ALL to 7)
         )
-        item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
+        //item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
+        item.tier = "&#F34848&lS&#E06C42&lu&#CD903C&lm&#B9B436&lm&#A6D830&le&#93FC2A&lr &#5DC472&l2&#42A795&l0&#278BB9&l2&#0C6FDD&l4"
         item.stringPersistentDatas[NamespacedKey(plugin, "ability-type")] = AbilityType.RIGHTEOUS_DOWNFALL.name
         return Pair("sweetbluetgemstone", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 event as PlayerInteractEvent
                 val activeAbilityType: AbilityType = event.item?.itemMeta?.persistentDataContainer?.get(NamespacedKey(
                     plugin, "ability-type"), PersistentDataType.STRING)?.uppercase()?.let {
@@ -81,7 +83,7 @@ class SweetBluetGemstone : CustomItem {
                     runAbilityType(activeAbilityType, player)
                 }
             }
-            Ability.PROJECTILE_LAND -> {
+            Action.PROJECTILE_LAND -> {
                 event as ProjectileHitEvent
                 val snowball = event.entity as? Snowball ?: return false
 
@@ -234,40 +236,7 @@ class SweetBluetGemstone : CustomItem {
 
     enum class AbilityType(val friendlyName: String, val lapis: Int, val cooldown: Long) {
         RIGHTEOUS_DOWNFALL("&#E2EFFDRighteous Downfall", 5, 0),
-        STORM("&#FFEB92Storm", 4, 200), // change to explosion one
+        STORM("&#FFEB92Storm", 4, 200),
         GLACIER_BREAKAGE("&#a8c6fbG&#abc9fbl&#aecbfca&#b1cefcc&#b5d0fci&#b8d3fce&#bbd5fdr &#bed8fdB&#c1dafdr&#c4ddfee&#c7dffea&#cbe2fek&#cee4fea&#d1e7ffg&#d4e9ffe", 8, 1200);
     }
 }
-
-/*val loc1 = player.location
-val loc2 = livingEntity.location
-val vector: Vector = AbilityUtil.getDirectionBetweenLocations(loc1, loc2)
-var i = 1.0
-
-object : BukkitRunnable() {
-    override fun run() {
-        if (i <= loc1.distance(loc2)) {
-            vector.multiply(i)
-            loc1.add(vector)
-            loc1.world.strikeLightningEffect(loc1)
-            loc1.subtract(vector)
-            vector.normalize()
-            i += 2.0
-        } else {
-            this.cancel()
-        }
-    }
-}.runTaskTimer(plugin, 0L, 1L)
-
-
-while (i <= loc1.distance(loc2)) {
-    vector.multiply(i)
-    loc1.add(vector)
-    loc1.world.spawnEntity(loc1, EntityType.LIGHTNING)
-    loc1.getWorld().spawnParticle(Particle.SCULK_SOUL, loc1, 1, 0.2, 0.1, 0.2, 0.0)
-    loc1.getWorld().spawnParticle(Particle.REVERSE_PORTAL, loc1, 1, 0.2, 0.1, 0.2, 0.1)
-    loc1.subtract(vector)
-    vector.normalize()
-    i += 0.5
-}
- */

@@ -20,7 +20,7 @@ class UpgradeCommand : SubCommand {
         return null
     }
 
-    override fun permission(): String? {
+    override fun permission(): String {
         return "lumaitems.command.upgrade"
     }
 

@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
 import org.bukkit.Material
@@ -59,10 +59,10 @@ class BrewmastersSpellbladeItem : CustomItem {
         return Pair("brewmastersspellblade", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
 
         when (type) {
-            Ability.ENTITY_DAMAGE -> {
+            Action.ENTITY_DAMAGE -> {
                 event as EntityDamageByEntityEvent
                 if (Random.nextInt(100) >= 7 || AbilityUtil.noDamagePermission(player, event.entity)) return false
 

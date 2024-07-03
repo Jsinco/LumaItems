@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil.isOnGround
 import org.bukkit.Bukkit
@@ -18,7 +18,7 @@ import org.bukkit.metadata.FixedMetadataValue
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.bukkit.util.Vector
-import java.util.*
+import java.util.UUID
 
 class ThunderStridesItem : CustomItem {
 
@@ -45,9 +45,9 @@ class ThunderStridesItem : CustomItem {
 
 
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.PLAYER_CROUCH -> {
+            Action.PLAYER_CROUCH -> {
                 if (player.isSneaking || cooldown.contains(player.uniqueId)) return false
 
                 if (activeFastLane.contains(player.uniqueId) && isOnGround(player)) {
@@ -56,7 +56,7 @@ class ThunderStridesItem : CustomItem {
                     startFastLane(player)
                 }
             }
-            Ability.MOVE -> {
+            Action.MOVE -> {
                 if (!activeFastLane.contains(player.uniqueId)) return false
                 val playerMoveEvent: PlayerMoveEvent = event as PlayerMoveEvent
                 val vector = playerMoveEvent.to.clone().subtract(playerMoveEvent.from.clone()).toVector()

@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -24,16 +24,16 @@ class RibbonBootsItem : CustomItem {
         return Pair("ribbonboots", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val entityDamage: EntityDamageEvent? = event as? EntityDamageEvent
 
         when (type) {
-            Ability.PLAYER_DAMAGE_BY_SELF -> {
+            Action.PLAYER_DAMAGE_BY_SELF -> {
                 if (entityDamage!!.cause == EntityDamageEvent.DamageCause.FALL) {
                     entityDamage.isCancelled = true
                 }
             }
-            Ability.RUNNABLE -> {
+            Action.RUNNABLE -> {
                 player.addPotionEffect(PotionEffect(PotionEffectType.JUMP, 220, 0, false, false, false))
             }
             else -> return false

@@ -19,5 +19,5 @@ interface CustomItem {
      * @param event The event that triggered the ability
      * @return A boolean for return info
      */
-    fun executeAbilities(type: Ability, player: Player, event: Any): Boolean
+    fun executeAbilities(type: Action, player: Player, event: Any): Boolean
 }

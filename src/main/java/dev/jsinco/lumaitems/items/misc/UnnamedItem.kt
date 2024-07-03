@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.FileManager
 import org.bukkit.Bukkit
@@ -52,15 +52,15 @@ class UnnamedItem : CustomItem {
 
 
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.FISH -> {
+            Action.FISH -> {
                 event as PlayerFishEvent
                 if (event.state !=  PlayerFishEvent.State.CAUGHT_FISH) return false
                 spawnBarrel(event.caught!!)
                 watchBarrel()
             }
-            Ability.ENTITY_CHANGE_BLOCK -> {
+            Action.ENTITY_CHANGE_BLOCK -> {
                 event as EntityChangeBlockEvent
                 event.isCancelled = true
             }

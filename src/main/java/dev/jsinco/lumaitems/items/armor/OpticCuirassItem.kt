@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -25,15 +25,15 @@ class OpticCuirassItem : CustomItem {
         return Pair("opticcuirass", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val playerSwapHands: PlayerSwapHandItemsEvent? = event as? PlayerSwapHandItemsEvent
 
         when (type) {
-            Ability.SWAP_HAND -> {
+            Action.SWAP_HAND -> {
                 swapArmor(playerSwapHands!!.offHandItem!!, player)
                 playerSwapHands.isCancelled = true
             }
-            Ability.RUNNABLE -> {
+            Action.RUNNABLE -> {
                 opticEffects(player)
             }
             else -> return false

@@ -2,10 +2,10 @@ package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
-import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.obj.Cuboid
+import dev.jsinco.lumaitems.util.AbilityUtil
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound
@@ -16,7 +16,8 @@ import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Vector
-import java.util.*
+import java.util.Locale
+import java.util.Random
 
 class MistralMattockItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
@@ -31,11 +32,11 @@ class MistralMattockItem : CustomItem {
         return Pair("mistralmattock", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val blockBreakEvent: BlockBreakEvent? = event as? BlockBreakEvent
 
         when (type) {
-            Ability.BREAK_BLOCK -> {
+            Action.BREAK_BLOCK -> {
                 seeker(blockBreakEvent!!.block, player)
             }
             else -> return false

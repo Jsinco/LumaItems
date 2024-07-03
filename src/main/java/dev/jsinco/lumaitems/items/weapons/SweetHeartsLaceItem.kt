@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -42,9 +42,9 @@ class SweetHeartsLaceItem : CustomItem {
         return Pair("sweetheartslace", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.PROJECTILE_LAUNCH -> {
+            Action.PROJECTILE_LAUNCH -> {
                 event as ProjectileLaunchEvent
                 val nearbyWatchers = player.getNearbyEntities(50.0, 50.0, 50.0).mapNotNull { it as? Player }
 
@@ -71,7 +71,7 @@ class SweetHeartsLaceItem : CustomItem {
                 }.runTaskTimer(p, 0L, 1L);
 
             }
-            Ability.PROJECTILE_LAND -> {
+            Action.PROJECTILE_LAND -> {
                 event as ProjectileHitEvent
                 val entity = event.hitEntity as? LivingEntity ?: return false
 
@@ -85,11 +85,11 @@ class SweetHeartsLaceItem : CustomItem {
                     }, 600L)
                 }
             }
-            Ability.ENTITY_TARGET_PLAYER -> {
+            Action.ENTITY_TARGET_PLAYER -> {
                 event as EntityTargetLivingEntityEvent
                 event.isCancelled = true
             }
-            Ability.ENTITY_DAMAGE -> {
+            Action.ENTITY_DAMAGE -> {
                 event as EntityDamageByEntityEvent
                 event.damage += 12.0
             }

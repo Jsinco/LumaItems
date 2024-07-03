@@ -3,7 +3,7 @@ package dev.jsinco.lumaitems.items.astral.sets
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.GenericMCToolType
 import dev.jsinco.lumaitems.util.Util
@@ -20,7 +20,7 @@ import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
-import java.util.*
+import java.util.UUID
 
 class MagmaticSet : AstralSet {
 
@@ -70,22 +70,22 @@ class MagmaticSet : AstralSet {
         return "magmatic-set"
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val genericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand)
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 // poorly written but im in a rush
                 if ((Util.isItemInSlot("magmatic-set", EquipmentSlot.HAND, player)|| Util.isItemInSlot("magmatic-set", EquipmentSlot.OFF_HAND, player)) && genericMCToolType == GenericMCToolType.SWORD && !cooldown.contains(player.uniqueId)) {
                     AbilityUtil.spawnSpell(player, Particle.FLAME, "magmatic-set", 120L)
                     cooldownPlayer(player.uniqueId)
                 }
             }
-            Ability.PROJECTILE_LAND -> {
+            Action.PROJECTILE_LAND -> {
                 event as ProjectileHitEvent
                 if (AbilityUtil.noDamagePermission(player, event.hitEntity ?: return false)) return false
                 igniteEntity(event.hitEntity as LivingEntity)
             }
-            Ability.BREAK_BLOCK -> {
+            Action.BREAK_BLOCK -> {
                 event as BlockBreakEvent
                 if (genericMCToolType == GenericMCToolType.PICKAXE) {
                     if (pickaxeSmelt(event.block, event.block.getDrops(player.inventory.itemInMainHand))) event.isDropItems = false

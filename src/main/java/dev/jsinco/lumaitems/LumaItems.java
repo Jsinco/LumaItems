@@ -9,7 +9,7 @@ import dev.jsinco.lumaitems.events.GeneralListeners;
 import dev.jsinco.lumaitems.events.Listeners;
 import dev.jsinco.lumaitems.events.PassiveListeners;
 import dev.jsinco.lumaitems.guis.AbstractGui;
-import dev.jsinco.lumaitems.manager.Ability;
+import dev.jsinco.lumaitems.manager.Action;
 import dev.jsinco.lumaitems.manager.FileManager;
 import dev.jsinco.lumaitems.manager.GlowManager;
 import dev.jsinco.lumaitems.manager.ItemManager;
@@ -31,6 +31,7 @@ public final class LumaItems extends JavaPlugin {
     private static boolean withProtocolLib;
     private static boolean withMythicMobs;
     private static PAPIManager papiManager;
+    private static PassiveListeners passiveListeners;
 
     @Override
     public void onEnable() {
@@ -41,15 +42,15 @@ public final class LumaItems extends JavaPlugin {
         withMythicMobs = getServer().getPluginManager().getPlugin("MythicMobs") != null;
 
 
+        passiveListeners = new PassiveListeners(this);
         final ItemManager itemManager = new ItemManager(this);
-        final PassiveListeners passiveListeners = new PassiveListeners(this);
         try {
             itemManager.registerItems();
         } catch (Exception e) {
             getLogger().log(Level.SEVERE, "An error occurred while registering items", e);
         }
-        passiveListeners.getPassiveListener(Ability.RUNNABLE).runTaskTimer(this, 0L, PassiveListeners.DEFAULT_PASSIVE_LISTENER_TICKS);
-        passiveListeners.getPassiveListener(Ability.ASYNC_RUNNABLE).runTaskTimerAsynchronously(this, 0L, PassiveListeners.ASYNC_PASSIVE_LISTENER_TICKS);
+        passiveListeners.getPassiveListener(Action.RUNNABLE).runTaskTimer(this, 0L, PassiveListeners.DEFAULT_PASSIVE_LISTENER_TICKS);
+        passiveListeners.getPassiveListener(Action.ASYNC_RUNNABLE).runTaskTimerAsynchronously(this, 0L, PassiveListeners.ASYNC_PASSIVE_LISTENER_TICKS);
 
 
         GlowManager.initGlowTeams();
@@ -67,10 +68,14 @@ public final class LumaItems extends JavaPlugin {
             papiManager = new PAPIManager(this);
             papiManager.register();
         }
+
+        passiveListeners.onPluginAction(Action.PLUGIN_ENABLE);
     }
 
     @Override
     public void onDisable() {
+        passiveListeners.onPluginAction(Action.PLUGIN_DISABLE);
+
         if (papiManager != null) {
             papiManager.unregister();
         }

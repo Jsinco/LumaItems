@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.DefaultAttributes
 import dev.jsinco.lumaitems.util.Util
@@ -48,9 +48,9 @@ class PrideCrownItem : CustomItem {
         return Pair("pridecrown", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RUNNABLE -> {
+            Action.RUNNABLE -> {
                 for (i in 0..2) {
                     player.world.spawnParticle(
                         Particle.REDSTONE, player.eyeLocation.add(0.0, 0.45, 0.0), 2, 0.2, 0.0, 0.2, colors.random())
@@ -62,7 +62,7 @@ class PrideCrownItem : CustomItem {
 
             }
 
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 event as PlayerInteractEvent
                 if (!Util.isItemInSlot("pridecrown", EquipmentSlot.HAND, player)) {
                     return false

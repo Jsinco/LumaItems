@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Bukkit
 import org.bukkit.Color
@@ -35,30 +35,34 @@ class SunbrellaHatItem : CustomItem {
     // Movement-based/utility helmet
     // - Ability to glide down
     // - Ability to jump higher
+    // - Ability to knockback enemies further
     // - Slide forward?
 
     companion object {
-        val plugin: LumaItems = LumaItems.getPlugin()
-        val dustoption = DustOptions(Color.WHITE, 1f)
-        val fallingPlayers: ConcurrentHashMap<Player, Double> = ConcurrentHashMap()
+        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val dustOption = DustOptions(Color.WHITE, 1f)
+        private val fallingPlayers: ConcurrentHashMap<Player, Double> = ConcurrentHashMap()
     }
 
-    // TODO: fix fall damage happening even when gliding
+
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
-            "&#F34848&lS&#E36643&lu&#D3843E&ln&#C3A239&lb&#B3C034&lr&#A3DE2F&le&#93FC2A&ll&#7DE548&ll&#66CD66&la &#399EA1&lH&#2387BF&la&#0C6FDD&lt",
-            mutableListOf("&#0C6FDDBreezy Day"),
-            mutableListOf("&#A3DE2FTailwind &7- &fWhen falling, shift to glide", "down and mitigate fall damage.", "", "&#E36643Aerovector &7- &fWhile wearing, knockback attacks will", "launch enemies further and faster.", "", "&#399EA1WindTye &7- &fArrows fired while wearing this hat", "will be converted to wind slashes that", "glide through the air.",),
+            "&#A0F562&lS&#B6DD75&lu&#CCC487&ln&#E2AC9A&lb&#F893AC&lr&#E5A2BE&le&#D1B0D1&ll&#BEBFE3&ll&#AACDF5&la&#ABC1F3&l &#ABB6F2&lH&#ACAAF0&la&#AC9EEE&lt",
+            mutableListOf("&#B4E591Breezy Day"),
+            mutableListOf("&#F893ACTailwind &7- &fWhen falling, shift to glide", "down and mitigate fall damage.", "",
+                "&#AACDF5Trailblazer &7- &fWhile wearing, knockback", "attacks will launch enemies further", "and faster.", "",
+                "&#AC9EEEWindTye &7- &fWhile wearing, arrows", "fired will be converted to wind", "slashes that glide through the air."),
             Material.NETHERITE_HELMET,
             mutableListOf("sunbrellahat"),
             mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 5, Enchantment.PROTECTION_FALL to 6, Enchantment.PROTECTION_PROJECTILE to 4, Enchantment.DURABILITY to 4, Enchantment.MENDING to 1)
         )
+        item.tier = "&#F34848&lS&#E06C42&lu&#CD903C&lm&#B9B436&lm&#A6D830&le&#93FC2A&lr &#5DC472&l2&#42A795&l0&#278BB9&l2&#0C6FDD&l4"
         return Pair("sunbrellahat", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.PLAYER_CROUCH -> {
+            Action.PLAYER_CROUCH -> {
                 if (!player.isSneaking && player.velocity.y < -0.1) {
                     Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, {
                         fallingPlayers[player] = 0.77
@@ -66,15 +70,15 @@ class SunbrellaHatItem : CustomItem {
                 }
             }
 
-            Ability.ASYNC_RUNNABLE -> {
+            Action.ASYNC_RUNNABLE -> {
                 for (fallingPlayer in fallingPlayers.keys) {
-                    if (isGliding(fallingPlayer)) {
+                    if (!isGliding(fallingPlayer)) {
                         fallingPlayers.remove(fallingPlayer)
                     }
                 }
             }
 
-            Ability.MOVE -> {
+            Action.MOVE -> {
                 if (!player.isSneaking || player.velocity.y > -0.1) {
                     return false
                 }
@@ -92,27 +96,27 @@ class SunbrellaHatItem : CustomItem {
                 val vec = player.location.direction.multiply(0.25)
                 player.velocity = Vector(vec.x, player.velocity.y * multiplier, vec.z)
                 player.fallDistance = 0.0f // Update this when the player actually changes blocks or keep this?
-                player.world.spawnParticle(Particle.REDSTONE, player.location, 4, 0.3, 0.0, 0.3, dustoption)
+                player.world.spawnParticle(Particle.REDSTONE, player.location, 4, 0.3, 0.0, 0.3, dustOption)
             }
 
-            Ability.ENTITY_DAMAGE -> {
+            Action.ENTITY_DAMAGE -> {
                 event as EntityDamageByEntityEvent
                 val livingEntity = event.entity as? LivingEntity ?: return false
 
                 // Check for knockback attack - TODO: Is there a DamageSource for this?
                 if (!event.isCritical && player.isSprinting) {
                     // Adjust velocity of the attacked entity to knock them back further than normal.
-                    val vector: Vector = livingEntity.location.toVector().subtract(player.location.toVector().add(Vector(0.0, 0.2, 0.0))).multiply(1.5)
+                    val vector: Vector = livingEntity.location.toVector().subtract(player.location.toVector()).multiply(1.5).add(Vector(0.0, 0.1, 0.0))
 
                     vector.x = (-3.0).coerceAtLeast(vector.x.coerceAtMost(3.0))
                     vector.y = (-3.0).coerceAtLeast(vector.y.coerceAtMost(3.0))
                     vector.z = (-3.0).coerceAtLeast(vector.z.coerceAtMost(3.0))
                     livingEntity.velocity = vector
-                    livingEntity.world.spawnParticle(Particle.REDSTONE, livingEntity.location, 10, 0.5, 0.5, 0.5, dustoption)
+                    livingEntity.world.spawnParticle(Particle.REDSTONE, livingEntity.location, 10, 0.5, 0.5, 0.5, dustOption)
                 }
             }
 
-            Ability.PROJECTILE_LAUNCH -> {
+            Action.PROJECTILE_LAUNCH -> {
                 event as ProjectileLaunchEvent
                 val projectile = event.entity as? Arrow ?: return false
                 projectile.setGravity(false)
@@ -150,7 +154,7 @@ class SunbrellaHatItem : CustomItem {
                 }.runTaskTimer(plugin, 1L, 3L)
             }
 
-            Ability.PROJECTILE_LAND -> {
+            Action.PROJECTILE_LAND -> {
                 event as ProjectileHitEvent
                 event.entity.remove()
             }
@@ -162,7 +166,7 @@ class SunbrellaHatItem : CustomItem {
 
 
     private fun isGliding(player: Player): Boolean {
-        return !player.isOnline || !player.isSneaking || player.velocity.y > -0.01
+        return player.isSneaking && player.velocity.y > -0.01
     }
 
 }

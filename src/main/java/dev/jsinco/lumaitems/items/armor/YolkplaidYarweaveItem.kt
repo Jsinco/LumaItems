@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.manager.GlowManager
@@ -53,9 +53,9 @@ class YolkplaidYarweaveItem : CustomItem {
         return Pair("yolkplaidyarweave", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.PLAYER_DAMAGED_BY_ENTITY -> {
+            Action.PLAYER_DAMAGED_BY_ENTITY -> {
                 event as EntityDamageByEntityEvent
 
                 if (!Util.isItemInSlot("yolkplaidyarweave", EquipmentSlot.CHEST, player)) {
@@ -71,7 +71,7 @@ class YolkplaidYarweaveItem : CustomItem {
                 }
 
             }
-            Ability.ENTITY_MOVE, Ability.ENTITY_TELEPORT -> {
+            Action.ENTITY_MOVE, Action.ENTITY_TELEPORT -> {
                 event as Cancellable
                 event.isCancelled = true
             }

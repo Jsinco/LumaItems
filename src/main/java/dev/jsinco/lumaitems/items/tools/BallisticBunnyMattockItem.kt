@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.Util
@@ -20,7 +20,7 @@ import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
-import java.util.*
+import java.util.UUID
 import kotlin.random.Random
 
 class BallisticBunnyMattockItem : CustomItem {
@@ -56,9 +56,9 @@ class BallisticBunnyMattockItem : CustomItem {
         return Pair("ballisticbunnymattock", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 event as PlayerInteractEvent
                 if (player.isSneaking) {
                     detonateCarrots(player)
@@ -66,7 +66,7 @@ class BallisticBunnyMattockItem : CustomItem {
                 }
                 stickCarrot(event.clickedBlock ?: return false, event.blockFace, player)
             }
-            Ability.ENTITY_DAMAGED_GENERIC -> {
+            Action.ENTITY_DAMAGED_GENERIC -> {
                 event as EntityDamageEvent
                 detonateCarrot(event.entity as? Interaction ?: return false)
             }

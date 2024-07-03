@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.manager.GlowManager
@@ -48,9 +48,9 @@ class YolkPlaidYataghanItem : CustomItem {
         return Pair("yolkplaidyataghan", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 val livingEntity: LivingEntity = player.getTargetEntity(35) as? LivingEntity ?: return false
                 if (livingEntity is Player) {
                     return false
@@ -61,7 +61,7 @@ class YolkPlaidYataghanItem : CustomItem {
                     trapMobInEgg(livingEntity, player)
                 }
             }
-            Ability.ENTITY_MOVE, Ability.ENTITY_TELEPORT -> {
+            Action.ENTITY_MOVE, Action.ENTITY_TELEPORT -> {
                 event as Cancellable
                 event.isCancelled = true
             }

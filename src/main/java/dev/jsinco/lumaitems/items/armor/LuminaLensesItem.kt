@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.Util
 import net.md_5.bungee.api.ChatMessageType
@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
-import java.util.*
+import java.util.UUID
 
 class LuminaLensesItem : CustomItem {
 
@@ -37,15 +37,15 @@ class LuminaLensesItem : CustomItem {
         return Pair("luminalenses", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RUNNABLE -> {
+            Action.RUNNABLE -> {
                 if (tickPlayer(player)) {
                     addNoctalEffects(player)
                 }
             }
 
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 batteryCharge(player.inventory.helmet!!, player.inventory.itemInMainHand, player)
             }
             else -> return false

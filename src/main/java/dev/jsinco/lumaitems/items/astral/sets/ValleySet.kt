@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.util.GenericMCToolType
 import org.bukkit.FluidCollisionMode
 import org.bukkit.Material
@@ -62,11 +62,11 @@ class ValleySet : AstralSet {
         return "valley-set"
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val tool = GenericMCToolType.getToolType(player.inventory.itemInMainHand)
 
         when (type) {
-            Ability.LEFT_CLICK, Ability.RIGHT_CLICK -> {
+            Action.LEFT_CLICK, Action.RIGHT_CLICK -> {
                 if (tool != GenericMCToolType.SHOVEL) return false
                 val targetBlock = player.getTargetBlockExact(45, FluidCollisionMode.ALWAYS) ?: return false
 
@@ -75,7 +75,7 @@ class ValleySet : AstralSet {
                 }
             }
 
-            Ability.ENTITY_DAMAGE -> {
+            Action.ENTITY_DAMAGE -> {
                 if (tool != GenericMCToolType.SWORD) return false
                 event as EntityDamageByEntityEvent
                 if (event.entity !is Monster) return false
@@ -83,7 +83,7 @@ class ValleySet : AstralSet {
                 player.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 0, false, false, false))
             }
 
-            Ability.BREAK_BLOCK -> {
+            Action.BREAK_BLOCK -> {
                 if (tool == GenericMCToolType.HOE && Random.nextInt(100) < 3) {
                     event as BlockBreakEvent
                     event.block.world.dropItem(event.block.location,

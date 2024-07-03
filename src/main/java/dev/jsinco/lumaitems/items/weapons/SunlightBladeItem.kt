@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.GlowManager
 import dev.jsinco.lumaitems.util.AbilityUtil
@@ -22,7 +22,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
-import java.util.*
+import java.util.Random
 import java.util.function.Consumer
 
 
@@ -46,15 +46,15 @@ class SunlightBladeItem : CustomItem {
         return Pair("sunlightblade", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val entityDamageEvent: EntityDamageByEntityEvent? = event as? EntityDamageByEntityEvent
         when (type) {
-            Ability.ENTITY_DAMAGE -> {
+            Action.ENTITY_DAMAGE -> {
                 if (undeads.contains(entityDamageEvent!!.entity.type)) {
                     entityDamageEvent.damage *= 1.5
                 }
             }
-            Ability.RIGHT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 starbound(player)
             }
             else -> return false

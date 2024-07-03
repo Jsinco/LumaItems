@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.GlowManager
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent
@@ -37,19 +37,19 @@ class CannonBowItem : CustomItem {
         return Pair("cannonbow", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val crossbowLoad: EntityLoadCrossbowEvent? = event as? EntityLoadCrossbowEvent
         val projectileLaunch: ProjectileLaunchEvent? = event as? ProjectileLaunchEvent
         val projectileLand: ProjectileHitEvent? = event as? ProjectileHitEvent
 
         when (type) {
-            Ability.CROSSBOW_LOAD -> {
+            Action.CROSSBOW_LOAD -> {
                 crossbowLoad?.isCancelled = cannonBallLoad(player)
             }
-            Ability.PROJECTILE_LAUNCH -> {
+            Action.PROJECTILE_LAUNCH -> {
                 cannonBallLaunch(projectileLaunch!!.entity, player)
             }
-            Ability.PROJECTILE_LAND -> {
+            Action.PROJECTILE_LAND -> {
                 cannonBallLand(projectileLand!!.entity)
             }
 

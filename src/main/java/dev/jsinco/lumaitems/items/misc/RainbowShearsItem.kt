@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -34,9 +34,9 @@ class RainbowShearsItem : CustomItem {
         return Pair("rainbowshears", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.SHEAR_ENTITY -> {
+            Action.SHEAR_ENTITY -> {
                 event as PlayerShearEntityEvent
                 val drops: MutableList<ItemStack> = event.drops.toMutableList()
                 for (i in 0..Random.nextInt(4)) {
@@ -44,7 +44,7 @@ class RainbowShearsItem : CustomItem {
                 }
                 event.drops = drops
             }
-            Ability.BLOCK_SHEAR_ENTITY -> {
+            Action.BLOCK_SHEAR_ENTITY -> {
                 event as BlockShearEntityEvent
                 val drops: MutableList<ItemStack> = event.drops.toMutableList()
                 for (i in 0..Random.nextInt(4)) {

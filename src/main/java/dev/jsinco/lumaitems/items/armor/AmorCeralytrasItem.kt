@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
 import org.bukkit.Color
@@ -14,7 +14,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.scheduler.BukkitRunnable
-import java.util.*
+import java.util.UUID
 
 class AmorCeralytrasItem : CustomItem {
 
@@ -35,9 +35,9 @@ class AmorCeralytrasItem : CustomItem {
         return Pair("armorceralytras", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.PLAYER_CROUCH -> {
+            Action.PLAYER_CROUCH -> {
                 if (!player.isSneaking && AbilityUtil.isOnGround(player)) {
                     object : BukkitRunnable() {
                         override fun run() {
@@ -67,7 +67,7 @@ class AmorCeralytrasItem : CustomItem {
                 player.velocity = player.location.direction.multiply(0.6).setY(0.7)
                 boostCounter[player.uniqueId] = boostCounter.getOrDefault(player.uniqueId, 0) + 1
             }
-            Ability.MOVE -> {
+            Action.MOVE -> {
                 if (!boostCounter.contains(player.uniqueId) || !AbilityUtil.isOnGround(player)) return false
                 boostCounter.remove(player.uniqueId)
             }

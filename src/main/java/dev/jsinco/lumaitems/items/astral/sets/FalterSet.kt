@@ -3,7 +3,7 @@ package dev.jsinco.lumaitems.items.astral.sets
 import com.gamingmesh.jobs.Jobs
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.util.GenericMCToolType
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
@@ -53,9 +53,9 @@ class FalterSet : AstralSet {
         return "falter-set"
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.ENTITY_DAMAGE -> {
+            Action.ENTITY_DAMAGE -> {
                 event as EntityDamageByEntityEvent
                 event.damage += (getJobLevel(player.inventory.itemInMainHand.type, player) / 2.0)
             }

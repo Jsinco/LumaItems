@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.tools
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.Util
@@ -15,7 +15,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.inventory.ItemStack
-import java.util.*
+import java.util.UUID
 import kotlin.random.Random
 
 class ShiningHeartsHatchetItem : CustomItem {
@@ -37,9 +37,9 @@ class ShiningHeartsHatchetItem : CustomItem {
         return Pair("shiningheartshatchet", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.BREAK_BLOCK -> {
+            Action.BREAK_BLOCK -> {
                 if (Random.nextInt(100) > 3) return false
                 event as BlockBreakEvent
 
@@ -59,7 +59,7 @@ class ShiningHeartsHatchetItem : CustomItem {
                 block.world.playSound(block.location, Sound.ENTITY_FIREWORK_ROCKET_BLAST_FAR, 0.7f, 1.0f)
             }
 
-            Ability.ENTITY_DAMAGE -> {
+            Action.ENTITY_DAMAGE -> {
                 if (Random.nextInt(100) > 45 || blockAbility.contains(player.uniqueId)) return false
                 event as EntityDamageByEntityEvent
                 val entity = event.entity as? LivingEntity ?: return false

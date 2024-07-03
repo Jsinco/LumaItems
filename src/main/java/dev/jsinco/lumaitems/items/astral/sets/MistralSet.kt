@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.relics.RelicCrafting
 import dev.jsinco.lumaitems.util.DefaultAttributes
 import dev.jsinco.lumaitems.util.GenericMCToolType
@@ -15,7 +15,7 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
-import java.util.*
+import java.util.UUID
 
 class MistralSet : AstralSet {
 
@@ -73,9 +73,9 @@ class MistralSet : AstralSet {
     override fun identifier(): String {
         return "swift-set"
     }
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Ability.RUNNABLE -> {
+            Action.RUNNABLE -> {
                 if (RelicCrafting.hasFullSet("mistral-set", player)) {
                     player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 240, 0, false, false, false))
                 }

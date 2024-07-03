@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.util.ToolType
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
@@ -45,15 +45,15 @@ class MelukaSet : AstralSet {
         return astralSetFactory.createdAstralItems
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         if (!player.isInWater) return false
         when (type) {
-            Ability.RUNNABLE -> {
+            Action.RUNNABLE -> {
                 if (Util.isWearingWithNBT(player, "meluka-set")) {
                     player.addPotionEffect(PotionEffect(PotionEffectType.DOLPHINS_GRACE, 240, 0, false, false, false))
                 }
             }
-            Ability.BREAK_BLOCK -> {
+            Action.BREAK_BLOCK -> {
                 event as BlockBreakEvent
                 val item = player.inventory.itemInMainHand
                 if (ToolType.getToolType(item.type) != ToolType.TOOL) return false

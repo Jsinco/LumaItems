@@ -32,35 +32,15 @@ import kotlin.random.Random
 object AbilityUtil {
 
     val plugin: LumaItems = LumaItems.getPlugin()
-    val blockTypeBlacklist = mutableListOf( // Move to YAML file
-        Material.CHEST,
-        Material.BARREL,
-        Material.TRAPPED_CHEST,
-        Material.FURNACE,
-        Material.BLAST_FURNACE,
-        Material.SMOKER,
-        Material.HOPPER,
-        Material.BREWING_STAND,
-        Material.DROPPER,
-        Material.DISPENSER,
-        Material.BEDROCK,
-        Material.END_PORTAL_FRAME,
-        Material.SPAWNER,
-        Material.COMMAND_BLOCK,
-        Material.BARRIER,
-        Material.STRUCTURE_BLOCK,
-        Material.JIGSAW,
-        Material.END_GATEWAY,
-        Material.BUDDING_AMETHYST,
-        Material.FARMLAND,
-        Material.DIRT_PATH,
-        Material.END_PORTAL,
-        Material.END_GATEWAY,
-        Material.LAVA,
-        Material.WATER,
-        Material.AIR,
-        Material.CAVE_AIR,
-        Material.VOID_AIR
+    val blockTypeBlacklist = mutableSetOf( // Move to YAML file
+        Material.CHEST, Material.BARREL, Material.TRAPPED_CHEST,
+        Material.FURNACE, Material.BLAST_FURNACE, Material.SMOKER,
+        Material.HOPPER, Material.BREWING_STAND, Material.DROPPER,
+        Material.DISPENSER, Material.BEDROCK, Material.END_PORTAL_FRAME,
+        Material.SPAWNER, Material.COMMAND_BLOCK, Material.BARRIER,
+        Material.STRUCTURE_BLOCK, Material.JIGSAW, Material.END_GATEWAY,
+        Material.BUDDING_AMETHYST, Material.FARMLAND, Material.DIRT_PATH,
+        Material.END_PORTAL
     )
     private val blockedAbility: MutableSet<UUID> = mutableSetOf()
 
@@ -198,7 +178,7 @@ object AbilityUtil {
 
     }
 
-    fun spawnSpell(player: Player, particle: Particle?, meta: String, ticksAlive: Long) {
+    fun spawnSpell(player: Player, particle: Particle?, meta: String, ticksAlive: Long): Snowball {
         val snowball = player.launchProjectile(Snowball::class.java)
         snowball.setGravity(false)
         snowball.velocity = player.location.direction.multiply(3)
@@ -225,6 +205,7 @@ object AbilityUtil {
                 snowball.remove()
             }
         }, ticksAlive)
+        return snowball
     }
 
     fun takeSpellLapisCost(player: Player, amount: Int): Boolean {

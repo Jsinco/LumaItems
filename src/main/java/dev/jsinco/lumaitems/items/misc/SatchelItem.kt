@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.GlowManager
 import dev.jsinco.lumaitems.util.AbilityUtil
@@ -42,15 +42,15 @@ class SatchelItem : CustomItem {
         return Pair("satchel", satchel.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val projectileLaunch: ProjectileLaunchEvent? = event as? ProjectileLaunchEvent
         val projectileHit: ProjectileHitEvent? = event as? ProjectileHitEvent
 
         when (type) {
-            Ability.PROJECTILE_LAUNCH -> {
+            Action.PROJECTILE_LAUNCH -> {
                 satchelLaunch(projectileLaunch!!.entity, player)
             }
-            Ability.PROJECTILE_LAND -> {
+            Action.PROJECTILE_LAND -> {
                 satchelDetonate(projectileHit!!.entity, player)
             }
             else -> return false

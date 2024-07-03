@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Material
 import org.bukkit.attribute.Attribute
@@ -10,7 +10,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
-import java.util.*
+import java.util.UUID
 
 class MoonshineFallowItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
@@ -28,7 +28,7 @@ class MoonshineFallowItem : CustomItem {
         return Pair("moonshinefallow", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         return false // Do nothing
     }
 }

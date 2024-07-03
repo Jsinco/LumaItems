@@ -1,7 +1,7 @@
 package dev.jsinco.lumaitems.items.misc
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -24,14 +24,14 @@ class CozyCampFireItem : CustomItem {
         return Pair("cozycampfire", item.createItem())
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val blockPlaceEvent: BlockPlaceEvent? = event as? BlockPlaceEvent
 
         when (type) {
-            Ability.RUNNABLE -> {
+            Action.RUNNABLE -> {
                 cozy(player)
             }
-            Ability.PLACE_BLOCK -> {
+            Action.PLACE_BLOCK -> {
                 blockPlaceEvent!!.isCancelled = true
             }
             else -> return false

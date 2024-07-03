@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Ability
+import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.util.GenericMCToolType
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
@@ -42,16 +42,16 @@ class BlitzSet : AstralSet {
         return factory.createdAstralItems
     }
 
-    override fun executeAbilities(type: Ability, player: Player, event: Any): Boolean {
+    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         val genericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand)
 
         when (type) {
-            Ability.RUNNABLE -> {
+            Action.RUNNABLE -> {
                 if (genericMCToolType == GenericMCToolType.AXE) {
                     player.addPotionEffect(PotionEffect(PotionEffectType.FAST_DIGGING, 220, 0, false, false, true))
                 }
             }
-            Ability.ELYTRA_BOOST -> {
+            Action.ELYTRA_BOOST -> {
                 if (Util.isItemInSlot("blitz-set", EquipmentSlot.CHEST, player)) {
                     player.velocity = player.location.getDirection().multiply(1.5)
                     player.world.playSound(player.location, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1f, 1f)
