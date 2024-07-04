@@ -33,6 +33,7 @@ public enum Action {
     DROP_ITEM, // When a player drops an item
     BREAK_BLOCK, // When a player breaks a block
     CACHED_BLOCK_BREAK, // When a player breaks a block and the block is cached <-- Edit description
+    BLOCK_DROP_ITEM, // After a player breaks a block, and the block drops item(s)
     PLACE_BLOCK, // When a player places a block
     FISH, // When a player fishes in their main or offhand
     ELYTRA_BOOST, // When a player boosts themselves with an item while gliding with an elytra

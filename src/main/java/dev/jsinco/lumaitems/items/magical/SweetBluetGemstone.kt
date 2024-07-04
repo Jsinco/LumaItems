@@ -49,7 +49,7 @@ class SweetBluetGemstone : CustomItem {
             mutableMapOf(Enchantment.DURABILITY to 9, Enchantment.FIRE_ASPECT to 5, Enchantment.THORNS to 4, Enchantment.DAMAGE_ALL to 7)
         )
         //item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
-        item.tier = "&#F34848&lS&#E06C42&lu&#CD903C&lm&#B9B436&lm&#A6D830&le&#93FC2A&lr &#5DC472&l2&#42A795&l0&#278BB9&l2&#0C6FDD&l4"
+        item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
         item.stringPersistentDatas[NamespacedKey(plugin, "ability-type")] = AbilityType.RIGHTEOUS_DOWNFALL.name
         return Pair("sweetbluetgemstone", item.createItem())
     }

@@ -19,6 +19,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
+import org.bukkit.event.block.BlockDropItemEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.block.BlockShearEntityEvent
 import org.bukkit.event.entity.EntityChangeBlockEvent
@@ -209,6 +210,17 @@ class Listeners(val plugin: LumaItems) : Listener {
             }
         }
     }
+
+    @EventHandler
+    fun onBlockDropItems(event: BlockDropItemEvent) {
+        val player = event.player
+        val data = player.inventory.itemInMainHand.itemMeta?.persistentDataContainer
+
+        if (data != null) {
+            fire(data, Action.BLOCK_DROP_ITEM, player, event)
+        }
+    }
+
 
     @FireForAllNBT
     @EventHandler

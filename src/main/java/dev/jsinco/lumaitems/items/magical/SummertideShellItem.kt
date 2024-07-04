@@ -51,7 +51,7 @@ class SummertideShellItem : CustomItem {
             mutableListOf(ID),
             mutableMapOf(Enchantment.KNOCKBACK to 3, Enchantment.DAMAGE_ALL to 4, Enchantment.DURABILITY to 6)
         )
-        item.tier = "&#F34848&lS&#E06C42&lu&#CD903C&lm&#B9B436&lm&#A6D830&le&#93FC2A&lr &#5DC472&l2&#42A795&l0&#278BB9&l2&#0C6FDD&l4"
+        item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
         item.stringPersistentDatas[NamespacedKey(plugin, "ability-type")] = AbilityType.SPEED.name
         return Pair(ID, item.createItem())
     }
