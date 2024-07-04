@@ -31,7 +31,7 @@ class StellarStarItem : CustomItem {
     }
 
     init {
-        stellarStarFile.generateFile() //TODO: cleanup
+        stellarStarFile.generateFile()
     }
 
     lateinit var stellarStar: ItemStack
@@ -72,8 +72,7 @@ class StellarStarItem : CustomItem {
         for (i in 0 until stellarFile.getStringList("$randomTool.Enchants").size) {
             toolEnchants[stellarFile.getStringList("$randomTool.Enchants")[i]] = stellarFile.getIntegerList("$randomTool.Levels")[i]
         }
-        // Create item TODO: move to separate function
-        // FIXME
+
         val numOfEnchants = Random.nextInt(3, toolEnchants.size)
         val item = ItemStack(Material.valueOf("DIAMOND_$randomTool"))
         val meta = item.itemMeta
@@ -84,13 +83,13 @@ class StellarStarItem : CustomItem {
             while (meta.hasEnchant(enchant)) {
                 enchant = Enchantment.getByKey(NamespacedKey.minecraft(toolEnchants.keys.random()))!!
             }
-            //TODO: Works?
+
             val enchantString = enchant.key.toString().split(":")[1]
             meta.addEnchant(enchant, toolEnchants[enchantString]!!, true)
         }
 
         if (meta.hasEnchant(Enchantment.SILK_TOUCH) && meta.hasEnchant(Enchantment.LOOT_BONUS_BLOCKS)) {
-            if (Random.nextBoolean()) { // FIXME
+            if (Random.nextBoolean()) {
                 meta.removeEnchant(Enchantment.SILK_TOUCH)
             } else {
                 meta.removeEnchant(Enchantment.LOOT_BONUS_BLOCKS)

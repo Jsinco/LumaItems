@@ -30,7 +30,7 @@ class OpticCuirassItem : CustomItem {
 
         when (type) {
             Action.SWAP_HAND -> {
-                swapArmor(playerSwapHands!!.offHandItem!!, player)
+                swapArmor(playerSwapHands?.offHandItem ?: return false, player)
                 playerSwapHands.isCancelled = true
             }
             Action.RUNNABLE -> {

@@ -17,7 +17,7 @@ class PlasticToyShovelItem : CustomItem {
         val item = ItemFactory(
             "&#EF3F43&lP&#DB4756&ll&#C74E6A&la&#B3567D&ls&#9F5E90&lt&#8A65A4&li&#766DB7&lc&#6275CA&l &#4E7CDE&lT&#3A84F1&lo&#499EBE&ly&#59B88B&l &#68D257&lS&#77EC24&lh&#94E22E&lo&#B2D838&lv&#CFCE42&le&#ECC44C&ll",
             mutableListOf("&#766DB7Abundant"),
-            mutableListOf("When breaking sand or gravel,", "this shovel offers an extra", "chance to triple drops."), // TODO: change
+            mutableListOf("When breaking sand or gravel,", "this shovel offers an extra", "chance to triple drops."),
             Material.NETHERITE_SHOVEL,
             mutableListOf("plastictoyshovel"),
             mutableMapOf(Enchantment.MENDING to 1, Enchantment.DURABILITY to 9, Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 3)

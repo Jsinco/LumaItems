@@ -12,7 +12,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
 
-class BlueGarnetMattockItem : CustomItem { // Todo: Rename
+class BlueGarnetMattockItem : CustomItem {
 
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(

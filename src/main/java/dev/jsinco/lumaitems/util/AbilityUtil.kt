@@ -40,7 +40,7 @@ object AbilityUtil {
         Material.SPAWNER, Material.COMMAND_BLOCK, Material.BARRIER,
         Material.STRUCTURE_BLOCK, Material.JIGSAW, Material.END_GATEWAY,
         Material.BUDDING_AMETHYST, Material.FARMLAND, Material.DIRT_PATH,
-        Material.END_PORTAL
+        Material.END_PORTAL, Material.REINFORCED_DEEPSLATE
     )
     private val blockedAbility: MutableSet<UUID> = mutableSetOf()
 

@@ -51,7 +51,6 @@ import org.bukkit.persistence.PersistentDataType
  * Blocks cannot store persistent data, so we will have to store in a file (if needed for long term)
  * Or have our listeners fire every single executeAbilities() method every time we need to grab data from a block
  */
-// TODO: Convert these to use the fire event method
 class Listeners(val plugin: LumaItems) : Listener {
 // You may not find the prettiest code in this class. The code in here is designed to be
 // optimized and functional

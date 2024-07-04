@@ -49,15 +49,6 @@ class LumineEyeglassesItem : CustomItem {
                     }
                 }
             }
-
-            //Ability.ARMOR_CHANGE -> {
-            //                if (!Util.isItemInSlot("luminalrabbiteyeglasses", EquipmentSlot.HEAD, player)) {
-            //                    player.removePotionEffect(PotionEffectType.NIGHT_VISION)
-            //                } else {
-            //                    player.addPotionEffect(PotionEffect(PotionEffectType.NIGHT_VISION, 340, 0, false, false, false))
-            //                }
-            //            }
-
             else -> return false
         }
         return true
