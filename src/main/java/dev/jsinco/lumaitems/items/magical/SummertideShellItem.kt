@@ -93,6 +93,7 @@ class SummertideShellItem : CustomItem {
                 event as ProjectileHitEvent
                 val snowball = event.entity as? Snowball ?: return false
                 val entity = event.hitEntity as? LivingEntity ?: return false
+                if (AbilityUtil.noDamagePermission(player, entity)) return false
 
                 if (snowball.hasMetadata("spell-ability")) {
 

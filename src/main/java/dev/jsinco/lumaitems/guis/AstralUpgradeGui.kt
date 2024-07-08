@@ -33,19 +33,24 @@ class AstralUpgradeGui : AbstractGui {
         if (clickedItem.itemMeta?.persistentDataContainer?.has(NamespacedKey(plugin, "gui-item"), PersistentDataType.SHORT) == true) {
             event.isCancelled = true
         }
+        val i = event.inventory
+        val p = event.whoClicked as Player
 
-        val astralTool = event.inventory.getItem(11) ?: return
+        val astralTool = i.getItem(11) ?: return
 
-        val upgradeCore = event.inventory.getItem(13) ?: return
+        val upgradeCore = i.getItem(13) ?: return
         if (!isUpgradeCore(upgradeCore)) return
 
-        val factory = AstralSetUpgradeFactory(astralTool);
+        val factory = AstralSetUpgradeFactory(astralTool)
         if (factory.upgrade()) {
             upgradeCore.amount -= 1
+            i.setItem(15, astralTool)
+            i.setItem(11, null)
+            p.sendMessage("${Util.prefix} Your Astral item has been upgraded.")
+        } else {
+            p.sendMessage("${Util.prefix} This item cannot be upgraded any further.")
         }
 
-        event.inventory.setItem(15, astralTool)
-        event.inventory.setItem(11, null)
     }
 
     override fun onInventoryClose(event: InventoryCloseEvent) {

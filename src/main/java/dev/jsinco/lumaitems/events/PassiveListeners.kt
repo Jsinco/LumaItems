@@ -5,7 +5,6 @@ import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
-import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
@@ -22,7 +21,7 @@ class PassiveListeners(val plugin: LumaItems) {
     private fun fire(dataList: List<PersistentDataContainer>, player: Player, action: Action) {
         for (data: PersistentDataContainer in dataList) {
             for (customItem in ItemManager.customItems) {
-                if (!data.has(NamespacedKey(plugin, customItem.key), PersistentDataType.SHORT)) continue
+                if (!data.has(customItem.key, PersistentDataType.SHORT)) continue
                 customItem.value.executeAbilities(action, player, 0)
             }
         }

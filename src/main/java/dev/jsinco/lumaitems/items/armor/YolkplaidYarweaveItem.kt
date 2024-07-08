@@ -62,7 +62,7 @@ class YolkplaidYarweaveItem : CustomItem {
                     return false
                 }
 
-                val damager = event.damager as LivingEntity
+                val damager = event.damager as? LivingEntity ?: return false
 
                 if (Random.nextInt(10) == 5 && damager !is Player) {
                     encase(damager, player)

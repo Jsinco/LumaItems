@@ -2,6 +2,7 @@ package dev.jsinco.lumaitems.manager;
 
 import com.google.common.reflect.ClassPath;
 import dev.jsinco.lumaitems.LumaItems;
+import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -26,7 +27,7 @@ public class ItemManager {
      * Key: Custom Item NBT Key
      * Value: Custom Item Class
      */
-    public final static Map<String, CustomItem> customItems = new HashMap<>();
+    public final static Map<NamespacedKey, CustomItem> customItems = new HashMap<>();
 
 
     /**
@@ -65,7 +66,7 @@ public class ItemManager {
             try {
                 if (CustomItem.class.isAssignableFrom(clazz) && !clazz.isInterface()) {
                     CustomItem item = (CustomItem) clazz.getDeclaredConstructor().newInstance();
-                    customItems.put(item.createItem().component1(), item);
+                    customItems.put(new NamespacedKey(plugin, item.createItem().component1()), item);
                 }
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();

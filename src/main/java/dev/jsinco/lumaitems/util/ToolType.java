@@ -1,10 +1,7 @@
 package dev.jsinco.lumaitems.util;
 
 import org.bukkit.Material;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -55,10 +52,7 @@ public enum ToolType {
             case ARMOR -> {
                 return EquipmentSlot.CHEST;
             }
-            case WEAPON -> {
-                return EquipmentSlot.HAND;
-            }
-            case TOOL -> {
+            case WEAPON, TOOL -> {
                 return EquipmentSlot.HAND;
             }
         }

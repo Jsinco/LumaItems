@@ -106,7 +106,7 @@ class LoreEditTagItem : CustomItem {
             isCustomItem = true
         } else { // Secondary check
             for (nbt in ItemManager.customItems) {
-                if (meta.persistentDataContainer.has(NamespacedKey(plugin, nbt.key), PersistentDataType.SHORT)) {
+                if (meta.persistentDataContainer.has(nbt.key, PersistentDataType.SHORT)) {
                     isCustomItem = true
                 }
             }

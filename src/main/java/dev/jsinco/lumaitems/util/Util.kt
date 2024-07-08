@@ -22,10 +22,10 @@ import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
 import java.util.UUID
 import net.md_5.bungee.api.ChatColor as BungeeChatColor
+import java.awt.Color as AwtColor
 
 
 object Util {
-
     lateinit var prefix: String
     private const val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
     val armorEquipmentSlots: List<EquipmentSlot> = listOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
@@ -220,14 +220,14 @@ object Util {
         )
     }
 
-    fun getColor(block: Block): java.awt.Color {
+    fun getColor(block: Block): AwtColor {
         val cb: CraftBlock = block as CraftBlock
         val bs: BlockState = cb.nms
         val mc: MapColor = bs.getMapColor(cb.craftWorld.handle, cb.position)
-        return java.awt.Color(mc.col)
+        return AwtColor(mc.col)
     }
 
-    fun javaAwtColorToBukkitColor(color: java.awt.Color): Color {
+    fun javaAwtColorToBukkitColor(color: AwtColor): Color {
         return Color.fromARGB(color.alpha, color.red, color.green, color.blue)
     }
 

@@ -1,15 +1,15 @@
 astral-orb-rarities:
   # Class name and then chance of item
-  MistralSet: 38
-  ArchaelSet: 28
+  MistralSet: 35
+  ArchaelSet: 38
   VenomSet: 43
-  MagmaticSet: 1
-  FalterSet: 5
-  MelukaSet: 45
-  ValleySet: 55
+  MagmaticSet: 0
+  FalterSet: 3
+  MelukaSet: 42
+  ValleySet: 70
   BlitzSet: 10
   ReforgedSet: 20
-  KazkanSet: 15
+  KazkanSet: 11
 
 # All sets, by default, start from tier 1
 astral-upgrades:

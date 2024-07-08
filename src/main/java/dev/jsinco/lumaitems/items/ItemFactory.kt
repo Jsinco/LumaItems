@@ -12,6 +12,11 @@ import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
+// Breakdown:
+// - This class is for creating custom items easily.
+// - Our constructor takes in the parameters that generally most custom items always have and builds an item based off of them.
+// - Some other options are available outside the constructor.
+
 class ItemFactory(
     private val name: String,
     private val customEnchants: MutableList<String>,
