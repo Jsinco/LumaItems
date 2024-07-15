@@ -17,26 +17,27 @@ import org.bukkit.inventory.ItemStack
 import java.util.Random
 import kotlin.math.max
 
-class ArcaneAnglerItem : CustomItem {
+class SeasideSurfRodItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
-            "&#cdf9fb&lA&#c5f1fb&lr&#bde8fc&lc&#b5e0fc&la&#add8fc&ln&#a5d0fd&le &#9cc7fd&lA&#94bffe&ln&#8cb7fe&lg&#84affe&ll&#7ca6ff&le&#749eff&lr",
-            mutableListOf("&#cdf9fbW&#b7e2fca&#a1ccfdg&#8ab5fee&#749effr"),
-            mutableListOf("&#749eff\"&#79a3ffI&#7ea8fft&#83aefes &#88b3fem&#8db8fea&#93bdfeg&#98c2fdi&#9dc8fdc &#a2cdfds&#a7d2fdt&#acd7fca&#b1dcfcb&#b6e2fci&#bbe7fcl&#c0ecfci&#c5f1fbz&#caf6fbe&#caf6fbs &#c5f1fbf&#c0ecfco&#bbe7fcr&#b6e2fct&#b1dcfcu&#acd7fcn&#a7d2fde&#a2cdfd, &#9dc8fdw&#98c2fdi&#93bdfet&#8db8feh &#88b3fev&#83aefeo&#7ea8ffi&#79a3ffd&#749eff\"","","&fWhile fishing with this rod, you will","&fhave the chance to catch a surplus","&fof fish or lose your catch","","&fYour chances of wagering and a","&ffavorable gamble increase with the","&famount of fish you have caught"),
+            "&#EFB7AE&lS&#EDBEB1&le&#EAC4B5&la&#E8CBB8&ls&#E0CCBE&li&#D9CCC4&ld&#D1CDCA&le &#BAD2DA&lS&#AFD4E2&lu&#A6D0DB&lr&#9ECDD4&lf &#8BC1C5&lR&#81BABE&lo&#77B2B6&ld",
+            mutableListOf("&#95c9cdSunside Bets"),
+            mutableListOf("While fishing with this rod, you will","have the chance to catch a surplus","of fish or lose your catch.","","Your chances of wagering and a","favorable gamble increase with the","amount of fish you have caught."),
             Material.FISHING_ROD,
-            mutableListOf("arcaneangler"),
+            mutableListOf("seasidesurfrod"),
             mutableMapOf(Enchantment.LURE to 5, Enchantment.LUCK to 5, Enchantment.DURABILITY to 9, Enchantment.MENDING to 1)
         )
-        return Pair("arcaneangler", item.createItem())
+        item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
+        return Pair("seasidesurfrod", item.createItem())
     }
 
     override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
-        val playerFishEvent: PlayerFishEvent? = event as? PlayerFishEvent
 
         when (type) {
             Action.FISH -> {
-                if (playerFishEvent!!.state == PlayerFishEvent.State.CAUGHT_FISH) {
-                    wager(player, playerFishEvent.caught as Item)
+                event as PlayerFishEvent
+                if (event.state == PlayerFishEvent.State.CAUGHT_FISH) {
+                    wager(player, event.caught as Item)
                 }
             }
             else -> return false
@@ -46,16 +47,8 @@ class ArcaneAnglerItem : CustomItem {
 
     // if someone reaches int limit change to long ig
     private fun wager(player: Player, caught: Item) {
-        val chance: Int = if (player.scoreboardTags.contains("lumaitems.debug")) {
-            -1
-        } else {
-            player.getStatistic(Statistic.FISH_CAUGHT) / 1000
-        }
-        if (Random().nextInt(100) > max(
-                (12 + chance).toDouble(),
-                20.0
-            ) && chance != -1
-        ) return  // chance to wager is 12% + 1% per 1000 fish caught, max 20%
+        val chance: Int =  player.getStatistic(Statistic.FISH_CAUGHT) / 1000
+        if (Random().nextInt(100) > max((12 + chance).toDouble(), 20.0)) return  // chance to wager is 12% + 1% per 1000 fish caught, max 20%
 
         // 70% base chance + 1% per 1000 fish caught
         if (Random().nextInt(100) <= 70 + chance) {
