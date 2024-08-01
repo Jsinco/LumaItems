@@ -27,7 +27,7 @@ class LoversAlluringItem : CustomItem {
             mutableListOf("When fishing with this rod, bites", "will automatically be reeled in", "", "Fish caught with this rod have", "a small chance to be doubled"),
             Material.FISHING_ROD,
             mutableListOf("lovers-alluring"),
-            mutableMapOf(Enchantment.LURE to 5, Enchantment.LUCK to 5, Enchantment.DURABILITY to 9, Enchantment.MENDING to 1),
+            mutableMapOf(Enchantment.LURE to 5, Enchantment.LUCK_OF_THE_SEA to 5, Enchantment.UNBREAKING to 9, Enchantment.MENDING to 1),
         )
         item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
         return Pair("lovers-alluring", item.createItem())

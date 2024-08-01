@@ -20,7 +20,7 @@ class BunnyBarillasItem : CustomItem {
                 mutableListOf("Jump like a bunny!"),
                 Material.NETHERITE_BOOTS,
                 mutableListOf("bunnybarillas"),
-                mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 6, Enchantment.PROTECTION_PROJECTILE to 7, Enchantment.PROTECTION_FALL to 5, Enchantment.DURABILITY to 8, Enchantment.MENDING to 1)
+                mutableMapOf(Enchantment.PROTECTION to 6, Enchantment.PROJECTILE_PROTECTION to 7, Enchantment.FEATHER_FALLING to 5, Enchantment.UNBREAKING to 8, Enchantment.MENDING to 1)
         )
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"
         return Pair("bunnybarillas", item.createItem())
@@ -30,14 +30,14 @@ class BunnyBarillasItem : CustomItem {
         when (type) {
             Action.RUNNABLE -> {
                 if (Util.isItemInSlot("bunnybarillas", EquipmentSlot.FEET, player)) {
-                    player.addPotionEffect(PotionEffect(PotionEffectType.JUMP, 340, 2, false, false, false))
+                    player.addPotionEffect(PotionEffect(PotionEffectType.JUMP_BOOST, 340, 2, false, false, false))
                 }
             }
             Action.ARMOR_CHANGE -> {
                 if (!Util.isItemInSlot("bunnybarillas", EquipmentSlot.FEET, player)) {
-                    player.removePotionEffect(PotionEffectType.JUMP)
+                    player.removePotionEffect(PotionEffectType.JUMP_BOOST)
                 } else {
-                    player.addPotionEffect(PotionEffect(PotionEffectType.JUMP, 340, 2, false, false, false))
+                    player.addPotionEffect(PotionEffect(PotionEffectType.JUMP_BOOST, 340, 2, false, false, false))
                 }
             }
             else -> return false

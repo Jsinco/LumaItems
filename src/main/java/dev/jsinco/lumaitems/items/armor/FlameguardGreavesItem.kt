@@ -18,7 +18,7 @@ class FlameguardGreavesItem : CustomItem {
             mutableListOf("&#ba1e1e\"&#ba1e1eT&#ba1e1eu&#ba1e1er&#ba1e1en &#ba1e1ef&#ba1e1ei&#ba1e1er&#ba1e1ee&#ad2424'&#9a2e2ds &#873736f&#74413fu&#604a48r&#4d5451y &#3a5d5at&#276763o &#1a6d69s&#1a6d69t&#1a6d69a&#1a6d69r&#1a6d69d&#1a6d69u&#1a6d69s&#1a6d69t&#1a6d69\"","","&fGrants fire resistance to the wearer","&fof these pants"),
             Material.NETHERITE_LEGGINGS,
             mutableListOf("flameguardgreaves"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 7, Enchantment.PROTECTION_EXPLOSIONS to 6, Enchantment.PROTECTION_PROJECTILE to 6, Enchantment.DURABILITY to 8, Enchantment.DURABILITY to 8, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 7, Enchantment.BLAST_PROTECTION to 6, Enchantment.PROJECTILE_PROTECTION to 6, Enchantment.UNBREAKING to 8, Enchantment.UNBREAKING to 8, Enchantment.MENDING to 1)
         )
         return Pair("flameguardgreaves", item.createItem())
     }

@@ -15,8 +15,8 @@ class ArchaelSet : AstralSet {
 
         astralSetFactory.astralSetItem(
             Material.ELYTRA,
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 6, Enchantment.PROTECTION_PROJECTILE to 5, Enchantment.DURABILITY to 5,
-                Enchantment.PROTECTION_FALL to 4),
+            mutableMapOf(Enchantment.PROTECTION to 6, Enchantment.PROJECTILE_PROTECTION to 5, Enchantment.UNBREAKING to 5,
+                Enchantment.FEATHER_FALLING to 4),
             mutableListOf(),
             true,
             null,

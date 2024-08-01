@@ -36,8 +36,8 @@ class FlamingHeartsEstoc : CustomItem {
             mutableListOf("Grants resistance at the cost", "of slowness whilst attacking", "", "Right-click to send out an incendiary", "that explodes on impact", "", "&cCooldown: 30s"),
             Material.NETHERITE_SWORD,
             mutableListOf("flamingheartssword"),
-            mutableMapOf(Enchantment.MENDING to 1, Enchantment.DAMAGE_ALL to 8, Enchantment.FIRE_ASPECT to 4, Enchantment.DAMAGE_UNDEAD to 7, Enchantment.DURABILITY to 10,
-                Enchantment.LOOT_BONUS_MOBS to 4, Enchantment.SWEEPING_EDGE to 4)
+            mutableMapOf(Enchantment.MENDING to 1, Enchantment.SHARPNESS to 8, Enchantment.FIRE_ASPECT to 4, Enchantment.SMITE to 7, Enchantment.UNBREAKING to 10,
+                Enchantment.LOOTING to 4, Enchantment.SWEEPING_EDGE to 4)
         )
         item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
         return Pair("flamingheartssword", item.createItem())
@@ -77,12 +77,12 @@ class FlamingHeartsEstoc : CustomItem {
                 }
                 event.entity.world.playSound(event.entity.location, Sound.ENTITY_WITHER_SHOOT, 1.0f, 2.0f)
                 event.entity.world.spawnParticle(Particle.FLAME, event.entity.location, 25, 0.5, 0.5, 0.5, 0.5)
-                event.entity.world.spawnParticle(Particle.EXPLOSION_HUGE, event.entity.location, 1, 0.0, 0.0, 0.0, 0.0)
+                event.entity.world.spawnParticle(Particle.EXPLOSION, event.entity.location, 1, 0.0, 0.0, 0.0, 0.0)
                 event.entity.world.playSound(event.entity.location, Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 2.0f)
             }
             Action.ENTITY_DAMAGE -> {
-                player.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 220, 3, false, false, true))
-                player.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 220, 0, false, false, true))
+                player.addPotionEffect(PotionEffect(PotionEffectType.RESISTANCE, 220, 3, false, false, true))
+                player.addPotionEffect(PotionEffect(PotionEffectType.SLOWNESS, 220, 0, false, false, true))
             }
             else -> return false
         }

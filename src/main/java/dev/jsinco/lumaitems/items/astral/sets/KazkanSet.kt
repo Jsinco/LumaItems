@@ -39,12 +39,12 @@ class KazkanSet : AstralSet {
         val factory = AstralSetFactory("Kazkan", mutableListOf("&#AC87FBInvigorated"))
 
         factory.commonEnchants = mutableMapOf(
-            Enchantment.DURABILITY to 7,
+            Enchantment.UNBREAKING to 7,
         )
 
         factory.astralSetItem(
             Material.IRON_AXE,
-            mutableMapOf(Enchantment.DAMAGE_ALL to 6, Enchantment.LOOT_BONUS_MOBS to 3, Enchantment.DAMAGE_ARTHROPODS to 5),
+            mutableMapOf(Enchantment.SHARPNESS to 6, Enchantment.LOOTING to 3, Enchantment.BANE_OF_ARTHROPODS to 5),
             mutableListOf("Right-click and hold to begin", "charging up this weapon's", "power.", "", "Attack damage increases", "with time spent charging.")
         )
 
@@ -70,7 +70,7 @@ class KazkanSet : AstralSet {
 
         factory.astralSetItem(
             Material.SHIELD,
-            mutableMapOf(Enchantment.MENDING to 1, Enchantment.FIRE_ASPECT to 4, Enchantment.DAMAGE_ALL to 5),
+            mutableMapOf(Enchantment.MENDING to 1, Enchantment.FIRE_ASPECT to 4, Enchantment.SHARPNESS to 5),
             mutableListOf(),
             includeCommonEnchants = true,
             attributeModifiers = null,
@@ -97,7 +97,7 @@ class KazkanSet : AstralSet {
                 } else if (genericMCToolType == GenericMCToolType.MAGICAL) {
                     val entity = player.getTargetEntity(15) as? LivingEntity ?: return false
                     if (entity !is Player && AbilityUtil.takeSpellLapisCost(player, 13)) {
-                        entity.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 200, 30, false, false, false))
+                        entity.addPotionEffect(PotionEffect(PotionEffectType.SLOWNESS, 200, 30, false, false, false))
                     }
                 }
             }
@@ -108,7 +108,7 @@ class KazkanSet : AstralSet {
                     handleArrowFiring(player)
                 } else if (genericMCToolType == GenericMCToolType.MAGICAL) {
                     if (AbilityUtil.takeSpellLapisCost(player, 13)) {
-                        AbilityUtil.spawnSpell(player, Particle.SPELL_WITCH, "kazkan-set", 120L)
+                        AbilityUtil.spawnSpell(player, Particle.WITCH, "kazkan-set", 120L)
                     }
                 }
 
@@ -178,7 +178,7 @@ class KazkanSet : AstralSet {
                 entity.world.playSound(entity.location, Sound.ENTITY_EVOKER_CAST_SPELL, 1f, 1f)
                 entity.world.playSound(entity.location, Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1f, 1f)
                 entity.world.spawnParticle(Particle.SOUL_FIRE_FLAME, entity.eyeLocation, 20, 0.5, 0.5, 0.5, 0.5)
-                entity.world.spawnParticle(Particle.REDSTONE, entity.eyeLocation, 10, 0.4, 0.4, 0.4, 0.8,
+                entity.world.spawnParticle(Particle.DUST, entity.eyeLocation, 10, 0.4, 0.4, 0.4, 0.8,
                     Particle.DustOptions(Util.hex2BukkitColor("#AC87FB"), 2f)
                 )
 

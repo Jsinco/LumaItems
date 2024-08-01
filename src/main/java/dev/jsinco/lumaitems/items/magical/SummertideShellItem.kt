@@ -49,7 +49,7 @@ class SummertideShellItem : CustomItem {
                 "&cCooldown: 15s"),
             Material.NAUTILUS_SHELL,
             mutableListOf(ID),
-            mutableMapOf(Enchantment.KNOCKBACK to 3, Enchantment.DAMAGE_ALL to 4, Enchantment.DURABILITY to 6)
+            mutableMapOf(Enchantment.KNOCKBACK to 3, Enchantment.SHARPNESS to 4, Enchantment.UNBREAKING to 6)
         )
         item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
         item.stringPersistentDatas[NamespacedKey(plugin, "ability-type")] = AbilityType.SPEED.name
@@ -129,7 +129,7 @@ class SummertideShellItem : CustomItem {
             player.sendMessage(Util.colorcode("${Util.prefix} You are on cooldown for this item."))
             return
         }
-        AbilityUtil.spawnSpell(player, Particle.SPELL, ID, 120L).setMetadata("spell-ability", FixedMetadataValue(plugin, true))
+        AbilityUtil.spawnSpell(player, Particle.ENTITY_EFFECT, ID, 120L).setMetadata("spell-ability", FixedMetadataValue(plugin, true))
     }
 
     private fun spellAbilityLand(player: Player, entity: LivingEntity) {

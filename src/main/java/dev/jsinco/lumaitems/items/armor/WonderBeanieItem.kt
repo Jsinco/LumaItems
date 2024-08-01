@@ -41,7 +41,7 @@ class WonderBeanieItem : CustomItem {
             mutableListOf("&#723d8a\"&#7c4b9aI &#8559a9f&#8f67b9e&#9975c9e&#a383d9l &#ac91e8d&#b69ff8i&#aca8e4z&#a1b2d0z&#97bbbcy&#8dc5a8.&#83ce94.&#78d880.&#6ee16c\"","","This beanie amplifies all consumable", "potion effects you receive", "", "Wearing this beanie grants", "an extra health boost"),
             Material.NETHERITE_HELMET,
             mutableListOf("wonderbeanie"),
-            mutableMapOf(Enchantment.DURABILITY to 10, Enchantment.PROTECTION_ENVIRONMENTAL to 7, Enchantment.OXYGEN to 5, Enchantment.WATER_WORKER to 1, Enchantment.PROTECTION_EXPLOSIONS to 7, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.UNBREAKING to 10, Enchantment.PROTECTION to 7, Enchantment.RESPIRATION to 5, Enchantment.AQUA_AFFINITY to 1, Enchantment.BLAST_PROTECTION to 7, Enchantment.MENDING to 1)
         )
         item.attributeModifiers[Attribute.GENERIC_ARMOR] = AttributeModifier(UUID.randomUUID(), "generic.armor", 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD)
         item.attributeModifiers[Attribute.GENERIC_ARMOR_TOUGHNESS] = AttributeModifier(UUID.randomUUID(), "generic.armorToughness", 3.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD)

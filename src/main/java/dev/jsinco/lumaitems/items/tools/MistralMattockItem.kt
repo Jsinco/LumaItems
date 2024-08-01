@@ -27,7 +27,7 @@ class MistralMattockItem : CustomItem {
             mutableListOf("&#e790b5\"&#e593b2B&#e497afe &#e29aadg&#e09daau&#dfa0a7i&#dda4a4d&#dba7a1e&#daaa9fd &#d8ad9cb&#d6b199y &#d4b496t&#d3b794h&#d1ba91e &#cfbe8ew&#cec18bi&#ccc488n&#cac786d&#c9cb83.&#c7ce80\"","","§fSeeks out nearby ores and points the","§fwielder to them","","§fWhen breaking ores, Seeker will try to break", "§fneighboring ores as well"),
             Material.NETHERITE_PICKAXE,
             mutableListOf("mistralmattock"),
-            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.DURABILITY to 10, Enchantment.LOOT_BONUS_BLOCKS to 6, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.EFFICIENCY to 8, Enchantment.UNBREAKING to 10, Enchantment.FORTUNE to 6, Enchantment.MENDING to 1)
         )
         return Pair("mistralmattock", item.createItem())
     }

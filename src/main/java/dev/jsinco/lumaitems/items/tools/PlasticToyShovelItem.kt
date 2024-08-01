@@ -20,7 +20,7 @@ class PlasticToyShovelItem : CustomItem {
             mutableListOf("When breaking sand or gravel,", "this shovel offers an extra", "chance to triple drops."),
             Material.NETHERITE_SHOVEL,
             mutableListOf("plastictoyshovel"),
-            mutableMapOf(Enchantment.MENDING to 1, Enchantment.DURABILITY to 9, Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 3)
+            mutableMapOf(Enchantment.MENDING to 1, Enchantment.UNBREAKING to 9, Enchantment.EFFICIENCY to 8, Enchantment.FORTUNE to 3)
         )
         item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
         return Pair("plastictoyshovel", item.createItem())
@@ -39,7 +39,7 @@ class PlasticToyShovelItem : CustomItem {
                     val item = it.itemStack
                     if (item.type == Material.SAND || item.type == Material.RED_SAND || item.type == Material.GRAVEL) {
                         val block = event.block
-                        block.world.spawnParticle(Particle.REDSTONE, block.location.add(0.5, 0.5, 0.5), 20, 0.5, 0.5, 0.5, 0.1,
+                        block.world.spawnParticle(Particle.DUST, block.location.add(0.5, 0.5, 0.5), 20, 0.5, 0.5, 0.5, 0.1,
                             Particle.DustOptions(Util.javaAwtColorToBukkitColor(Util.getColor(block)), 1f)
                         )
                         item.amount *= 3

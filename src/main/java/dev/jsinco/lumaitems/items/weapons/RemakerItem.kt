@@ -36,7 +36,7 @@ class RemakerItem : CustomItem {
             mutableListOf("&#160E35\"See nothing.\"","","§fHolding this dagger will passively spawn","§fdark auras around opponents causing","§fthem to waste away","","§fRight click to unleash a bad omen, highlighting", "§fnearby opponents and blinding them","","§cCooldown: 23 secs"),
             Material.NETHERITE_SWORD,
             mutableListOf("remaker"),
-            mutableMapOf(Enchantment.DAMAGE_ALL to 8, Enchantment.DAMAGE_UNDEAD to 9, Enchantment.SWEEPING_EDGE to 4, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.SHARPNESS to 8, Enchantment.SMITE to 9, Enchantment.SWEEPING_EDGE to 4, Enchantment.UNBREAKING to 10, Enchantment.MENDING to 1)
         )
         return Pair("remaker", item.createItem())
     }
@@ -58,7 +58,7 @@ class RemakerItem : CustomItem {
         p.getNearbyEntities(10.0, 10.0, 10.0).forEach { entity ->
             if (entity !is LivingEntity || AbilityUtil.noDamagePermission(p, entity)) return@forEach
             if (entity is Monster || entity is Player) {
-                entity.world.spawnParticle(Particle.REDSTONE, entity.location.add(0.0, 1.0, 0.0), 150, 0.5, 0.5, 0.5, 0.1, dustOptions)
+                entity.world.spawnParticle(Particle.DUST, entity.location.add(0.0, 1.0, 0.0), 150, 0.5, 0.5, 0.5, 0.1, dustOptions)
                 entity.damage(1.5)
                 entity.velocity = Vector(0, 0, 0)
             }
@@ -70,7 +70,7 @@ class RemakerItem : CustomItem {
         cooldown.add(p)
         p.getNearbyEntities(10.0, 10.0, 10.0).forEach { entity ->
             if (entity !is LivingEntity || AbilityUtil.noDamagePermission(p, entity)) return@forEach
-            entity.world.spawnParticle(Particle.REDSTONE, entity.eyeLocation, 300, 0.2, 0.1, 0.2, 0.1, dustOptions)
+            entity.world.spawnParticle(Particle.DUST, entity.eyeLocation, 300, 0.2, 0.1, 0.2, 0.1, dustOptions)
             entity.addPotionEffect(PotionEffect(PotionEffectType.DARKNESS, 100, 0))
             entity.addPotionEffect(PotionEffect(PotionEffectType.LEVITATION, 100, 0))
             entity.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 100, 0))

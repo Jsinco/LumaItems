@@ -38,7 +38,7 @@ class PrideCrownItem : CustomItem {
             mutableListOf("&7Legends whisper the &#F49595&lP&#F9EB97&lr&#C6F9AC&li&#A8D9F6&ld&#E2BBFD&le &f&lCrown", "&7reveals unseen beauty within, coaxing", "&7a blossoming of confidence and charm", "&7that captivates all who witness it."),
             Material.LARGE_AMETHYST_BUD,
             mutableListOf("pridecrown"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 8)
+            mutableMapOf(Enchantment.PROTECTION to 8)
         )
         item.autoHat = true
         item.tier = "&#731385&lP&#4332B9&lr&#1351ED&li&#0C6A87&ld&#058221&le &#7FB715&l2&#F9EB08&l0&#EF7A05&l2&#E40902&l4"
@@ -53,7 +53,7 @@ class PrideCrownItem : CustomItem {
             Action.RUNNABLE -> {
                 for (i in 0..2) {
                     player.world.spawnParticle(
-                        Particle.REDSTONE, player.eyeLocation.add(0.0, 0.45, 0.0), 2, 0.2, 0.0, 0.2, colors.random())
+                        Particle.DUST, player.eyeLocation.add(0.0, 0.45, 0.0), 2, 0.2, 0.0, 0.2, colors.random())
                 }
 
                 player.world.spawnParticle(

@@ -106,7 +106,7 @@ object AbilityUtil {
             val b = block.getRelative(face)
             if (b.type.toString().lowercase().contains(type)) {
                 if (particle != null) {
-                    b.world.spawnParticle(Particle.BLOCK_CRACK, b.location, 5, 0.5, 0.5, 0.5, 0.1, b.blockData)
+                    b.world.spawnParticle(Particle.BLOCK, b.location, 5, 0.5, 0.5, 0.5, 0.1, b.blockData)
                     b.world.spawnParticle(particle, b.location, 2, 0.5, 0.5, 0.5, 0.1)
                 }
                 blockedAbility.add(player.uniqueId)
@@ -136,7 +136,7 @@ object AbilityUtil {
             for (i in 0 until cube.blockList().size) {
                 val b: Block = cube.blockList()[i]
                 if (blockTypeBlacklist.contains(b.type) || !restrict.contains(b.type)) continue
-                b.world.spawnParticle(Particle.BLOCK_DUST, b.location.add(0.5, 0.5, 0.5), 10, 0.5, 0.5, 0.5, 0.1, b.blockData)
+                b.world.spawnParticle(Particle.BLOCK, b.location.add(0.5, 0.5, 0.5), 10, 0.5, 0.5, 0.5, 0.1, b.blockData)
                 player.breakBlock(b)
             }
         } else {
@@ -144,7 +144,7 @@ object AbilityUtil {
                 val b: Block = cube.blockList()[i]
                 if (blockTypeBlacklist.contains(b.type)) continue
                 b.world.spawnParticle(
-                    Particle.BLOCK_DUST, b.location.add(0.5, 0.5, 0.5), 10, 0.5, 0.5, 0.5, 0.1, b.blockData)
+                    Particle.BLOCK, b.location.add(0.5, 0.5, 0.5), 10, 0.5, 0.5, 0.5, 0.1, b.blockData)
                 player.breakBlock(b)
             }
         }
@@ -172,8 +172,8 @@ object AbilityUtil {
         if (item != null) {
             block.world.dropItemNaturally(block.location, item)
         }
-        block.world.spawnParticle(Particle.REDSTONE, block.location, 50, 0.5, 0.5, 0.5, 0.1, DustOptions(Color.fromRGB(106, 219, 255), 2f))
-        block.world.spawnParticle(Particle.REDSTONE, block.location, 50, 0.5, 0.5, 0.5, 0.1, DustOptions(Color.fromRGB(255, 121, 209), 2f))
+        block.world.spawnParticle(Particle.DUST, block.location, 50, 0.5, 0.5, 0.5, 0.1, DustOptions(Color.fromRGB(106, 219, 255), 2f))
+        block.world.spawnParticle(Particle.DUST, block.location, 50, 0.5, 0.5, 0.5, 0.1, DustOptions(Color.fromRGB(255, 121, 209), 2f))
         block.world.playSound(block.location, Sound.ENTITY_FIREWORK_ROCKET_TWINKLE, 1f, 1f)
 
     }

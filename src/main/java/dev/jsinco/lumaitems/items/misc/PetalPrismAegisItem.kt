@@ -24,7 +24,7 @@ class PetalPrismAegisItem : CustomItem {
             mutableListOf("Any damage received while", "blocking will be stored and", "dealt back upon the user's", "next attack.", "", "&cMax storable: 15❤"),
             Material.SHIELD,
             mutableListOf("petalprismaegis"),
-            mutableMapOf(Enchantment.DURABILITY to 6, Enchantment.MENDING to 1, Enchantment.KNOCKBACK to 3)
+            mutableMapOf(Enchantment.UNBREAKING to 6, Enchantment.MENDING to 1, Enchantment.KNOCKBACK to 3)
         )
         item.addQuote("&#E899E9\"&#E699E8W&#E499E8o&#E299E7w&#E099E7, &#DD98E6i&#DB98E6t&#D998E5'&#D798E5s &#D598E4s&#D398E4o &#D198E3s&#CF98E3h&#CC97E2i&#CA97E2n&#C897E1y&#C697E1!&#C497E0\"")
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"

@@ -23,14 +23,14 @@ class SollureItem : CustomItem {
                 "&#a2bbfbE&#b2c0f0n&#c3c5e5c&#d3cadah&#e4cfcfa&#e8cec3n&#e1c6b6t&#dabea8i&#d3b69bn&#ccae8dg"
             ),
             mutableListOf(
-                "§fHolding this rod will give you Luck II",
+                "§fHolding this rod will give you LUCK_OF_THE_SEA II",
                 "",
                 "§fFishing with this rod will grant you double",
                 "§fthe fish"
             ),
             Material.FISHING_ROD,
             mutableListOf("sollure"),
-            mutableMapOf(Enchantment.LURE to 6, Enchantment.LUCK to 6)
+            mutableMapOf(Enchantment.LURE to 6, Enchantment.LUCK_OF_THE_SEA to 6)
         )
         item.unbreakable = true
         return Pair("sollure", item.createItem())

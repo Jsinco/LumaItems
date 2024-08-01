@@ -39,7 +39,7 @@ class AutumnsHarrowerItem : CustomItem {
             mutableListOf("&#cd3c33\"&#cf4032L&#d04430e&#d2482ft &#d34c2dr&#d5512ci&#d6552ac&#d85929h&#d95d28e&#db6126s &#dc6525f&#de6923a&#df6d22l&#e17120l &#e2751fl&#e47a1ei&#e67e1ck&#e7821be &#e98619a&#ea8a18u&#ec8e16t&#ed9215u&#ef9613m&#f09a12n &#f29e11l&#f3a30fe&#f5a70ea&#f6ab0cv&#f8af0be&#f9b309s&#fbb708\"","","Breaking crops with this hoe", "will occasionally yield a", "surplus amount of drops"),
             Material.NETHERITE_HOE,
             mutableListOf("autumnharrower"),
-            mutableMapOf(Enchantment.MENDING to 1, Enchantment.DURABILITY to 10, Enchantment.LOOT_BONUS_BLOCKS to 5, Enchantment.DIG_SPEED to 7)
+            mutableMapOf(Enchantment.MENDING to 1, Enchantment.UNBREAKING to 10, Enchantment.FORTUNE to 5, Enchantment.EFFICIENCY to 7)
         )
         item.tier = "&#c46bfb&lH&#c86eee&la&#cd71e2&ll&#d174d5&ll&#d677c8&lo&#da7abc&lm&#de7daf&la&#e380a2&lr&#e78395&le&#eb8689&ls &#f0897c&l2&#f48c6f&l0&#f98f63&l2&#fd9256&l3"
         return Pair("autumnharrower", item.createItem())
@@ -65,7 +65,7 @@ class AutumnsHarrowerItem : CustomItem {
 
         if (crops.containsKey(item.type)) {
             block.world.spawnParticle(
-                Particle.REDSTONE, block.location, 100, 0.5, 0.5, 0.5, DustOptions(crops[item.type]!!, 1f)
+                Particle.DUST, block.location, 100, 0.5, 0.5, 0.5, DustOptions(crops[item.type]!!, 1f)
             )
             block.world.playSound(block.location, Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST_FAR, 1f, 1f)
             if (Random.nextBoolean()) {
@@ -80,7 +80,7 @@ class AutumnsHarrowerItem : CustomItem {
         val loc = location.add(0.0,0.2,0.0).toCenterLocation()
         val task = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, {
             loc.world.dropItem(loc, ItemStack(material))
-            loc.world.spawnParticle(Particle.REDSTONE, loc, 30, 0.2, 0.2, 0.2, dustOptions)
+            loc.world.spawnParticle(Particle.DUST, loc, 30, 0.2, 0.2, 0.2, dustOptions)
         }, 0, 5)
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, {

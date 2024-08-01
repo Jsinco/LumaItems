@@ -36,11 +36,11 @@ class PeepPlushyMattockItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
             "&#aca1ff&lP&#bbabff&le&#cab4ff&le&#dabeff&lp &#e9c7ff&lP&#f8d1ff&ll&#fdcaf6&lu&#febbe9&ls&#feacdc&lh&#fe9ccf&ly &#ff8dc2&lM&#ff81b4&la&#ff7aa4&lt&#ff7493&lt&#ff6d83&lo&#ff6773&lc&#ff6063&lk",
-            mutableListOf("&#ACA1FFSnuggly Luck"),
+            mutableListOf("&#ACA1FFSnuggly LUCK_OF_THE_SEA"),
             mutableListOf("Mining ores with this pickaxe grants","a chance to substantially increase","the amount of materials gained","","However, there is a chance for","mined ores to drop nothing"),
             Material.NETHERITE_PICKAXE,
             mutableListOf("peepplushymattock"),
-            mutableMapOf(Enchantment.MENDING to 1, Enchantment.DURABILITY to 10, Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 5)
+            mutableMapOf(Enchantment.MENDING to 1, Enchantment.UNBREAKING to 10, Enchantment.EFFICIENCY to 8, Enchantment.FORTUNE to 5)
         )
         item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
         return Pair("peepplushymattock", item.createItem())
@@ -50,14 +50,14 @@ class PeepPlushyMattockItem : CustomItem {
         when (type) {
             Action.BREAK_BLOCK -> {
                 event as BlockBreakEvent
-                event.isDropItems = snugluck(event.block, event.block.drops)
+                event.isDropItems = snugLUCK_OF_THE_SEA(event.block, event.block.drops)
             }
             else -> return false
         }
         return true
     }
 
-    private fun snugluck(block: Block, drops: Collection<ItemStack>): Boolean {
+    private fun snugLUCK_OF_THE_SEA(block: Block, drops: Collection<ItemStack>): Boolean {
         if (!block.type.toString().endsWith("_ORE")) return true
         val chance = Random().nextInt(100)
         if (chance <= 17) {
@@ -67,7 +67,7 @@ class PeepPlushyMattockItem : CustomItem {
                 block.world.dropItemNaturally(block.location, drops.iterator().next())
             }
             block.world.playSound(block.location, Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST_FAR, 1f, 1f)
-            block.world.spawnParticle(Particle.REDSTONE, block.location, 35, 0.5, 0.5, 0.5, 0.1, DustOptions(oreColors[dropMaterial] ?: return true, 1f))
+            block.world.spawnParticle(Particle.DUST, block.location, 35, 0.5, 0.5, 0.5, 0.1, DustOptions(oreColors[dropMaterial] ?: return true, 1f))
             return false
         } else if (chance <= 24) {
             drops.forEach(Consumer { drop: ItemStack -> drop.amount = 0 })

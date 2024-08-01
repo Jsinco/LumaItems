@@ -36,7 +36,7 @@ class CottonTailCrossbowItem : CustomItem {
             mutableListOf("Arrows fired by this weapon", "will travel faster and deal", "more damage"),
             Material.CROSSBOW,
             mutableListOf("cottontailcrossbow"),
-            mutableMapOf(Enchantment.PIERCING to 7, Enchantment.QUICK_CHARGE to 4, Enchantment.DURABILITY to 9, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PIERCING to 7, Enchantment.QUICK_CHARGE to 4, Enchantment.UNBREAKING to 9, Enchantment.MENDING to 1)
         )
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"
         return Pair("cottontailcrossbow", item.createItem())
@@ -57,7 +57,7 @@ class CottonTailCrossbowItem : CustomItem {
                 object : BukkitRunnable() {
 
                     override fun run() {
-                        arrow.world.spawnParticle(Particle.REDSTONE, arrow.location, 2, 0.1, 0.1, 0.1, 0.1,
+                        arrow.world.spawnParticle(Particle.DUST, arrow.location, 2, 0.1, 0.1, 0.1, 0.1,
                             Particle.DustOptions(dustColors.random(), 1f))
                         arrow.world.spawnParticle(Particle.FLAME, arrow.location, 1, 0.1, 0.1, 0.1, 0.0)
 

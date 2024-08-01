@@ -45,7 +45,7 @@ class YolkplaidYarweaveItem : CustomItem {
             mutableListOf("While worn, attacking enemies may be", "encased in eggs, dealing damage.", "", "When being attacked, attackers will", "passively be inflicted damage by", "egg shellings."),
             Material.NETHERITE_CHESTPLATE,
             mutableListOf("yolkplaidyarweave"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 7, Enchantment.DURABILITY to 8, Enchantment.PROTECTION_EXPLOSIONS to 6, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 7, Enchantment.UNBREAKING to 8, Enchantment.BLAST_PROTECTION to 6, Enchantment.MENDING to 1)
         )
         item.addQuote("&#CFF6A6\"&#D0F5A5S&#D2F4A4m&#D3F4A3e&#D4F3A2a&#D6F2A1r&#D7F1A0e&#D8F09Fd &#DAF09Ew&#DBEF9Ci&#DCEE9Bt&#DEED9Ah &#DFEC99y&#E0EB98o&#E2EB97l&#E3EA96k&#E5E995s&#E6E894; &#E7E793i&#E9E792t &#EAE691s&#EBE590m&#EDE48Fe&#EEE38El&#EFE38Dl&#F1E28Bs &#F2E18Aa&#F3E089w&#F5DF88f&#F6DE87u&#F7DE86l&#F9DD85.&#FADC84\"")
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"
@@ -86,11 +86,11 @@ class YolkplaidYarweaveItem : CustomItem {
         val loc = player.boundingBox.center.toLocation(player.world)
         val locDamager = damager.boundingBox.center.toLocation(damager.world)
 
-        player.world.spawnParticle(Particle.ITEM_CRACK, loc, 20, 0.5, 0.5, 0.5, 0.1, ItemStack(Material.EGG))
-        damager.world.spawnParticle(Particle.BLOCK_CRACK, locDamager, 20, 0.5, 0.5, 0.5, 0.1, Material.TURTLE_EGG.createBlockData())
+        player.world.spawnParticle(Particle.ITEM, loc, 20, 0.5, 0.5, 0.5, 0.1, ItemStack(Material.EGG))
+        damager.world.spawnParticle(Particle.BLOCK, locDamager, 20, 0.5, 0.5, 0.5, 0.1, Material.TURTLE_EGG.createBlockData())
         player.world.playSound(loc, Sound.ENTITY_TURTLE_EGG_CRACK, 1f, 1f)
 
-        damager.damage(Random.nextDouble(2.0, 4.0), player)
+        damager.damage(Random.nextDouble(2.0, 4.0))
     }
 
     private fun encase(livingEntity: LivingEntity, attacker: Player) {
@@ -99,7 +99,7 @@ class YolkplaidYarweaveItem : CustomItem {
         val loc = livingEntity.eyeLocation.add(0.0, 0.5, 0.0); loc.yaw = 0.0f; loc.pitch = 0.0f
         val egg = livingEntity.world.spawnEntity(loc, EntityType.ITEM_DISPLAY) as ItemDisplay
         egg.isPersistent = false
-        egg.itemStack = Util.playerHeadFromBase64(eggTextures.random(), 1)
+        egg.setItemStack(Util.playerHeadFromBase64(eggTextures.random(), 1))
         egg.interpolationDuration = 0
         egg.interpolationDelay = -1
 

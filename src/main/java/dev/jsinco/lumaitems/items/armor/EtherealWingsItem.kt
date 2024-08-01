@@ -24,7 +24,7 @@ class EtherealWingsItem : CustomItem {
             mutableListOf("§fCrouch while gliding to launch yourself","§fin the direction you're facing", "","§cCooldown: 10 secs"),
             Material.ELYTRA,
             mutableListOf("etherealwings"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 9, Enchantment.PROTECTION_EXPLOSIONS to 8, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 9, Enchantment.BLAST_PROTECTION to 8, Enchantment.UNBREAKING to 10, Enchantment.MENDING to 1)
         )
         return Pair("etherealwings", item.createItem())
     }

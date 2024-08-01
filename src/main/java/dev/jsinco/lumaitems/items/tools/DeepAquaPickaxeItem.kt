@@ -23,7 +23,7 @@ class DeepAquaPickaxeItem : CustomItem {
             mutableListOf("Grants the user the ability to", "silk touch reinforced deepslate.", "", "Attacking wardens with this", "tool will deal significantly", "more damage."),
             Material.NETHERITE_PICKAXE,
             mutableListOf("deepaquapickaxe"),
-            mutableMapOf(Enchantment.DIG_SPEED to 9, Enchantment.DURABILITY to 10, Enchantment.LOOT_BONUS_BLOCKS to 4, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.EFFICIENCY to 9, Enchantment.UNBREAKING to 10, Enchantment.FORTUNE to 4, Enchantment.MENDING to 1)
         )
         item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
         return Pair("deepaquapickaxe", item.createItem())
@@ -49,7 +49,7 @@ class DeepAquaPickaxeItem : CustomItem {
 
                 event.isDropItems = false
                 b.world.dropItemNaturally(b.location, ItemStack(Material.REINFORCED_DEEPSLATE, 1))
-                b.world.spawnParticle(Particle.REDSTONE, b.location.add(0.5, 0.5, 0.5), 20, 0.5, 0.5, 0.5, 0.1,
+                b.world.spawnParticle(Particle.DUST, b.location.add(0.5, 0.5, 0.5), 20, 0.5, 0.5, 0.5, 0.1,
                     DustOptions(Util.javaAwtColorToBukkitColor(Util.getColor(b)), 1f))
             }
 

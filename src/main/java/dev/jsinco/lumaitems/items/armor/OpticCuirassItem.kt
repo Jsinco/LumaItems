@@ -20,7 +20,7 @@ class OpticCuirassItem : CustomItem {
             mutableListOf("&#6a87f3\"&#6a88f3T&#6b8af3h&#6b8bf3e&#6c8df3r&#6c8ef3e&#6d90f3'&#6d91f3s &#6e93f3a &#6e94f3m&#6e96f3a&#6f97f3r&#6f99f3k&#709af3i&#709cf3n&#719df3g &#719ff3o&#72a0f3n &#72a2f3t&#73a3f3h&#73a5f3e &#73a6f3c&#74a8f3e&#74a9f3n&#75abf3t&#75acf3e&#76aef3r &#76aff3t&#77b1f3h&#77b2f3a&#77b4f3t","&#78b5f3l&#78b7f3o&#79b8f3o&#79baf3k&#7abcf3s &#7abdf3l&#7bbff3i&#7bc1f3k&#7cc3f3e &#7cc4f3a&#7dc6f3n &#7dc8f3e&#7ec9f3y&#7ecbf3e&#7ecdf3, &#7fcff3I &#7fd0f3w&#80d2f3o&#80d4f3n&#81d6f3d&#81d7f3e&#82d9f3r &#82dbf3w&#83dcf3h&#83def3a&#84e0f3t &#84e2f3i&#85e3f3t&#85e5f3'&#86e7f3s &#86e9f3f&#87eaf3o&#87ecf3r&#88eef3.&#88f0f3.&#89f1f3.&#89f3f3\"","","§fThis armor gives night vision and","§fresistance to the wearer.","","§fPress your swap key while holding to","§fswap armor types"),
             Material.NETHERITE_CHESTPLATE,
             mutableListOf("opticcuirass"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 7, Enchantment.PROTECTION_EXPLOSIONS to 9, Enchantment.PROTECTION_FALL to 4, Enchantment.DURABILITY to 8, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 7, Enchantment.BLAST_PROTECTION to 9, Enchantment.FEATHER_FALLING to 4, Enchantment.UNBREAKING to 8, Enchantment.MENDING to 1)
         )
         return Pair("opticcuirass", item.createItem())
     }
@@ -58,6 +58,6 @@ class OpticCuirassItem : CustomItem {
 
     private fun opticEffects(player: Player) {
         player.addPotionEffect(PotionEffect(PotionEffectType.NIGHT_VISION, 220, 0, false, false, false))
-        player.addPotionEffect(PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 220, 2, false, false, false))
+        player.addPotionEffect(PotionEffect(PotionEffectType.RESISTANCE, 220, 2, false, false, false))
     }
 }

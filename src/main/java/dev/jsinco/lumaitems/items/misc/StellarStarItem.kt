@@ -88,11 +88,11 @@ class StellarStarItem : CustomItem {
             meta.addEnchant(enchant, toolEnchants[enchantString]!!, true)
         }
 
-        if (meta.hasEnchant(Enchantment.SILK_TOUCH) && meta.hasEnchant(Enchantment.LOOT_BONUS_BLOCKS)) {
+        if (meta.hasEnchant(Enchantment.SILK_TOUCH) && meta.hasEnchant(Enchantment.FORTUNE)) {
             if (Random.nextBoolean()) {
                 meta.removeEnchant(Enchantment.SILK_TOUCH)
             } else {
-                meta.removeEnchant(Enchantment.LOOT_BONUS_BLOCKS)
+                meta.removeEnchant(Enchantment.FORTUNE)
             }
         }
         item.itemMeta = meta

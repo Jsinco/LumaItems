@@ -25,7 +25,7 @@ class SeasideSurfRodItem : CustomItem {
             mutableListOf("While fishing with this rod, you will","have the chance to catch a surplus","of fish or lose your catch.","","Your chances of wagering and a","favorable gamble increase with the","amount of fish you have caught."),
             Material.FISHING_ROD,
             mutableListOf("seasidesurfrod"),
-            mutableMapOf(Enchantment.LURE to 5, Enchantment.LUCK to 5, Enchantment.DURABILITY to 9, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.LURE to 5, Enchantment.LUCK_OF_THE_SEA to 5, Enchantment.UNBREAKING to 9, Enchantment.MENDING to 1)
         )
         item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
         return Pair("seasidesurfrod", item.createItem())
@@ -53,12 +53,12 @@ class SeasideSurfRodItem : CustomItem {
         // 70% base chance + 1% per 1000 fish caught
         if (Random().nextInt(100) <= 70 + chance) {
             caught.world.spawnParticle(
-                Particle.REDSTONE, caught.location.add(0.0, 1.0, 0.0), 15, 0.5, 0.5, 0.5, 0.1, DustOptions(
+                Particle.DUST, caught.location.add(0.0, 1.0, 0.0), 15, 0.5, 0.5, 0.5, 0.1, DustOptions(
                     Color.fromRGB(176, 140, 253), 2f
                 )
             )
             caught.world.spawnParticle(
-                Particle.REDSTONE, caught.location.add(0.0, 1.0, 0.0), 15, 0.5, 0.5, 0.5, 0.1, DustOptions(
+                Particle.DUST, caught.location.add(0.0, 1.0, 0.0), 15, 0.5, 0.5, 0.5, 0.1, DustOptions(
                     Color.fromRGB(189, 244, 251), 2f
                 )
             )
@@ -67,11 +67,11 @@ class SeasideSurfRodItem : CustomItem {
                 Random().nextInt(2, 5) // set amount to 2-4
         } else {
             caught.world.spawnParticle(
-                Particle.REDSTONE, caught.location.add(0.0, 1.0, 0.0), 15, 0.5, 0.5, 0.5, 0.1, DustOptions(
+                Particle.DUST, caught.location.add(0.0, 1.0, 0.0), 15, 0.5, 0.5, 0.5, 0.1, DustOptions(
                     Color.fromRGB(255, 10, 10), 2f
                 )
             )
-            caught.world.spawnParticle(Particle.SPELL_WITCH, caught.location.add(0.0, 1.0, 0.0), 15, 0.5, 0.5, 0.5, 0.1)
+            caught.world.spawnParticle(Particle.WITCH, caught.location.add(0.0, 1.0, 0.0), 15, 0.5, 0.5, 0.5, 0.1)
             caught.world.playSound(caught.location, Sound.ENTITY_WITCH_CELEBRATE, 0.5f, 1f)
             caught.remove()
         }

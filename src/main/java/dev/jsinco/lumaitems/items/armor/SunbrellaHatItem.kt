@@ -54,7 +54,7 @@ class SunbrellaHatItem : CustomItem {
                 "&#AC9EEEWindTye &7- &fWhile wearing, arrows", "fired will be converted to wind", "slashes that glide through the air."),
             Material.NETHERITE_HELMET,
             mutableListOf("sunbrellahat"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 5, Enchantment.PROTECTION_FALL to 6, Enchantment.PROTECTION_PROJECTILE to 4, Enchantment.DURABILITY to 4, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 5, Enchantment.FEATHER_FALLING to 6, Enchantment.PROJECTILE_PROTECTION to 4, Enchantment.UNBREAKING to 4, Enchantment.MENDING to 1)
         )
         item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
         return Pair("sunbrellahat", item.createItem())
@@ -96,7 +96,7 @@ class SunbrellaHatItem : CustomItem {
                 val vec = player.location.direction.multiply(0.25)
                 player.velocity = Vector(vec.x, player.velocity.y * multiplier, vec.z)
                 player.fallDistance = 0.0f // Update this when the player actually changes blocks or keep this?
-                player.world.spawnParticle(Particle.REDSTONE, player.location, 4, 0.3, 0.0, 0.3, dustOption)
+                player.world.spawnParticle(Particle.DUST, player.location, 4, 0.3, 0.0, 0.3, dustOption)
             }
 
             Action.ENTITY_DAMAGE -> {
@@ -112,7 +112,7 @@ class SunbrellaHatItem : CustomItem {
                     vector.y = (-3.0).coerceAtLeast(vector.y.coerceAtMost(3.0))
                     vector.z = (-3.0).coerceAtLeast(vector.z.coerceAtMost(3.0))
                     livingEntity.velocity = vector
-                    livingEntity.world.spawnParticle(Particle.REDSTONE, livingEntity.location, 10, 0.5, 0.5, 0.5, dustOption)
+                    livingEntity.world.spawnParticle(Particle.DUST, livingEntity.location, 10, 0.5, 0.5, 0.5, dustOption)
                 }
             }
 

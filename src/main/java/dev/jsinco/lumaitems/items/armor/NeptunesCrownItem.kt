@@ -18,7 +18,7 @@ class NeptunesCrownItem : CustomItem {
             mutableListOf("§fWearing this helmet will grant you","§fConduit power and Dolphin's grace"),
             Material.NETHERITE_HELMET,
             mutableListOf("neptunescrown"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 6, Enchantment.PROTECTION_FIRE to 10, Enchantment.DURABILITY to 5, Enchantment.OXYGEN to 4, Enchantment.WATER_WORKER to 1, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 6, Enchantment.FIRE_PROTECTION to 10, Enchantment.UNBREAKING to 5, Enchantment.RESPIRATION to 4, Enchantment.AQUA_AFFINITY to 1, Enchantment.MENDING to 1)
         )
         return Pair("neptunescrown", item.createItem())
     }

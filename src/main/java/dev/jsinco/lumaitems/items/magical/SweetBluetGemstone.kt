@@ -46,7 +46,7 @@ class SweetBluetGemstone : CustomItem {
                 "", "&c4 lapis per spell"),
             Material.DIAMOND,
             mutableListOf("sweetbluetgemstone"),
-            mutableMapOf(Enchantment.DURABILITY to 9, Enchantment.FIRE_ASPECT to 5, Enchantment.THORNS to 4, Enchantment.DAMAGE_ALL to 7)
+            mutableMapOf(Enchantment.UNBREAKING to 9, Enchantment.FIRE_ASPECT to 5, Enchantment.THORNS to 4, Enchantment.SHARPNESS to 7)
         )
         //item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
         item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
@@ -143,7 +143,7 @@ class SweetBluetGemstone : CustomItem {
                     return
                 }
                 snowball.world.playSound(snowball.location, Sound.BLOCK_AMETHYST_BLOCK_RESONATE, 1f, 1f)
-                snowball.world.spawnParticle(Particle.REDSTONE, snowball.location, 50, 0.7, 0.7, 0.7, 0.1, DustOptions(Color.WHITE, 1f))
+                snowball.world.spawnParticle(Particle.DUST, snowball.location, 50, 0.7, 0.7, 0.7, 0.1, DustOptions(Color.WHITE, 1f))
                 snowball.world.spawnParticle(Particle.WAX_OFF, snowball.location, 10, 0.7, 0.7, 0.7, 0.1)
             }
         }.runTaskTimer(plugin, 0L, 1L)
@@ -204,7 +204,7 @@ class SweetBluetGemstone : CustomItem {
     private fun magicGlacierExplosionLand(snowball: Snowball) {
         snowball.world.playSound(snowball.location, Sound.ENTITY_GENERIC_EXPLODE, 2f, 1.2f)
         snowball.world.playSound(snowball.location, Sound.BLOCK_AMETHYST_CLUSTER_BREAK, 4f, 1f)
-        snowball.world.spawnParticle(Particle.EXPLOSION_HUGE, snowball.location, 1, 0.0, 0.0, 0.0, 0.0)
+        snowball.world.spawnParticle(Particle.EXPLOSION, snowball.location, 1, 0.0, 0.0, 0.0, 0.0)
         snowball.world.spawnParticle(Particle.SOUL_FIRE_FLAME, snowball.location, 100, 0.5, 0.5, 0.5, 0.8)
         snowball.getNearbyEntities(10.0,10.0,10.0).mapNotNull { it as? LivingEntity }.forEach {
             if (!AbilityUtil.noDamagePermission(snowball.shooter as Player, it) && it != snowball.shooter) {

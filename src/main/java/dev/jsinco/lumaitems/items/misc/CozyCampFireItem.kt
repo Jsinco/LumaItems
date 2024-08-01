@@ -19,7 +19,7 @@ class CozyCampFireItem : CustomItem {
             mutableListOf("§fHolding this campfire will","§fheal you and nearby players"),
             Material.CAMPFIRE,
             mutableListOf("cozycampfire"),
-            mutableMapOf(Enchantment.ARROW_INFINITE to 1)
+            mutableMapOf(Enchantment.INFINITY to 1)
         )
         return Pair("cozycampfire", item.createItem())
     }

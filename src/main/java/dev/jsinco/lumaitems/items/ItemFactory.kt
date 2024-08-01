@@ -10,7 +10,9 @@ import org.bukkit.attribute.AttributeModifier
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.Damageable
 import org.bukkit.persistence.PersistentDataType
+import kotlin.random.Random
 
 // Breakdown:
 // - This class is for creating custom items easily.
@@ -52,7 +54,7 @@ class ItemFactory(
 
     fun createItem(): ItemStack {
         val item = ItemStack(material)
-        val meta = item.itemMeta ?: return item
+        val meta = item.itemMeta as? Damageable ?: return item
 
         meta.persistentDataContainer.set(NamespacedKey(plugin, "lumaitem"), PersistentDataType.SHORT, 1)
         for (name in persistentData) {
@@ -101,8 +103,8 @@ class ItemFactory(
             meta.persistentDataContainer.set(NamespacedKey(plugin, "autohat"), PersistentDataType.SHORT, 1)
         }
 
-        item.itemMeta = meta
 
+        item.itemMeta = meta
         return item
     }
 }

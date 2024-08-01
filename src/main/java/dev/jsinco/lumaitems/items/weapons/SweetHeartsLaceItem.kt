@@ -35,7 +35,7 @@ class SweetHeartsLaceItem : CustomItem {
             mutableListOf("Shot enemies may be briefly", "charmed, causing them to", "shortly become passive"),
             Material.BOW,
             mutableListOf("sweetheartslace"),
-            mutableMapOf(Enchantment.ARROW_DAMAGE to 7, Enchantment.KNOCKBACK to 2, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1, Enchantment.LOOT_BONUS_MOBS to 4)
+            mutableMapOf(Enchantment.POWER to 7, Enchantment.KNOCKBACK to 2, Enchantment.UNBREAKING to 10, Enchantment.MENDING to 1, Enchantment.LOOTING to 4)
         )
         item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
 
@@ -75,7 +75,7 @@ class SweetHeartsLaceItem : CustomItem {
                 event as ProjectileHitEvent
                 val entity = event.hitEntity as? LivingEntity ?: return false
 
-                entity.world.spawnParticle(Particle.SPELL_WITCH, entity.location, 30, 0.5, 0.5, 0.5, 0.5)
+                entity.world.spawnParticle(Particle.WITCH, entity.location, 30, 0.5, 0.5, 0.5, 0.5)
 
                 if (entity is Enemy && Random.nextInt(100) <= 40) {
                     entity.persistentDataContainer.set(NamespacedKey(p, "sweetheartslace"), PersistentDataType.SHORT, 1.toShort())

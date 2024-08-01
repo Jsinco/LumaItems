@@ -18,14 +18,14 @@ class ReforgedSet : AstralSet {
         val astralSetFactory = AstralSetFactory("Reforged", mutableListOf("&#AC87FBUnwavering"))
         astralSetFactory.commonEnchants = mutableMapOf(
             Enchantment.MENDING to 1,
-            Enchantment.DURABILITY to 6,
-            Enchantment.PROTECTION_ENVIRONMENTAL to 7
+            Enchantment.UNBREAKING to 6,
+            Enchantment.PROTECTION to 7
         )
 
 
         astralSetFactory.astralSetItem(
             Material.NETHERITE_HELMET,
-            mutableMapOf(Enchantment.OXYGEN to 3),
+            mutableMapOf(Enchantment.RESPIRATION to 3),
             mutableListOf("Increases max amount", "of health while worn"),
             true,
             DefaultAttributes.NETHERITE_HELMET.appendThenGetAttributes(Attribute.GENERIC_MAX_HEALTH,
@@ -52,7 +52,7 @@ class ReforgedSet : AstralSet {
 
         astralSetFactory.astralSetItem(
             Material.NETHERITE_BOOTS,
-            mutableMapOf(Enchantment.PROTECTION_FALL to 4, Enchantment.DEPTH_STRIDER to 3),
+            mutableMapOf(Enchantment.FEATHER_FALLING to 4, Enchantment.DEPTH_STRIDER to 3),
             mutableListOf("Increases max amount", "of health while worn"),
             true,
             DefaultAttributes.NETHERITE_BOOTS.appendThenGetAttributes(Attribute.GENERIC_MAX_HEALTH,

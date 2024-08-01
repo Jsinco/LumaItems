@@ -38,7 +38,7 @@ class SpringVaultItem : CustomItem {
             mutableListOf("Right-click to be propelled", "into the air!", "", "&cCooldown: 15s"),
             Material.STICK,
             mutableListOf("springvault"),
-            mutableMapOf(Enchantment.DURABILITY to 10, Enchantment.KNOCKBACK to 4)
+            mutableMapOf(Enchantment.UNBREAKING to 10, Enchantment.KNOCKBACK to 4)
         )
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"
         return Pair("springvault", item.createItem())
@@ -61,7 +61,7 @@ class SpringVaultItem : CustomItem {
                     private var ticks = 0
 
                     override fun run() {
-                        player.world.spawnParticle(Particle.REDSTONE, player.location, 2, 0.3, 0.3, 0.3, 0.1, DustOptions(colors.random(), 1f))
+                        player.world.spawnParticle(Particle.DUST, player.location, 2, 0.3, 0.3, 0.3, 0.1, DustOptions(colors.random(), 1f))
                         ticks++
                         if (ticks >= 50) {
                             this.cancel()

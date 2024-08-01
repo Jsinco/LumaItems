@@ -19,7 +19,7 @@ class PeachPlumMattock : CustomItem {
             mutableListOf("When mining ores with this", "mattock, occasionally, ores will", "transform into their full block"),
             Material.NETHERITE_PICKAXE,
             mutableListOf("peachplummattock"),
-            mutableMapOf(Enchantment.MENDING to 1, Enchantment.DIG_SPEED to 8, Enchantment.DURABILITY to 10, Enchantment.SILK_TOUCH to 1)
+            mutableMapOf(Enchantment.MENDING to 1, Enchantment.EFFICIENCY to 8, Enchantment.UNBREAKING to 10, Enchantment.SILK_TOUCH to 1)
         )
         item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
 

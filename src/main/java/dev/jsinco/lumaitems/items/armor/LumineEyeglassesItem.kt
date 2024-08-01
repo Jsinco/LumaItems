@@ -22,7 +22,7 @@ class LumineEyeglassesItem : CustomItem {
             mutableListOf("While wearing, nearby items", "will slowly be pulled closer", "in your direction."),
             Material.NETHERITE_HELMET,
             mutableListOf("lumineeyeglasses"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 7, Enchantment.DURABILITY to 8, Enchantment.PROTECTION_EXPLOSIONS to 6, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 7, Enchantment.UNBREAKING to 8, Enchantment.BLAST_PROTECTION to 6, Enchantment.MENDING to 1)
         )
         item.addQuote("&#AB98F7\"&#AD97F6W&#AF96F5a&#B095F4i&#B293F3t&#B492F2, &#B691F2y&#B790F1o&#B98FF0u &#BB8EEFw&#BD8DEEe&#BF8CEDa&#C08AECr &#C289EBg&#C488EAl&#C687E9a&#C786E8s&#C985E8s&#CB84E7e&#CD82E6s&#CE81E5?&#D080E4!&#D27FE3\"")
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"

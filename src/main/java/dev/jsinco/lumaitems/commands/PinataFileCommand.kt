@@ -15,13 +15,13 @@ class PinataFileCommand : SubCommand {
 
 
         val item = player.inventory.itemInMainHand
-        val name = if (item.itemMeta.hasDisplayName()) {
-            ChatColor.stripColor(item.itemMeta.displayName)!!.replace(" ", "_").lowercase()
+        val name = if (item.itemMeta?.hasDisplayName() == true) {
+            ChatColor.stripColor(item.itemMeta?.displayName)!!.replace(" ", "_").lowercase()
         } else {
             item.type.name.lowercase()
         }
-        if (args[1].equals("add")) {
-            val type = if (args[2].equals("rare")) {
+        if (args[1] == "add") {
+            val type = if (args[2] == "rare") {
                 "rare-items"
             } else {
                 "items"

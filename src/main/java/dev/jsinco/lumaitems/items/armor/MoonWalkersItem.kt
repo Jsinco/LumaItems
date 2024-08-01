@@ -18,7 +18,7 @@ class MoonWalkersItem : CustomItem {
             mutableListOf("§fWalk on the moon!"),
             Material.NETHERITE_BOOTS,
             mutableListOf("moonwalkers"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 7, Enchantment.PROTECTION_PROJECTILE to 4, Enchantment.PROTECTION_FALL to 6, Enchantment.DURABILITY to 8, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 7, Enchantment.PROJECTILE_PROTECTION to 4, Enchantment.FEATHER_FALLING to 6, Enchantment.UNBREAKING to 8, Enchantment.MENDING to 1)
         )
         return Pair("moonwalkers", item.createItem())
     }
@@ -26,7 +26,7 @@ class MoonWalkersItem : CustomItem {
     override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RUNNABLE -> {
-                player.addPotionEffect(PotionEffect(PotionEffectType.JUMP, 220, 2, false, false, false))
+                player.addPotionEffect(PotionEffect(PotionEffectType.JUMP_BOOST, 220, 2, false, false, false))
             }
             else -> return false
         }

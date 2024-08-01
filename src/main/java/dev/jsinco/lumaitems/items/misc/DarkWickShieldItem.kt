@@ -26,7 +26,7 @@ class DarkWickShieldItem : CustomItem {
             mutableListOf("&#e1da72\"&#e2da70B&#e3da6fo&#e4da6dt&#e5da6ch &#e6da6ap&#e7da68r&#e9db67o&#eadb65t&#ebdb63e&#ecdb62c&#eddb60t&#eedb5fo&#efdb5dr &#f0db5ba&#f1db5an&#f2db58d &#f3db57d&#f4db55e&#f5db53s&#f7dc52t&#f8dc50r&#f9dc4eo&#fadc4dy&#fbdc4be&#fcdc4ar&#fddc48\"","","While blocking with this shield,", "hold sneak to charge up a", "powerful explosion", "", "&cCooldown: 15 secs"),
             Material.SHIELD,
             mutableListOf("darkwickshield"),
-            mutableMapOf(Enchantment.DURABILITY to 10, Enchantment.MENDING to 1, Enchantment.DAMAGE_ALL to 5, Enchantment.FIRE_ASPECT to 5)
+            mutableMapOf(Enchantment.UNBREAKING to 10, Enchantment.MENDING to 1, Enchantment.SHARPNESS to 5, Enchantment.FIRE_ASPECT to 5)
         )
         item.tier = "&#c46bfb&lH&#c86eee&la&#cd71e2&ll&#d174d5&ll&#d677c8&lo&#da7abc&lm&#de7daf&la&#e380a2&lr&#e78395&le&#eb8689&ls &#f0897c&l2&#f48c6f&l0&#f98f63&l2&#fd9256&l3"
         return Pair("darkwickshield", item.createItem())

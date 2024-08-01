@@ -34,7 +34,7 @@ class MagmaticPickaxeItem : CustomItem {
             mutableListOf("§fConverts mined gold, copper,","§fand iron ore to ingots"),
             Material.NETHERITE_PICKAXE,
             mutableListOf("magmaticpickaxe"),
-            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1, Enchantment.SILK_TOUCH to 1, Enchantment.FIRE_ASPECT to 4)
+            mutableMapOf(Enchantment.EFFICIENCY to 8, Enchantment.UNBREAKING to 10, Enchantment.MENDING to 1, Enchantment.SILK_TOUCH to 1, Enchantment.FIRE_ASPECT to 4)
         )
         return Pair("magmaticpickaxe", item.createItem())
     }

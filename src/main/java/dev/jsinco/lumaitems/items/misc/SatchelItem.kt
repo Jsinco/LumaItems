@@ -37,7 +37,7 @@ class SatchelItem : CustomItem {
             mutableListOf("§fUpon landing, this item will explode into", "§fparticles and launch nearby entities","","§fWhen falling, launches are instant"),
             Material.SNOWBALL,
             mutableListOf("satchel"),
-            mutableMapOf(Enchantment.ARROW_INFINITE to 1)
+            mutableMapOf(Enchantment.INFINITY to 1)
         )
         return Pair("satchel", satchel.createItem())
     }

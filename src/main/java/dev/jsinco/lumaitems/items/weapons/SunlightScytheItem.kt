@@ -36,7 +36,7 @@ class SunlightScytheItem : CustomItem {
             mutableListOf("§fThis weapon deals significantly more", "§fdamage to mobs that burn in the daylight","","§fRight click to unleash a dazzling barrage","§fof slashes","","§cCooldown: 8 secs"),
             Material.NETHERITE_HOE,
             mutableListOf("sunlightscythe"),
-            mutableMapOf(Enchantment.DAMAGE_ALL to 9, Enchantment.DAMAGE_ARTHROPODS to 7, Enchantment.DURABILITY to 10, Enchantment.LOOT_BONUS_MOBS to 6, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.SHARPNESS to 9, Enchantment.BANE_OF_ARTHROPODS to 7, Enchantment.UNBREAKING to 10, Enchantment.LOOTING to 6, Enchantment.MENDING to 1)
             )
         return Pair("sunlightscythe", item.createItem())
     }
@@ -93,7 +93,7 @@ class SunlightScytheItem : CustomItem {
         entities.forEach(Consumer { livingEntity: LivingEntity ->
             livingEntity.damage(14.0, p)
             livingEntity.velocity = Vector(0, 0, 0)
-            livingEntity.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 56, 3, false, false, false))
+            livingEntity.addPotionEffect(PotionEffect(PotionEffectType.SLOWNESS, 56, 3, false, false, false))
         })
 
         // runnables

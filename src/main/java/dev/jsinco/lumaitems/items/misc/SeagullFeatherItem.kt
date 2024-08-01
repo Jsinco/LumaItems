@@ -20,9 +20,10 @@ class SeagullFeatherItem : CustomItem {
             mutableListOf("This beautiful seagull feather","shines in the light!", "", "Holding this feather in your", "offhand will give a speed boost."),
             Material.FEATHER,
             mutableListOf("seagullfeather"),
-            mutableMapOf(Enchantment.DURABILITY to 10)
+            mutableMapOf(Enchantment.UNBREAKING to 10)
         )
         item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
+        // AttributeModifier(@NotNull NamespacedKey key, double amount, @NotNull Operation operation, @NotNull EquipmentSlotGroup slot)
         item.attributeModifiers[Attribute.GENERIC_MOVEMENT_SPEED] = AttributeModifier(UUID.randomUUID(), "movementSpeed", 0.025, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.OFF_HAND)
         return Pair("seagullfeather", item.createItem())
     }

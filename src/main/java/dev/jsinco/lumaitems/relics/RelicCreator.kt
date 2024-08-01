@@ -19,17 +19,17 @@ class RelicCreator (
     companion object {
         private val plugin: LumaItems = LumaItems.getPlugin()
         private const val RELIC_SUFFIX_RGB = "&f"
-        private val blackListedEnchants: List<Enchantment> = listOf(Enchantment.BINDING_CURSE,  Enchantment.VANISHING_CURSE, Enchantment.FROST_WALKER, Enchantment.SWIFT_SNEAK, Enchantment.SOUL_SPEED, Enchantment.LUCK, Enchantment.LURE,
-            Enchantment.IMPALING, Enchantment.RIPTIDE, Enchantment.CHANNELING, Enchantment.LOYALTY, Enchantment.MULTISHOT, Enchantment.PIERCING, Enchantment.QUICK_CHARGE, Enchantment.ARROW_KNOCKBACK, Enchantment.ARROW_FIRE, Enchantment.ARROW_INFINITE,
-            Enchantment.ARROW_DAMAGE)
+        private val blackListedEnchants: List<Enchantment> = listOf(Enchantment.BINDING_CURSE,  Enchantment.VANISHING_CURSE, Enchantment.FROST_WALKER, Enchantment.SWIFT_SNEAK, Enchantment.SOUL_SPEED, Enchantment.LUCK_OF_THE_SEA, Enchantment.LURE,
+            Enchantment.IMPALING, Enchantment.RIPTIDE, Enchantment.CHANNELING, Enchantment.LOYALTY, Enchantment.MULTISHOT, Enchantment.PIERCING, Enchantment.QUICK_CHARGE, Enchantment.PUNCH, Enchantment.FLAME, Enchantment.INFINITY,
+            Enchantment.POWER)
         private val limitedEnchantLevel: Map<Enchantment, Int> = mapOf(
             Enchantment.SILK_TOUCH to 1,
             Enchantment.MENDING to 1,
-            Enchantment.ARROW_FIRE to 1,
+            Enchantment.FLAME to 1,
             Enchantment.DEPTH_STRIDER to 3,
-            Enchantment.LOOT_BONUS_BLOCKS to 4,
-            Enchantment.LOOT_BONUS_MOBS to 4,
-            Enchantment.WATER_WORKER to 2,
+            Enchantment.FORTUNE to 4,
+            Enchantment.LOOTING to 4,
+            Enchantment.AQUA_AFFINITY to 2,
             Enchantment.KNOCKBACK to 6,
             Enchantment.FIRE_ASPECT to 5,
             Enchantment.SWEEPING_EDGE to 5

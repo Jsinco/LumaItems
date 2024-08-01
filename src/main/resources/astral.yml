@@ -75,7 +75,7 @@ astral-upgrades:
       enchants:
         - 'unbreaking/8'
         - 'efficiency/8'
-        - 'luck_of_the_sea/5'
+        - 'LUCK_OF_THE_SEA_of_the_sea/5'
   falter-set:
     tier-2:
       material: NETHERITE

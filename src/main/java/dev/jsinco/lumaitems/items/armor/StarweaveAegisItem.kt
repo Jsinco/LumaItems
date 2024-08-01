@@ -20,7 +20,7 @@ class StarweaveAegisItem : CustomItem {
             mutableListOf("&#8b81f9\"&#8786f7T&#828cf6i&#7e91f4m&#7a96f3e &#759bf1i&#71a1efn &#6da6eem&#68abeco&#64b0eat&#60b6e9i&#5bbbe7o&#57c0e6n&#53c5e4, &#4ecbe2y&#4ad0e1o&#46d5dfu &#41daddi&#3de0dcn &#39e5das&#34ead9t&#30efd7o&#2cf5d5n&#27fad4e&#23ffd2\"","","&fWearing this chestplate will make","&fyou immune to all knockback effects"),
             Material.NETHERITE_CHESTPLATE,
             mutableListOf("starweaveaegis"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 7, Enchantment.PROTECTION_FIRE to 5, Enchantment.PROTECTION_PROJECTILE to 5, Enchantment.PROTECTION_EXPLOSIONS to 5, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 7, Enchantment.FIRE_PROTECTION to 5, Enchantment.PROJECTILE_PROTECTION to 5, Enchantment.BLAST_PROTECTION to 5, Enchantment.UNBREAKING to 10, Enchantment.MENDING to 1)
         )
         item.attributeModifiers[Attribute.GENERIC_ARMOR] = AttributeModifier(UUID.randomUUID(), "generic.armor", 8.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST)
         item.attributeModifiers[Attribute.GENERIC_KNOCKBACK_RESISTANCE] = AttributeModifier(UUID.randomUUID(), "generic.knockbackResistance", 1000.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST)

@@ -22,7 +22,7 @@ class GiveItemCommand : SubCommand {
             val item: ItemStack = customItem.value.createItem().second
             if (!item.hasItemMeta()) continue
             customItemsByName[
-                ChatColor.stripColor(item.itemMeta.displayName)
+                ChatColor.stripColor(item.itemMeta?.displayName)
                 ?.replace(" ", "_")
                 ?.lowercase() ?: item.type.toString().lowercase()
             ] = item
@@ -45,7 +45,7 @@ class GiveItemCommand : SubCommand {
 
         if (item != null) {
             Util.giveItem(player, item)
-            player.sendMessage("${Util.prefix} You have been given ${item.itemMeta.displayName}")
+            player.sendMessage("${Util.prefix} You have been given ${item.itemMeta?.displayName}")
         } else {
             for (customItem in customItems) {
                 Util.giveItem(player, customItem.value.createItem().second)

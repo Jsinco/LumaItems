@@ -29,7 +29,7 @@ class AmorCeralytrasItem : CustomItem {
             mutableListOf("Allows the wearer to triple", "jump when sneaking midair", "", "Crouch and hold for 4 secs", "to activate a high boost"),
             Material.ELYTRA,
             mutableListOf("armorceralytras"),
-            mutableMapOf(Enchantment.MENDING to 1, Enchantment.PROTECTION_ENVIRONMENTAL to 8, Enchantment.DURABILITY to 10, Enchantment.PROTECTION_FALL to 5, Enchantment.PROTECTION_PROJECTILE to 4)
+            mutableMapOf(Enchantment.MENDING to 1, Enchantment.PROTECTION to 8, Enchantment.UNBREAKING to 10, Enchantment.FEATHER_FALLING to 5, Enchantment.PROJECTILE_PROTECTION to 4)
         )
         item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
         return Pair("armorceralytras", item.createItem())
@@ -54,7 +54,7 @@ class AmorCeralytrasItem : CustomItem {
 
 
                             if (boostCounter[player.uniqueId]!! % 80 == 0) {
-                                player.world.spawnParticle(Particle.REDSTONE, player.location, 40, 0.5, 0.0, 0.5, 0.5, DustOptions(Color.RED, 1f))
+                                player.world.spawnParticle(Particle.DUST, player.location, 40, 0.5, 0.0, 0.5, 0.5, DustOptions(Color.RED, 1f))
                                 player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_BELL, 1f, 1f)
                             }
                         }

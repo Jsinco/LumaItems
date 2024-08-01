@@ -37,9 +37,9 @@ class MagmaticSet : AstralSet {
         val factory = AstralSetFactory("Magmatic", mutableListOf("&#AC87FBVolcanic"))
 
         factory.commonEnchants = mutableMapOf(
-            Enchantment.PROTECTION_ENVIRONMENTAL to 5, Enchantment.DAMAGE_ALL to 6, Enchantment.DURABILITY to 6,
-            Enchantment.SWEEPING_EDGE to 4, Enchantment.FIRE_ASPECT to 3, Enchantment.DIG_SPEED to 5,
-            Enchantment.LOOT_BONUS_BLOCKS to 3, Enchantment.LOOT_BONUS_MOBS to 3, Enchantment.PROTECTION_FALL to 4,
+            Enchantment.PROTECTION to 5, Enchantment.SHARPNESS to 6, Enchantment.UNBREAKING to 6,
+            Enchantment.SWEEPING_EDGE to 4, Enchantment.FIRE_ASPECT to 3, Enchantment.EFFICIENCY to 5,
+            Enchantment.FORTUNE to 3, Enchantment.LOOTING to 3, Enchantment.FEATHER_FALLING to 4,
             Enchantment.THORNS to 3
         )
 

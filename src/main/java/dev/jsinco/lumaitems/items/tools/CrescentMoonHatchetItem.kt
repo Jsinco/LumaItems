@@ -28,7 +28,7 @@ class CrescentMoonHatchetItem : CustomItem {
             mutableListOf("&#89f3f3\"&#8aeff3T&#8beaf3h&#8ce6f3e &#8de1f3h&#8eddf3e&#8fd9f3a&#90d4f3d &#91d0f3o&#92cbf3f &#93c7f3t&#94c3f3h&#95bef3e &#96baf3a&#97b5f3x&#99b1f3e &#9aadf3w&#9ba8f3a&#9ca4f3s &#9d9ff3m&#9a9df3a&#949bf3d&#8f99f3e &#8a97f3f&#8595f3r&#8093f3o&#7b91f3m","&#758ff3a &#708df3r&#6b8cf3a&#668af3r&#6188f3e &#5b86f3m&#5684f3a&#5182f3t&#4c80f3e&#477ef3r&#427cf3i&#3c7af3a&#3a79f3l&#3c7af3, &#3f7bf3t&#417bf3a&#447cf3k&#477df3e &#497ef3g&#4c7ef3o&#4e7ff3o&#5180f3d &#5380f3c&#5681f3a&#5882f3r&#5b83f3e &#5d83f3o&#6084f3f &#6285f3i&#6586f3t&#6786f3.&#6a87f3\"","","§fBreaks trees in one hit", "","§cCooldown: 1.6 secs"),
             Material.NETHERITE_AXE,
             mutableListOf("crescentmoonhatchet","cuboid"),
-            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.DURABILITY to 9, Enchantment.LOOT_BONUS_BLOCKS to 6, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.EFFICIENCY to 8, Enchantment.UNBREAKING to 9, Enchantment.FORTUNE to 6, Enchantment.MENDING to 1)
         )
         return Pair("crescentmoonhatchet", item.createItem())
     }

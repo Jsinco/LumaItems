@@ -37,7 +37,7 @@ class ThunderStridesItem : CustomItem {
             mutableListOf("&#fbe734\"&#fbe43fS&#fbe149u&#fcde54r&#fcdb5fg&#fcd86ae &#fcd574l&#fcd27fi&#fdcf8ak&#fdcc95e &#f4c49fL&#e2b7aai&#d1aab4g&#bf9dbeh&#ad91c9t&#9b84d3n&#8977dei&#786ae8n&#665ef3g&#5451fd\"","","Crouch to activate a speed boost", "during your boost, crouch to slide","","&cCooldown: 16 secs"),
             Material.NETHERITE_BOOTS,
             mutableListOf("thunderstrides"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 7, Enchantment.PROTECTION_PROJECTILE to 7, Enchantment.PROTECTION_FALL to 8 , Enchantment.DURABILITY to 10 ,Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 7, Enchantment.PROJECTILE_PROTECTION to 7, Enchantment.FEATHER_FALLING to 8 , Enchantment.UNBREAKING to 10 ,Enchantment.MENDING to 1)
         )
         item.tier = "&#c46bfb&lH&#c86eee&la&#cd71e2&ll&#d174d5&ll&#d677c8&lo&#da7abc&lm&#de7daf&la&#e380a2&lr&#e78395&le&#eb8689&ls &#f0897c&l2&#f48c6f&l0&#f98f63&l2&#fd9256&l3"
         return Pair("thunderstrides", item.createItem())
@@ -79,8 +79,8 @@ class ThunderStridesItem : CustomItem {
         player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 140, 2, false, false, false))
         activeFastLane.add(player.uniqueId)
         val particles = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, {
-            player.world.spawnParticle(Particle.REDSTONE, player.location, 1, 0.2, 0.0, 0.2, 0.1, DustOptions(Color.fromRGB(251, 216, 90), 0.9f))
-            player.world.spawnParticle(Particle.REDSTONE, player.location, 1, 0.2, 0.0, 0.2, 0.1, DustOptions(Color.fromRGB(106, 129, 253), 0.9f))
+            player.world.spawnParticle(Particle.DUST, player.location, 1, 0.2, 0.0, 0.2, 0.1, DustOptions(Color.fromRGB(251, 216, 90), 0.9f))
+            player.world.spawnParticle(Particle.DUST, player.location, 1, 0.2, 0.0, 0.2, 0.1, DustOptions(Color.fromRGB(106, 129, 253), 0.9f))
         }, 0L, 1L)
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, {

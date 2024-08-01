@@ -27,7 +27,7 @@ class RainbowShearsItem : CustomItem {
             mutableListOf("Sheared mobs will drop extra,", "rainbow colors of wool."),
             Material.SHEARS,
             mutableListOf("rainbowshears"),
-            mutableMapOf(Enchantment.DURABILITY to 6, Enchantment.DIG_SPEED to 7, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.UNBREAKING to 6, Enchantment.EFFICIENCY to 7, Enchantment.MENDING to 1)
         )
         item.addQuote("&7\"Shear to your heart's content!\"")
         item.tier = "&#731385&lP&#4332B9&lr&#1351ED&li&#0C6A87&ld&#058221&le &#7FB715&l2&#F9EB08&l0&#EF7A05&l2&#E40902&l4"

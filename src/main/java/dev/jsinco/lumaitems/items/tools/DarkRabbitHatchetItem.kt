@@ -25,7 +25,7 @@ class DarkRabbitHatchetItem : CustomItem {
             mutableListOf("Upon breaking blocks, drops will", "randomly be converted to charcoal", "or they will be multiplied."),
             Material.NETHERITE_AXE,
             mutableListOf("darkrabbithatchet"),
-            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.DURABILITY to 9, Enchantment.SILK_TOUCH to 1, Enchantment.MENDING to 1, Enchantment.DAMAGE_UNDEAD to 5)
+            mutableMapOf(Enchantment.EFFICIENCY to 8, Enchantment.UNBREAKING to 9, Enchantment.SILK_TOUCH to 1, Enchantment.MENDING to 1, Enchantment.SMITE to 5)
         )
         item.addQuote("&#C399E2\"&#BF96DEE&#BB93D9u&#B790D5g&#B48CD0h&#B089CC, &#AC86C8i&#A883C3t&#A480BF'&#A07DBBs &#9C79B6g&#9876B2o&#9573ADt &#9170A9c&#8D6DA5h&#896AA0a&#85669Cr&#816397c&#7D6093o&#795D8Fa&#765A8Al &#725786a&#6E5381l&#6A507Dl &#664D79o&#624A74v&#5E4770e&#5A446Cr &#574067i&#533D63t&#4F3A5E!&#4B375A\"")
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"
@@ -73,7 +73,7 @@ class DarkRabbitHatchetItem : CustomItem {
 
 
         val color = if (doDropCharCoal) Color.BLACK else Util.javaAwtColorToBukkitColor(Util.getColor(block))
-        block.world.spawnParticle(Particle.REDSTONE, block.location.add(0.5, 0.5, 0.5), 20, 0.5, 0.5, 0.5, 0.1, Particle.DustOptions(color, 1f))
+        block.world.spawnParticle(Particle.DUST, block.location.add(0.5, 0.5, 0.5), 20, 0.5, 0.5, 0.5, 0.1, Particle.DustOptions(color, 1f))
         block.world.playSound(block.location, Sound.ENTITY_GLOW_SQUID_AMBIENT,0.6f, 1f)
     }
 

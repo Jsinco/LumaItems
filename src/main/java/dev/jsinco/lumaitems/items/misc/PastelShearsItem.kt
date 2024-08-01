@@ -19,7 +19,7 @@ class PastelShearsItem : CustomItem {
             mutableListOf("Breaks all types of", "glass instantly."),
             Material.SHEARS,
             mutableListOf("pastelshears"),
-            mutableMapOf(Enchantment.DURABILITY to 9, Enchantment.MENDING to 1, Enchantment.DIG_SPEED to 6, Enchantment.SILK_TOUCH to 1)
+            mutableMapOf(Enchantment.UNBREAKING to 9, Enchantment.MENDING to 1, Enchantment.EFFICIENCY to 6, Enchantment.SILK_TOUCH to 1)
         )
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"
         return Pair("pastelshears", item.createItem())

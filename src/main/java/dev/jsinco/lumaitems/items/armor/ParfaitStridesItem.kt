@@ -30,7 +30,7 @@ class ParfaitStridesItem : CustomItem {
             mutableListOf("Passively grants the wearer", "extra health while wearing", "", "While wearing, crouch and", "right-click to grant all nearbys", "a buff for a short duration", "", "&cCooldown: 1m"),
             Material.NETHERITE_LEGGINGS,
             mutableListOf("parfaitstrides"),
-            mutableMapOf(Enchantment.PROTECTION_EXPLOSIONS to 8, Enchantment.PROTECTION_ENVIRONMENTAL to 7, Enchantment.DURABILITY to 8, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.BLAST_PROTECTION to 8, Enchantment.PROTECTION to 7, Enchantment.UNBREAKING to 8, Enchantment.MENDING to 1)
         )
         item.tier = "&#fb5a5a&lV&#fb6069&la&#fc6677&ll&#fc6c86&le&#fc7294&ln&#fd78a3&lt&#fd7eb2&li&#fb83be&ln&#f788c9&le&#f38dd4&ls &#f092df&l2&#ec97e9&l0&#e89cf4&l2&#e4a1ff&l4"
         item.attributeModifiers = DefaultAttributes.NETHERITE_LEGGINGS.appendThenGetAttributes(
@@ -51,7 +51,7 @@ class ParfaitStridesItem : CustomItem {
                 for (nearbyPlayer in nearbyPlayers) {
                     nearbyPlayer.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 450, 1))
                     nearbyPlayer.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 450, 0))
-                    nearbyPlayer.addPotionEffect(PotionEffect(PotionEffectType.FAST_DIGGING, 450, 1))
+                    nearbyPlayer.addPotionEffect(PotionEffect(PotionEffectType.HASTE, 450, 1))
                 }
 
                 cooldown.add(player.uniqueId)

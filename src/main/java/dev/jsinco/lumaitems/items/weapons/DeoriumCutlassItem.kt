@@ -38,7 +38,7 @@ class DeoriumCutlassItem  : CustomItem {
             mutableListOf("&#8020fb\"&#8523faL&#8926fae&#8e2af9t &#932df9t&#9730f8h&#9c33f7e &#a137f7d&#a63af6a&#aa3df5r&#af40f5k&#b444f4n&#b847f4e&#bd4af3s&#c24df2s &#c650f2c&#cb54f1o&#d057f1n&#d45af0s&#d95defu&#de61efm&#e364eee &#e767edt&#ec6aedh&#f16eece&#f571ecm&#fa74eb\"","","Right-click to summon a gravity well", "at a targeted block","","Entities nearby the well will","be damaged and weakened", "", "&cCooldown: 30 secs"),
             Material.NETHERITE_SWORD,
             mutableListOf("deoriumcutlass"),
-            mutableMapOf(Enchantment.DAMAGE_ALL to 8, Enchantment.DAMAGE_UNDEAD to 8, Enchantment.LOOT_BONUS_MOBS to 5, Enchantment.SWEEPING_EDGE to 4, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.SHARPNESS to 8, Enchantment.SMITE to 8, Enchantment.LOOTING to 5, Enchantment.SWEEPING_EDGE to 4, Enchantment.UNBREAKING to 10, Enchantment.MENDING to 1)
         )
         item.tier = "&#c46bfb&lH&#c86eee&la&#cd71e2&ll&#d174d5&ll&#d677c8&lo&#da7abc&lm&#de7daf&la&#e380a2&lr&#e78395&le&#eb8689&ls &#f0897c&l2&#f48c6f&l0&#f98f63&l2&#fd9256&l3"
         return Pair("deoriumcutlass", item.createItem())
@@ -77,7 +77,7 @@ class DeoriumCutlassItem  : CustomItem {
                     entity.velocity = Vector(0, 0, 0)
 
                     entity.addPotionEffect(PotionEffect(PotionEffectType.WEAKNESS, 40, 1, false, false, false))
-                    entity.world.spawnParticle(Particle.REDSTONE, entity.location, 5, 0.6, 0.6, 0.6, 0.8,
+                    entity.world.spawnParticle(Particle.DUST, entity.location, 5, 0.6, 0.6, 0.6, 0.8,
                         Particle.DustOptions(Color.PURPLE, 1f)
                     )
                 }
@@ -87,8 +87,8 @@ class DeoriumCutlassItem  : CustomItem {
             for (i in 0 until points) {
                 val dx: Double = cos(step + Math.PI * 2 * (i.toDouble() / points))
                 val dz: Double = sin(step + Math.PI * 2 * (i.toDouble() / points))
-                armorStand.location.world.spawnParticle(Particle.SPELL_WITCH, armorStand.location.x + dx, armorStand.location.y, armorStand.location.z + dz, 1, 0.0, 0.0, 0.0, 0.1)
-                armorStand.location.world.spawnParticle(Particle.REDSTONE, armorStand.location.x + dx, armorStand.location.y, armorStand.location.z + dz, 1, 0.0, 0.0, 0.0, 0.5, Particle.DustOptions(Color.PURPLE, 1f))
+                armorStand.location.world.spawnParticle(Particle.WITCH, armorStand.location.x + dx, armorStand.location.y, armorStand.location.z + dz, 1, 0.0, 0.0, 0.0, 0.1)
+                armorStand.location.world.spawnParticle(Particle.DUST, armorStand.location.x + dx, armorStand.location.y, armorStand.location.z + dz, 1, 0.0, 0.0, 0.0, 0.5, Particle.DustOptions(Color.PURPLE, 1f))
             }
             armorStand.location.world.playSound(armorStand.location, Sound.ENTITY_WITHER_AMBIENT, 0.08f, 2f)
         },0, 5L)

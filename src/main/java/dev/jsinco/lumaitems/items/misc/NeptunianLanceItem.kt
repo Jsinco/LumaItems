@@ -18,7 +18,7 @@ class NeptunianLanceItem : CustomItem {
             mutableListOf("&#51f9b9\"&#56f9bbD&#5bf9bdr&#60f9bfe&#65f9c1a&#6af9c2m &#6ff9c4b&#73f9c6i&#78f9c8g&#7df9cag&#82f9cce&#87f9cer &#8cf9d0t&#91f9d1h&#96f9d3a&#9bf9d5n &#a0f9d7t&#a5f9d9h&#aaf9dbe &#aef9ddo&#b3f9dfc&#b8f9e0e&#bdf9e2a&#c2f9e4n&#c7f9e6\"","","&fUsing this trident grants","&fthe wielder dolphin's grace"),
             Material.TRIDENT,
             mutableListOf("neptunianlance"),
-            mutableMapOf(Enchantment.IMPALING to 8, Enchantment.RIPTIDE to 4, Enchantment.DAMAGE_ALL to 8, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.IMPALING to 8, Enchantment.RIPTIDE to 4, Enchantment.SHARPNESS to 8, Enchantment.UNBREAKING to 10, Enchantment.MENDING to 1)
         )
         return Pair("neptunianlance", item.createItem())
     }

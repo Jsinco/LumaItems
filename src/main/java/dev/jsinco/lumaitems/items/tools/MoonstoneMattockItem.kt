@@ -22,7 +22,7 @@ class MoonstoneMattockItem : CustomItem {
             mutableListOf("§fMining ores with this pickaxe grants","§fa chance to substantially increase the","§famount of materials gained","","§fHowever, there is a chance for mined","§for ores to drop nothing"),
             Material.NETHERITE_PICKAXE,
             mutableListOf("moonstonemattock"),
-            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1, Enchantment.LOOT_BONUS_BLOCKS to 5)
+            mutableMapOf(Enchantment.EFFICIENCY to 8, Enchantment.UNBREAKING to 10, Enchantment.MENDING to 1, Enchantment.FORTUNE to 5)
         )
         return Pair("moonstonemattock", item.createItem())
     }
@@ -44,7 +44,7 @@ class MoonstoneMattockItem : CustomItem {
         val chance = Random().nextInt(100)
         if (chance <= 25) {
             drops.forEach(Consumer { drop: ItemStack -> drop.amount *= 10 })
-            block.world.spawnParticle(Particle.TOTEM, block.location, 50, 0.5, 0.5, 0.5, 0.1)
+            block.world.spawnParticle(Particle.TOTEM_OF_UNDYING, block.location, 50, 0.5, 0.5, 0.5, 0.1)
             block.world.playSound(block.location, Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST_FAR, 1f, 1f)
             for (i in drops.indices) {
                 block.world.dropItemNaturally(block.location, drops.iterator().next())

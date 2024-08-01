@@ -42,7 +42,7 @@ class YolkPlaidYataghanItem : CustomItem {
             mutableListOf("While in range, right-click to encase", "up to 2 entities in eggs for a", "short duration, dealing damage", "", "&cCooldown: 20s per egg"),
             Material.NETHERITE_SWORD,
             mutableListOf("yolkplaidyataghan"),
-            mutableMapOf(Enchantment.DAMAGE_ALL to 8, Enchantment.DURABILITY to 9, Enchantment.DAMAGE_UNDEAD to 6, Enchantment.SWEEPING_EDGE to 5, Enchantment.FIRE_ASPECT to 4, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.SHARPNESS to 8, Enchantment.UNBREAKING to 9, Enchantment.SMITE to 6, Enchantment.SWEEPING_EDGE to 5, Enchantment.FIRE_ASPECT to 4, Enchantment.MENDING to 1)
         )
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"
         return Pair("yolkplaidyataghan", item.createItem())
@@ -76,7 +76,7 @@ class YolkPlaidYataghanItem : CustomItem {
         val egg = livingEntity.world.spawnEntity(loc, EntityType.ITEM_DISPLAY) as ItemDisplay
 
         egg.isPersistent = false
-        egg.itemStack = Util.playerHeadFromBase64(eggTextures.random(), 1)
+        egg.setItemStack(Util.playerHeadFromBase64(eggTextures.random(), 1))
         egg.interpolationDuration = 0
         egg.interpolationDelay = -1
 

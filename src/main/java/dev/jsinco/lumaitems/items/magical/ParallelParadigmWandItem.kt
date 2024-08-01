@@ -34,7 +34,7 @@ class ParallelParadigmWandItem : CustomItem {
             mutableListOf("&#349532\"&#3e913fT&#488c4ch&#518858i&#5b8365n&#657f72g&#6f7a7fs &#79768ca&#837199r&#8c6da5e&#9668b2n&#a064bf'&#aa5fcct &#b45bd9a&#bd56e5l&#c752f2w&#d14dffa&#d251f2y&#d355e6s &#d359d9a&#d45dcds &#d561c0t&#d665b4h&#d669a7e&#d76d9by &#d8708es&#d97481e&#d97875e&#da7c68m&#db805c.&#dc844f.&#dc8843.&#dd8c36\"","","Left-click to cast a spell", "", "Spells from this wand may", "vary, caution is advised!", "", "&c1 Lapis per spell"),
             Material.BLAZE_ROD,
             mutableListOf("parallelparadigmwand"),
-            mutableMapOf(Enchantment.DAMAGE_ALL to 5, Enchantment.DAMAGE_ARTHROPODS to 5, Enchantment.FIRE_ASPECT to 4)
+            mutableMapOf(Enchantment.SHARPNESS to 5, Enchantment.BANE_OF_ARTHROPODS to 5, Enchantment.FIRE_ASPECT to 4)
         )
         item.tier = "&#c46bfb&lH&#c86eee&la&#cd71e2&ll&#d174d5&ll&#d677c8&lo&#da7abc&lm&#de7daf&la&#e380a2&lr&#e78395&le&#eb8689&ls &#f0897c&l2&#f48c6f&l0&#f98f63&l2&#fd9256&l3"
         return Pair("parallelparadigmwand", item.createItem())
@@ -43,7 +43,7 @@ class ParallelParadigmWandItem : CustomItem {
     override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.LEFT_CLICK -> {
-                AbilityUtil.spawnSpell(player, Particle.FIREWORKS_SPARK, "parallelparadigmwand", 120L)
+                AbilityUtil.spawnSpell(player, Particle.FIREWORK, "parallelparadigmwand", 120L)
             }
 
             Action.PROJECTILE_LAND -> {
@@ -86,7 +86,7 @@ class ParallelParadigmWandItem : CustomItem {
 
     private fun potionEntity(entity: LivingEntity) {
         for (i in 0..60) {
-            entity.world.spawnParticle(Particle.SPELL_WITCH, entity.location, 1, 0.3, 0.3, 0.3, 0.2)
+            entity.world.spawnParticle(Particle.WITCH, entity.location, 1, 0.3, 0.3, 0.3, 0.2)
         }
         entity.world.playSound(entity.location, Sound.ITEM_BOTTLE_FILL, 1f, 0.9f)
         entity.addPotionEffect(PotionEffect(PotionEffectType.values().random(), 100, 1, false, true, false))
@@ -124,7 +124,7 @@ class ParallelParadigmWandItem : CustomItem {
         for (i in 0..3) {
             val random = Random.nextDouble(1.0)
             val random2 = Random.nextDouble(1.0)
-            entity.world.spawnEntity(entity.location.add(random,3.0,random2), EntityType.THROWN_EXP_BOTTLE)
+            entity.world.spawnEntity(entity.location.add(random,3.0,random2), EntityType.EXPERIENCE_BOTTLE)
         }
     }
 }

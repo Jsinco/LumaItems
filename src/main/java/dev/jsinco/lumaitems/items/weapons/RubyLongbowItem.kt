@@ -33,7 +33,7 @@ class RubyLongbowItem : CustomItem {
             mutableListOf("&#ff5372\"&#fd5378A&#fb527es &#f95284f&#f7518aa&#f55190s&#f25196t &#f0509ca&#ee50a2s &#ec4fa8a &#ea4faes&#e84fb4h&#e64ebbo&#e44ec1o&#e24ec7t&#e04dcdi&#de4dd3n&#dc4cd9g &#d94cdfs&#d74ce5t&#d54beba&#d34bf1r&#d14af7!&#cf4afd\"","","&fArrows fired from this bow will","&ftravel faster and deal more damage","","&fAny arrow fired has 50% chance","&fto replicate itself"),
             Material.BOW,
             mutableListOf("rubylongbow"),
-            mutableMapOf(Enchantment.ARROW_DAMAGE to 5, Enchantment.ARROW_INFINITE to 1, Enchantment.DURABILITY to 9, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.POWER to 5, Enchantment.INFINITY to 1, Enchantment.UNBREAKING to 9, Enchantment.MENDING to 1)
         )
         return Pair("rubylongbow", item.createItem())
     }
@@ -69,11 +69,11 @@ class RubyLongbowItem : CustomItem {
             proj2 = null
         }
         val task = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, {
-            proj.world.spawnParticle(Particle.REDSTONE, proj.location, 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(255, 83, 114), 1f))
-            proj.world.spawnParticle(Particle.REDSTONE, proj.location, 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(207, 74, 253), 1f))
+            proj.world.spawnParticle(Particle.DUST, proj.location, 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(255, 83, 114), 1f))
+            proj.world.spawnParticle(Particle.DUST, proj.location, 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(207, 74, 253), 1f))
             if (proj2 != null) {
-                proj2.world.spawnParticle(Particle.REDSTONE, proj2.location, 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(255, 83, 114), 1f))
-                proj2.world.spawnParticle(Particle.REDSTONE, proj2.location, 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(207, 74, 253), 1f))
+                proj2.world.spawnParticle(Particle.DUST, proj2.location, 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(255, 83, 114), 1f))
+                proj2.world.spawnParticle(Particle.DUST, proj2.location, 1, 0.0, 0.0, 0.0, 0.1, DustOptions(Color.fromRGB(207, 74, 253), 1f))
             }
         }, 0L, 1L)
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, { Bukkit.getScheduler().cancelTask(task) }, 45L)

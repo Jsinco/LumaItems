@@ -32,7 +32,7 @@ class LuminaLensesItem : CustomItem {
             mutableListOf("&#7554fb\"&#7358fbH&#725cfaa&#7060far&#6e65fan&#6c69f9e&#6b6df9s&#6971f9s &#6775f8t&#6679f8h&#647df8e &#6282f8e&#6086f7t&#5f8af7e&#5d8ef7r&#5b92f6n&#5a96f6a&#589af6l &#569ff5b&#54a3f5r&#53a7f5i&#51abf4g&#4faff4h&#4eb3f4t&#4cb7f3n&#4abcf3e&#48c0f3s&#47c4f3s &#45c8f2o&#43ccf2f &#42d0f2a &#40d4f1s&#3ed9f1t&#3cddf1a&#3be1f0r&#39e5f0\"","","&fGrants multiple potion buffs while","&fsufficiently charged","","&fThis helmet relies on a charge to function","&fRight-click any amount of raw copper to","&frecharge your helmet"),
             Material.NETHERITE_HELMET,
             mutableListOf("luminalenses"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 6, Enchantment.PROTECTION_EXPLOSIONS to 5, Enchantment.WATER_WORKER to 1, Enchantment.OXYGEN to 3, Enchantment.DURABILITY to 8, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 6, Enchantment.BLAST_PROTECTION to 5, Enchantment.AQUA_AFFINITY to 1, Enchantment.RESPIRATION to 3, Enchantment.UNBREAKING to 8, Enchantment.MENDING to 1)
         )
         return Pair("luminalenses", item.createItem())
     }

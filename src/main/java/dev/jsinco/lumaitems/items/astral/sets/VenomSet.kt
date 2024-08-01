@@ -20,8 +20,8 @@ class VenomSet : AstralSet {
         astralSetFactory.identifier = "venom-set"
 
         astralSetFactory.commonEnchants = mutableMapOf(
-            Enchantment.PROTECTION_ENVIRONMENTAL to 5, Enchantment.DAMAGE_ALL to 6, Enchantment.DURABILITY to 5,
-            Enchantment.SWEEPING_EDGE to 4, Enchantment.THORNS to 4, Enchantment.PROTECTION_FALL to 4,
+            Enchantment.PROTECTION to 5, Enchantment.SHARPNESS to 6, Enchantment.UNBREAKING to 5,
+            Enchantment.SWEEPING_EDGE to 4, Enchantment.THORNS to 4, Enchantment.FEATHER_FALLING to 4,
         )
 
         val materials: List<Material> = listOf(

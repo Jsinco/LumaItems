@@ -23,8 +23,8 @@ class WitchsBrewItem : CustomItem {
 
     companion object {
         val potionEffects: List<PotionEffectType> = listOf(
-            PotionEffectType.FAST_DIGGING,
-            PotionEffectType.JUMP,
+            PotionEffectType.HASTE,
+            PotionEffectType.JUMP_BOOST,
             PotionEffectType.ABSORPTION,
             PotionEffectType.BAD_OMEN,
             PotionEffectType.CONDUIT_POWER,
@@ -40,9 +40,9 @@ class WitchsBrewItem : CustomItem {
             PotionEffectType.SATURATION,
             PotionEffectType.SLOW_FALLING,
             PotionEffectType.SPEED,
-            PotionEffectType.DAMAGE_RESISTANCE,
+            PotionEffectType.RESISTANCE,
             PotionEffectType.FIRE_RESISTANCE,
-            PotionEffectType.INCREASE_DAMAGE
+            PotionEffectType.STRENGTH
         )
 
         val cooldown: MutableList<UUID> = mutableListOf()

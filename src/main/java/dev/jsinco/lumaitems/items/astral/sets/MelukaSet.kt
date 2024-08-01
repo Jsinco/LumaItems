@@ -24,9 +24,9 @@ class MelukaSet : AstralSet {
         )
 
         astralSetFactory.commonEnchants = mutableMapOf(
-            Enchantment.PROTECTION_ENVIRONMENTAL to 5, Enchantment.DAMAGE_ALL to 5, Enchantment.DURABILITY to 5,
-            Enchantment.SWEEPING_EDGE to 3, Enchantment.DIG_SPEED to 4, Enchantment.SILK_TOUCH to 1,
-            Enchantment.DEPTH_STRIDER to 3, Enchantment.WATER_WORKER to 2, Enchantment.OXYGEN to 3
+            Enchantment.PROTECTION to 5, Enchantment.SHARPNESS to 5, Enchantment.UNBREAKING to 5,
+            Enchantment.SWEEPING_EDGE to 3, Enchantment.EFFICIENCY to 4, Enchantment.SILK_TOUCH to 1,
+            Enchantment.DEPTH_STRIDER to 3, Enchantment.AQUA_AFFINITY to 2, Enchantment.RESPIRATION to 3
         )
 
         for (material in materials) {

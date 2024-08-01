@@ -33,7 +33,7 @@ class ViperHatchetItem : CustomItem {
             mutableListOf("&#478426\"&#4a8827T&#4d8c28h&#509028e &#539429v&#56982ae&#599c2bn&#5ca02bo&#5fa42cm &#62a82dh&#65ac2ea&#68b02ei&#6bb42fl&#6eb830s &#71bc31n&#75c032o&#78c432t &#7bc833f&#7ecc34r&#81d035o&#84d435m &#87d836t&#8adc37h&#8de038i&#90e438s &#93e839r&#96ec3ae&#99f03ba&#9cf43bl&#9ff83cm&#a2fc3d\"","","&fEntities attacked with this weapon","&fwill take poison damage","","&fOpponents will have a chance to be bitten","&fand take extra damage"),
             Material.NETHERITE_AXE,
             mutableListOf("viperhatchet"),
-            mutableMapOf(Enchantment.DAMAGE_ALL to 8, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.SHARPNESS to 8, Enchantment.UNBREAKING to 10, Enchantment.MENDING to 1)
         )
         return Pair("viperhatchet", item.createItem())
     }

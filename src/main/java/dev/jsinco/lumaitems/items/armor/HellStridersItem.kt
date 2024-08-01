@@ -47,7 +47,7 @@ class HellStridersItem : CustomItem {
             mutableListOf("Allows the wearer to", "walk on lava."),
             Material.NETHERITE_BOOTS,
             mutableListOf(ID),
-            mutableMapOf(Enchantment.MENDING to 1, Enchantment.DURABILITY to 10, Enchantment.PROTECTION_ENVIRONMENTAL to 4, Enchantment.PROTECTION_FIRE to 9, Enchantment.SOUL_SPEED to 3)
+            mutableMapOf(Enchantment.MENDING to 1, Enchantment.UNBREAKING to 10, Enchantment.PROTECTION to 4, Enchantment.FIRE_PROTECTION to 9, Enchantment.SOUL_SPEED to 3)
         )
         item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
         return Pair(ID, item.createItem())

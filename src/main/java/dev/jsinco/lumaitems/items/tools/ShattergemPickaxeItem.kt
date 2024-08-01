@@ -18,7 +18,7 @@ class ShattergemPickaxeItem : CustomItem {
             mutableListOf("Grants the user the ability to", "silk touch budding amethyst"),
             Material.NETHERITE_PICKAXE,
             mutableListOf("shattergempickaxe"),
-            mutableMapOf(Enchantment.DIG_SPEED to 7, Enchantment.SILK_TOUCH to 1, Enchantment.DURABILITY to 10, Enchantment. MENDING to 1)
+            mutableMapOf(Enchantment.EFFICIENCY to 7, Enchantment.SILK_TOUCH to 1, Enchantment.UNBREAKING to 10, Enchantment. MENDING to 1)
         )
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"
         return Pair("shattergempickaxe", item.createItem())

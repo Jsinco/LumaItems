@@ -19,7 +19,7 @@ class RibbonBootsItem : CustomItem {
             mutableListOf("&#fb79d7\"&#fb78d5R&#fb77d3e&#fb75d0a&#fb74cec&#fc73cch &#fc72cat&#fc70c7h&#fc6fc5e &#fc6ec3s&#fc6dc1k&#fc6bbei&#fc6abce&#fc69bas&#fc68b8, &#fd66b5b&#fd65b3u&#fd64b1t &#fd63afd&#fd62ade&#fd60aaf&#fd5fa8y &#fd5ea6g&#fd5da4r&#fe5ba1a&#fe5a9fv&#fe599di&#fe589bt&#fe5698y&#fe5596'&#fe5494s &#fe5392t&#fe518fi&#fe508de&#ff4f8bs&#ff4e89.&#ff4c86.&#ff4b84.&#ff4a82\"","","&fWearing these socks will prevent all", "&ftypes of fall damage and give a small","&fjump boost"),
             Material.NETHERITE_BOOTS,
             mutableListOf("ribbonboots"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 7, Enchantment.FROST_WALKER to 3, Enchantment.DURABILITY to 8, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 7, Enchantment.FROST_WALKER to 3, Enchantment.UNBREAKING to 8, Enchantment.MENDING to 1)
         )
         return Pair("ribbonboots", item.createItem())
     }
@@ -34,7 +34,7 @@ class RibbonBootsItem : CustomItem {
                 }
             }
             Action.RUNNABLE -> {
-                player.addPotionEffect(PotionEffect(PotionEffectType.JUMP, 220, 0, false, false, false))
+                player.addPotionEffect(PotionEffect(PotionEffectType.JUMP_BOOST, 220, 0, false, false, false))
             }
             else -> return false
         }

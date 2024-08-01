@@ -29,7 +29,7 @@ class RubyPinionsItem : CustomItem {
             mutableListOf("&#ff5372\"&#fd5378A&#fb527es &#f95284f&#f7518aa&#f55190s&#f25196t &#f0509ca&#ee50a2s &#ec4fa8a &#ea4faes&#e84fb4h&#e64ebbo&#e44ec1o&#e24ec7t&#e04dcdi&#de4dd3n&#dc4cd9g &#d94cdfs&#d74ce5t&#d54beba&#d34bf1r&#d14af7!&#cf4afd\"","","The effectiveness of rockets will be", "increased while wearing these wings","","Wearing these wings grants a 50%","chance to not consume a rocket"),
             Material.ELYTRA,
             mutableListOf("rubypinions"),
-            mutableMapOf(Enchantment.PROTECTION_ENVIRONMENTAL to 6, Enchantment.PROTECTION_PROJECTILE to 8, Enchantment.DURABILITY to 9, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.PROTECTION to 6, Enchantment.PROJECTILE_PROTECTION to 8, Enchantment.UNBREAKING to 9, Enchantment.MENDING to 1)
         )
         return Pair("rubypinions", item.createItem())
     }
@@ -59,9 +59,9 @@ class RubyPinionsItem : CustomItem {
             }
         }
         val task = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, {
-            player.world.spawnParticle(Particle.REDSTONE, player.location.add(0.0, 1.0, 0.0), 1, 0.5, 0.5, 0.5, 0.1, DustOptions(
+            player.world.spawnParticle(Particle.DUST, player.location.add(0.0, 1.0, 0.0), 1, 0.5, 0.5, 0.5, 0.1, DustOptions(
                 Color.fromRGB(255, 83, 114), 2f))
-            player.world.spawnParticle(Particle.REDSTONE, player.location.add(0.0, 1.0, 0.0), 1, 0.5, 0.5, 0.5, 0.1, DustOptions(Color.fromRGB(207, 74, 253), 2f))
+            player.world.spawnParticle(Particle.DUST, player.location.add(0.0, 1.0, 0.0), 1, 0.5, 0.5, 0.5, 0.1, DustOptions(Color.fromRGB(207, 74, 253), 2f))
         }, 0L, 1L)
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, { Bukkit.getScheduler().cancelTask(task) }, 35L)
     }

@@ -37,7 +37,7 @@ class PumpkinLauncherItem : CustomItem {
             mutableListOf("&#fb7a43\"&#fb7d42A&#fb8041b&#fb8440s&#fb873eo&#fb8a3dl&#fb8d3cu&#fb913bt&#fb943ae&#fb9739l&#fb9a38y &#fb9e37m&#fba135a&#fba434n&#fba733i&#fbaa32a&#fbae31c&#fbb130a&#fbb42fl&#fbb72d.&#fbbb2c.&#fbbe2b.&#fbc12a\"","","Upon charging and releasing, this","bow will launch a pumpkin that","explodes on impact"),
             Material.BOW,
             mutableListOf("pumpkinlauncher"),
-            mutableMapOf(Enchantment.ARROW_DAMAGE to 7, Enchantment.ARROW_INFINITE to 1, Enchantment.DURABILITY to 10, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.POWER to 7, Enchantment.INFINITY to 1, Enchantment.UNBREAKING to 10, Enchantment.MENDING to 1)
         )
         item.tier = "&#c46bfb&lH&#c86eee&la&#cd71e2&ll&#d174d5&ll&#d677c8&lo&#da7abc&lm&#de7daf&la&#e380a2&lr&#e78395&le&#eb8689&ls &#f0897c&l2&#f48c6f&l0&#f98f63&l2&#fd9256&l3"
         return Pair("pumpkinlauncher", item.createItem())

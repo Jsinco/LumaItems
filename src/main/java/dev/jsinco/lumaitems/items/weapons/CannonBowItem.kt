@@ -32,7 +32,7 @@ class CannonBowItem : CustomItem {
             mutableListOf("§fA medieval invention, now in","§fyour hands!","","§fWith an empty offhand, fire a cannonball","§fprojectile that will explode on impact","","§c1 TNT per shot"),
             Material.CROSSBOW,
             mutableListOf("cannonbow"),
-            mutableMapOf(Enchantment.QUICK_CHARGE to(3), Enchantment.DURABILITY to(5), Enchantment.MENDING to(1), Enchantment.ARROW_INFINITE to(1), Enchantment.MULTISHOT to(1))
+            mutableMapOf(Enchantment.QUICK_CHARGE to(3), Enchantment.UNBREAKING to(5), Enchantment.MENDING to(1), Enchantment.INFINITY to(1), Enchantment.MULTISHOT to(1))
         )
         return Pair("cannonbow", item.createItem())
     }

@@ -10,7 +10,7 @@ import org.bukkit.Color
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.block.Block
-import org.bukkit.craftbukkit.v1_20_R3.block.CraftBlock
+import org.bukkit.craftbukkit.block.CraftBlock
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
@@ -145,7 +145,7 @@ object Util {
             meta.persistentDataContainer.set(NamespacedKey(plugin, data), PersistentDataType.SHORT, 1)
         }
         if (glint) {
-            meta.addEnchant(Enchantment.DURABILITY, 10, true)
+            meta.addEnchant(Enchantment.UNBREAKING, 10, true)
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS)
         }
         item.itemMeta = meta

@@ -50,7 +50,7 @@ class BallisticBunnyMattockItem : CustomItem {
             ),
             Material.NETHERITE_PICKAXE,
             mutableListOf("ballisticbunnymattock"),
-            mutableMapOf(Enchantment.DIG_SPEED to 9, Enchantment.DURABILITY to 7, Enchantment.LOOT_BONUS_BLOCKS to 5, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.EFFICIENCY to 9, Enchantment.UNBREAKING to 7, Enchantment.FORTUNE to 5, Enchantment.MENDING to 1)
         )
         item.tier = "&#FF9A9A&lE&#FFBAA6&la&#FFD9B2&ls&#FFF9BE&lt&#E5FAD4&le&#CAFCE9&lr &#B0FDFF&l2&#C7E8FF&l0&#DED4FF&l2&#F5BFFF&l4"
         return Pair("ballisticbunnymattock", item.createItem())
@@ -98,7 +98,7 @@ class BallisticBunnyMattockItem : CustomItem {
         loc.direction = blockFace.direction
 
         val itemDisplay = block.world.spawnEntity(loc, EntityType.ITEM_DISPLAY) as ItemDisplay
-        itemDisplay.itemStack = Util.createBasicItem("", mutableListOf(), if (double) Material.GOLDEN_CARROT else Material.CARROT, mutableListOf(), true)
+        itemDisplay.setItemStack(Util.createBasicItem("", mutableListOf(), if (double) Material.GOLDEN_CARROT else Material.CARROT, mutableListOf(), true))
         itemDisplay.isPersistent = false
 
         val interaction = block.world.spawnEntity(loc, EntityType.INTERACTION) as Interaction

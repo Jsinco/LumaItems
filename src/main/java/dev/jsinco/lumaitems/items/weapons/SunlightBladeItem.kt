@@ -41,7 +41,7 @@ class SunlightBladeItem : CustomItem {
             mutableListOf("&#e3dd45\"&#e4d745L&#e5d145i&#e6ca45g&#e7c445h&#e7be44t &#e8b844t&#e9b244h&#eaac44e &#eba544s&#ec9f44h&#ed9944a&#ee9344d&#ef8d44o&#ef8643w&#f08043s &#f17a43o&#f27443f &#f36e43t&#f46743h&#f56143e &#f65b43u&#f75543n&#f74f42d&#f84942e&#f94242a&#fa3c42d&#fb3642\"","","&fThis weapon deals significantly more", "&fdamage to mobs that burn in the daylight", "", "&fRight click to summon a star that will", "&ffreeze, damage, and ignite all mobs near it","", "&cCooldown: 15 secs"),
             Material.NETHERITE_SWORD,
             mutableListOf("sunlightblade"),
-            mutableMapOf(Enchantment.DAMAGE_ALL to 8, Enchantment.FIRE_ASPECT to 3, Enchantment.LOOT_BONUS_MOBS to 4, Enchantment.DURABILITY to 10, Enchantment.SWEEPING_EDGE to 5, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.SHARPNESS to 8, Enchantment.FIRE_ASPECT to 3, Enchantment.LOOTING to 4, Enchantment.UNBREAKING to 10, Enchantment.SWEEPING_EDGE to 5, Enchantment.MENDING to 1)
         )
         return Pair("sunlightblade", item.createItem())
     }
@@ -71,7 +71,7 @@ class SunlightBladeItem : CustomItem {
                 entity.setFireTicks(100)
                 entity.damage(11.0, p)
                 if (entity is Player) return@Consumer
-                entity.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 100, 49, false, false))
+                entity.addPotionEffect(PotionEffect(PotionEffectType.SLOWNESS, 100, 49, false, false))
             }
         })
 

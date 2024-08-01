@@ -30,7 +30,7 @@ class UnnamedItem : CustomItem {
             Material.SPONGE,
             Material.DIAMOND,
             Material.GOLD_BLOCK,
-            Material.SCUTE,
+            Material.TURTLE_SCUTE,
             Material.PHANTOM_MEMBRANE,
             Material.ANCIENT_DEBRIS,
             Material.GOLDEN_APPLE,
@@ -95,7 +95,7 @@ class UnnamedItem : CustomItem {
 
     fun dropLoot(loc: Location = barrel.location) {
         loc.world.playSound(loc, Sound.ITEM_TOTEM_USE, 1f, 1f)
-        loc.world.spawnParticle(Particle.TOTEM, loc, 50, 0.5, 0.5, 0.5, 0.1)
+        loc.world.spawnParticle(Particle.TOTEM_OF_UNDYING, loc, 50, 0.5, 0.5, 0.5, 0.1)
         for (i in 0..Random.nextInt(3,5)) {
             if (Random.nextBoolean()) {
                 val rareItems = pinataFile.getConfigurationSection("rare-items")!!.getKeys(false)

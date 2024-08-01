@@ -37,7 +37,7 @@ class SoulEaterItem : CustomItem {
             mutableListOf("\"&#03263a\"&#09243fD&#102243a&#162048r&#1c1e4dk&#231c51n&#291a56e&#30185as&#36165fs &#3c1464l&#431268u&#49106dr&#431464k&#3e175as &#381b51u&#321e48p&#2d223fo&#272535n &#22292cy&#1c2c23o&#16301au&#113310.&#0b3707\"","","§fPress your swap key (F) to swap between","§fa bow and an axe","","§fUpon killing an entity with this weapon, their soul","§fwill drop, press your drop key (Q) to devour the soul", "§fand overheal based on the strength of the soul"),
             Material.NETHERITE_AXE,
             mutableListOf("souleater"),
-            mutableMapOf(Enchantment.DAMAGE_ALL to 10, Enchantment.LOOT_BONUS_MOBS to 6, Enchantment.ARROW_INFINITE to 1, Enchantment.ARROW_DAMAGE to 5, Enchantment.DURABILITY to 8, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.SHARPNESS to 10, Enchantment.LOOTING to 6, Enchantment.INFINITY to 1, Enchantment.POWER to 5, Enchantment.UNBREAKING to 8, Enchantment.MENDING to 1)
         )
         return Pair("souleater", item.createItem())
     }

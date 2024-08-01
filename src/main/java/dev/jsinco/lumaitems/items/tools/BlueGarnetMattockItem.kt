@@ -21,7 +21,7 @@ class BlueGarnetMattockItem : CustomItem {
             mutableListOf("Breaks blocks in a 3x3 radius."),
             Material.NETHERITE_PICKAXE,
             mutableListOf("bluegarnetmattock"),
-            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.DURABILITY to 10, Enchantment.SILK_TOUCH to 1, Enchantment.MENDING to 1)
+            mutableMapOf(Enchantment.EFFICIENCY to 8, Enchantment.UNBREAKING to 10, Enchantment.SILK_TOUCH to 1, Enchantment.MENDING to 1)
         )
         item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
         return Pair("bluegarnetmattock", item.createItem())
@@ -39,7 +39,7 @@ class BlueGarnetMattockItem : CustomItem {
 
                 for (block in blocklist) {
                     block.breakNaturally(player.inventory.itemInMainHand)
-                    block.world.spawnParticle(Particle.BLOCK_CRACK, block.location.add(0.5, 0.5, 0.5), 10, 0.5, 0.5, 0.5, 0.1, block.blockData)
+                    block.world.spawnParticle(Particle.BLOCK, block.location.add(0.5, 0.5, 0.5), 10, 0.5, 0.5, 0.5, 0.1, block.blockData)
                 }
             }
             else -> return false

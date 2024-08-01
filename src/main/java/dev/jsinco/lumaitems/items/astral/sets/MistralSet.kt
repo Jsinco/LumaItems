@@ -23,10 +23,10 @@ class MistralSet : AstralSet {
         val astralSetFactory = AstralSetFactory("Mistral", mutableListOf("&#AC87FBSwift"))
 
         astralSetFactory.commonEnchants = mutableMapOf(
-            Enchantment.PROTECTION_ENVIRONMENTAL to 4, Enchantment.PROTECTION_PROJECTILE to 5, Enchantment.PROTECTION_FALL to 5,
-            Enchantment.DAMAGE_ALL to 6, Enchantment.DURABILITY to 7, Enchantment.SWEEPING_EDGE to 4,
-            Enchantment.DIG_SPEED to 6, Enchantment.SILK_TOUCH to 1, //Enchantment.MENDING to 1,
-            Enchantment.LURE to 4, Enchantment.LUCK to 4
+            Enchantment.PROTECTION to 4, Enchantment.PROJECTILE_PROTECTION to 5, Enchantment.FEATHER_FALLING to 5,
+            Enchantment.SHARPNESS to 6, Enchantment.UNBREAKING to 7, Enchantment.SWEEPING_EDGE to 4,
+            Enchantment.EFFICIENCY to 6, Enchantment.SILK_TOUCH to 1, //Enchantment.MENDING to 1,
+            Enchantment.LURE to 4, Enchantment.LUCK_OF_THE_SEA to 4
         )
 
         val materials: List<Material> = listOf(

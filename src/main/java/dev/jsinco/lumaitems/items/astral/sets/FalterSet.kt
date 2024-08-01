@@ -19,30 +19,30 @@ class FalterSet : AstralSet {
         val commonLore = mutableListOf("Damage dealt to enemies scales", "with %s Job level")
 
         astralSetFactory.commonEnchants = mutableMapOf(
-            Enchantment.DAMAGE_ALL to 7,
-            Enchantment.DAMAGE_UNDEAD to 7,
-            Enchantment.DURABILITY to 8,
+            Enchantment.SHARPNESS to 7,
+            Enchantment.SMITE to 7,
+            Enchantment.UNBREAKING to 8,
             Enchantment.MENDING to 1
         )
 
         astralSetFactory.astralSetItem(
             Material.DIAMOND_PICKAXE,
-            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 5),
+            mutableMapOf(Enchantment.EFFICIENCY to 8, Enchantment.FORTUNE to 5),
             commonLore.map { it.format("Miner") }
         )
         astralSetFactory.astralSetItem(
             Material.DIAMOND_HOE,
-            mutableMapOf(Enchantment.DIG_SPEED to 8,Enchantment.LOOT_BONUS_BLOCKS to 5),
+            mutableMapOf(Enchantment.EFFICIENCY to 8,Enchantment.FORTUNE to 5),
             commonLore.map { it.format("Farmer") }
         )
         astralSetFactory.astralSetItem(
             Material.DIAMOND_AXE,
-            mutableMapOf(Enchantment.DIG_SPEED to 8, Enchantment.LOOT_BONUS_BLOCKS to 4, Enchantment.LOOT_BONUS_MOBS to 6),
+            mutableMapOf(Enchantment.EFFICIENCY to 8, Enchantment.FORTUNE to 4, Enchantment.LOOTING to 6),
             commonLore.map { it.format("Lumberjack") }
         )
         astralSetFactory.astralSetItem(
             Material.FISHING_ROD,
-            mutableMapOf(Enchantment.LURE to 5, Enchantment.LUCK to 6),
+            mutableMapOf(Enchantment.LURE to 5, Enchantment.LUCK_OF_THE_SEA to 6),
             commonLore.map { it.format("Fisherman") }
         )
 

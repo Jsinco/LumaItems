@@ -16,7 +16,7 @@ class TwilightSeasideSwordItem : CustomItem {
 
     companion object {
         private val speed = PotionEffect(PotionEffectType.SPEED, 100, 0, true, false, false)
-        private val haste = PotionEffect(PotionEffectType.FAST_DIGGING, 100, 0, true, false, false)
+        private val haste = PotionEffect(PotionEffectType.HASTE, 100, 0, true, false, false)
         private val wither = PotionEffect(PotionEffectType.WITHER, 100, 0, true, false, false)
     }
 
@@ -27,7 +27,7 @@ class TwilightSeasideSwordItem : CustomItem {
             mutableListOf("Hitting enemies with this weapon", "will offer speed and haste buffs", "while also inflicting withering."),
             Material.NETHERITE_SWORD,
             mutableListOf("twilightseasidesword"),
-            mutableMapOf(Enchantment.MENDING to 1, Enchantment.DURABILITY to 10, Enchantment.DAMAGE_ALL to 8, Enchantment.LOOT_BONUS_MOBS to 4, Enchantment.SWEEPING_EDGE to 3, Enchantment.FIRE_ASPECT to 3)
+            mutableMapOf(Enchantment.MENDING to 1, Enchantment.UNBREAKING to 10, Enchantment.SHARPNESS to 8, Enchantment.LOOTING to 4, Enchantment.SWEEPING_EDGE to 3, Enchantment.FIRE_ASPECT to 3)
         )
         item.tier = "&#F34848&lS&#E36643&lo&#D3843E&ll&#C3A239&ls&#B3C034&lt&#A3DE2F&li&#93FC2A&lc&#7DE548&le&#66CD66&l &#50B684&l2&#399EA1&l0&#2387BF&l2&#0C6FDD&l4"
         return Pair("twilightseasidesword", item.createItem())
