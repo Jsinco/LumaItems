@@ -1,0 +1,36 @@
+name: LumaItems
+version: '${version}'
+main: dev.jsinco.lumaitems.LumaItems
+api-version: '1.20'
+softdepend:
+- PlaceHolderAPI
+- EvenMoreFish # Softdepending EMF to register listeners after it
+- ProtocolLib
+- MythicMobs
+- Jobs
+author: 'Jsinco'
+permissions:
+  lumaitems.command.give:
+    description: Gives a player a LumaItem
+    default: op
+  lumaitems.command.pinatafile:
+    description: Internal command for adding items to pinata ability prizepool
+    default: false
+  lumaitems.command.stellarstar:
+    description: Command to give a player a Stellar Star
+    default: op
+  lumaitems.command.giveastral:
+    description: Command to give a player an Astral Item
+    default: op
+  lumaitems.disassemblergui:
+    description: Permission to open the disassembler GUI
+    default: op
+commands:
+  lumaitems:
+    description: LumaItems command
+    permission: lumaitems.command
+    usage: /<command> <subcommand>
+  upgrade:
+    description: Upgrade an astral item
+    permission: lumaitems.command.upgrade
+    usage: /<command>

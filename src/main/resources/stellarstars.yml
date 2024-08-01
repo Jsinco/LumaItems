@@ -1,0 +1,113 @@
+deconstructor-blocks:
+  '1':
+    world: 'spawn'
+    x: -149
+    y: 27
+    z: -193
+
+deconstructor-random-items:
+  - "give %player% diamond 3"
+
+valid-tools:
+  - 'HELMET'
+  - 'CHESTPLATE'
+  - 'LEGGINGS'
+  - 'BOOTS'
+  - 'SWORD'
+  - 'PICKAXE'
+  - 'AXE'
+  - 'SHOVEL'
+  - 'HOE'
+
+# max level of enchantment
+# each number corresponds to the level of the enchantment above
+HELMET:
+  Enchants: [aqua_affinity,blast_protection,fire_protection,projectile_protection,protection,respiration,thorns,unbreaking,mending]
+  Levels: [2,6,6,6,7,5,3,6,1]
+CHESTPLATE:
+  Enchants: [blast_protection,fire_protection,projectile_protection,protection,thorns,unbreaking,mending]
+  Levels: [6,6,6,7,4,6,1]
+LEGGINGS:
+  Enchants: [blast_protection,fire_protection,projectile_protection,protection,swift_sneak,thorns,unbreaking,mending]
+  Levels: [6,6,6,7,2,3,6,1]
+BOOTS:
+  Enchants: [blast_protection,fire_protection,projectile_protection,protection,feather_falling,depth_strider,soul_speed,thorns,unbreaking,mending]
+  Levels: [6,6,6,7,6,5,4,3,6,1]
+SWORD:
+  Enchants: [bane_of_arthropods,fire_aspect,knockback,looting,mending,sharpness,smite,sweeping,unbreaking]
+  Levels: [7,4,5,4,1,7,7,4,6]
+PICKAXE:
+  Enchants: [efficiency,fortune,mending,silk_touch,unbreaking]
+  Levels: [7,4,1,1,6]
+AXE:
+  Enchants: [bane_of_arthropods,efficiency,fortune,mending,sharpness,silk_touch,smite,unbreaking]
+  Levels: [7,7,4,1,7,1,7,6]
+SHOVEL:
+  Enchants: [efficiency,fortune,mending,silk_touch,unbreaking]
+  Levels: [7,4,1,1,6]
+HOE:
+  Enchants: [efficiency,fortune,mending,silk_touch,unbreaking]
+  Levels: [7,4,1,1,6]
+
+
+rgb-colors:
+  - 'A6FB9F'
+  - 'ADF3FD'
+  - 'FDC3BF'
+  - 'F4F7D5'
+  - 'F7E99F'
+  - '9F90F7'
+  - 'F778BC'
+  - '94F0FD'
+  - '6183FD'
+  - '87FD9A'
+  - 'FD5A5A'
+  - 'FDB069'
+  - 'EFB7FD'
+  - '80FDB2'
+  - 'FDAF9E'
+  - 'FF5353'
+  - '7DF75F'
+  - 'F7268A'
+  - '3430F7'
+  - '15A6F7'
+prefixes:
+  - 'Bleak'
+  - 'Spotlight'
+  - 'Liar''s'
+  - 'Soul'
+  - 'Apple Slice'
+  - 'Imagination'
+  - 'Candy'
+  - 'White Wool'
+  - 'Lover''s'
+  - 'Telephone'
+  - 'City Pop'
+  - 'Ice Cube'
+  - 'Yam'
+  - 'Circus'
+  - 'Carnival'
+  - 'Phoenix'
+  - 'Reflections'
+  - 'Opera House'
+  - 'Clouded Skies'
+  - 'Zodiac'
+  - 'Blonde'
+  - 'Cotton Candy'
+  - 'Sweet Soul'
+  - 'Egyptian'
+  - 'Utopian'
+  - 'Sakura'
+  - 'Cherry'
+  - 'Oak'
+  - 'Crew'
+  - 'Crimson'
+  - 'Forgotten'
+  - 'Boss'''
+  - 'Green Thumb'
+  - 'Trooper'
+  - 'Smash'
+  - 'Nameless'
+  - 'Soda'
+  - 'Beluga'
+  - 'Jsinco''s'
