@@ -7,10 +7,9 @@ plugins {
     id("io.papermc.paperweight.userdev") version "1.7.1" // PaperWeight
 }
 
-val javaVers = 21
-val projectName = "LumaItems"
+
 group = "dev.jsinco"
-version = "1.0.0"
+version = "ver/1.21"
 
 
 repositories {
@@ -26,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
+    //compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
     compileOnly("me.clip:placeholderapi:2.11.3")
     compileOnly("com.github.Zrips:jobs:v4.17.2")
     compileOnly("com.comphenix.protocol:ProtocolLib:5.0.0")
@@ -40,9 +39,6 @@ dependencies {
 }
 
 tasks {
-    java {
-        toolchain.languageVersion = JavaLanguageVersion.of(javaVers)
-    }
 
     assemble {
         dependsOn(reobfJar)
@@ -58,8 +54,8 @@ tasks {
     }
 
     shadowJar {
-        relocate("com.iridium", "dev.jsinco.iridium")
         dependencies {
+            include(dependency("com.iridium:IridiumColorAPI"))
             include(dependency("org.jetbrains.kotlin:kotlin-stdlib"))
         }
         archiveClassifier.set("")
@@ -75,7 +71,7 @@ tasks {
     }
 
     kotlin {
-        jvmToolchain(javaVers)
+        jvmToolchain(17)
     }
 
     reobfJar {
@@ -85,4 +81,11 @@ tasks {
     build {
         dependsOn(shadowJar)
     }
+
+    java {
+        //sourceCompatibility = JavaVersion.VERSION_17
+        //targetCompatibility =  JavaVersion.VERSION_17
+        toolchain.languageVersion = JavaLanguageVersion.of(21)
+    }
+
 }
