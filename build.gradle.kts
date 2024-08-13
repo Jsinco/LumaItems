@@ -46,8 +46,9 @@ tasks {
 
     processResources {
         outputs.upToDateWhen { false }
+        println(project.version.toString())
         filter<ReplaceTokens>(mapOf(
-            "tokens" to mapOf("version" to project.version.toString()),
+            "tokens" to mapOf("version" to project.version.toString().replace("/", "")),
             "beginToken" to "\${",
             "endToken" to "}"
         ))
