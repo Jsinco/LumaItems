@@ -25,10 +25,9 @@ repositories {
 }
 
 dependencies {
-    //compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
     compileOnly("me.clip:placeholderapi:2.11.3")
     compileOnly("com.github.Zrips:jobs:v4.17.2")
-    compileOnly("com.comphenix.protocol:ProtocolLib:5.0.0")
+    compileOnly("com.comphenix.protocol:ProtocolLib:5.1.0")
     compileOnly("io.lumine:Mythic-Dist:5.6.1")
 
     implementation("com.iridium:IridiumColorAPI:1.0.9")

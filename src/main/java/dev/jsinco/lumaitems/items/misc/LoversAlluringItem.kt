@@ -39,14 +39,14 @@ class LoversAlluringItem : CustomItem {
                 event as PlayerFishEvent
                 when (event.state) {
                     PlayerFishEvent.State.BITE -> {
-                        Bukkit.getScheduler().runTaskLater(plugin, Runnable {
-                            LumaItems.getProtocolManager()?.receiveClientPacket(player, PacketContainer(PacketType.Play.Client.BLOCK_PLACE))
+                        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, Runnable {
+                            LumaItems.getProtocolManager()?.receiveClientPacket(player, PacketContainer(PacketType.Play.Client.USE_ITEM))
                         }, 1L)
                     }
                     PlayerFishEvent.State.CAUGHT_FISH -> {
                         if (Random.nextInt(100) > 10) return false
                         val item = event.caught as Item
-                        if (item.itemStack.getMaxStackSize() > 1) item.itemStack.amount = 2
+                        if (item.itemStack.maxStackSize > 1) item.itemStack.amount = 2
                     }
                     else -> return false
                 }
