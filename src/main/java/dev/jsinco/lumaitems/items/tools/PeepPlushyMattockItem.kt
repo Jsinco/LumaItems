@@ -36,7 +36,7 @@ class PeepPlushyMattockItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
             "&#aca1ff&lP&#bbabff&le&#cab4ff&le&#dabeff&lp &#e9c7ff&lP&#f8d1ff&ll&#fdcaf6&lu&#febbe9&ls&#feacdc&lh&#fe9ccf&ly &#ff8dc2&lM&#ff81b4&la&#ff7aa4&lt&#ff7493&lt&#ff6d83&lo&#ff6773&lc&#ff6063&lk",
-            mutableListOf("&#ACA1FFSnuggly LUCK_OF_THE_SEA"),
+            mutableListOf("&#ACA1FFSnuggly Luck"),
             mutableListOf("Mining ores with this pickaxe grants","a chance to substantially increase","the amount of materials gained","","However, there is a chance for","mined ores to drop nothing"),
             Material.NETHERITE_PICKAXE,
             mutableListOf("peepplushymattock"),
@@ -50,14 +50,14 @@ class PeepPlushyMattockItem : CustomItem {
         when (type) {
             Action.BREAK_BLOCK -> {
                 event as BlockBreakEvent
-                event.isDropItems = snugLUCK_OF_THE_SEA(event.block, event.block.drops)
+                event.isDropItems = snugglyLuck(event.block, event.block.drops)
             }
             else -> return false
         }
         return true
     }
 
-    private fun snugLUCK_OF_THE_SEA(block: Block, drops: Collection<ItemStack>): Boolean {
+    private fun snugglyLuck(block: Block, drops: Collection<ItemStack>): Boolean {
         if (!block.type.toString().endsWith("_ORE")) return true
         val chance = Random().nextInt(100)
         if (chance <= 17) {

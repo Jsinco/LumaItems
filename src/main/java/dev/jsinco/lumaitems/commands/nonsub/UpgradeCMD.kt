@@ -1,4 +1,4 @@
-package dev.jsinco.lumaitems.commands.singleton
+package dev.jsinco.lumaitems.commands.nonsub
 
 import dev.jsinco.lumaitems.commands.UpgradeCommand
 import org.bukkit.command.Command

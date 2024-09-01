@@ -3,8 +3,8 @@ package dev.jsinco.lumaitems;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import dev.jsinco.lumaitems.commands.CommandManager;
-import dev.jsinco.lumaitems.commands.singleton.UpgradeCMD;
-import dev.jsinco.lumaitems.events.AnvilPrevention;
+import dev.jsinco.lumaitems.commands.nonsub.UpgradeCMD;
+import dev.jsinco.lumaitems.events.ExternalListeners;
 import dev.jsinco.lumaitems.events.GeneralListeners;
 import dev.jsinco.lumaitems.events.Listeners;
 import dev.jsinco.lumaitems.events.PassiveListeners;
@@ -58,8 +58,8 @@ public final class LumaItems extends JavaPlugin {
         RelicDisassembler.setupDisassemblerBlocks();
 
         getServer().getPluginManager().registerEvents(new Listeners(this), this);
-        getServer().getPluginManager().registerEvents(new AnvilPrevention(this), this);
         getServer().getPluginManager().registerEvents(new GeneralListeners(this), this);
+        getServer().getPluginManager().registerEvents(new ExternalListeners(this), this);
 
         getCommand("lumaitems").setExecutor(new CommandManager(this));
         getCommand("upgrade").setExecutor(new UpgradeCMD());

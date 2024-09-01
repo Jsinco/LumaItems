@@ -40,7 +40,8 @@ public class ItemManager {
             "dev.jsinco.lumaitems.items.armor",
             "dev.jsinco.lumaitems.items.magical",
             "dev.jsinco.lumaitems.items.astral",
-            "dev.jsinco.lumaitems.items.astral.sets"
+            "dev.jsinco.lumaitems.items.astral.sets",
+            "dev.jsinco.lumaitems.items.test"
     );
 
     public ItemManager(LumaItems plugin) {

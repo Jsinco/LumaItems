@@ -231,4 +231,28 @@ object Util {
         return Color.fromARGB(color.alpha, color.red, color.green, color.blue)
     }
 
+    @JvmStatic
+    fun blend(vararg c: AwtColor): AwtColor {
+        val ratio = 1f / (c.size.toFloat())
+
+        var a = 0
+        var r = 0
+        var g = 0
+        var b = 0
+
+        for (i in c.indices) {
+            val rgb: Int = c[i].getRGB()
+            val a1 = (rgb shr 24 and 0xff)
+            val r1 = ((rgb and 0xff0000) shr 16)
+            val g1 = ((rgb and 0xff00) shr 8)
+            val b1 = (rgb and 0xff)
+            a = (a + (a1 * ratio)).toInt()
+            r = (r + (r1 * ratio)).toInt()
+            g = (g + (g1 * ratio)).toInt()
+            b = (b + (b1 * ratio)).toInt()
+        }
+
+        return AwtColor(a shl 24 or (r shl 16) or (g shl 8) or b)
+    }
+
 }

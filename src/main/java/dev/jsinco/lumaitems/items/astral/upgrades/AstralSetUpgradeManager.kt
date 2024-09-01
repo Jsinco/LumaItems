@@ -49,7 +49,7 @@ open class AstralSetUpgradeManager {
         }
     }
 
-    fun getEnchantsFromStringList(stringEnchants: MutableList<String>): List<AstralUpgradeEnchantment> {
+    private fun getEnchantsFromStringList(stringEnchants: MutableList<String>): List<AstralUpgradeEnchantment> {
         val enchants: MutableList<AstralUpgradeEnchantment> = mutableListOf()
         for (stringEnchant in stringEnchants) {
             val pair = AstralUpgradeEnchantment.deserializeAndRemoveApplyTo(stringEnchant)
@@ -58,8 +58,16 @@ open class AstralSetUpgradeManager {
             val finalStringEnchant = pair.second
 
             val split = finalStringEnchant.split("/")
+            if (split.size != 2) {
+                plugin.logger.severe("Invalid enchantment! $finalStringEnchant")
+                continue
+            }
 
-            val enchantment: Enchantment = Enchantment.getByKey(NamespacedKey.minecraft(split[0])) ?: continue
+            val enchantment: Enchantment? = Enchantment.getByKey(NamespacedKey.minecraft(split[0].lowercase()))
+            if (enchantment == null) {
+                plugin.logger.severe("Invalid enchantment! ${split[0]}")
+                continue
+            }
             enchants.add(AstralUpgradeEnchantment(enchantment, split[1].toInt(), toolsToApplyTo))
         }
         return enchants

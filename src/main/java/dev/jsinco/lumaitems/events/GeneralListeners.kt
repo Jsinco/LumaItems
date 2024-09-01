@@ -1,16 +1,15 @@
 package dev.jsinco.lumaitems.events
 
-import com.gamingmesh.jobs.api.JobsPrePaymentEvent
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.guis.AbstractGui
 import dev.jsinco.lumaitems.guis.DisassemblerGui
 import dev.jsinco.lumaitems.manager.FileManager
+import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.relics.Rarity
 import dev.jsinco.lumaitems.relics.RelicCreator
 import dev.jsinco.lumaitems.relics.RelicDisassembler
 import dev.jsinco.lumaitems.util.EntityArmor
 import dev.jsinco.lumaitems.util.ToolType
-import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -26,6 +25,7 @@ import org.bukkit.event.entity.EntitySpawnEvent
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryType
+import org.bukkit.event.inventory.PrepareAnvilEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.persistence.PersistentDataType
 import kotlin.random.Random
@@ -124,26 +124,28 @@ class GeneralListeners(val plugin: LumaItems) : Listener {
 
 
     @EventHandler
-    fun onJobsPrePayment(event: JobsPrePaymentEvent) {
-        if (Random.nextInt(3000) > 2 || event.job.name == "Hunter") return
-        val player = event.player?.player ?: return
+    fun onAnvilPrepare(event: PrepareAnvilEvent) {
+        if (event.result == null || !event.result!!.hasItemMeta()) {
+            return
+        }
+
+        val meta = event.result!!.itemMeta
+        var cancelEvent = false
+
+        if (meta.persistentDataContainer.has(NamespacedKey(plugin, "lumaitem"), PersistentDataType.SHORT)) {
+            cancelEvent = true
+        } else {
+            for (key in ItemManager.customItems.keys) {
+                if (meta.persistentDataContainer.has(key, PersistentDataType.SHORT)) {
+                    cancelEvent = true
+                    break
+                }
+            }
+        }
 
 
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, Runnable {
-            val rarity = Rarity.genericRarities.random()
-            val material: Material =
-                Material.valueOf(relicFile.getStringList("relic-materials.${rarity.name.lowercase()}").random())
-
-            val relic = RelicCreator(
-                rarity.algorithmWeight,
-                -1,
-                rarity,
-                material
-            ).getRelicItem()
-
-            Bukkit.getScheduler().runTask(plugin, Runnable {
-                Util.giveItem(player, relic)
-            })
-        })
+        if (cancelEvent && event.inventory.secondItem != null) {
+            event.result = null
+        }
     }
 }
