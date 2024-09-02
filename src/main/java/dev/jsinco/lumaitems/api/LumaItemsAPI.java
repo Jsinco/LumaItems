@@ -18,7 +18,6 @@ import java.util.Map;
  */
 public final class LumaItemsAPI {
 
-
     /**
      * Check if an item is a custom item by comparing NBT tags
      * @param itemStack ItemStack to check
