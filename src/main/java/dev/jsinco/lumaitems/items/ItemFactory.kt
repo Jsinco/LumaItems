@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.Damageable
 import org.bukkit.persistence.PersistentDataType
-import kotlin.random.Random
 
 // Breakdown:
 // - This class is for creating custom items easily.
@@ -25,22 +24,24 @@ class ItemFactory(
     private val lore: MutableList<String>,
     private val material: Material,
     private val persistentData: MutableList<String>,
-    private val vanillaEnchants: MutableMap<Enchantment, Int>
+    private val vanillaEnchants: MutableMap<Enchantment, Int>,
+
+    var tier: String = "&#AC87FB&lAstral", //"&#ffc8c8&lC&#ffcfc8&le&#ffd5c7&ll&#ffdcc7&le&#ffe3c7&ls&#ffe9c6&lt&#fff0c6&li&#fff6c5&la&#fffdc5&ll"
+
+    var unbreakable: Boolean = false,
+    var hideEnchants: Boolean = false,
+    var addSpace: Boolean = true,
+    var autoHat: Boolean = false,
+    var attributeModifiers: MutableMap<Attribute, AttributeModifier> = mutableMapOf(),
+    val stringPersistentDatas: MutableMap<NamespacedKey, String> = mutableMapOf(),
+    var quotes: MutableList<String> = mutableListOf()
 ) {
 
     companion object {
         private val plugin: LumaItems = LumaItems.getPlugin()
+        fun builder() = Builder()
     }
 
-    var tier: String = "&#AC87FB&lAstral" //"&#ffc8c8&lC&#ffcfc8&le&#ffd5c7&ll&#ffdcc7&le&#ffe3c7&ls&#ffe9c6&lt&#fff0c6&li&#fff6c5&la&#fffdc5&ll"
-
-    var unbreakable: Boolean = false
-    var hideEnchants: Boolean = false
-    var addSpace: Boolean = true
-    var autoHat: Boolean = false
-    var attributeModifiers: MutableMap<Attribute, AttributeModifier> = mutableMapOf()
-    val stringPersistentDatas: MutableMap<NamespacedKey, String> = mutableMapOf()
-    var quotes: MutableList<String> = mutableListOf()
 
     fun addQuote(s: String) {
         quotes.add(s)
@@ -106,5 +107,42 @@ class ItemFactory(
 
         item.itemMeta = meta
         return item
+    }
+
+    class Builder {
+        private var name: String = ""
+        private var customEnchants: MutableList<String> = mutableListOf()
+        private var lore: MutableList<String> = mutableListOf()
+        private var material: Material = Material.AIR
+        private var persistentData: MutableList<String> = mutableListOf()
+        private var vanillaEnchants: MutableMap<Enchantment, Int> = mutableMapOf()
+        private var tier: String = "&#AC87FB&lAstral"
+        private var unbreakable: Boolean = false
+        private var hideEnchants: Boolean = false
+        private var addSpace: Boolean = true
+        private var autoHat: Boolean = false
+        private var attributeModifiers: MutableMap<Attribute, AttributeModifier> = mutableMapOf()
+        private var stringPersistentDatas: MutableMap<NamespacedKey, String> = mutableMapOf()
+        private var quotes: MutableList<String> = mutableListOf()
+
+        fun name(name: String) = apply { this.name = name }
+        fun customEnchants(customEnchants: MutableList<String>) = apply { this.customEnchants = customEnchants }
+        fun lore(lore: MutableList<String>) = apply { this.lore = lore }
+        fun material(material: Material) = apply { this.material = material }
+        fun persistentData(persistentData: MutableList<String>) = apply { this.persistentData = persistentData }
+        fun vanillaEnchants(vanillaEnchants: MutableMap<Enchantment, Int>) = apply { this.vanillaEnchants = vanillaEnchants }
+        fun tier(tier: String) = apply { this.tier = tier }
+        fun unbreakable(unbreakable: Boolean) = apply { this.unbreakable = unbreakable }
+        fun hideEnchants(hideEnchants: Boolean) = apply { this.hideEnchants = hideEnchants }
+        fun addSpace(addSpace: Boolean) = apply { this.addSpace = addSpace }
+        fun autoHat(autoHat: Boolean) = apply { this.autoHat = autoHat }
+        fun attributeModifiers(attributeModifiers: MutableMap<Attribute, AttributeModifier>) = apply { this.attributeModifiers = attributeModifiers }
+        fun stringPersistentDatas(stringPersistentDatas: MutableMap<NamespacedKey, String>) = apply { this.stringPersistentDatas = stringPersistentDatas }
+        fun quotes(quotes: MutableList<String>) = apply { this.quotes = quotes }
+
+        fun build() = ItemFactory(
+            name, customEnchants, lore, material, persistentData, vanillaEnchants,
+            tier, unbreakable, hideEnchants, addSpace, autoHat, attributeModifiers, stringPersistentDatas, quotes
+        )
     }
 }

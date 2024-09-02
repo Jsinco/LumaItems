@@ -18,6 +18,13 @@ import java.util.Map;
  */
 public final class LumaItemsAPI {
 
+    private static boolean valid = true;
+
+
+    public boolean isValid() {
+        return valid;
+    }
+
     /**
      * Check if an item is a custom item by comparing NBT tags
      * @param itemStack ItemStack to check

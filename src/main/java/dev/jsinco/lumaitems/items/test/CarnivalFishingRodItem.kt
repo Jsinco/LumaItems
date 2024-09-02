@@ -11,7 +11,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerFishEvent
 import org.bukkit.inventory.ItemStack
 
-class CarnivalFishingRod : CustomItem {
+class CarnivalFishingRodItem : CustomItem {
     override fun createItem(): Pair<String, ItemStack> {
         val item = ItemFactory(
             "Carnival Fishing Rod",
