@@ -18,7 +18,6 @@ class CommandManager(val plugin: LumaItems) : CommandExecutor, TabCompleter {
         commands["debug"] = DebugCommand()
         commands["relic"] = RelicCommand()
         commands["giveastral"] = GiveAstralCommand()
-        commands["hotswapp"] = HotSwappCommand()
         commands["addtier"] = AddTier()
         commands["upgrade"] = UpgradeCommand()
     }

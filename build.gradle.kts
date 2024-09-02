@@ -1,8 +1,9 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
+    kotlin("jvm")
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "2.0.20-RC"
+    id("maven-publish")
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.papermc.paperweight.userdev") version "1.7.1" // PaperWeight
 }
@@ -31,7 +32,7 @@ dependencies {
     compileOnly("io.lumine:Mythic-Dist:5.6.1")
 
     implementation("com.iridium:IridiumColorAPI:1.0.9")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation(kotlin("stdlib-jdk8"))
 
     // PaperWeight
     paperweight.paperDevBundle("1.21-R0.1-SNAPSHOT")
@@ -71,7 +72,7 @@ tasks {
     }
 
     kotlin {
-        jvmToolchain(17)
+        jvmToolchain(21)
     }
 
     reobfJar {
@@ -82,10 +83,17 @@ tasks {
         dependsOn(shadowJar)
     }
 
-    java {
-        //sourceCompatibility = JavaVersion.VERSION_17
-        //targetCompatibility =  JavaVersion.VERSION_17
-        toolchain.languageVersion = JavaLanguageVersion.of(21)
-    }
 
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
 }

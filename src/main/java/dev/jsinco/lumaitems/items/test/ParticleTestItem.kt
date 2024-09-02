@@ -36,7 +36,7 @@ class ParticleTestItem : CustomItem {
                 //Particles.sphere(3.0, 30.0, particleDisplayCloud.mixWith(Color.BLUE))
                 // Particles.rainbow(double radius, double rate, double curve, double layers, double compact, ParticleDisplay display)
                 Particles.rainbow(3.0, 3.0, 1.0, 3.0, 0.0, particleDisplayCloud)
-                Particles.flower(6, 15.0, particleDisplayCloud) {
+                Particles.flower(3, 15.0, particleDisplayCloud) {
                     Particles.sphere(3.0, 30.0, particleDisplayCloud.mixWith(Color.PINK))
                 }
                 return true

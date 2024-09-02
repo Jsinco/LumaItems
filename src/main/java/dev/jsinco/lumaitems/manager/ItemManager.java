@@ -2,8 +2,11 @@ package dev.jsinco.lumaitems.manager;
 
 import com.google.common.reflect.ClassPath;
 import dev.jsinco.lumaitems.LumaItems;
+import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +21,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ItemManager {
+public final class ItemManager {
 
     private final LumaItems plugin;
 
@@ -28,6 +31,9 @@ public class ItemManager {
      * Value: Custom Item Class
      */
     public final static Map<NamespacedKey, CustomItem> customItems = new HashMap<>();
+
+
+    public final static Map<String, ItemStack> physicalItemsByName = new HashMap<>();
 
 
     /**
@@ -44,12 +50,51 @@ public class ItemManager {
             "dev.jsinco.lumaitems.items.test"
     );
 
+
+    /**
+     * Get a Custom Item by its display name.
+     * Spaces are replaced with underscores ('_'), colors are negated, and the name is case-insensitive.
+     * @param name Display name of the Custom Item
+     * @return Custom Item if found, null otherwise
+     */
+    @Nullable
+    public static ItemStack getItemByName(String name) {
+        return physicalItemsByName.get(name.replace(" ", "_").toLowerCase());
+    }
+
+    /**
+     * Get a Custom Item by its key.
+     * @param key Key of the Custom Item
+     * @return Custom Item if found, null otherwise
+     */
+    @Nullable
+    public static CustomItem getCustomItem(String key) {
+        return customItems.get(new NamespacedKey(LumaItems.getPlugin(), key));
+    }
+
+    /**
+     * @return an immutable list of all physical items
+     */
+    public static List<ItemStack> getAllItems() {
+        return List.copyOf(physicalItemsByName.values());
+    }
+
+
     public ItemManager(LumaItems plugin) {
         this.plugin = plugin;
     }
 
-    public void clearAllItems() {
-        customItems.clear();
+    public void initPhysicalItemsByName() {
+        for (CustomItem item : customItems.values()) {
+            ItemStack itemStack = item.createItem().component2();
+            if (!itemStack.hasItemMeta() || !itemStack.getItemMeta().hasDisplayName()) {
+                LumaItems.log("Item " + itemStack.getType() + " does not have a display name or meta!");
+                continue;
+            }
+            String formattedName = ChatColor.stripColor(itemStack.getItemMeta().getDisplayName()).replace(" ", "_").toLowerCase();
+            physicalItemsByName.put(formattedName, itemStack);
+        }
+        LumaItems.log("Finished initializing " + physicalItemsByName.size() + " physical items by display names");
     }
 
 
@@ -75,7 +120,7 @@ public class ItemManager {
                 throw new RuntimeException(e);
             }
         }
-        plugin.getLogger().info("Registered " + customItems.size() + " classes through reflection");
+        LumaItems.log("Registered " + customItems.size() + " classes through reflection");
     }
 
     /**

@@ -1,33 +1,12 @@
 package dev.jsinco.lumaitems.commands
 
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.Util
-import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
-import org.bukkit.inventory.ItemStack
 
 class GiveItemCommand : SubCommand {
-    private val customItems: MutableMap<String, CustomItem> = mutableMapOf()
-    private val customItemsByName: MutableMap<String, ItemStack> = mutableMapOf()
-
-    init {
-        refreshItems()
-    }
-
-    private fun refreshItems() {
-        for (customItem in ItemManager.customItems) {
-            val item: ItemStack = customItem.value.createItem().second
-            if (!item.hasItemMeta()) continue
-            customItemsByName[
-                ChatColor.stripColor(item.itemMeta?.displayName)
-                ?.replace(" ", "_")
-                ?.lowercase() ?: item.type.toString().lowercase()
-            ] = item
-        }
-    }
 
     override fun execute(plugin: LumaItems, sender: CommandSender, args: Array<out String>) {
         val player = if (args.size == 3) {
@@ -38,7 +17,7 @@ class GiveItemCommand : SubCommand {
 
 
         val item = if (args[1] != "all") {
-            customItemsByName[args[1]] ?: return
+            ItemManager.getItemByName(args[1]) ?: return
         } else {
             null
         }
@@ -47,17 +26,17 @@ class GiveItemCommand : SubCommand {
             Util.giveItem(player, item)
             player.sendMessage("${Util.prefix} You have been given ${item.itemMeta?.displayName}")
         } else {
-            for (customItem in customItems) {
-                Util.giveItem(player, customItem.value.createItem().second)
+            for (customItem in ItemManager.getAllItems()) {
+                Util.giveItem(player, customItem)
             }
+            player.sendMessage("${Util.prefix} You have been given all custom items")
         }
-        refreshItems()
     }
 
     override fun tabComplete(plugin: LumaItems, sender: CommandSender, args: Array<out String>): List<String>? {
         when (args.size) {
             2 -> {
-                val list: MutableList<String> = customItemsByName.keys.toMutableList()
+                val list: MutableList<String> = ItemManager.physicalItemsByName.keys.toMutableList()
                 list.add("all")
                 return list
             }

@@ -44,13 +44,16 @@ public final class LumaItems extends JavaPlugin {
 
         passiveListeners = new PassiveListeners(this);
         final ItemManager itemManager = new ItemManager(this);
-        try {
-            itemManager.registerItems();
-        } catch (Exception e) {
-            getLogger().log(Level.SEVERE, "An error occurred while registering items", e);
+
+        if (!Bukkit.getOnlinePlayers().isEmpty()) {
+            log("Players are online, registering items asynchronously");
+            Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
+                initItemManager(itemManager);
+                log("Finished asynchronous item registration!");
+            });
+        } else {
+            initItemManager(itemManager);
         }
-        passiveListeners.getPassiveListener(Action.RUNNABLE).runTaskTimer(this, 0L, PassiveListeners.DEFAULT_PASSIVE_LISTENER_TICKS);
-        passiveListeners.getPassiveListener(Action.ASYNC_RUNNABLE).runTaskTimerAsynchronously(this, 0L, PassiveListeners.ASYNC_PASSIVE_LISTENER_TICKS);
 
 
         GlowManager.initGlowTeams();
@@ -69,7 +72,20 @@ public final class LumaItems extends JavaPlugin {
             papiManager.register();
         }
 
-        passiveListeners.onPluginAction(Action.PLUGIN_ENABLE);
+
+    }
+
+    private void initItemManager(ItemManager itemManager) {
+        try {
+            itemManager.registerItems();
+            itemManager.initPhysicalItemsByName();
+            passiveListeners.getPassiveListener(Action.RUNNABLE).runTaskTimer(this, 0L, PassiveListeners.DEFAULT_PASSIVE_LISTENER_TICKS);
+            passiveListeners.getPassiveListener(Action.ASYNC_RUNNABLE).runTaskTimerAsynchronously(this, 0L, PassiveListeners.ASYNC_PASSIVE_LISTENER_TICKS);
+            passiveListeners.onPluginAction(Action.PLUGIN_ENABLE);
+        } catch (Exception e) {
+            getLogger().log(Level.SEVERE, "An error occurred while registering items", e);
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
     }
 
     @Override
@@ -98,5 +114,9 @@ public final class LumaItems extends JavaPlugin {
 
     public static boolean isWithMythicMobs() {
         return withMythicMobs;
+    }
+
+    public static void log(String m) {
+        Bukkit.getConsoleSender().sendMessage(Util.colorcode("&#f498f6[LumaItems] " + m));
     }
 }

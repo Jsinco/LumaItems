@@ -1,5 +1,5 @@
 name: LumaItems
-version: 'ver/1.21'
+version: 'PAPER-1.21'
 main: dev.jsinco.lumaitems.LumaItems
 api-version: '1.21'
 softdepend:
