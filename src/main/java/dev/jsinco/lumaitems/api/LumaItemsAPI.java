@@ -5,12 +5,10 @@ import dev.jsinco.lumaitems.manager.CustomItem;
 import dev.jsinco.lumaitems.manager.ItemManager;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * LumaItemsAPI. Should always grab a new instance of this class because LumaItems may be subject
@@ -18,11 +16,29 @@ import java.util.Map;
  */
 public final class LumaItemsAPI {
 
-    private static boolean valid = true;
+    /**
+     * Singleton instance of the LumaItemsAPI
+     */
+    private static LumaItemsAPI singleton = null;
+
+    /**
+     * API Shouldn't be instantiated
+     * @see LumaItemsAPI#getInstance()
+     */
+    private LumaItemsAPI() {
+    }
 
 
-    public boolean isValid() {
-        return valid;
+    /**
+     * Get an instance of the LumaItemsAPI
+     * @return LumaItemsAPI instance
+     */
+    public static synchronized LumaItemsAPI getInstance() {
+        if (singleton == null) {
+            LumaItems.log("A plugin is accessing the LumaItems API. Creating a new instance!");
+            singleton = new LumaItemsAPI();
+        }
+        return singleton;
     }
 
     /**
@@ -33,7 +49,7 @@ public final class LumaItemsAPI {
      */
     public boolean isCustomItem(ItemStack itemStack, String customItemKey) {
         if (!itemStack.hasItemMeta()) return false;
-        ItemMeta meta = itemStack.getItemMeta();
+        var meta = itemStack.getItemMeta();
 
         return meta.getPersistentDataContainer().has(new NamespacedKey(LumaItems.getPlugin(), customItemKey), PersistentDataType.SHORT);
     }
@@ -45,9 +61,9 @@ public final class LumaItemsAPI {
      */
     public boolean isCustomItem(ItemStack itemStack) {
         if (!itemStack.hasItemMeta()) return false;
-        ItemMeta meta = itemStack.getItemMeta();
+        var meta = itemStack.getItemMeta();
 
-        for (NamespacedKey key : ItemManager.customItems.keySet()) {
+        for (var key : ItemManager.customItems.keySet()) {
             if (meta.getPersistentDataContainer().has(key, PersistentDataType.SHORT)) {
                 return true;
             }
@@ -63,9 +79,9 @@ public final class LumaItemsAPI {
     @Nullable
     public CustomItem getCustomItem(ItemStack itemStack) {
         if (!itemStack.hasItemMeta()) return null;
-        ItemMeta meta = itemStack.getItemMeta();
+        var meta = itemStack.getItemMeta();
 
-        for (Map.Entry<NamespacedKey, CustomItem> customItem : ItemManager.customItems.entrySet()) {
+        for (var customItem : ItemManager.customItems.entrySet()) {
             if (meta.getPersistentDataContainer().has(customItem.getKey(), PersistentDataType.SHORT)) {
                 return customItem.getValue();
             }

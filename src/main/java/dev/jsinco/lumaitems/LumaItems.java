@@ -2,7 +2,6 @@ package dev.jsinco.lumaitems;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import dev.jsinco.lumaitems.api.LumaItemsAPI;
 import dev.jsinco.lumaitems.commands.CommandManager;
 import dev.jsinco.lumaitems.commands.nonsub.UpgradeCMD;
 import dev.jsinco.lumaitems.events.ExternalListeners;
@@ -24,7 +23,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Field;
 import java.util.logging.Level;
 
 public final class LumaItems extends JavaPlugin {
@@ -75,8 +73,6 @@ public final class LumaItems extends JavaPlugin {
             papiManager = new PAPIManager(this);
             papiManager.register();
         }
-
-
     }
 
     private void initItemManager(ItemManager itemManager) {
@@ -105,14 +101,6 @@ public final class LumaItems extends JavaPlugin {
             }
         }
         HandlerList.unregisterAll(this);
-
-        try {
-            Field field = LumaItemsAPI.class.getDeclaredField("valid");
-            field.setAccessible(true);
-            field.set(null, false);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            getLogger().log(Level.SEVERE, "An error occurred while invalidating LumaItemsAPI!", e);
-        }
     }
 
     public static LumaItems getPlugin() {
