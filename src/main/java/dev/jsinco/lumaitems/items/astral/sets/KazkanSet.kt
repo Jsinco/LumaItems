@@ -29,7 +29,7 @@ import java.util.concurrent.ConcurrentLinkedQueue
 class KazkanSet : AstralSet {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
 
         private val holdingPlayers: ConcurrentLinkedQueue<ClickHoldingPlayer> = ConcurrentLinkedQueue()
         private val playerLinkedArrows: ConcurrentHashMap<Player, List<Arrow>> = ConcurrentHashMap()

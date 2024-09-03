@@ -27,7 +27,7 @@ import kotlin.math.sin
 class DeoriumCutlassItem  : CustomItem {
 
     companion object {
-        val plugin: LumaItems = LumaItems.getPlugin()
+        val plugin: LumaItems = LumaItems.getInstance()
         val cooldown: MutableList<UUID> = mutableListOf()
     }
 

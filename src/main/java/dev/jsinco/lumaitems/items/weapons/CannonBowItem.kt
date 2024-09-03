@@ -22,7 +22,7 @@ import org.bukkit.persistence.PersistentDataType
 class CannonBowItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
     }
 
     override fun createItem(): Pair<String, ItemStack> {

@@ -100,7 +100,7 @@ class WitchsBrewItem : CustomItem {
 
     private fun startCooldown(uuid: UUID) {
         cooldown.add(uuid)
-        Bukkit.getScheduler().runTaskLater(LumaItems.getPlugin(), Runnable {
+        Bukkit.getScheduler().runTaskLater(LumaItems.getInstance(), Runnable {
             cooldown.remove(uuid)
         }, 400)
     }

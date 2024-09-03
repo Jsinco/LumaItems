@@ -23,7 +23,7 @@ import java.util.Random
 class RubyLongbowItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
     }
 
     override fun createItem(): Pair<String, ItemStack> {

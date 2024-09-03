@@ -27,7 +27,7 @@ import java.util.function.Consumer
 class PumpkinLauncherItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
     }
 
     override fun createItem(): Pair<String, ItemStack> {

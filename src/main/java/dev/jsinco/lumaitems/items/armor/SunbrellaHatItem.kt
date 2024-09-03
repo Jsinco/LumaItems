@@ -39,7 +39,7 @@ class SunbrellaHatItem : CustomItem {
     // - Slide forward?
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         private val dustOption = DustOptions(Color.WHITE, 1f)
         private val fallingPlayers: ConcurrentHashMap<Player, Double> = ConcurrentHashMap()
     }

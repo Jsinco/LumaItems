@@ -18,7 +18,7 @@ import org.bukkit.scheduler.BukkitRunnable
 class CottonTailCrossbowItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         private val dustColors: Set<Color> = setOf(
             Util.hex2BukkitColor("#EC62B6"),
             Util.hex2BukkitColor("#FDADAD"),

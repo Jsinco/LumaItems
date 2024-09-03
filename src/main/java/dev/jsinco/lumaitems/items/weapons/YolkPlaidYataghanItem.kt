@@ -31,7 +31,7 @@ class YolkPlaidYataghanItem : CustomItem {
 
     companion object {
         private val eggTextures: List<String> = FileManager("heads.yml").generateYamlFile().getStringList("easter-egg")
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         private val coolingDownEggs: MutableMap<UUID, Int> = mutableMapOf()
     }
 

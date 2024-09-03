@@ -14,7 +14,7 @@ import org.bukkit.persistence.PersistentDataType
 
 object RelicCrafting {
 
-    private val plugin: LumaItems = LumaItems.getPlugin()
+    private val plugin: LumaItems = LumaItems.getInstance()
 
     val relicShard: ItemStack = Util.createBasicItem(
         "&#E97979&lRelic &#F7FFC9Shard",

@@ -29,7 +29,7 @@ class LunarOrbItem : CustomItem {
     override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RIGHT_CLICK -> {
-                if (!player.inventory.itemInMainHand.itemMeta.persistentDataContainer.has(NamespacedKey(LumaItems.getPlugin(), "lunarorb"), PersistentDataType.SHORT)) return false
+                if (!player.inventory.itemInMainHand.itemMeta.persistentDataContainer.has(NamespacedKey(LumaItems.getInstance(), "lunarorb"), PersistentDataType.SHORT)) return false
 
                 event as PlayerInteractEvent
                 event.isCancelled = true

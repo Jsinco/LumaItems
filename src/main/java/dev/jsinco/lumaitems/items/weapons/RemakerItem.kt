@@ -24,7 +24,7 @@ import org.bukkit.util.Vector
 class RemakerItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         private val dustOptions = DustOptions(Color.BLACK, 1f)
         private val cooldown: MutableList<Player> = mutableListOf()
     }

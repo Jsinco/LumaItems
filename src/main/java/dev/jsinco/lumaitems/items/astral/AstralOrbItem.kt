@@ -27,7 +27,7 @@ class AstralOrbItem : CustomItem {
                 event as PlayerInteractEvent
                 event.isCancelled = true
 
-                if (!player.inventory.itemInMainHand.itemMeta.persistentDataContainer.has(NamespacedKey(LumaItems.getPlugin(), "astralorb"), PersistentDataType.SHORT)) return false
+                if (!player.inventory.itemInMainHand.itemMeta.persistentDataContainer.has(NamespacedKey(LumaItems.getInstance(), "astralorb"), PersistentDataType.SHORT)) return false
 
                 player.inventory.itemInMainHand.amount -= 1
                 player.playSound(player.location, Sound.ENTITY_EVOKER_CAST_SPELL, 1f, 1f)

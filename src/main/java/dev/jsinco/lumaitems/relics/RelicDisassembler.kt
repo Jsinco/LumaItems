@@ -19,7 +19,7 @@ object RelicDisassembler {
     private val file = FileManager("relics.yml").generateYamlFile()
 
     private val confirmCooldownTasks: MutableMap<UUID, Int> = mutableMapOf()
-    private val plugin: LumaItems = LumaItems.getPlugin()
+    private val plugin: LumaItems = LumaItems.getInstance()
 
     @JvmStatic fun setupDisassemblerBlocks() {
         if (file.getConfigurationSection("disassembler.blocks") == null) {

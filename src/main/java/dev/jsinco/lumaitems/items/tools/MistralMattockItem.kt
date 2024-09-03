@@ -88,7 +88,7 @@ class MistralMattockItem : CustomItem {
                     cancel()
                 } else repeatTracker[0]++
             }
-        }.runTaskTimer(LumaItems.getPlugin(), 0L, 1L)
+        }.runTaskTimer(LumaItems.getInstance(), 0L, 1L)
         seekedBlock.world.playSound(seekedBlock.location, Sound.ENTITY_ALLAY_ITEM_TAKEN, 1f, 1f)
     }
 }

@@ -20,7 +20,7 @@ import kotlin.random.Random
 class StellarStarItem : CustomItem {
 
     companion object {
-        val plugin: LumaItems = LumaItems.getPlugin()
+        val plugin: LumaItems = LumaItems.getInstance()
         val stellarStarFile = FileManager("stellarstars.yml")
         val stellarFile = stellarStarFile.getFileYaml()
         val stellarTier = listOf(

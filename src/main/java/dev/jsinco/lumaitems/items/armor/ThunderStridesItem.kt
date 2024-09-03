@@ -23,7 +23,7 @@ import java.util.UUID
 class ThunderStridesItem : CustomItem {
 
     companion object {
-        val plugin: LumaItems = LumaItems.getPlugin()
+        val plugin: LumaItems = LumaItems.getInstance()
         val directions: MutableMap<UUID, Vector> = mutableMapOf()
 
         val activeFastLane: MutableList<UUID> = mutableListOf()

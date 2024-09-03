@@ -19,7 +19,7 @@ import java.util.Random
 class RubyPinionsItem : CustomItem {
 
     companion object {
-        val plugin: LumaItems = LumaItems.getPlugin()
+        val plugin: LumaItems = LumaItems.getInstance()
     }
 
     override fun createItem(): Pair<String, ItemStack> {

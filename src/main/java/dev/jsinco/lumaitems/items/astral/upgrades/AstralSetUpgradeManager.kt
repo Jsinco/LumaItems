@@ -14,7 +14,7 @@ open class AstralSetUpgradeManager {
         )
 
         @JvmStatic val upgrades: MutableMap<String, MutableList<AstralUpgradeTier>> = mutableMapOf()
-        val plugin: LumaItems = LumaItems.getPlugin()
+        val plugin: LumaItems = LumaItems.getInstance()
     }
 
     init {

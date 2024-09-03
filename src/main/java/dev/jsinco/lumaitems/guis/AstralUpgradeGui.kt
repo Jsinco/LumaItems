@@ -17,7 +17,7 @@ import org.bukkit.persistence.PersistentDataType
 class AstralUpgradeGui : AbstractGui {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         private val EMPTY_SLOTS: List<Int> = listOf(11, 13, 15)
         private val BORDER: ItemStack = Util.createBasicItem("&0", listOf(), Material.PURPLE_STAINED_GLASS_PANE, listOf("gui-item"), false)
         private val CONFIRM_BUTTON: ItemStack = Util.createBasicItem("&a&lConfirm", listOf(), Material.LIME_STAINED_GLASS_PANE, listOf("gui-item", "confirm"), true)

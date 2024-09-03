@@ -25,7 +25,7 @@ import java.util.function.Consumer
 class SatchelItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         lateinit var satchel: ItemFactory
     }
 

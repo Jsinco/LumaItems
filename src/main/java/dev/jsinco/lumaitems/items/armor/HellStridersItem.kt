@@ -36,7 +36,7 @@ class HellStridersItem : CustomItem {
 
     companion object {
         const val ID = "hellstriders"
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
     }
 
 

@@ -29,7 +29,7 @@ import java.util.function.Consumer
 class SunlightBladeItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         private val undeads = listOf(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.ZOMBIE_VILLAGER, EntityType.STRAY, EntityType.DROWNED, EntityType.PHANTOM)
         private val cooldown: MutableList<Player> = mutableListOf()
     }

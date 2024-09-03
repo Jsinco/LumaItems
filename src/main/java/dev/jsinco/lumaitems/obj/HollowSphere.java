@@ -22,7 +22,7 @@ public class HollowSphere {
         this.density = density;
 
         if (async) {
-            Bukkit.getScheduler().runTaskAsynchronously(LumaItems.getPlugin(), this::init);
+            Bukkit.getScheduler().runTaskAsynchronously(LumaItems.getInstance(), this::init);
         } else {
             init();
         }

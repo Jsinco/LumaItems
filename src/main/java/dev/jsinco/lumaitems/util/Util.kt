@@ -30,7 +30,7 @@ object Util {
     private const val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
     val armorEquipmentSlots: List<EquipmentSlot> = listOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
 
-    private val plugin: LumaItems = LumaItems.getPlugin()
+    private val plugin: LumaItems = LumaItems.getInstance()
     private val gearTypes: List<String> = listOf("Helmet", "Chestplate", "Leggings", "Boots", "Sword", "Pickaxe", "Axe", "Shovel", "Hoe", "Rod", "Elytra", "Shield", "Crossbow", "Bow")
     @JvmStatic val staticUUID: UUID = UUID.fromString("1c786ebf-50f7-408d-9bc6-02defd41c0a8")
 

@@ -23,7 +23,7 @@ import java.util.Random
 class ViperHatchetItem : CustomItem {
 
     companion object {
-        val plugin: LumaItems = LumaItems.getPlugin()
+        val plugin: LumaItems = LumaItems.getInstance()
     }
 
     override fun createItem(): Pair<String, ItemStack> {

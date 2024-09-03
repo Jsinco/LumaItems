@@ -15,7 +15,7 @@ import java.util.UUID
 class DarkWickShieldItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         private val cooldown: MutableList<UUID> = mutableListOf()
     }
 

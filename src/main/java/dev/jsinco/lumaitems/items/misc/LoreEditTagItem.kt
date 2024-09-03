@@ -15,7 +15,7 @@ import java.util.UUID
 class LoreEditTagItem : CustomItem {
 
     companion object {
-        val plugin: LumaItems = LumaItems.getPlugin()
+        val plugin: LumaItems = LumaItems.getInstance()
         val lores: MutableMap<UUID, MutableList<String>> = mutableMapOf()
     }
 

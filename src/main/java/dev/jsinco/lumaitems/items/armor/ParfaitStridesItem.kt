@@ -19,7 +19,7 @@ import java.util.UUID
 class ParfaitStridesItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         private val cooldown: MutableSet<UUID> = mutableSetOf()
     }
 

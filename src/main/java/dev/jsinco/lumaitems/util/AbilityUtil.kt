@@ -31,7 +31,7 @@ import kotlin.random.Random
 
 object AbilityUtil {
 
-    val plugin: LumaItems = LumaItems.getPlugin()
+    val plugin: LumaItems = LumaItems.getInstance()
     val blockTypeBlacklist = mutableSetOf( // Move to YAML file
         Material.CHEST, Material.BARREL, Material.TRAPPED_CHEST,
         Material.FURNACE, Material.BLAST_FURNACE, Material.SMOKER,

@@ -25,7 +25,7 @@ import java.util.function.Consumer
 class SunlightScytheItem : CustomItem {
 
     companion object {
-        val plugin: LumaItems = LumaItems.getPlugin()
+        val plugin: LumaItems = LumaItems.getInstance()
         val cooldown: MutableList<Player> = mutableListOf()
     }
 

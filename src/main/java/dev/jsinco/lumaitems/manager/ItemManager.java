@@ -69,7 +69,7 @@ public final class ItemManager {
      */
     @Nullable
     public static CustomItem getCustomItem(String key) {
-        return customItems.get(new NamespacedKey(LumaItems.getPlugin(), key));
+        return customItems.get(new NamespacedKey(LumaItems.getInstance(), key));
     }
 
     /**

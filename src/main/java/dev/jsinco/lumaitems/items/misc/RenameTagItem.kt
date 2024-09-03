@@ -13,7 +13,7 @@ import org.bukkit.persistence.PersistentDataType
 class RenameTagItem : CustomItem {
 
     companion object{
-        val plugin: LumaItems = LumaItems.getPlugin()
+        val plugin: LumaItems = LumaItems.getInstance()
     }
 
     private lateinit var renameTag: ItemStack

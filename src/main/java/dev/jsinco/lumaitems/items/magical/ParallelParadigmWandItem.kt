@@ -4,7 +4,6 @@ import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
-import dev.jsinco.lumaitems.particles.ParticleDisplay
 import dev.jsinco.lumaitems.util.AbilityUtil
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -25,7 +24,7 @@ import kotlin.random.Random
 class ParallelParadigmWandItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
     }
 
     override fun createItem(): Pair<String, ItemStack> {

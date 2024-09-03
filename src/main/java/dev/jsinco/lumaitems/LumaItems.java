@@ -29,7 +29,7 @@ public final class LumaItems extends JavaPlugin {
 
     // TODO: write a program to go through an replace all legacy rgb with minimessage
 
-    private static LumaItems plugin;
+    private static LumaItems instance;
     private static boolean withProtocolLib;
     private static boolean withMythicMobs;
     private static PAPIManager papiManager;
@@ -37,7 +37,7 @@ public final class LumaItems extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        plugin = this;
+        instance = this;
         FileManager.generateDefaultFiles();
         Util.loadUtils();
         withProtocolLib = getServer().getPluginManager().getPlugin("ProtocolLib") != null;
@@ -103,8 +103,8 @@ public final class LumaItems extends JavaPlugin {
         HandlerList.unregisterAll(this);
     }
 
-    public static LumaItems getPlugin() {
-        return plugin;
+    public static LumaItems getInstance() {
+        return instance;
     }
 
     @Nullable

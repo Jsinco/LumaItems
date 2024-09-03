@@ -36,7 +36,7 @@ class SummertideShellItem : CustomItem {
     companion object {
         const val ID = "summertideshell"
         private val cooldown: MutableSet<UUID> = mutableSetOf()
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
     }
 
     override fun createItem(): Pair<String, ItemStack> {

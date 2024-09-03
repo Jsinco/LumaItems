@@ -11,7 +11,7 @@ import java.util.UUID
 
 object GlowManager {
 
-    private val plugin: LumaItems = LumaItems.getPlugin()
+    private val plugin: LumaItems = LumaItems.getInstance()
     val glowColors: List<ChatColor> = listOf(
         ChatColor.AQUA, ChatColor.BLACK, ChatColor.BLUE, ChatColor.DARK_AQUA,
         ChatColor.DARK_BLUE, ChatColor.DARK_GRAY, ChatColor.DARK_GREEN, ChatColor.DARK_PURPLE,

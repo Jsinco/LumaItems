@@ -24,7 +24,7 @@ import kotlin.random.Random
 class UnnamedItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         val pinataFile = FileManager("saves/pinata.yml").getFileYaml()
         private val normalItems: List<Material> = listOf(
             Material.SPONGE,

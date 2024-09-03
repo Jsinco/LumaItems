@@ -22,7 +22,7 @@ import java.util.Random
 class SpellboundShattererItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         private val dustOptions: List<DustOptions> = listOf(
             DustOptions(Color.fromRGB(118, 0, 117), 1f),
             DustOptions(Color.fromRGB(245, 96, 1), 1f),

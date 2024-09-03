@@ -26,7 +26,7 @@ import kotlin.random.Random
 class BallisticBunnyMattockItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         private val stuckCarrots: LinkedHashMap<UUID, MutableList<CarrotDisplay>> = linkedMapOf()
         private const val EXPLOSION_POWER: Float = 2.3f
 

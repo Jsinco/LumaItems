@@ -140,7 +140,7 @@ class MagmaticSet : AstralSet {
 
     private fun cooldownPlayer(uuid: UUID) {
         cooldown.add(uuid)
-        Bukkit.getScheduler().scheduleSyncDelayedTask(LumaItems.getPlugin(), {
+        Bukkit.getScheduler().scheduleSyncDelayedTask(LumaItems.getInstance(), {
             cooldown.remove(uuid)
         },200L)
     }

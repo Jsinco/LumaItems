@@ -25,7 +25,7 @@ import java.util.UUID
 
 class FlamingHeartsEstoc : CustomItem {
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         private val cooldown: MutableSet<UUID> = mutableSetOf()
     }
 

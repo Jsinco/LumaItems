@@ -21,7 +21,7 @@ import kotlin.random.Random
 class WonderBeanieItem : CustomItem {
 
     companion object {
-        val plugin: LumaItems = LumaItems.getPlugin()
+        val plugin: LumaItems = LumaItems.getInstance()
         private val recursionProtection: MutableList<UUID> = mutableListOf()
         private val causeEffectWhiteList: List<EntityPotionEffectEvent.Cause> = listOf(
             EntityPotionEffectEvent.Cause.AREA_EFFECT_CLOUD,

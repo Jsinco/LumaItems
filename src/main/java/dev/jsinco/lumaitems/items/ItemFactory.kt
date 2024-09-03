@@ -38,7 +38,7 @@ class ItemFactory(
 ) {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         fun builder() = Builder()
     }
 

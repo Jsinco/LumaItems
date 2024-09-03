@@ -22,7 +22,7 @@ import kotlin.random.Random
 class AutumnsHarrowerItem : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         private val crops: Map<Material, Color> = mapOf(
             Material.WHEAT to Color.fromRGB(220, 187, 101),
             Material.BEETROOT to Color.fromRGB(164, 39, 44),

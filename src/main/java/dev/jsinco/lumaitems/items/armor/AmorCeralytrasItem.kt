@@ -58,7 +58,7 @@ class AmorCeralytrasItem : CustomItem {
                                 player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_BELL, 1f, 1f)
                             }
                         }
-                    }.runTaskTimer(LumaItems.getPlugin(), 0L, 5L)
+                    }.runTaskTimer(LumaItems.getInstance(), 0L, 5L)
                 }
 
                 if (player.isSneaking || player.isFlying || AbilityUtil.isOnGround(player) ||

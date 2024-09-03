@@ -29,7 +29,7 @@ import java.util.UUID
 class SweetBluetGemstone : CustomItem {
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
         // Todo: why the hell do i have 3 lists for this...
         private val activeSnowballs: MutableSet<UUID> = mutableSetOf()
         private val cooldownStorm: MutableSet<UUID> = mutableSetOf()

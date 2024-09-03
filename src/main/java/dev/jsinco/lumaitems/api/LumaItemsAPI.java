@@ -51,7 +51,7 @@ public final class LumaItemsAPI {
         if (!itemStack.hasItemMeta()) return false;
         var meta = itemStack.getItemMeta();
 
-        return meta.getPersistentDataContainer().has(new NamespacedKey(LumaItems.getPlugin(), customItemKey), PersistentDataType.SHORT);
+        return meta.getPersistentDataContainer().has(new NamespacedKey(LumaItems.getInstance(), customItemKey), PersistentDataType.SHORT);
     }
 
     /**

@@ -31,7 +31,7 @@ class CarnivalTargetPracticeBowItem : CustomItem {
         when (type) {
             Action.PROJECTILE_LAUNCH -> {
                 event as ProjectileLaunchEvent
-                event.entity.setMetadata("carnival_target_practice_bow", FixedMetadataValue(LumaItems.getPlugin(), true))
+                event.entity.setMetadata("carnival_target_practice_bow", FixedMetadataValue(LumaItems.getInstance(), true))
             }
 
             Action.DROP_ITEM -> {

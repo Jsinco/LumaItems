@@ -16,7 +16,7 @@ class AstralSetFactory (val name: String, val customEnchantNames: List<String>?)
     constructor(name: String) : this(name, null)
 
     companion object {
-        private val plugin: LumaItems = LumaItems.getPlugin()
+        private val plugin: LumaItems = LumaItems.getInstance()
     }
 
     var commonLore: List<String> = listOf()

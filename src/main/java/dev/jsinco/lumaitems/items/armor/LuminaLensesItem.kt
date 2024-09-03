@@ -21,7 +21,7 @@ import java.util.UUID
 class LuminaLensesItem : CustomItem {
 
     companion object {
-        val plugin: LumaItems = LumaItems.getPlugin()
+        val plugin: LumaItems = LumaItems.getInstance()
         val ticker: MutableMap<UUID, Int> = mutableMapOf()
     }
 

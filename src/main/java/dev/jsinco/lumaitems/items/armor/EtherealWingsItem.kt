@@ -46,6 +46,6 @@ class EtherealWingsItem : CustomItem {
         p.velocity = p.location.getDirection().multiply(3)
         p.playSound(p.location, Sound.ENTITY_ENDER_DRAGON_FLAP, 1f, 1f)
         cooldown.add(p)
-        Bukkit.getServer().scheduler.scheduleSyncDelayedTask(LumaItems.getPlugin(), { cooldown.remove(p) }, 200L)
+        Bukkit.getServer().scheduler.scheduleSyncDelayedTask(LumaItems.getInstance(), { cooldown.remove(p) }, 200L)
     }
 }

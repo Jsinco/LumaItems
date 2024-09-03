@@ -25,7 +25,7 @@ import kotlin.random.Random
 class SweetHeartsLaceItem : CustomItem {
 
     companion object {
-        private val p: LumaItems = LumaItems.getPlugin()
+        private val p: LumaItems = LumaItems.getInstance()
     }
 
     override fun createItem(): Pair<String, ItemStack> {

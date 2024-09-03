@@ -22,7 +22,7 @@ class SpringVaultItem : CustomItem {
 
     companion object {
         private val cooldown: MutableSet<UUID> = mutableSetOf()
-        private val plugin = LumaItems.getPlugin()
+        private val plugin = LumaItems.getInstance()
 
         private val colors: List<Color> = listOf(
             Util.hex2BukkitColor("#6CF380"),
