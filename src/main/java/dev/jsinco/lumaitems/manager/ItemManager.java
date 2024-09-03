@@ -2,6 +2,7 @@ package dev.jsinco.lumaitems.manager;
 
 import com.google.common.reflect.ClassPath;
 import dev.jsinco.lumaitems.LumaItems;
+import dev.jsinco.lumaitems.items.astral.AstralSet;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -87,7 +88,9 @@ public final class ItemManager {
     public void initPhysicalItemsByName() {
         for (CustomItem item : customItems.values()) {
             ItemStack itemStack = item.createItem().component2();
-            if (!itemStack.hasItemMeta() || !itemStack.getItemMeta().hasDisplayName()) {
+            if (AstralSet.class.isAssignableFrom(item.getClass())) {
+                continue;
+            } else if (!itemStack.hasItemMeta() || !itemStack.getItemMeta().hasDisplayName()) {
                 LumaItems.log("Item " + itemStack.getType() + " does not have a display name or meta!");
                 continue;
             }

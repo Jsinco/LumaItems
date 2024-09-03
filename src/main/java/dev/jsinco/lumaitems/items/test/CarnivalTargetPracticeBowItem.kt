@@ -22,7 +22,7 @@ class CarnivalTargetPracticeBowItem : CustomItem {
             .material(Material.BOW)
             .persistentData(mutableListOf("carnivaltargetpracticebow"))
             .vanillaEnchants(mutableMapOf(Enchantment.UNBREAKING to 5))
-            .tier("&a&lDebug")
+            .tier("<light_green><bold>Debug")
             .build()
         return Pair("carnivaltargetpracticebow", item.createItem())
     }

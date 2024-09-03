@@ -1,9 +1,13 @@
 package dev.jsinco.lumaitems.manager
 
+import dev.jsinco.lumaitems.LumaItems
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 interface CustomItem {
+
+    val INSTANCE: LumaItems
+        get() = LumaItems.getInstance()
 
     /**
      * Called at startup to initialize and create each custom item

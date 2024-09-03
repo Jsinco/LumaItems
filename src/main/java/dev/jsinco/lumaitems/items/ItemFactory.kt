@@ -2,6 +2,8 @@ package dev.jsinco.lumaitems.items
 
 import com.iridium.iridiumcolorapi.IridiumColorAPI
 import dev.jsinco.lumaitems.LumaItems
+import dev.jsinco.lumaitems.util.MiniMessageUtil
+import dev.jsinco.lumaitems.util.Tier
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -37,6 +39,26 @@ class ItemFactory(
     var quotes: MutableList<String> = mutableListOf()
 ) {
 
+    private val tierFormat = listOf(
+        "",
+        "&#EEE1D5&m       &r&#EEE1D5⋆⁺₊⋆ ★ ⋆⁺₊⋆&m       ",
+        "&#EEE1D5Tier • $tier",
+        "&#EEE1D5&m       &r&#EEE1D5⋆⁺₊⋆ ★ ⋆⁺₊⋆&m       "
+    )
+
+    private val miniMessageTierFormat = listOf(
+        "",
+        "<#EEE1D5><st>       </st>⋆⁺₊⋆ ★ ⋆⁺₊⋆<st>       </st>",
+        "<#EEE1D5>Tier • $tier",
+        "<#EEE1D5><st>       </st>⋆⁺₊⋆ ★ ⋆⁺₊⋆<st>       </st>"
+    )
+
+    var miniMessage = false
+
+    fun miniMessage() {
+        miniMessage = true
+    }
+
     companion object {
         private val plugin: LumaItems = LumaItems.getInstance()
         fun builder() = Builder()
@@ -66,7 +88,7 @@ class ItemFactory(
             meta.persistentDataContainer.set(stringPersistentData.key, PersistentDataType.STRING, stringPersistentData.value)
         }
 
-        meta.setDisplayName(Util.colorcode(name))
+
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ARMOR_TRIM, ItemFlag.HIDE_UNBREAKABLE)
 
         val combinedLore: MutableList<String> = mutableListOf()
@@ -81,13 +103,19 @@ class ItemFactory(
         }
 
 
-        combinedLore.addAll(lore.map { "&f$it" })
-        combinedLore.add("")
-        combinedLore.add("&#EEE1D5&m       &r&#EEE1D5⋆⁺₊⋆ ★ ⋆⁺₊⋆&m       ")
-        combinedLore.add("&#EEE1D5Tier • $tier")
-        combinedLore.add("&#EEE1D5&m       &r&#EEE1D5⋆⁺₊⋆ ★ ⋆⁺₊⋆&m       ")
+        if (!miniMessage) {
+            combinedLore.addAll(lore.map { "&f$it" })
+            combinedLore.addAll(tierFormat)
 
-        meta.lore = Util.colorcodeList(combinedLore)
+            meta.setDisplayName(Util.colorcode(name))
+            meta.lore = Util.colorcodeList(combinedLore)
+        } else {
+            combinedLore.addAll(lore.map { "<white>$it" })
+            combinedLore.addAll(miniMessageTierFormat)
+
+            meta.displayName(MiniMessageUtil.mm(name))
+            meta.lore(MiniMessageUtil.mml(combinedLore))
+        }
 
         for (enchant in vanillaEnchants) {
             meta.addEnchant(enchant.key, enchant.value, true)
@@ -116,7 +144,7 @@ class ItemFactory(
         private var material: Material = Material.AIR
         private var persistentData: MutableList<String> = mutableListOf()
         private var vanillaEnchants: MutableMap<Enchantment, Int> = mutableMapOf()
-        private var tier: String = "&#AC87FB&lAstral"
+        private var tier: String = Tier.ASTRAL.formattedName
         private var unbreakable: Boolean = false
         private var hideEnchants: Boolean = false
         private var addSpace: Boolean = true
@@ -127,11 +155,16 @@ class ItemFactory(
 
         fun name(name: String) = apply { this.name = name }
         fun customEnchants(customEnchants: MutableList<String>) = apply { this.customEnchants = customEnchants }
+        fun customEnchants(vararg customEnchants: String) = apply { this.customEnchants = customEnchants.toMutableList() }
         fun lore(lore: MutableList<String>) = apply { this.lore = lore }
+        fun lore(vararg lore: String) = apply { this.lore = lore.toMutableList() }
         fun material(material: Material) = apply { this.material = material }
+        fun material(s: String) = apply { this.material = Material.matchMaterial(s) ?: Material.AIR }
         fun persistentData(persistentData: MutableList<String>) = apply { this.persistentData = persistentData }
+        fun persistentData(vararg persistentData: String) = apply { this.persistentData = persistentData.toMutableList() }
         fun vanillaEnchants(vanillaEnchants: MutableMap<Enchantment, Int>) = apply { this.vanillaEnchants = vanillaEnchants }
         fun tier(tier: String) = apply { this.tier = tier }
+        fun tier (tier: Tier) = apply { this.tier = tier.formattedName }
         fun unbreakable(unbreakable: Boolean) = apply { this.unbreakable = unbreakable }
         fun hideEnchants(hideEnchants: Boolean) = apply { this.hideEnchants = hideEnchants }
         fun addSpace(addSpace: Boolean) = apply { this.addSpace = addSpace }
@@ -139,10 +172,25 @@ class ItemFactory(
         fun attributeModifiers(attributeModifiers: MutableMap<Attribute, AttributeModifier>) = apply { this.attributeModifiers = attributeModifiers }
         fun stringPersistentDatas(stringPersistentDatas: MutableMap<NamespacedKey, String>) = apply { this.stringPersistentDatas = stringPersistentDatas }
         fun quotes(quotes: MutableList<String>) = apply { this.quotes = quotes }
+        fun quotes(vararg quotes: String) = apply { this.quotes = quotes.toMutableList() }
 
         fun build() = ItemFactory(
             name, customEnchants, lore, material, persistentData, vanillaEnchants,
             tier, unbreakable, hideEnchants, addSpace, autoHat, attributeModifiers, stringPersistentDatas, quotes
+        ).apply { miniMessage() }
+
+        fun buildNoMiniMessage() = ItemFactory(
+            name, customEnchants, lore, material, persistentData, vanillaEnchants,
+            tier, unbreakable, hideEnchants, addSpace, autoHat, attributeModifiers, stringPersistentDatas, quotes
         )
+
+        fun buildPair(): Pair<String, ItemStack> {
+            if (persistentData.size != 1) {
+                LumaItems.log("Error: persistentData must have exactly one value!")
+                return Pair("", ItemStack(Material.AIR))
+            }
+            return Pair(persistentData[0], build().createItem())
+        }
+
     }
 }

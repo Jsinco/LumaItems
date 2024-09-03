@@ -15,6 +15,7 @@ import org.bukkit.Sound
 import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
 import org.bukkit.entity.Entity
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.entity.Snowball
 import org.bukkit.event.block.BlockPlaceEvent
@@ -55,10 +56,10 @@ object AbilityUtil {
 
     @Suppress("deprecation", "removal")
     @JvmStatic
-    fun noDamagePermission(attacker: Player, damagee: Entity): Boolean {
-        val event = EntityDamageByEntityEvent(attacker, damagee, EntityDamageEvent.DamageCause.ENTITY_ATTACK, 0.1)
+    fun noDamagePermission(attacker: Player, victim: Entity): Boolean {
+        val event = EntityDamageByEntityEvent(attacker, victim, EntityDamageEvent.DamageCause.ENTITY_ATTACK, 0.1)
         Bukkit.getPluginManager().callEvent(event)
-        return event.isCancelled || isMythicMob(damagee)
+        return event.isCancelled || isMythicMob(victim)
     }
 
     @JvmStatic
@@ -179,6 +180,10 @@ object AbilityUtil {
     }
 
     fun spawnSpell(player: Player, particle: Particle?, meta: String, ticksAlive: Long): Snowball {
+        return spawnSpell(player, particle, meta, ticksAlive, null)
+    }
+
+    fun spawnSpell(player: Player, particle: Particle?, meta: String, ticksAlive: Long, runnableCallback: EntityCallBack?): Snowball {
         val snowball = player.launchProjectile(Snowball::class.java)
         snowball.setGravity(false)
         snowball.velocity = player.location.direction.multiply(3)
@@ -190,16 +195,19 @@ object AbilityUtil {
             }
         }
 
-        object : BukkitRunnable() {
-            override fun run() {
-                if (snowball.isDead) {
-                    cancel()
+        if (particle != null || runnableCallback != null) {
+            object : BukkitRunnable() {
+                override fun run() {
+                    if (snowball.isDead) {
+                        cancel()
+                    }
+                    if (particle != null) {
+                        snowball.world.spawnParticle(particle, snowball.location, 4, 0.1, 0.1, 0.1, 0.0)
+                    }
+                    runnableCallback?.go(snowball)
                 }
-                if (particle != null) {
-                    snowball.world.spawnParticle(particle, snowball.location, 4, 0.1, 0.1, 0.1, 0.0)
-                }
-            }
-        }.runTaskTimer(plugin, 0, 1)
+            }.runTaskTimerAsynchronously(plugin, 0, 1)
+        }
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, {
             if (!snowball.isDead) {
                 snowball.remove()
@@ -214,5 +222,25 @@ object AbilityUtil {
             return true
         }
         return false
+    }
+
+    fun damageOverTicks(victim: LivingEntity, attacker: Player?, damage: Double, hitAmount: Int) {
+        damageOverTicks(victim, attacker, damage, hitAmount, null)
+    }
+
+    fun damageOverTicks(victim: LivingEntity, attacker: Player?, damage: Double, hitAmount: Int, runnableCallback: EntityCallBack?) {
+        val damageToDealOverTicks = damage / hitAmount
+        object : BukkitRunnable() {
+            var count = 0
+            override fun run() {
+                if (count >= hitAmount || victim.isDead) {
+                    this.cancel()
+                    return
+                }
+                victim.damage(damageToDealOverTicks, attacker)
+                runnableCallback?.go(victim)
+                count++
+            }
+        }.runTaskTimer(plugin, 0, 10)
     }
 }

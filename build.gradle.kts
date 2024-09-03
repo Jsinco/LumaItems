@@ -83,6 +83,14 @@ tasks {
         dependsOn(shadowJar)
     }
 
+    register("legacyToMM") {
+        println("HERE:")
+        var newString = legacyToMMConverter()
+        if (newString.contains("<b>")) {
+            newString = "<b>" + newString.replace("<b>", "") + "</b>"
+        }
+        println(newString)
+    }
 
 }
 
@@ -95,5 +103,62 @@ publishing {
         create<MavenPublication>("maven") {
             from(components["java"])
         }
+    }
+}
+
+// lore: &5Illusion
+val legacyString = "&#C7305D&lM&#962F72&la&#642D87&lg&#8D3A71&li&#B6475C&lc &#C45078&lW&#A94CAA&la&#A94CAA&ln&#A94CAA&ld"
+val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
+
+fun legacyToMMConverter(): String {
+    if (legacyString.isEmpty()) {
+        return legacyString
+    }
+    val texts = legacyString.split(String.format(WITH_DELIMITER, "&").toRegex()).dropLastWhile { it.isEmpty() }
+        .toTypedArray()
+    val finalText = StringBuilder()
+    var i = 0
+    while (i < texts.size) {
+        if (texts[i].equals("&", ignoreCase = true)) {
+            //get the next string
+            i++
+            if (texts[i][0] == '#') {
+                finalText.append('<').append(texts[i].substring(0, 7)).append(texts[i].substring(7)).append('>')
+            } else {
+                finalText.append(getMiniMessageNamedColor("&" + texts[i].substring(0, 1))).append(texts[i].substring(1))
+            }
+        } else {
+            finalText.append(texts[i])
+        }
+        i++
+    }
+    return finalText.toString()
+}
+
+fun getMiniMessageNamedColor(namedColor: String): String {
+    return when (namedColor) {
+        "&0" -> "<black>"
+        "&1" -> "<dark_blue>"
+        "&2" -> "<dark_green>"
+        "&3" -> "<dark_aqua>"
+        "&4" -> "<dark_red>"
+        "&5" -> "<dark_purple>"
+        "&6" -> "<gold>"
+        "&7" -> "<gray>"
+        "&8" -> "<dark_gray>"
+        "&9" -> "<blue>"
+        "&a" -> "<green>"
+        "&b" -> "<aqua>"
+        "&c" -> "<red>"
+        "&d" -> "<light_purple>"
+        "&e" -> "<yellow>"
+        "&f" -> "<white>"
+        "&k" -> "<obf>"
+        "&l" -> "<b>"
+        "&m" -> "<st>"
+        "&n" -> "<u>"
+        "&o" -> "<i>"
+        "&r" -> "<reset>"
+        else -> throw IllegalStateException("Unexpected value: $namedColor")
     }
 }

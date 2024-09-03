@@ -27,7 +27,7 @@ import java.awt.Color as AwtColor
 
 object Util {
     lateinit var prefix: String
-    private const val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
+    const val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
     val armorEquipmentSlots: List<EquipmentSlot> = listOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
 
     private val plugin: LumaItems = LumaItems.getInstance()
@@ -214,6 +214,15 @@ object Util {
 
     fun hex2BukkitColor(colorStr: String): Color {
         return Color.fromRGB(
+            colorStr.substring(1, 3).toInt(16),
+            colorStr.substring(3, 5).toInt(16),
+            colorStr.substring(5, 7).toInt(16)
+        )
+    }
+
+    @JvmStatic
+    fun hex2AwtColor(colorStr: String): AwtColor {
+        return AwtColor(
             colorStr.substring(1, 3).toInt(16),
             colorStr.substring(3, 5).toInt(16),
             colorStr.substring(5, 7).toInt(16)

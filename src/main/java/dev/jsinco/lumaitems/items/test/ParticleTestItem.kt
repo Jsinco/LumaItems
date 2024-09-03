@@ -31,14 +31,15 @@ class ParticleTestItem : CustomItem {
             Action.RIGHT_CLICK -> {
                 val location = player.location
 
-                val particleDisplayCloud = ParticleDisplay.of(Particle.DUST).withLocation(location)
+                val particleDisplayCloud = ParticleDisplay.of(Particle.DUST).withLocation(location).withColor(Color.CYAN)
+                //Particles.vortex(INSTANCE, 30, 4.0, particleDisplayCloud)
                 //diamond(double radiusRate, double rate, double height, ParticleDisplay display)
                 //Particles.sphere(3.0, 30.0, particleDisplayCloud.mixWith(Color.BLUE))
                 // Particles.rainbow(double radius, double rate, double curve, double layers, double compact, ParticleDisplay display)
-                Particles.rainbow(3.0, 3.0, 1.0, 3.0, 0.0, particleDisplayCloud)
-                Particles.flower(3, 15.0, particleDisplayCloud) {
-                    Particles.sphere(3.0, 30.0, particleDisplayCloud.mixWith(Color.PINK))
-                }
+                //Particles.rainbow(3.0, 3.0, 1.0, 3.0, 0.0, particleDisplayCloud)
+                //Particles.flower(3, 15.0, particleDisplayCloud) {
+                //    Particles.sphere(3.0, 30.0, particleDisplayCloud.mixWith(Color.PINK))
+                //}
                 return true
             }
             else -> return false
