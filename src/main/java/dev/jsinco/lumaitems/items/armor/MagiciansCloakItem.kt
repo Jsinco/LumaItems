@@ -22,18 +22,19 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
+import org.bukkit.util.Vector
 
 class MagiciansCloakItem : CustomItem {
 
-    val colors = listOf(
+    private val colors = listOf(
         Util.hex2AwtColor("#8ec4f7"),
         Util.hex2AwtColor("#ff9ccb"),
         Util.hex2AwtColor("#d7f58d"),
         Util.hex2AwtColor("#fffe8a"),
         Util.hex2AwtColor("#ffd365")
     )
-
-    val key = NamespacedKey(INSTANCE, "magicianscloak")
+    private val vector0 = Vector(0, 0,0)
+    private val key = NamespacedKey(INSTANCE, "magicianscloak")
 
     override fun createItem(): Pair<String, ItemStack> {
         return ItemFactory.builder()
@@ -61,7 +62,7 @@ class MagiciansCloakItem : CustomItem {
             Action.RIGHT_CLICK -> {
                 val target = player.getTargetEntity(15) as? LivingEntity ?: return false
 
-                if (getTotalDamage(player) < 200 || AbilityUtil.noDamagePermission(player, target)) {
+                if (getTotalDamage(player) < 300 || AbilityUtil.noDamagePermission(player, target)) {
                     showDamageStars(player)
                     return false
                 }
@@ -71,11 +72,13 @@ class MagiciansCloakItem : CustomItem {
                 updateCloakDamage(player, 0)
                 showDamageStars(player)
 
-                val ticks =AbilityUtil.damageOverTicks(target, player, target.health / 3, 5) {
+                val ticks = AbilityUtil.damageOverTicks(target, player, target.health / 3, 5) {
+                    target.velocity = vector0
                     target.world.playSound(target.location, Sound.ITEM_TOTEM_USE, 1.0f, 0.6f)
                 }
 
-                target.addPotionEffect(PotionEffect(PotionEffectType.SLOWNESS, ticks, 49, false, false, false))
+
+                target.addPotionEffect(PotionEffect(PotionEffectType.SLOWNESS, ticks, 3, false, false, false))
             }
 
             else -> return false
@@ -88,7 +91,7 @@ class MagiciansCloakItem : CustomItem {
         val meta = item.itemMeta ?: return
 
         val currentDamage = meta.persistentDataContainer.get(key, PersistentDataType.SHORT) ?: 0
-        if (currentDamage >= 200) return
+        if (currentDamage >= 300) return
         meta.persistentDataContainer.set(key, PersistentDataType.SHORT, (currentDamage + amt).toShort())
         item.itemMeta = meta
     }
@@ -109,7 +112,7 @@ class MagiciansCloakItem : CustomItem {
 
     private fun showDamageStars(player: Player) {
         val damage = getTotalDamage(player)
-        val stars = "★".repeat(damage / 40) + "☆".repeat(5 - damage / 40)
+        val stars = "★".repeat((damage / 60).coerceAtLeast(0)) + "☆".repeat((5 - damage / 60).coerceAtLeast(0))
 
         val color = colors.random()
 

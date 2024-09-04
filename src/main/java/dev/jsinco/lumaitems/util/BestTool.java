@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated(forRemoval = true)
 public class BestTool {
 
     public static final List<Material> AXE = new ArrayList<>();

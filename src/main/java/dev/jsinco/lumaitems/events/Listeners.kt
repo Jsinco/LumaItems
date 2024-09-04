@@ -145,7 +145,7 @@ class Listeners(val plugin: LumaItems) : Listener {
     }
 
     @FireForAllNBT
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     fun onEntityDamageByEntity(event: EntityDamageByEntityEvent) {
         val player: Player = when (event.damager) {
             is Player -> event.damager as Player
@@ -159,7 +159,7 @@ class Listeners(val plugin: LumaItems) : Listener {
         fire(data, Action.ENTITY_DAMAGE, player, event)
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     fun onPlayerDamagedByEntity(event: EntityDamageByEntityEvent) {
         val player: Player = event.entity as? Player ?: return
         val action = if (player.isBlocking) Action.PLAYER_DAMAGED_WHILE_BLOCKING else Action.PLAYER_DAMAGED_BY_ENTITY

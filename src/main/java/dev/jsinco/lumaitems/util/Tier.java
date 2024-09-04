@@ -1,18 +1,29 @@
 package dev.jsinco.lumaitems.util;
 
-public enum Tier {
+import net.kyori.adventure.text.Component;
 
-    ASTRAL("<b><#AC87FB>Astral</#AC87FB></b>"),
-    CARNIVAL_2024("<b><#8EC4F7>C<#C7B0E1>a<#FF9CCB>r<#EBC9AC>n<#D7F58D>i<#FFFE8A>v<#FFE978>a<#FFD365>l</b>")
-    ;
+public class Tier {
 
-    private final String formattedName;
+    public static final Tier ASTRAL = new Tier("<b><#AC87FB>Astral</#AC87FB></b>");
+    public static final Tier CARNIVAL_2024 = new Tier("<b><#8EC4F7>C<#C7B0E1>a<#FF9CCB>r<#EBC9AC>n<#D7F58D>i<#FFFE8A>v<#FFE978>a<#FFD365>l</b>");
 
-    Tier(String s) {
-        this.formattedName = s;
+
+    private final String mmTierString;
+
+    private Tier(String s) {
+        this.mmTierString = s;
     }
 
-    public String getFormattedName() {
-        return formattedName;
+    public String getTierString() {
+        return mmTierString;
+    }
+
+    public Component toComponent() {
+        return MiniMessageUtil.mm(mmTierString);
+    }
+
+    @Override
+    public String toString() {
+        return mmTierString;
     }
 }

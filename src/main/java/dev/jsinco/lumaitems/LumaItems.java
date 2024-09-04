@@ -79,9 +79,9 @@ public final class LumaItems extends JavaPlugin {
         try {
             itemManager.registerItems();
             itemManager.initPhysicalItemsByName();
+            passiveListeners.onPluginAction(Action.PLUGIN_ENABLE); // Fire this as soon as we're done registering our items
             passiveListeners.getPassiveListener(Action.RUNNABLE).runTaskTimer(this, 0L, PassiveListeners.DEFAULT_PASSIVE_LISTENER_TICKS);
             passiveListeners.getPassiveListener(Action.ASYNC_RUNNABLE).runTaskTimerAsynchronously(this, 0L, PassiveListeners.ASYNC_PASSIVE_LISTENER_TICKS);
-            passiveListeners.onPluginAction(Action.PLUGIN_ENABLE);
         } catch (Exception e) {
             getLogger().log(Level.SEVERE, "An error occurred while registering items", e);
             Bukkit.getPluginManager().disablePlugin(this);
@@ -90,17 +90,18 @@ public final class LumaItems extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        passiveListeners.onPluginAction(Action.PLUGIN_DISABLE);
+        HandlerList.unregisterAll(this); // Immediately disable all listeners to prevent any further events from firing
+        passiveListeners.onPluginAction(Action.PLUGIN_DISABLE); // Then fire this for whatever items need to use this
 
-        if (papiManager != null) {
-            papiManager.unregister();
-        }
+
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.getOpenInventory().getTopInventory().getHolder(false) instanceof AbstractGui) {
                 player.closeInventory();
             }
         }
-        HandlerList.unregisterAll(this);
+        if (papiManager != null) {
+            papiManager.unregister();
+        }
     }
 
     public static LumaItems getInstance() {

@@ -144,7 +144,7 @@ class ItemFactory(
         private var material: Material = Material.AIR
         private var persistentData: MutableList<String> = mutableListOf()
         private var vanillaEnchants: MutableMap<Enchantment, Int> = mutableMapOf()
-        private var tier: String = Tier.ASTRAL.formattedName
+        private var tier: String = Tier.ASTRAL.toString()
         private var unbreakable: Boolean = false
         private var hideEnchants: Boolean = false
         private var addSpace: Boolean = true
@@ -164,7 +164,7 @@ class ItemFactory(
         fun persistentData(vararg persistentData: String) = apply { this.persistentData = persistentData.toMutableList() }
         fun vanillaEnchants(vanillaEnchants: MutableMap<Enchantment, Int>) = apply { this.vanillaEnchants = vanillaEnchants }
         fun tier(tier: String) = apply { this.tier = tier }
-        fun tier (tier: Tier) = apply { this.tier = tier.formattedName }
+        fun tier (tier: Tier) = apply { this.tier = tier.tierString }
         fun unbreakable(unbreakable: Boolean) = apply { this.unbreakable = unbreakable }
         fun hideEnchants(hideEnchants: Boolean) = apply { this.hideEnchants = hideEnchants }
         fun addSpace(addSpace: Boolean) = apply { this.addSpace = addSpace }
