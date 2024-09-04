@@ -2,7 +2,9 @@ package dev.jsinco.lumaitems.commands
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.ItemManager
+import dev.jsinco.lumaitems.util.MiniMessageUtil
 import dev.jsinco.lumaitems.util.Util
+import net.kyori.adventure.text.Component
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
@@ -24,7 +26,7 @@ class GiveItemCommand : SubCommand {
 
         if (item != null) {
             Util.giveItem(player, item)
-            player.sendMessage("${Util.prefix} You have been given ${item.itemMeta?.displayName}")
+            MiniMessageUtil.msg(player, item.itemMeta?.displayName()?.let { Component.text("You have been given ").append(it) })
         } else {
             for (customItem in ItemManager.getAllItems()) {
                 Util.giveItem(player, customItem)

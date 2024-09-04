@@ -107,7 +107,7 @@ publishing {
 }
 
 // lore: &5Illusion
-val legacyString = "&#C7305D&lM&#962F72&la&#642D87&lg&#8D3A71&li&#B6475C&lc &#C45078&lW&#A94CAA&la&#A94CAA&ln&#A94CAA&ld"
+val legacyString = "&#f498f6&lI&#c990f9&ln&#9d88fc&lf&#7280ff&lo &r&8»&#E2E2E2"
 val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
 
 fun legacyToMMConverter(): String {

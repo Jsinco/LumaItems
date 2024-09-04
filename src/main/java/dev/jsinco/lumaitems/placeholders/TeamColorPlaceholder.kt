@@ -8,6 +8,6 @@ import org.bukkit.OfflinePlayer
 class TeamColorPlaceholder : Placeholder {
 
     override fun onReceivedRequest(plugin: LumaItems, player: OfflinePlayer?, args: List<String>): String {
-        return Util.getColorCodeByChatColor(player?.player?.let { GlowManager.getGlowColor(it) } ?: return "§f")
+        return Util.getColorCodeByChatColor(player?.player?.let { GlowManager.getGlowColorLegacy(it) } ?: return "§f")
     }
 }

@@ -1,6 +1,5 @@
 package dev.jsinco.lumaitems.util;
 
-import dev.jsinco.lumaitems.LumaItems;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
@@ -11,10 +10,14 @@ import static dev.jsinco.lumaitems.util.Util.WITH_DELIMITER;
 
 public class MiniMessageUtil {
 
-    public static Component PREFIX = mm(LumaItems.getInstance().getConfig().getString("prefix", ""));
+    public static Component PREFIX = mm("<b><#f498f6>I<#c990f9>n<#9d88fc>f<#7280ff>o</b> <dark_gray>»<white> ");
 
     public static void msg(CommandSender sender, String m) {
         sender.sendMessage(PREFIX.append(mm(m)));
+    }
+
+    public static void msg(CommandSender sender, Component m) {
+        sender.sendMessage(PREFIX.append(m));
     }
 
     public static Component mm(String m) {

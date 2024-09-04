@@ -228,7 +228,7 @@ object AbilityUtil {
         damageOverTicks(victim, attacker, damage, hitAmount, null)
     }
 
-    fun damageOverTicks(victim: LivingEntity, attacker: Player?, damage: Double, hitAmount: Int, runnableCallback: EntityCallBack?) {
+    fun damageOverTicks(victim: LivingEntity, attacker: Player?, damage: Double, hitAmount: Int, runnableCallback: EntityCallBack?): Int {
         val damageToDealOverTicks = damage / hitAmount
         object : BukkitRunnable() {
             var count = 0
@@ -242,5 +242,6 @@ object AbilityUtil {
                 count++
             }
         }.runTaskTimer(plugin, 0, 10)
+        return hitAmount * 10
     }
 }

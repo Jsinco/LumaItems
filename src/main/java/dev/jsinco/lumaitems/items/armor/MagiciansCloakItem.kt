@@ -20,6 +20,8 @@ import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 
 class MagiciansCloakItem : CustomItem {
 
@@ -50,6 +52,7 @@ class MagiciansCloakItem : CustomItem {
 
             Action.ENTITY_DAMAGE -> {
                 event as EntityDamageByEntityEvent
+                if (event.isCancelled) return false
                 val damage = event.damage.toInt().toShort()
                 appendCloakDamage(player, damage)
                 showDamageStars(player)
@@ -58,7 +61,7 @@ class MagiciansCloakItem : CustomItem {
             Action.RIGHT_CLICK -> {
                 val target = player.getTargetEntity(15) as? LivingEntity ?: return false
 
-                if (getTotalDamage(player) < 100 || AbilityUtil.noDamagePermission(player, target)) {
+                if (getTotalDamage(player) < 200 || AbilityUtil.noDamagePermission(player, target)) {
                     showDamageStars(player)
                     return false
                 }
@@ -68,8 +71,11 @@ class MagiciansCloakItem : CustomItem {
                 updateCloakDamage(player, 0)
                 showDamageStars(player)
 
-                target.world.playSound(target.location, Sound.ITEM_TOTEM_USE, 0.9f, 1.2f)
-                target.damage(target.health / 2, player)
+                val ticks =AbilityUtil.damageOverTicks(target, player, target.health / 3, 5) {
+                    target.world.playSound(target.location, Sound.ITEM_TOTEM_USE, 1.0f, 0.6f)
+                }
+
+                target.addPotionEffect(PotionEffect(PotionEffectType.SLOWNESS, ticks, 49, false, false, false))
             }
 
             else -> return false
@@ -82,7 +88,7 @@ class MagiciansCloakItem : CustomItem {
         val meta = item.itemMeta ?: return
 
         val currentDamage = meta.persistentDataContainer.get(key, PersistentDataType.SHORT) ?: 0
-        if (currentDamage >= 100) return
+        if (currentDamage >= 200) return
         meta.persistentDataContainer.set(key, PersistentDataType.SHORT, (currentDamage + amt).toShort())
         item.itemMeta = meta
     }
@@ -103,7 +109,7 @@ class MagiciansCloakItem : CustomItem {
 
     private fun showDamageStars(player: Player) {
         val damage = getTotalDamage(player)
-        val stars = "★".repeat(damage / 20) + "☆".repeat(5 - damage / 20)
+        val stars = "★".repeat(damage / 40) + "☆".repeat(5 - damage / 40)
 
         val color = colors.random()
 
