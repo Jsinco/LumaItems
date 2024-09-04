@@ -6,6 +6,7 @@ import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.Tier
 import dev.jsinco.lumaitems.util.Util
+import io.papermc.paper.event.entity.EntityMoveEvent
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -15,6 +16,7 @@ import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.persistence.PersistentDataType
 
 class GiantInflatableHammerItem : CustomItem {
 
@@ -46,15 +48,25 @@ class GiantInflatableHammerItem : CustomItem {
 
                 val entity = event.entity as? LivingEntity ?: return false
 
-                if (AbilityUtil.noDamagePermission(player, entity) || !event.isCritical || !entity.hasAI()) return false
+                if (AbilityUtil.noDamagePermission(player, entity) || !event.isCritical) {
+                    return false
+                } else if (!entity.persistentDataContainer.has(key, PersistentDataType.INTEGER)) {
+                    entity.world.spawnParticle(Particle.DUST, entity.eyeLocation, 100, 0.3, -1.5, 0.3, 0.1, Particle.DustOptions(colors.random(), 1f))
+                    event.isCancelled = true
+                }
 
-                entity.setAI(false)
-                entity.world.spawnParticle(Particle.DUST, entity.eyeLocation, 300, 0.2, -1.5, 0.2, 0.1, Particle.DustOptions(colors.random(), 1f))
-                event.isCancelled = true
+                val accumulatedDamage = entity.persistentDataContainer.get(key, PersistentDataType.INTEGER) ?: 0
+                entity.persistentDataContainer.set(key, PersistentDataType.INTEGER, accumulatedDamage + event.damage.toInt())
+
 
                 Bukkit.getScheduler().runTaskLaterAsynchronously(INSTANCE, Runnable {
-                    entity.setAI(true)
+                    entity.persistentDataContainer.remove(key)
                 }, 100)
+            }
+
+            Action.ENTITY_MOVE -> {
+                event as EntityMoveEvent
+                event.isCancelled = true
             }
 
             else -> return false
