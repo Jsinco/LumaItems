@@ -216,6 +216,39 @@ object AbilityUtil {
         return snowball
     }
 
+    fun spawnSpell(player: Player, location: Location, particle: Particle?, meta: String, ticksAlive: Long, runnableCallback: EntityCallBack?): Snowball {
+        val snowball = location.world.createEntity(location, Snowball::class.java)
+        snowball.shooter = player
+        snowball.setGravity(false)
+        snowball.persistentDataContainer.set(NamespacedKey(plugin, meta), PersistentDataType.SHORT, 1)
+        for (entity in snowball.getNearbyEntities(65.0, 65.0, 65.0)) {
+            if (entity is Player) {
+                entity.hideEntity(plugin, snowball)
+            }
+        }
+        snowball.spawnAt(location)
+
+        if (particle != null || runnableCallback != null) {
+            object : BukkitRunnable() {
+                override fun run() {
+                    if (snowball.isDead) {
+                        cancel()
+                    }
+                    if (particle != null) {
+                        snowball.world.spawnParticle(particle, snowball.location, 4, 0.1, 0.1, 0.1, 0.0)
+                    }
+                    runnableCallback?.go(snowball)
+                }
+            }.runTaskTimerAsynchronously(plugin, 0, 1)
+        }
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, {
+            if (!snowball.isDead) {
+                snowball.remove()
+            }
+        }, ticksAlive)
+        return snowball
+    }
+
     fun takeSpellLapisCost(player: Player, amount: Int): Boolean {
         if (player.inventory.contains(Material.LAPIS_LAZULI, amount)) {
             player.inventory.removeItem(ItemStack(Material.LAPIS_LAZULI, amount))
@@ -224,17 +257,22 @@ object AbilityUtil {
         return false
     }
 
-    fun damageOverTicks(victim: LivingEntity, attacker: Player?, damage: Double, hitAmount: Int) {
-        damageOverTicks(victim, attacker, damage, hitAmount, null)
+    fun damageOverTicks(victim: LivingEntity, attacker: Player?, damage: Double, hitAmount: Int): Int {
+        return damageOverTicks(victim, attacker, damage, hitAmount, null)
     }
 
     fun damageOverTicks(victim: LivingEntity, attacker: Player?, damage: Double, hitAmount: Int, runnableCallback: EntityCallBack?): Int {
+        return damageOverTicks(victim, attacker, damage, hitAmount, runnableCallback, null)
+    }
+
+    fun damageOverTicks(victim: LivingEntity, attacker: Player?, damage: Double, hitAmount: Int, runnableCallback: EntityCallBack?, whenFinishedCallback: EntityCallBack?): Int {
         val damageToDealOverTicks = damage / hitAmount
         object : BukkitRunnable() {
             var count = 0
             override fun run() {
                 if (count >= hitAmount || victim.isDead) {
                     this.cancel()
+                    whenFinishedCallback?.go(victim)
                     return
                 }
                 victim.damage(damageToDealOverTicks, attacker)

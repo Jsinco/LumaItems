@@ -27,6 +27,8 @@ import java.awt.Color as AwtColor
 
 object Util {
     lateinit var prefix: String
+
+    const val SPACE = ""
     const val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
     val armorEquipmentSlots: List<EquipmentSlot> = listOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
 
@@ -201,6 +203,13 @@ object Util {
 
     fun isItemInSlot(identifier: String, slot: EquipmentSlot, player: Player): Boolean {
         return player.equipment.getItem(slot).itemMeta?.persistentDataContainer?.has(NamespacedKey(plugin, identifier), PersistentDataType.SHORT) == true
+    }
+
+    fun isItemInSlots(identifier: String, slots: List<EquipmentSlot>, player: Player): Boolean {
+        for (slot in slots) {
+            if (isItemInSlot(identifier, slot, player)) return true
+        }
+        return false
     }
 
     fun playerHeadFromBase64(base64: String, amt: Int): ItemStack {
