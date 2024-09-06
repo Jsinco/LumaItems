@@ -89,7 +89,7 @@ class ItemFactory(
         }
 
 
-        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ARMOR_TRIM, ItemFlag.HIDE_UNBREAKABLE)
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_ARMOR_TRIM, ItemFlag.HIDE_UNBREAKABLE, ItemFlag.HIDE_DYE)
 
         val combinedLore: MutableList<String> = mutableListOf()
         combinedLore.addAll(customEnchants)

@@ -44,7 +44,6 @@ class WizardsHatItem : CustomItem {
             .build().createItem()
 
         item.itemMeta = (item.itemMeta as? LeatherArmorMeta)?.apply {
-            addItemFlags(ItemFlag.HIDE_DYE)
             setColor(colors.random())
         }
 
