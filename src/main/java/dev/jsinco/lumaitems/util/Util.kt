@@ -165,8 +165,10 @@ object Util {
         return null
     }
 
-    fun formatMaterialName(material: Material): String {
-        var name = material.toString().lowercase().replace("_", " ")
+    fun formatMaterialName(material: Material) = formatMaterialName(material.toString())
+
+    fun formatMaterialName(s: String): String {
+        var name = s.lowercase().replace("_", " ")
         name = name.substring(0, 1).uppercase() + name.substring(1)
         for (i in name.indices) {
             if (name[i] == ' ') {

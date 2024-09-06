@@ -24,8 +24,9 @@ class BookOfKnowledgeItem : CustomItem {
                 "If paired with a <b><#C7305D>M<#962F72>a<#642D87>g<#8D3A71>i<#B6475C>c <#C45078>W<#A94CAA>a<#A94CAA>n<#A94CAA>d</b><white>,",
                 "extra spells will be accessible.",
                 "",
-                "<dark_purple>Drain <dark_gray>- <white>Click to siphon health", "from nearby entities.",
-                "<dark_purple>Valiant Explosion <dark_gray>- <white>Cast a", "spell which will damage", "and explode entities.")
+                "<#CF9C68>Drain <dark_gray>- <white>Click to siphon health", "from nearby entities.",
+                "",
+                "<#CF9C68>Valiant Explosion <dark_gray>- <white>Cast a", "spell which will damage", "and explode entities.")
             .material(Material.BOOK)
             .persistentData(STRING_KEY)
             .tier(Tier.CARNIVAL_2024)

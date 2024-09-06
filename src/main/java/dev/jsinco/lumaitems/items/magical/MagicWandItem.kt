@@ -4,6 +4,7 @@ import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.enums.Tier
 import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItem
+import dev.jsinco.lumaitems.obj.MagicItemCooldown
 import dev.jsinco.lumaitems.particles.ParticleDisplay
 import dev.jsinco.lumaitems.particles.Particles
 import dev.jsinco.lumaitems.shapes.Sphere
@@ -33,7 +34,7 @@ import java.util.concurrent.ConcurrentLinkedQueue
 
 class MagicWandItem : CustomItem {
 
-    private data class CoolDown(val playerUUID: UUID, val spell: Spell, val cooldownStart: Long)
+    //private data class CoolDown(val playerUUID: UUID, val spell: Spell, val cooldownStart: Long)
 
     enum class Spell(val cooldownInSecs: Int) {
         BOOST_EFFECTS(30),
@@ -47,7 +48,7 @@ class MagicWandItem : CustomItem {
         private const val SPELL_KEY = "magicwand_spell"
         private const val DEFAULT_SPELL = "BOOST_EFFECTS"
         private val vector0 = Vector(0, 0, 0)
-        private val cooldowns: ConcurrentLinkedQueue<CoolDown> = ConcurrentLinkedQueue()
+        private val cooldowns: ConcurrentLinkedQueue<MagicItemCooldown> = ConcurrentLinkedQueue()
     }
 
     override fun createItem(): Pair<String, ItemStack> {
@@ -79,7 +80,7 @@ class MagicWandItem : CustomItem {
 
                 val spell = event.item?.let { getSpell(it) } ?: return false
 
-                if (cooldowns.any { it.playerUUID == player.uniqueId && it.spell == spell }) {
+                if (cooldowns.any { it.playerUUID == player.uniqueId && (it.spellEnum as Spell) == spell }) {
                     return false
                 }
 
@@ -111,7 +112,7 @@ class MagicWandItem : CustomItem {
 
                 val currentTime = System.currentTimeMillis()
                 for (cooldown in cooldowns) {
-                    if (cooldown.cooldownStart + (cooldown.spell.cooldownInSecs * 1000) < currentTime) {
+                    if (cooldown.cooldown + ((cooldown.spellEnum as Spell).cooldownInSecs * 1000) < currentTime) {
                         cooldowns.remove(cooldown)
                     }
                 }
@@ -151,20 +152,20 @@ class MagicWandItem : CustomItem {
         item.itemMeta = item.itemMeta?.apply {
             persistentDataContainer.set(NamespacedKey(INSTANCE, SPELL_KEY), PersistentDataType.STRING, nextSpell.name)
         }
-        MiniMessageUtil.msg(player, "Spell changed to <green>${nextSpell.name}")
+        MiniMessageUtil.msg(player, "Spell changed to <dark_purple>${Util.formatMaterialName(nextSpell.name)}")
     }
 
     // Spells
 
     private fun boostEffectsSpell(player: Player) {
-        cooldowns.add(CoolDown(player.uniqueId, Spell.BOOST_EFFECTS, System.currentTimeMillis()))
+        cooldowns.add(MagicItemCooldown(player.uniqueId, Spell.BOOST_EFFECTS, System.currentTimeMillis()))
         player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 500, 2))
         player.addPotionEffect(PotionEffect(PotionEffectType.JUMP_BOOST, 500, 2))
         player.addPotionEffect(PotionEffect(PotionEffectType.HASTE, 500, 2))
     }
 
     private fun launchSpell(player: Player, loc: Location) {
-        cooldowns.add(CoolDown(player.uniqueId, Spell.LAUNCH, System.currentTimeMillis()))
+        cooldowns.add(MagicItemCooldown(player.uniqueId, Spell.LAUNCH, System.currentTimeMillis()))
         val particleDisplay = ParticleDisplay.of(Particle.DUST).withColor(Color.WHITE).mixWith(Color.YELLOW)
         for (livingEntity in loc.getNearbyLivingEntities(5.0)) {
             if (AbilityUtil.noDamagePermission(player, livingEntity)) continue
@@ -185,7 +186,7 @@ class MagicWandItem : CustomItem {
 
     private fun spawnExplosionSphere(loc: Location, player: Player) {
         if (AbilityUtil.noBuildPermission(player, loc.block)) return
-        cooldowns.add(CoolDown(player.uniqueId, Spell.EXPLOSION_SPHERE, System.currentTimeMillis()))
+        cooldowns.add(MagicItemCooldown(player.uniqueId, Spell.EXPLOSION_SPHERE, System.currentTimeMillis()))
         val sphere = Sphere(loc, 4.0, 9.0)
         for (block in sphere.sphere) {
             block.breakNaturally(false, true)
@@ -196,7 +197,7 @@ class MagicWandItem : CustomItem {
 
 
     private fun drainSpell(player: Player) {
-        cooldowns.add(CoolDown(player.uniqueId, Spell.DRAIN, System.currentTimeMillis()))
+        cooldowns.add(MagicItemCooldown(player.uniqueId, Spell.DRAIN, System.currentTimeMillis()))
         val particleDisplay = ParticleDisplay.of(Particle.DUST).withColor(Color.WHITE).mixWith(Color.RED)
         val entities: List<LivingEntity> = player.getNearbyEntities(15.0, 15.0,15.0).filterIsInstance<LivingEntity>()
         var i = 0
@@ -223,7 +224,7 @@ class MagicWandItem : CustomItem {
 
     private fun valiantExplodeSpell(player: Player, target: LivingEntity) {
         if (AbilityUtil.noDamagePermission(player, target)) return
-        cooldowns.add(CoolDown(player.uniqueId, Spell.VALIANT_EXPLODE, System.currentTimeMillis()))
+        cooldowns.add(MagicItemCooldown(player.uniqueId, Spell.VALIANT_EXPLODE, System.currentTimeMillis()))
         val particleDisplay = ParticleDisplay.of(Particle.DUST).withColor(Color.WHITE).mixWith(Color.CYAN).withLocation(target.location)
 
 
