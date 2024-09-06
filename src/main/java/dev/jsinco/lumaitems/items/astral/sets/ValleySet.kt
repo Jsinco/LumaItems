@@ -2,8 +2,8 @@ package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Action
-import dev.jsinco.lumaitems.util.GenericMCToolType
+import dev.jsinco.lumaitems.enums.Action
+import dev.jsinco.lumaitems.enums.GenericMCToolType
 import org.bukkit.FluidCollisionMode
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment

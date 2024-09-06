@@ -1,6 +1,7 @@
 package dev.jsinco.lumaitems.commands;
 
 import dev.jsinco.lumaitems.LumaItems;
+import dev.jsinco.lumaitems.shapes.Cylinder;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -15,12 +16,62 @@ public class DebugCommand implements SubCommand {
     public void execute(@NotNull LumaItems plugin, @NotNull CommandSender sender, @NotNull String[] args) {
         Player player = (Player) sender;
 
-        int size = Integer.parseInt(args[1]);
-        int seg = Integer.parseInt(args[2]);
-        spawnCircle(size, player.getLocation(), seg);
+        int radi = Integer.parseInt(args[1]);
+        int density = Integer.parseInt(args[2]);
+        int height = Integer.parseInt(args[3]);
+        Cylinder cylinder = new Cylinder(player.getLocation(), radi, density, height);
+
+
+        //var blockIterator = cylinder.oscillatedBlockList().iterator();
+
+        /*new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (!blockIterator.hasNext()) {
+                    cancel();
+                    return;
+                }
+                var block = blockIterator.next();
+                block.setType(Material.EMERALD_BLOCK);
+                blockIterator.remove();
+            }
+        }.runTaskTimer(plugin, 0, 1L);*/
+        for (var block : cylinder.blockList()) {
+            block.setType(Material.EMERALD_BLOCK);
+        }
+        //spawnFilledSphere(player.getLocation().subtract(0,10, 0), size, seg);
     }
 
-    public void spawnCircle(int size, Location center, int segment){
+    public void spawnFilledSphere(Location location, int radius, int rate) {
+        for (int i = 0; i < radius; i++) {
+            spawnSphere(location, i, rate);
+        }
+    }
+
+    public void spawnSphere(Location location, int radius, int rate) {
+
+        double PII = Math.PI * 2;
+
+        double rateDiv = Math.PI / rate;
+
+        // To make a sphere we're going to generate multiple circles
+        // next to each other.
+        for (double phi = 0; phi <= Math.PI; phi += rateDiv) {
+            // Cache
+            double y1 = radius * Math.cos(phi);
+            double y2 = radius * Math.sin(phi);
+
+            for (double theta = 0; theta <= PII; theta += rateDiv) {
+                double x = Math.cos(theta) * y2;
+                double z = Math.sin(theta) * y2;
+
+
+                location.clone().add(x, y1, z).getBlock().setType(Material.EMERALD_BLOCK);
+            }
+        }
+    }
+
+    public void spawnCircle(double size, Location center, int segment){
         for (int radius = 0; radius < size; radius++) {
             for (int i = 0; i < 360; i += 360 / segment) {
                 double angle = (i * Math.PI / 180);

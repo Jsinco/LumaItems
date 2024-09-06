@@ -1,12 +1,12 @@
 package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Action
+import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.particles.ParticleDisplay
 import dev.jsinco.lumaitems.particles.Particles
 import dev.jsinco.lumaitems.util.AbilityUtil
-import dev.jsinco.lumaitems.util.Tier
+import dev.jsinco.lumaitems.enums.Tier
 import dev.jsinco.lumaitems.util.Util
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor

@@ -1,10 +1,10 @@
 package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Action
+import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.manager.CustomItem
-import dev.jsinco.lumaitems.util.DefaultAttributes
-import dev.jsinco.lumaitems.util.Tier
+import dev.jsinco.lumaitems.enums.DefaultAttributes
+import dev.jsinco.lumaitems.enums.Tier
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -38,7 +38,8 @@ class WizardsHatItem : CustomItem {
             .tier(Tier.CARNIVAL_2024)
             .unbreakable(true)
             .vanillaEnchants(mutableMapOf(Enchantment.MENDING to 1))
-            .attributeModifiers(DefaultAttributes.NETHERITE_HELMET.appendThenGetAttributes(
+            .attributeModifiers(
+                DefaultAttributes.NETHERITE_HELMET.appendThenGetAttributes(
                 Attribute.GENERIC_MAX_HEALTH, AttributeModifier(NamespacedKey(INSTANCE, key), 6.0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlotGroup.HEAD)))
             .build().createItem()
 

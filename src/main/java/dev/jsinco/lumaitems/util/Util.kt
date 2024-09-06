@@ -110,11 +110,12 @@ object Util {
 
     fun getAllEquipmentNBT(player: Player): List<PersistentDataContainer> {
         val nbtList: MutableList<PersistentDataContainer> = mutableListOf()
+        player.inventory.itemInMainHand.itemMeta?.persistentDataContainer?.let { nbtList.add(it) }
+        player.inventory.itemInOffHand.itemMeta?.persistentDataContainer?.let { nbtList.add(it) }
+
         for (equipment in player.equipment.armorContents) {
             equipment?.itemMeta?.persistentDataContainer?.let { nbtList.add(it) }
         }
-        player.inventory.itemInMainHand.itemMeta?.persistentDataContainer?.let { nbtList.add(it) }
-        player.inventory.itemInOffHand.itemMeta?.persistentDataContainer?.let { nbtList.add(it) }
         return nbtList
     }
 

@@ -2,11 +2,11 @@ package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Action
+import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.relics.RelicCrafting
-import dev.jsinco.lumaitems.util.DefaultAttributes
-import dev.jsinco.lumaitems.util.GenericMCToolType
-import dev.jsinco.lumaitems.util.ToolType
+import dev.jsinco.lumaitems.enums.DefaultAttributes
+import dev.jsinco.lumaitems.enums.GenericMCToolType
+import dev.jsinco.lumaitems.enums.ToolType
 import org.bukkit.Material
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier

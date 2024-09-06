@@ -2,10 +2,11 @@ package dev.jsinco.lumaitems.items.weapons
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Action
+import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.GlowManager
 import dev.jsinco.lumaitems.util.AbilityUtil
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -51,7 +52,7 @@ class FlamingHeartsEstoc : CustomItem {
                 val fireBall: Fireball = player.launchProjectile(Fireball::class.java)
                 fireBall.yield = 0.0f
                 fireBall.persistentDataContainer.set(NamespacedKey(plugin, "flamingheartssword"), PersistentDataType.SHORT, 1)
-                GlowManager.setGlowColor(fireBall, ChatColor.DARK_RED)
+                GlowManager.setGlowColor(fireBall, NamedTextColor.DARK_RED)
                 fireBall.isGlowing = true
                 fireBall.setIsIncendiary(false)
 

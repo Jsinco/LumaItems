@@ -106,15 +106,17 @@ publishing {
     }
 }
 
-// lore: &5Illusion
-val legacyString = "&#f498f6&lI&#c990f9&ln&#9d88fc&lf&#7280ff&lo &r&8»&#E2E2E2"
-val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
+
+//val legacyString = "&#f498f6&lI&#c990f9&ln&#9d88fc&lf&#7280ff&lo &r&8»&#E2E2E2"
+
 
 fun legacyToMMConverter(): String {
+    val legacyString = File("convert_me.txt").readText()
+
     if (legacyString.isEmpty()) {
         return legacyString
     }
-    val texts = legacyString.split(String.format(WITH_DELIMITER, "&").toRegex()).dropLastWhile { it.isEmpty() }
+    val texts = legacyString.split(String.format("((?<=%1\$s)|(?=%1\$s))", "&").toRegex()).dropLastWhile { it.isEmpty() }
         .toTypedArray()
     val finalText = StringBuilder()
     var i = 0

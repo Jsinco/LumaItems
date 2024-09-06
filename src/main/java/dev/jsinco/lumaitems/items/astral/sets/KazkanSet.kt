@@ -3,9 +3,9 @@ package dev.jsinco.lumaitems.items.astral.sets
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Action
+import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.util.AbilityUtil
-import dev.jsinco.lumaitems.util.GenericMCToolType
+import dev.jsinco.lumaitems.enums.GenericMCToolType
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
 import org.bukkit.Material

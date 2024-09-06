@@ -1,10 +1,9 @@
 package dev.jsinco.lumaitems.items.test
 
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Action
+import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.particles.ParticleDisplay
-import dev.jsinco.lumaitems.particles.Particles
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.enchantments.Enchantment

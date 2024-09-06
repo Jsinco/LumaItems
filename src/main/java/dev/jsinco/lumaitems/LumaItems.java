@@ -9,7 +9,7 @@ import dev.jsinco.lumaitems.events.GeneralListeners;
 import dev.jsinco.lumaitems.events.Listeners;
 import dev.jsinco.lumaitems.events.PassiveListeners;
 import dev.jsinco.lumaitems.guis.AbstractGui;
-import dev.jsinco.lumaitems.manager.Action;
+import dev.jsinco.lumaitems.enums.Action;
 import dev.jsinco.lumaitems.manager.FileManager;
 import dev.jsinco.lumaitems.manager.GlowManager;
 import dev.jsinco.lumaitems.manager.ItemManager;

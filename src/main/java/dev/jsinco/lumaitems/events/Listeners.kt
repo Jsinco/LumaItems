@@ -3,8 +3,9 @@ package dev.jsinco.lumaitems.events
 import com.destroystokyo.paper.event.player.PlayerArmorChangeEvent
 import com.destroystokyo.paper.event.player.PlayerElytraBoostEvent
 import com.destroystokyo.paper.event.player.PlayerJumpEvent
+import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.manager.Action
+import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.FireForAllNBT
@@ -372,5 +373,11 @@ class Listeners(val plugin: LumaItems) : Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     fun onPlayerQuit(event: PlayerQuitEvent) {
         fire(Util.getAllEquipmentNBT(event.player), Action.PLAYER_QUIT, event.player, event)
+    }
+
+    @FireForAllNBT
+    @EventHandler
+    fun onPlayerPickupExp(event: PlayerPickupExperienceEvent) {
+        fire(Util.getAllEquipmentNBT(event.player), Action.PLAYER_PICKUP_EXP, event.player, event)
     }
 }

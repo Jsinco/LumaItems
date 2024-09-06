@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.items.armor
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Action
+import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import org.bukkit.Bukkit
 import org.bukkit.Material

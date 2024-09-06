@@ -1,4 +1,4 @@
-package dev.jsinco.lumaitems.util;
+package dev.jsinco.lumaitems.enums;
 
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;

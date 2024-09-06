@@ -1,9 +1,9 @@
 package dev.jsinco.lumaitems.items.tools
 
+import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Action
 import dev.jsinco.lumaitems.manager.CustomItem
-import dev.jsinco.lumaitems.obj.Cuboid
+import dev.jsinco.lumaitems.shapes.ShapeUtil
 import dev.jsinco.lumaitems.util.AbilityUtil
 import org.bukkit.Material
 import org.bukkit.Particle
@@ -33,7 +33,7 @@ class BlueGarnetMattockItem : CustomItem {
                 event as BlockBreakEvent
                 val b = event.block
 
-                val blocklist = Cuboid.getCuboidBlocks(b.location.add(1.0, 1.0, 1.0), b.location.add(-1.0, -1.0, -1.0)).filter {
+                val blocklist = ShapeUtil.getCuboidBlocks(b.location.add(1.0, 1.0, 1.0), b.location.add(-1.0, -1.0, -1.0)).filter {
                     !AbilityUtil.blockTypeBlacklist.contains(it.type) && it.isSolid
                 }
 

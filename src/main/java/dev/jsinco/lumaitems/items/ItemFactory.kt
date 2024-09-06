@@ -3,7 +3,7 @@ package dev.jsinco.lumaitems.items
 import com.iridium.iridiumcolorapi.IridiumColorAPI
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.util.MiniMessageUtil
-import dev.jsinco.lumaitems.util.Tier
+import dev.jsinco.lumaitems.enums.Tier
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
 import org.bukkit.NamespacedKey

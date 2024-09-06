@@ -1,4 +1,4 @@
-package dev.jsinco.lumaitems.obj;
+package dev.jsinco.lumaitems.shapes;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Cuboid {
+public class Cuboid implements Shape3D {
 
     private final int xMin;
     private final int xMax;
@@ -114,20 +114,5 @@ public class Cuboid {
                 .getY() <= this.yMaxCentered + marge && loc.getZ() >= this.zMinCentered - marge && loc.getZ() <= this.zMaxCentered + marge;
     }
 
-    // The necessary parts of the Cuboid object blocklist condensed to a function for better performance
-    public static List<Block> getCuboidBlocks(final Location loc1, final Location loc2) {
-        Preconditions.checkArgument(loc1.getWorld() == loc2.getWorld(), "Points must be in the same world");
-        final World world = loc1.getWorld();
-        final List<Block> bL = new ArrayList<>();
 
-
-        for (int x = Math.min(loc1.getBlockX(), loc2.getBlockX()); x <= Math.max(loc1.getBlockX(), loc2.getBlockX()); ++x) {
-            for (int y = Math.min(loc1.getBlockY(), loc2.getBlockY()); y <= Math.max(loc1.getBlockY(), loc2.getBlockY()); ++y) {
-                for (int z = Math.min(loc1.getBlockZ(), loc2.getBlockZ()); z <= Math.max(loc1.getBlockZ(), loc2.getBlockZ()); ++z) {
-                    bL.add(world.getBlockAt(x, y, z));
-                }
-            }
-        }
-        return bL;
-    }
 }

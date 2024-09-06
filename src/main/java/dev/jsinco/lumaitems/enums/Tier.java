@@ -1,5 +1,6 @@
-package dev.jsinco.lumaitems.util;
+package dev.jsinco.lumaitems.enums;
 
+import dev.jsinco.lumaitems.util.MiniMessageUtil;
 import net.kyori.adventure.text.Component;
 
 public class Tier {

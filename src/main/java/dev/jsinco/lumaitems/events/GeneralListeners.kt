@@ -8,8 +8,8 @@ import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.relics.Rarity
 import dev.jsinco.lumaitems.relics.RelicCreator
 import dev.jsinco.lumaitems.relics.RelicDisassembler
-import dev.jsinco.lumaitems.util.EntityArmor
-import dev.jsinco.lumaitems.util.ToolType
+import dev.jsinco.lumaitems.enums.EntityArmor
+import dev.jsinco.lumaitems.enums.ToolType
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.NamespacedKey

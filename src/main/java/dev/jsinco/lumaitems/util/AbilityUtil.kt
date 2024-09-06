@@ -2,7 +2,7 @@ package dev.jsinco.lumaitems.util
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.manager.FileManager
-import dev.jsinco.lumaitems.obj.Cuboid
+import dev.jsinco.lumaitems.shapes.Cuboid
 import io.lumine.mythic.bukkit.MythicBukkit
 import org.bukkit.Bukkit
 import org.bukkit.Color

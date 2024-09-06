@@ -1,4 +1,4 @@
-package dev.jsinco.lumaitems.manager;
+package dev.jsinco.lumaitems.enums;
 
 /**
  * Enum for different actions that can be performed by LumaItems listeners.
@@ -54,5 +54,6 @@ public enum Action {
     BLOCK_SHEAR_ENTITY, // When a block shears a living entity
     PLAYER_TELEPORT, // When a player teleports
     PLAYER_QUIT, // When a player quits the server
+    PLAYER_PICKUP_EXP, // When a player picks up experience
 
 }

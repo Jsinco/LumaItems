@@ -1,6 +1,6 @@
 package dev.jsinco.lumaitems.items.astral.upgrades
 
-import dev.jsinco.lumaitems.util.GenericMCToolType
+import dev.jsinco.lumaitems.enums.GenericMCToolType
 import org.bukkit.enchantments.Enchantment
 
 data class AstralUpgradeEnchantment (

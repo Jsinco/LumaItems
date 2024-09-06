@@ -2,8 +2,8 @@ package dev.jsinco.lumaitems.items.astral.sets
 
 import dev.jsinco.lumaitems.items.astral.AstralSet
 import dev.jsinco.lumaitems.items.astral.AstralSetFactory
-import dev.jsinco.lumaitems.manager.Action
-import dev.jsinco.lumaitems.util.ToolType
+import dev.jsinco.lumaitems.enums.Action
+import dev.jsinco.lumaitems.enums.ToolType
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.LivingEntity

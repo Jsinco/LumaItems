@@ -3,8 +3,10 @@ package dev.jsinco.lumaitems.items.armor
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.events.BlockCacheManager
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.Action
+import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.manager.CustomItem
+import dev.jsinco.lumaitems.shapes.Cylinder
+import dev.jsinco.lumaitems.shapes.ShapeUtil
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
 import org.bukkit.Location
@@ -18,8 +20,6 @@ import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import java.util.UUID
-import kotlin.math.cos
-import kotlin.math.sin
 import kotlin.random.Random
 
 class HellStridersItem : CustomItem {
@@ -98,7 +98,7 @@ class HellStridersItem : CustomItem {
                 val blockBelow = locBelow.block
 
 
-                for (block in circle(blockBelow.location, 3, 13)) {
+                for (block in ShapeUtil.circle(blockBelow.location, 3, 13)) {
                     if ((block.type == Material.LAVA) && (block.blockData as Levelled).level == 0 && block.location.add(0.0, 1.0, 0.0).block.isEmpty) {
                         block.type = Material.OBSIDIAN
                         BlockCacheManager.cacheBlock(player.uniqueId, block, ID)
@@ -155,23 +155,6 @@ class HellStridersItem : CustomItem {
             else -> return false
         }
         return true
-    }
-
-
-    fun circle(center: Location, size: Int, segment: Int): Set<Block> {
-        val blockList: MutableSet<Block> = mutableSetOf()
-        for (radius in 0 until size) {
-            var i = 0
-            while (i < 360) {
-                val angle = i * Math.PI / 180
-                val x = Math.round(radius * cos(angle)).toDouble()
-                val z = Math.round(radius * sin(angle)).toDouble()
-                val loc = center.clone().add(x, 0.0, z)
-                blockList.add(loc.block)
-                i += 360 / segment
-            }
-        }
-        return blockList
     }
 
     private fun checkForAdjacentBlockType(center: Block, m: Material): Boolean {
