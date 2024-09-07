@@ -26,7 +26,7 @@ class BunnyBarillasItem : CustomItem {
         return Pair("bunnybarillas", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RUNNABLE -> {
                 if (Util.isItemInSlot("bunnybarillas", EquipmentSlot.FEET, player)) {

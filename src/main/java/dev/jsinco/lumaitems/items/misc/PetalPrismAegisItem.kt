@@ -31,7 +31,7 @@ class PetalPrismAegisItem : CustomItem {
         return Pair("petalprismaegis", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.PLAYER_DAMAGED_WHILE_BLOCKING -> {
                 if (!player.isBlocking) {

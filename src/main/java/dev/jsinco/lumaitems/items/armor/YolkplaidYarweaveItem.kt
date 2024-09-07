@@ -53,7 +53,7 @@ class YolkplaidYarweaveItem : CustomItem {
         return Pair("yolkplaidyarweave", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.PLAYER_DAMAGED_BY_ENTITY -> {
                 event as EntityDamageByEntityEvent

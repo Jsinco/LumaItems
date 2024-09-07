@@ -24,7 +24,7 @@ class FrakenshearsItem : CustomItem {
         return Pair("frakenshears", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val interact: PlayerInteractEvent? = event as? PlayerInteractEvent
 
         when (type) {

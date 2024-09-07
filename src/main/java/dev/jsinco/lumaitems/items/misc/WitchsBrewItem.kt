@@ -68,7 +68,7 @@ class WitchsBrewItem : CustomItem {
         return Pair("witchsbrew", potion)
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.CONSUME_ITEM -> {
                 event as PlayerItemConsumeEvent

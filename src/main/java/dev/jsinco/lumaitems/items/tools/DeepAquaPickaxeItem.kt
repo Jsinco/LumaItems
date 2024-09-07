@@ -29,7 +29,7 @@ class DeepAquaPickaxeItem : CustomItem {
         return Pair("deepaquapickaxe", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.ENTITY_DAMAGE -> {
                 event as EntityDamageEvent

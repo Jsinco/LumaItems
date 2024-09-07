@@ -25,7 +25,7 @@ class PastelShearsItem : CustomItem {
         return Pair("pastelshears", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.LEFT_CLICK -> {
                 if (!Util.isItemInSlot("pastelshears", EquipmentSlot.HAND, player)) {

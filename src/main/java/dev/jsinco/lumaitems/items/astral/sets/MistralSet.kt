@@ -73,7 +73,7 @@ class MistralSet : AstralSet {
     override fun identifier(): String {
         return "swift-set"
     }
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RUNNABLE -> {
                 if (RelicCrafting.hasFullSet("mistral-set", player)) {

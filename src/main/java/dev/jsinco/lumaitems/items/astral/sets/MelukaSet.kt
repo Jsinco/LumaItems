@@ -45,7 +45,7 @@ class MelukaSet : AstralSet {
         return astralSetFactory.createdAstralItems
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         if (!player.isInWater) return false
         when (type) {
             Action.RUNNABLE -> {

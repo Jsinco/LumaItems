@@ -62,7 +62,7 @@ class ValleySet : AstralSet {
         return "valley-set"
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val tool = GenericMCToolType.getToolType(player.inventory.itemInMainHand)
 
         when (type) {

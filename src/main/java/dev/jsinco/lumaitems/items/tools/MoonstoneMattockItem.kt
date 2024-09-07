@@ -27,7 +27,7 @@ class MoonstoneMattockItem : CustomItem {
         return Pair("moonstonemattock", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val blockBreakEvent: BlockBreakEvent? = event as? BlockBreakEvent
 
         when (type) {

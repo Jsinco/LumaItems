@@ -38,7 +38,7 @@ class RubyLongbowItem : CustomItem {
         return Pair("rubylongbow", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val projectileLaunch: ProjectileLaunchEvent? = event as? ProjectileLaunchEvent
         val projectileHit: ProjectileHitEvent? = event as? ProjectileHitEvent
 

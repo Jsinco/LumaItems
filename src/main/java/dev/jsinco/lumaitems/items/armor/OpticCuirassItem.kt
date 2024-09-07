@@ -25,7 +25,7 @@ class OpticCuirassItem : CustomItem {
         return Pair("opticcuirass", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val playerSwapHands: PlayerSwapHandItemsEvent? = event as? PlayerSwapHandItemsEvent
 
         when (type) {

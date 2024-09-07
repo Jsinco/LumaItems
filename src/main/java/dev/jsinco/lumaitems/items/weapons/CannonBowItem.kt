@@ -37,7 +37,7 @@ class CannonBowItem : CustomItem {
         return Pair("cannonbow", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val crossbowLoad: EntityLoadCrossbowEvent? = event as? EntityLoadCrossbowEvent
         val projectileLaunch: ProjectileLaunchEvent? = event as? ProjectileLaunchEvent
         val projectileLand: ProjectileHitEvent? = event as? ProjectileHitEvent

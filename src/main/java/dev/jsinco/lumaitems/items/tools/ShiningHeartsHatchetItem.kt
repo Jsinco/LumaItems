@@ -37,7 +37,7 @@ class ShiningHeartsHatchetItem : CustomItem {
         return Pair("shiningheartshatchet", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.BREAK_BLOCK -> {
                 if (Random.nextInt(100) > 3) return false

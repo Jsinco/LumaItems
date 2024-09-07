@@ -43,7 +43,7 @@ class SpellboundShattererItem : CustomItem {
         return Pair("spellboundshatterer", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         if (Random().nextInt(200) >= 3) return false
 
         when (type) {

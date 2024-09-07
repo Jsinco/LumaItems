@@ -42,7 +42,7 @@ class SoulEaterItem : CustomItem {
         return Pair("souleater", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val swapHands: PlayerSwapHandItemsEvent? = event as? PlayerSwapHandItemsEvent
         val entityDeathEvent: EntityDeathEvent? = event as? EntityDeathEvent
         val dropItemEvent: PlayerDropItemEvent? = event as? PlayerDropItemEvent

@@ -34,7 +34,7 @@ class RainbowShearsItem : CustomItem {
         return Pair("rainbowshears", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.SHEAR_ENTITY -> {
                 event as PlayerShearEntityEvent

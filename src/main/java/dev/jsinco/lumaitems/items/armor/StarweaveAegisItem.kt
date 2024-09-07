@@ -28,7 +28,7 @@ class StarweaveAegisItem : CustomItem {
         return Pair("starweaveaegis", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         return false // No abilities
     }
 }

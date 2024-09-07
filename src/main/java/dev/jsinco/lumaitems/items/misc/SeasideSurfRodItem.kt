@@ -31,7 +31,7 @@ class SeasideSurfRodItem : CustomItem {
         return Pair("seasidesurfrod", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
 
         when (type) {
             Action.FISH -> {

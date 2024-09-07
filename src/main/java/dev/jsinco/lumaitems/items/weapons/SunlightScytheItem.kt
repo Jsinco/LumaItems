@@ -41,7 +41,7 @@ class SunlightScytheItem : CustomItem {
         return Pair("sunlightscythe", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val entityDamageEvent: EntityDamageByEntityEvent? = event as? EntityDamageByEntityEvent
 
         when (type) {

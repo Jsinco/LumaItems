@@ -85,7 +85,7 @@ class KazkanSet : AstralSet {
         return "kazkan-set"
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RIGHT_CLICK -> {
                 val genericMCToolType: GenericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand) ?: return false

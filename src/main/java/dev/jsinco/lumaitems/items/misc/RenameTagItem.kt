@@ -29,7 +29,7 @@ class RenameTagItem : CustomItem {
         return Pair("renametag", renameTag)
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         //val chatEvent: AsyncPlayerChatEvent? = event as? AsyncPlayerChatEvent
 
         when (type) {

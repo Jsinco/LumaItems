@@ -48,7 +48,7 @@ class YolkPlaidYataghanItem : CustomItem {
         return Pair("yolkplaidyataghan", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RIGHT_CLICK -> {
                 val livingEntity: LivingEntity = player.getTargetEntity(35) as? LivingEntity ?: return false

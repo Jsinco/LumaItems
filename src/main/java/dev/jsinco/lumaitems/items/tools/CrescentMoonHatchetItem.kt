@@ -33,7 +33,7 @@ class CrescentMoonHatchetItem : CustomItem {
         return Pair("crescentmoonhatchet", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val blockBreakEvent: BlockBreakEvent? = event as? BlockBreakEvent
 
         when (type) {

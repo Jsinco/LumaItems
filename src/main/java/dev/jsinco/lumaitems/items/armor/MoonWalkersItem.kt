@@ -23,7 +23,7 @@ class MoonWalkersItem : CustomItem {
         return Pair("moonwalkers", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RUNNABLE -> {
                 player.addPotionEffect(PotionEffect(PotionEffectType.JUMP_BOOST, 220, 2, false, false, false))

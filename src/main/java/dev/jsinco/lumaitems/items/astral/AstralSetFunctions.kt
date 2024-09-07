@@ -1,10 +1,10 @@
 package dev.jsinco.lumaitems.items.astral
 
-import dev.jsinco.lumaitems.manager.CustomItem
+import dev.jsinco.lumaitems.manager.CustomItemFunctions
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
-interface AstralSet : CustomItem {
+abstract class AstralSetFunctions : CustomItemFunctions() {
 
     companion object {
         private val blankItem: ItemStack = ItemStack(Material.AIR)
@@ -22,12 +22,11 @@ interface AstralSet : CustomItem {
      * Set the items for the set
      * @return A list of itemstacks
      */
-    fun setItems(): List<ItemStack>
+    abstract fun setItems(): List<ItemStack>
 
     /**
      * Set the identifier for the set
      * @return A string identifier
      */
-    fun identifier(): String
-
+    abstract fun identifier(): String
 }

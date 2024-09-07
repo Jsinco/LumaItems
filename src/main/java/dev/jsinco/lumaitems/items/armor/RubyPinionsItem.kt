@@ -34,7 +34,7 @@ class RubyPinionsItem : CustomItem {
         return Pair("rubypinions", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val elytraBoostEvent: PlayerElytraBoostEvent? = event as? PlayerElytraBoostEvent
 
         when (type) {

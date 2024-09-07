@@ -42,7 +42,7 @@ class BlitzSet : AstralSet {
         return factory.createdAstralItems
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val genericMCToolType = GenericMCToolType.getToolType(player.inventory.itemInMainHand)
 
         when (type) {

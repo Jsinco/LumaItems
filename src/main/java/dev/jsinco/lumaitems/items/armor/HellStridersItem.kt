@@ -53,7 +53,7 @@ class HellStridersItem : CustomItem {
         return Pair(ID, item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
 
             Action.CACHED_BLOCK_BREAK -> {

@@ -36,7 +36,7 @@ class SollureItem : CustomItem {
         return Pair("sollure", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val fishEvent: PlayerFishEvent? = event as? PlayerFishEvent
         when (type) {
             Action.RUNNABLE -> {

@@ -22,7 +22,7 @@ class PassiveListeners(val plugin: LumaItems) {
         for (data: PersistentDataContainer in dataList) {
             for (customItem in ItemManager.customItems) {
                 if (!data.has(customItem.key, PersistentDataType.SHORT)) continue
-                customItem.value.executeAbilities(action, player, 0)
+                customItem.value.executeActions(action, player, 0)
             }
         }
     }

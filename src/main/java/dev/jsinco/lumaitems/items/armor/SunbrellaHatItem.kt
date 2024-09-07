@@ -60,7 +60,7 @@ class SunbrellaHatItem : CustomItem {
         return Pair("sunbrellahat", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.PLAYER_CROUCH -> {
                 if (!player.isSneaking && player.velocity.y < -0.1) {

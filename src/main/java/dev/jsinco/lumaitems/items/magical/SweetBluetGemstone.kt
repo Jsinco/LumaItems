@@ -54,7 +54,7 @@ class SweetBluetGemstone : CustomItem {
         return Pair("sweetbluetgemstone", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RIGHT_CLICK -> {
                 event as PlayerInteractEvent

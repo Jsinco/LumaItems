@@ -26,7 +26,7 @@ class PeachPlumMattock : CustomItem {
         return Pair("peachplummattock", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.LEFT_CLICK -> {
                 if (Random.nextInt(500) > 4) return false

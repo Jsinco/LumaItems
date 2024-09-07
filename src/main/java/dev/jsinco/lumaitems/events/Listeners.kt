@@ -70,7 +70,7 @@ class Listeners(val plugin: LumaItems) : Listener {
     private fun fire(data: PersistentDataContainer, action: Action, player: Player, event: Any) {
         for (customItem: MutableMap.MutableEntry<NamespacedKey, CustomItem> in ItemManager.customItems) {
             if (!data.has(customItem.key, PersistentDataType.SHORT)) continue
-            customItem.value.executeAbilities(action, player, event)
+            customItem.value.executeActions(action, player, event)
             break
         }
     }
@@ -79,7 +79,7 @@ class Listeners(val plugin: LumaItems) : Listener {
         for (itemData: PersistentDataContainer in data) {
             for (customItem: MutableMap.MutableEntry<NamespacedKey, CustomItem> in ItemManager.customItems) {
                 if (!itemData.has(customItem.key, PersistentDataType.SHORT)) continue
-                customItem.value.executeAbilities(action, player, event)
+                customItem.value.executeActions(action, player, event)
                 break
             }
         }
@@ -88,7 +88,7 @@ class Listeners(val plugin: LumaItems) : Listener {
     private fun fire(key: String, action: Action, player: Player, event: Any) {
         for (customItem in ItemManager.customItems) {
             if (key.equals(customItem.key.key, true)) {
-                customItem.value.executeAbilities(action, player, event)
+                customItem.value.executeActions(action, player, event)
                 break
             }
         }
@@ -175,7 +175,7 @@ class Listeners(val plugin: LumaItems) : Listener {
 
 
         if (data != null) {
-            fire(data, Action.PLAYER_DAMAGE_BY_SELF, entity as? Player ?: return, event)
+            fire(data, Action.PLAYER_DAMAGE_GENERIC, entity as? Player ?: return, event)
         } else {
             fire(entity.persistentDataContainer, Action.ENTITY_DAMAGED_GENERIC, (getDummyPlayer() ?: return), event)
         }
@@ -243,17 +243,17 @@ class Listeners(val plugin: LumaItems) : Listener {
         for (customItem in ItemManager.customItems) {
             if (data?.has(customItem.key, PersistentDataType.SHORT) == true) {
                 val customItemClass = customItem.value
-                customItemClass.executeAbilities(Action.FISH, player, event)
+                customItemClass.executeActions(Action.FISH, player, event)
                 break
             } else if (offHandData?.has(customItem.key, PersistentDataType.SHORT) == true) {
                 val customItemClass = customItem.value
-                customItemClass.executeAbilities(Action.FISH, player, event)
+                customItemClass.executeActions(Action.FISH, player, event)
                 break
             }
         }
     }
 
-    @EventHandler // The only item that uses this is the Ruby Pinions, only setting up to grab elytra for now
+    @EventHandler
     fun onPlayerElytraBoost(event: PlayerElytraBoostEvent) {
         val player = event.player
 

@@ -48,7 +48,7 @@ class PrideCrownItem : CustomItem {
         return Pair("pridecrown", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RUNNABLE -> {
                 for (i in 0..2) {

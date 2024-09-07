@@ -46,7 +46,7 @@ class PeepPlushyMattockItem : CustomItem {
         return Pair("peepplushymattock", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.BREAK_BLOCK -> {
                 event as BlockBreakEvent

@@ -32,7 +32,7 @@ class LoreEditTagItem : CustomItem {
         return Pair("newloretag", loreEditTag)
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         //val chatMessageEvent: AsyncPlayerChatEvent? = event as? AsyncPlayerChatEvent
 
         when (type) {

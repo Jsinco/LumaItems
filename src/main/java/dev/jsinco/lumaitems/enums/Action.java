@@ -28,7 +28,7 @@ public enum Action {
     ENTITY_DAMAGE, // When a player or a projectile shot by a player damages a living entity
     PLAYER_DAMAGED_BY_ENTITY, // When a player is damaged by a living entity
     PLAYER_DAMAGED_WHILE_BLOCKING, // When a player is damaged while blocking with a shield
-    PLAYER_DAMAGE_BY_SELF, // When a player damages themselves <-- FOR REMOVAL
+    PLAYER_DAMAGE_GENERIC, // When a player damages themselves <-- FOR REMOVAL
     ENTITY_DAMAGED_GENERIC, // When a living entity is damaged from ANYTHING and not just other living entities
     DROP_ITEM, // When a player drops an item
     BREAK_BLOCK, // When a player breaks a block

@@ -59,7 +59,7 @@ class BrewmastersSpellbladeItem : CustomItem {
         return Pair("brewmastersspellblade", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
 
         when (type) {
             Action.ENTITY_DAMAGE -> {

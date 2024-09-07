@@ -52,7 +52,7 @@ class AutumnsMattockItem : CustomItem {
         return Pair("autumnsmattock", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val random = if (player.scoreboardTags.contains("lumaitems.debug")) 0 else Random.nextInt(500)
         if (random > 5) return false
         when (type) {

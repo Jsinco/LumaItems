@@ -52,7 +52,7 @@ class WonderBeanieItem : CustomItem {
         return Pair("wonderbeanie", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.POTION_EFFECT -> {
                 if (recursionProtection.contains(player.uniqueId)) return false

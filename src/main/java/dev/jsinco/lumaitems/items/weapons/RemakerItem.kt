@@ -41,7 +41,7 @@ class RemakerItem : CustomItem {
         return Pair("remaker", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RUNNABLE -> {
                 paranoia(player)

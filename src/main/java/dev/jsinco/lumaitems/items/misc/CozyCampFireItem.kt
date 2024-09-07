@@ -24,7 +24,7 @@ class CozyCampFireItem : CustomItem {
         return Pair("cozycampfire", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val blockPlaceEvent: BlockPlaceEvent? = event as? BlockPlaceEvent
 
         when (type) {

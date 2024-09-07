@@ -44,7 +44,7 @@ class FlamingHeartsEstoc : CustomItem {
         return Pair("flamingheartssword", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RIGHT_CLICK -> {
                 if (cooldown.contains(player.uniqueId)) return false

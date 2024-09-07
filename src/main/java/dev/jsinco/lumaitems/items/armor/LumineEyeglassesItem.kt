@@ -30,7 +30,7 @@ class LumineEyeglassesItem : CustomItem {
         return Pair("lumineeyeglasses", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.ASYNC_RUNNABLE -> {
                 Bukkit.getScheduler().callSyncMethod(LumaItems.getInstance()) {

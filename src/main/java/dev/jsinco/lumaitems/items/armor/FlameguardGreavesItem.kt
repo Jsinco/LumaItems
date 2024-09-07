@@ -23,7 +23,7 @@ class FlameguardGreavesItem : CustomItem {
         return Pair("flameguardgreaves", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RUNNABLE -> {
                 player.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE, 220, 0, false, false, false))

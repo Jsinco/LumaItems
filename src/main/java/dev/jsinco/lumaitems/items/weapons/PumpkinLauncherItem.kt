@@ -44,7 +44,7 @@ class PumpkinLauncherItem : CustomItem {
     }
 
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.PROJECTILE_LAUNCH -> {
                 event as ProjectileLaunchEvent

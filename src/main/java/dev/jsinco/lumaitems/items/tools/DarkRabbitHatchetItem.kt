@@ -32,7 +32,7 @@ class DarkRabbitHatchetItem : CustomItem {
         return Pair("darkrabbithatchet", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.BREAK_BLOCK -> {
                 if (Random.nextInt(245) > 3) {

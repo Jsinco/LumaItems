@@ -25,7 +25,7 @@ class CarnivalFishingRodItem : CustomItem {
         return Pair("carnivalfishingrod", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
 
         when (type) {
             Action.FISH -> {
@@ -34,7 +34,7 @@ class CarnivalFishingRodItem : CustomItem {
                 if (!item.itemStack.type.toString().contains("APPLE")) {
                     player.sendMessage(Util.colorcode("""
                         &eWell, this is awkward... I'm catching something but it isn't an apple. I'm not a really big fan of fish that
-                        aren't apples. Why do we even fish fish that aren't apples? I don't know. I'm just a fishing rod. I don't really want to be used
+                        aren't apples. Why do we even catch fish that aren't apples? I don't know. I'm just a fishing rod. I don't really want to be used
                         for fishing anyways. Why was I made to catch apples anyways? Can you just put me back, I don't want to be a fishing rod anymore.
                     """.trimIndent()))
                     event.isCancelled = true

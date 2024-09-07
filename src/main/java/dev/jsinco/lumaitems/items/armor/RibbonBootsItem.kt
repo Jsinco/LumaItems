@@ -24,11 +24,11 @@ class RibbonBootsItem : CustomItem {
         return Pair("ribbonboots", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val entityDamage: EntityDamageEvent? = event as? EntityDamageEvent
 
         when (type) {
-            Action.PLAYER_DAMAGE_BY_SELF -> {
+            Action.PLAYER_DAMAGE_GENERIC -> {
                 if (entityDamage!!.cause == EntityDamageEvent.DamageCause.FALL) {
                     entityDamage.isCancelled = true
                 }

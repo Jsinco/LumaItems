@@ -19,7 +19,7 @@ class CarnivalTargetPracticeBowItem : CustomItem {
             .name("Carnival Target Practice Bow")
             .customEnchants(mutableListOf("&aThis is a test item"))
             .lore(mutableListOf("This is a test item"))
-            .material(Material.BOW)
+            .material(Material.CROSSBOW)
             .persistentData(mutableListOf("carnivaltargetpracticebow"))
             .vanillaEnchants(mutableMapOf(Enchantment.UNBREAKING to 5))
             .tier("<light_green><bold>Debug")
@@ -27,11 +27,12 @@ class CarnivalTargetPracticeBowItem : CustomItem {
         return Pair("carnivaltargetpracticebow", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.PROJECTILE_LAUNCH -> {
                 event as ProjectileLaunchEvent
                 event.entity.setMetadata("carnival_target_practice_bow", FixedMetadataValue(LumaItems.getInstance(), true))
+                event.isCancelled = true
             }
 
             Action.DROP_ITEM -> {

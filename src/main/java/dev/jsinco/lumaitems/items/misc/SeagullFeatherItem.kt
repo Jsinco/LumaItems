@@ -28,7 +28,7 @@ class SeagullFeatherItem : CustomItem {
         return Pair("seagullfeather", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         return false
     }
 }

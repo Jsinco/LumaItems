@@ -23,7 +23,7 @@ class StellarisTomahawkItem : CustomItem {
         return Pair("stellaristomahawk", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         val blockBreakEvent: BlockBreakEvent? = event as? BlockBreakEvent
         when (type) {
             Action.BREAK_BLOCK -> {

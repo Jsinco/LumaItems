@@ -66,7 +66,7 @@ class ReforgedSet : AstralSet {
         return "reforged-set"
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         return false
     }
 }

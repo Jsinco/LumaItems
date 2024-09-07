@@ -33,7 +33,7 @@ class BelovedFallowItem : CustomItem {
         return Pair("belovedfallow", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RIGHT_CLICK -> {
                 val playerLocation = player.location

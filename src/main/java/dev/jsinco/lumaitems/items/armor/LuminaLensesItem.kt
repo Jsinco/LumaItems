@@ -37,7 +37,7 @@ class LuminaLensesItem : CustomItem {
         return Pair("luminalenses", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
             Action.RUNNABLE -> {
                 if (tickPlayer(player)) {

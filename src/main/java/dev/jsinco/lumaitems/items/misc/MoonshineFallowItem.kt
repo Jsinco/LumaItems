@@ -28,7 +28,7 @@ class MoonshineFallowItem : CustomItem {
         return Pair("moonshinefallow", item.createItem())
     }
 
-    override fun executeAbilities(type: Action, player: Player, event: Any): Boolean {
+    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         return false // Do nothing
     }
 }
