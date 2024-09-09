@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -113,7 +114,7 @@ public final class ItemManager {
 
         for (Class<?> clazz : classes) {
             try {
-                if (CustomItem.class.isAssignableFrom(clazz) && !clazz.isInterface()) {
+                if (CustomItem.class.isAssignableFrom(clazz) && !clazz.isInterface() && !Modifier.isAbstract(clazz.getModifiers())) {
                     CustomItem item = (CustomItem) clazz.getDeclaredConstructor().newInstance();
                     customItems.put(new NamespacedKey(plugin, item.createItem().component1()), item);
                 }
@@ -123,7 +124,7 @@ public final class ItemManager {
                 throw new RuntimeException(e);
             }
         }
-        LumaItems.log("Registered " + customItems.size() + " classes through reflection");
+        LumaItems.log("Registered &6" + customItems.size() + " &#f498f6classes through reflection");
     }
 
     /**

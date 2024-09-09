@@ -1,58 +1,33 @@
 package dev.jsinco.lumaitems.items.test
 
-import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.enums.Tier
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.manager.CustomItem
+import dev.jsinco.lumaitems.manager.CustomItemFunctions
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.potion.PotionEffectType
 
-class CarnivalMiningPickaxeItem : CustomItem {
-
-    companion object {
-        private const val KEY = "carnivalminingpickaxe"
-        private val nameSpace = NamespacedKey(LumaItems.getInstance(), KEY)
-        private val blockBreakers: MutableMap<Player, Int> = mutableMapOf()
-    }
+class CarnivalMiningPickaxeItem : CustomItemFunctions() {
 
     override fun createItem(): Pair<String, ItemStack> {
         return ItemFactory.builder()
-            .name("Carnival Mining Pickaxe")
-            .customEnchants(mutableListOf("&aThis is a test item"))
-            .lore(mutableListOf("This is a test item"))
+            .name("<b><gradient:#8EC4F7:#ff9ccb>Carn</gradient><gradient:#ff9ccb:#d7f58d>ival</gradient><gradient:#d7f58d:#fffe8a> Pic</gradient><gradient:#fffe8a:#ffd365>kaxe</gradient></b>")
+            .customEnchants(mutableListOf("<gray>Unbreakable"))
             .material(Material.DIAMOND_PICKAXE)
-            .persistentData(KEY)
-            .vanillaEnchants(mutableMapOf(Enchantment.UNBREAKING to 5))
+            .persistentData("carnivalminingpickaxe")
+            .vanillaEnchants(mutableMapOf(Enchantment.EFFICIENCY to 1))
             .tier(Tier.CARNIVAL_2024)
+            .unbreakable(true)
             .buildPair()
     }
 
-    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
-        when (type) {
-            Action.BREAK_BLOCK -> {
-                event as BlockBreakEvent
-                event.isCancelled = true
-                val amt = blockBreakers.getOrDefault(player, 0)
-                blockBreakers[player] = amt + 1
-            }
-
-            Action.RUNNABLE -> {
-//                for (blockBreaker in blockBreakers) {
-//                    if (!blockBreaker.key.isOnline) {
-//                        continue
-//                    }
-//
-//                    //val
-//                }
-            }
-            else -> return false
+    override fun onBreakBlock(player: Player, event: BlockBreakEvent) {
+        if (player.hasPotionEffect(PotionEffectType.HASTE)) {
+            player.removePotionEffect(PotionEffectType.HASTE)
         }
-        return true
+        event.isCancelled = true
     }
-
 }

@@ -1,9 +1,9 @@
 package dev.jsinco.lumaitems.items.test
 
 import dev.jsinco.lumaitems.LumaItems
+import dev.jsinco.lumaitems.enums.Tier
 import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.enums.Action
-import dev.jsinco.lumaitems.manager.CustomItem
+import dev.jsinco.lumaitems.manager.CustomItemFunctions
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
@@ -12,35 +12,26 @@ import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.metadata.FixedMetadataValue
 
-class CarnivalTargetPracticeBowItem : CustomItem {
+class CarnivalTargetPracticeBowItem : CustomItemFunctions() {
 
     override fun createItem(): Pair<String, ItemStack> {
-        val item: ItemFactory = ItemFactory.builder()
-            .name("Carnival Target Practice Bow")
-            .customEnchants(mutableListOf("&aThis is a test item"))
-            .lore(mutableListOf("This is a test item"))
+        return ItemFactory.builder()
+            .name("<b><gradient:#8EC4F7:#ff9ccb>Carn</gradient><gradient:#ff9ccb:#d7f58d>ival </gradient><gradient:#d7f58d:#fffe8a>Cros</gradient><gradient:#fffe8a:#ffd365>sBow</gradient></b>")
+            .customEnchants(mutableListOf("<gray>Unbreakable"))
             .material(Material.CROSSBOW)
             .persistentData(mutableListOf("carnivaltargetpracticebow"))
-            .vanillaEnchants(mutableMapOf(Enchantment.UNBREAKING to 5))
-            .tier("<light_green><bold>Debug")
-            .build()
-        return Pair("carnivaltargetpracticebow", item.createItem())
+            .tier(Tier.CARNIVAL_2024)
+            .unbreakable(true)
+            .vanillaEnchants(mutableMapOf(Enchantment.QUICK_CHARGE to 1))
+            .buildPair()
     }
 
-    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
-        when (type) {
-            Action.PROJECTILE_LAUNCH -> {
-                event as ProjectileLaunchEvent
-                event.entity.setMetadata("carnival_target_practice_bow", FixedMetadataValue(LumaItems.getInstance(), true))
-                event.isCancelled = true
-            }
+    override fun onProjectileLaunch(player: Player, event: ProjectileLaunchEvent) {
+        event.entity.setMetadata("carnival_target_practice_bow", FixedMetadataValue(LumaItems.getInstance(), true))
+        event.isCancelled = true
+    }
 
-            Action.DROP_ITEM -> {
-                event as PlayerDropItemEvent
-                event.isCancelled = true
-            }
-            else -> return false
-        }
-        return true
+    override fun onPlayerDropItem(player: Player, event: PlayerDropItemEvent) {
+        event.isCancelled = true
     }
 }
