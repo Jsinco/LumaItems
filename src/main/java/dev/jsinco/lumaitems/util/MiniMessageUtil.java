@@ -6,8 +6,6 @@ import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
-import static dev.jsinco.lumaitems.util.Util.WITH_DELIMITER;
-
 public class MiniMessageUtil {
 
     public static final Component PREFIX = mm("<b><#f498f6>I<#c990f9>n<#9d88fc>f<#7280ff>o</b> <dark_gray>»<white> ");
@@ -38,7 +36,7 @@ public class MiniMessageUtil {
 
 
     public static String convertLegacyToMiniMesssageString(String legacy) {
-        String[] texts = legacy.split(String.format(WITH_DELIMITER, "&"));
+        String[] texts = legacy.split(String.format(Util.WITH_DELIMITER, "&"));
 
         StringBuilder finalText = new StringBuilder();
 

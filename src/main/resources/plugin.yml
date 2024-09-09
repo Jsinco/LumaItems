@@ -2,13 +2,13 @@ name: LumaItems
 version: 'PAPER-1.21'
 main: dev.jsinco.lumaitems.LumaItems
 api-version: '1.21'
+author: 'Jsinco'
 softdepend:
 - PlaceHolderAPI
 - EvenMoreFish # Softdepending EMF to register listeners after it
 - ProtocolLib
 - MythicMobs
 - Jobs
-author: 'Jsinco'
 permissions:
   lumaitems.command.give:
     description: Gives a player a LumaItem

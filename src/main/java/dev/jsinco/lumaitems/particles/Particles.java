@@ -1,5 +1,6 @@
 package dev.jsinco.lumaitems.particles;
 
+import dev.jsinco.lumaitems.LumaItems;
 import org.bukkit.Color;
 import org.bukkit.*;
 import org.bukkit.block.BlockFace;
@@ -2676,7 +2677,7 @@ public final class Particles {
         try {
             return ImageIO.read(Files.newInputStream(path, StandardOpenOption.READ));
         } catch (IOException e) {
-            e.printStackTrace();
+            LumaItems.log("Failed to read image from path: " + path, e);
             return null;
         }
     }
@@ -2802,7 +2803,7 @@ public final class Particles {
                 try {
                     displayRenderedImage(render, location.call(), quality, speed, size);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LumaItems.log("Failed to display rendered image.", e);
                 }
 
                 if (times-- <= 0) {
@@ -2909,7 +2910,7 @@ public final class Particles {
         try {
             ImageIO.write(image, "png", Files.newOutputStream(path, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE));
         } catch (IOException e) {
-            e.printStackTrace();
+            LumaItems.log("Failed to save image to path: " + path, e);
         }
     }
 

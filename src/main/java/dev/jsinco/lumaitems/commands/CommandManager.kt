@@ -1,6 +1,14 @@
 package dev.jsinco.lumaitems.commands
 
 import dev.jsinco.lumaitems.LumaItems
+import dev.jsinco.lumaitems.commands.subcommands.AddTier
+import dev.jsinco.lumaitems.commands.subcommands.CopyCoordinates
+import dev.jsinco.lumaitems.commands.subcommands.DebugCommand
+import dev.jsinco.lumaitems.commands.subcommands.GiveAstralCommand
+import dev.jsinco.lumaitems.commands.subcommands.GiveItemCommand
+import dev.jsinco.lumaitems.commands.subcommands.PinataFileCommand
+import dev.jsinco.lumaitems.commands.subcommands.RelicCommand
+import dev.jsinco.lumaitems.commands.subcommands.UpgradeCommand
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -14,12 +22,12 @@ class CommandManager(val plugin: LumaItems) : CommandExecutor, TabCompleter {
     init {
         commands["give"] = GiveItemCommand()
         commands["pinatafile"] = PinataFileCommand()
-        commands["stellarstar"] = StellarStarGiveCommand()
         commands["debug"] = DebugCommand()
         commands["relic"] = RelicCommand()
         commands["giveastral"] = GiveAstralCommand()
         commands["addtier"] = AddTier()
         commands["upgrade"] = UpgradeCommand()
+        commands["copycoordinates"] = CopyCoordinates()
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {

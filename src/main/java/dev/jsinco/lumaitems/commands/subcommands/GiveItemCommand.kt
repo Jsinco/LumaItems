@@ -1,6 +1,7 @@
-package dev.jsinco.lumaitems.commands
+package dev.jsinco.lumaitems.commands.subcommands
 
 import dev.jsinco.lumaitems.LumaItems
+import dev.jsinco.lumaitems.commands.SubCommand
 import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.MiniMessageUtil
 import dev.jsinco.lumaitems.util.Util
@@ -19,7 +20,7 @@ class GiveItemCommand : SubCommand {
 
 
         val item = if (args[1] != "all") {
-            ItemManager.getItemByName(args[1]) ?: return
+            ItemManager.getItemByName(args[1]) ?: ItemManager.getItemByKey(args[1]) ?: return
         } else {
             null
         }
@@ -38,7 +39,7 @@ class GiveItemCommand : SubCommand {
     override fun tabComplete(plugin: LumaItems, sender: CommandSender, args: Array<out String>): List<String>? {
         when (args.size) {
             2 -> {
-                val list: MutableList<String> = ItemManager.physicalItemsByName.keys.toMutableList()
+                val list: MutableList<String> = ItemManager.customItemsByName.keys.toMutableList()
                 list.add("all")
                 return list
             }

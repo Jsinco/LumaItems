@@ -1,6 +1,7 @@
-package dev.jsinco.lumaitems.commands
+package dev.jsinco.lumaitems.commands.subcommands
 
 import dev.jsinco.lumaitems.LumaItems
+import dev.jsinco.lumaitems.commands.SubCommand
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.relics.RelicCrafting
 import org.bukkit.command.CommandSender

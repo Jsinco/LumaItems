@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack
 interface AstralSet : CustomItem {
 
     companion object {
-        private val blankItem: ItemStack = ItemStack(Material.AIR)
+        val BLANK_ITEMSTACK: ItemStack = ItemStack(Material.AIR)
     }
 
     /**
@@ -15,7 +15,7 @@ interface AstralSet : CustomItem {
      * @see setItems
      */
     override fun createItem(): Pair<String, ItemStack> {
-        return Pair(identifier(), blankItem)
+        return Pair(identifier(), BLANK_ITEMSTACK)
     }
 
     /**

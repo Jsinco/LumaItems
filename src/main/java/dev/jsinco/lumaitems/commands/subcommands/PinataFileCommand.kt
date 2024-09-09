@@ -1,7 +1,8 @@
-package dev.jsinco.lumaitems.commands
+package dev.jsinco.lumaitems.commands.subcommands
 
 import dev.jsinco.lumaitems.manager.FileManager
 import dev.jsinco.lumaitems.LumaItems
+import dev.jsinco.lumaitems.commands.SubCommand
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player

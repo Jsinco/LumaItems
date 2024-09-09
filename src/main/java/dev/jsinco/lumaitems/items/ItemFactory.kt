@@ -2,8 +2,8 @@ package dev.jsinco.lumaitems.items
 
 import com.iridium.iridiumcolorapi.IridiumColorAPI
 import dev.jsinco.lumaitems.LumaItems
-import dev.jsinco.lumaitems.util.MiniMessageUtil
 import dev.jsinco.lumaitems.enums.Tier
+import dev.jsinco.lumaitems.util.MiniMessageUtil
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -36,8 +36,14 @@ class ItemFactory(
     var autoHat: Boolean = false,
     var attributeModifiers: MutableMap<Attribute, AttributeModifier> = mutableMapOf(),
     val stringPersistentDatas: MutableMap<NamespacedKey, String> = mutableMapOf(),
-    var quotes: MutableList<String> = mutableListOf()
+    var quotes: MutableList<String> = mutableListOf(),
+    var b64PHead: String? = null
 ) {
+
+    companion object {
+        private val plugin: LumaItems = LumaItems.getInstance()
+        fun builder() = Builder()
+    }
 
     private val tierFormat = listOf(
         "",
@@ -58,12 +64,6 @@ class ItemFactory(
     fun miniMessage() {
         miniMessage = true
     }
-
-    companion object {
-        private val plugin: LumaItems = LumaItems.getInstance()
-        fun builder() = Builder()
-    }
-
 
     fun addQuote(s: String) {
         quotes.add(s)
@@ -132,6 +132,10 @@ class ItemFactory(
             meta.persistentDataContainer.set(NamespacedKey(plugin, "autohat"), PersistentDataType.SHORT, 1)
         }
 
+        if (b64PHead != null && material == Material.PLAYER_HEAD) {
+            Util.setBase64Texture(meta, b64PHead)
+        }
+
 
         item.itemMeta = meta
         return item
@@ -152,6 +156,7 @@ class ItemFactory(
         private var attributeModifiers: MutableMap<Attribute, AttributeModifier> = mutableMapOf()
         private var stringPersistentDatas: MutableMap<NamespacedKey, String> = mutableMapOf()
         private var quotes: MutableList<String> = mutableListOf()
+        private var b64PHead: String? = null
 
         fun name(name: String) = apply { this.name = name }
         fun customEnchants(customEnchants: MutableList<String>) = apply { this.customEnchants = customEnchants }
@@ -173,15 +178,16 @@ class ItemFactory(
         fun stringPersistentDatas(stringPersistentDatas: MutableMap<NamespacedKey, String>) = apply { this.stringPersistentDatas = stringPersistentDatas }
         fun quotes(quotes: MutableList<String>) = apply { this.quotes = quotes }
         fun quotes(vararg quotes: String) = apply { this.quotes = quotes.toMutableList() }
+        fun b64PHead(b64PHead: String) = apply { this.b64PHead = b64PHead }
 
         fun build() = ItemFactory(
             name, customEnchants, lore, material, persistentData, vanillaEnchants,
-            tier, unbreakable, hideEnchants, addSpace, autoHat, attributeModifiers, stringPersistentDatas, quotes
+            tier, unbreakable, hideEnchants, addSpace, autoHat, attributeModifiers, stringPersistentDatas, quotes, b64PHead
         ).apply { miniMessage() }
 
         fun buildNoMiniMessage() = ItemFactory(
             name, customEnchants, lore, material, persistentData, vanillaEnchants,
-            tier, unbreakable, hideEnchants, addSpace, autoHat, attributeModifiers, stringPersistentDatas, quotes
+            tier, unbreakable, hideEnchants, addSpace, autoHat, attributeModifiers, stringPersistentDatas, quotes, b64PHead
         )
 
         fun buildPair(): Pair<String, ItemStack> {

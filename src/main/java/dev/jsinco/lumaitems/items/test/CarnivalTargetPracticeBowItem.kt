@@ -22,7 +22,7 @@ class CarnivalTargetPracticeBowItem : CustomItemFunctions() {
             .persistentData(mutableListOf("carnivaltargetpracticebow"))
             .tier(Tier.CARNIVAL_2024)
             .unbreakable(true)
-            .vanillaEnchants(mutableMapOf(Enchantment.QUICK_CHARGE to 1))
+            .vanillaEnchants(mutableMapOf(Enchantment.QUICK_CHARGE to 1, Enchantment.INFINITY to 1))
             .buildPair()
     }
 

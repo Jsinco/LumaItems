@@ -2,6 +2,7 @@ package dev.jsinco.lumaitems.relics
 
 import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.items.astral.AstralSet
+import dev.jsinco.lumaitems.items.astral.AstralSetFunctions
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Bukkit
@@ -111,6 +112,9 @@ object RelicCrafting {
         return if (AstralSet::class.java.isAssignableFrom(clazz)) {
             val astralSet = clazz.getDeclaredConstructor().newInstance() as AstralSet
             astralSet.setItems()
+        } else if (AstralSetFunctions::class.java.isAssignableFrom(clazz)) {
+            val astralSetFunctions = clazz.getDeclaredConstructor().newInstance() as AstralSetFunctions
+            astralSetFunctions.setItems()
         } else {
             val item = clazz.getDeclaredConstructor().newInstance() as CustomItem
             listOf(item.createItem().second)

@@ -1,6 +1,6 @@
 package dev.jsinco.lumaitems.commands.nonsub
 
-import dev.jsinco.lumaitems.commands.UpgradeCommand
+import dev.jsinco.lumaitems.commands.subcommands.UpgradeCommand
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender

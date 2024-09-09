@@ -5,6 +5,7 @@ import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.enums.Tier
+import dev.jsinco.lumaitems.util.NeedsEdits
 import dev.jsinco.lumaitems.util.Util
 import io.papermc.paper.event.entity.EntityMoveEvent
 import org.bukkit.Bukkit
@@ -20,6 +21,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import java.util.UUID
 
+@NeedsEdits
 class GiantInflatableHammerItem : CustomItem {
 
     companion object {

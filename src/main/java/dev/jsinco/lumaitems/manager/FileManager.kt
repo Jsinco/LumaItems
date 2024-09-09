@@ -10,7 +10,7 @@ class FileManager(val fileName: String) {
 
     companion object {
         private val plugin: LumaItems = LumaItems.getInstance()
-        private val defaultFiles: List<String> = listOf("relics.yml", "config.yml", "stellarstars.yml")
+        private val defaultFiles: List<String> = listOf("relics.yml", "config.yml")
 
         @JvmStatic fun generateFolder(folder: String) {
             if (!File(plugin.dataFolder, folder).exists()) {

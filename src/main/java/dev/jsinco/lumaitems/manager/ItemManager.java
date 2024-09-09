@@ -36,7 +36,7 @@ public final class ItemManager {
     public final static Map<NamespacedKey, CustomItem> customItems = new HashMap<>();
 
 
-    public final static Map<String, ItemStack> physicalItemsByName = new HashMap<>();
+    public final static Map<String, CustomItem> customItemsByName = new HashMap<>();
 
 
     /**
@@ -62,7 +62,12 @@ public final class ItemManager {
      */
     @Nullable
     public static ItemStack getItemByName(String name) {
-        return physicalItemsByName.get(name.replace(" ", "_").toLowerCase());
+        return customItemsByName.get(name.replace(" ", "_").toLowerCase()).createItem().component2();
+    }
+
+    @Nullable
+    public static ItemStack getItemByKey(String key) {
+        return customItems.get(new NamespacedKey(LumaItems.getInstance(), key)).createItem().component2();
     }
 
     /**
@@ -79,7 +84,15 @@ public final class ItemManager {
      * @return an immutable list of all physical items
      */
     public static List<ItemStack> getAllItems() {
-        return List.copyOf(physicalItemsByName.values());
+        List<ItemStack> list = new ArrayList<ItemStack>();
+        for (CustomItem item : customItems.values()) {
+            try {
+                list.add(item.createItem().component2());
+            } catch (Exception e) {
+                LumaItems.log("Failed to create item for " + item.getClass().getSimpleName(), e);
+            }
+        }
+        return list;
     }
 
 
@@ -87,9 +100,15 @@ public final class ItemManager {
         this.plugin = plugin;
     }
 
-    public void initPhysicalItemsByName() {
+    public void registerCustomItemsByName() {
         for (CustomItem item : customItems.values()) {
-            ItemStack itemStack = item.createItem().component2();
+            ItemStack itemStack;
+            try {
+                itemStack = item.createItem().component2();
+            } catch (Exception e) {
+                LumaItems.log("Failed to create item for " + item.getClass().getSimpleName(), e);
+                continue;
+            }
             if (AstralSet.class.isAssignableFrom(item.getClass())) {
                 continue;
             } else if (!itemStack.hasItemMeta() || !itemStack.getItemMeta().hasDisplayName()) {
@@ -97,9 +116,9 @@ public final class ItemManager {
                 continue;
             }
             String formattedName = ChatColor.stripColor(itemStack.getItemMeta().getDisplayName()).replace(" ", "_").toLowerCase();
-            physicalItemsByName.put(formattedName, itemStack);
+            customItemsByName.put(formattedName, item);
         }
-        LumaItems.log("Finished initializing " + physicalItemsByName.size() + " physical items by display names");
+        LumaItems.log("Finished initializing " + customItemsByName.size() + " physical items by display names");
     }
 
 
@@ -122,10 +141,8 @@ public final class ItemManager {
                         LumaItems.log("&cClass &6" + clazz.getSimpleName() + " &cneeds edits!");
                     }
                 }
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException | NoSuchMethodException e) {
-                throw new RuntimeException(e);
+            } catch (Exception e) {
+                LumaItems.log("Failed to register class " + clazz.getSimpleName(), e);
             }
         }
         LumaItems.log("Registered &6" + customItems.size() + " &#f498f6classes through reflection");

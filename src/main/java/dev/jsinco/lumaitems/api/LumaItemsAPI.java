@@ -35,8 +35,8 @@ public final class LumaItemsAPI {
      */
     public static synchronized LumaItemsAPI getInstance() {
         if (singleton == null) {
-            LumaItems.log("A plugin is accessing the LumaItems API. Creating a new instance!");
             singleton = new LumaItemsAPI();
+            LumaItems.log("A plugin is accessing the LumaItems API. Creating a new instance! &7(Hash: " + singleton.hashCode() + ")");
         }
         return singleton;
     }

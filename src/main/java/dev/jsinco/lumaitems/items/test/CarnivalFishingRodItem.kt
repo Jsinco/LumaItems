@@ -19,7 +19,7 @@ class CarnivalFishingRodItem : CustomItemFunctions() {
             .customEnchants(mutableListOf("<gray>Unbreakable"))
             .material(Material.FISHING_ROD)
             .persistentData("carnivalfishingrod")
-            .vanillaEnchants(mutableMapOf(Enchantment.LURE to 1))
+            .vanillaEnchants(mutableMapOf(Enchantment.LURE to 3))
             .tier(Tier.CARNIVAL_2024)
             .unbreakable(true)
             .buildPair()

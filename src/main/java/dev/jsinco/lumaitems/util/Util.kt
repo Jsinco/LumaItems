@@ -17,29 +17,28 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
+import org.bukkit.profile.PlayerTextures
 import java.util.UUID
 import net.md_5.bungee.api.ChatColor as BungeeChatColor
 import java.awt.Color as AwtColor
 
 
 object Util {
-    lateinit var prefix: String
 
-    const val SPACE = ""
+    val STATIC_UUID: UUID = UUID.fromString("e9378e48-0e8e-42a9-9df1-7074b00df6a9")
     const val WITH_DELIMITER = "((?<=%1\$s)|(?=%1\$s))"
-    val armorEquipmentSlots: List<EquipmentSlot> = listOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
 
     private val plugin: LumaItems = LumaItems.getInstance()
+    private val armorEquipmentSlots: List<EquipmentSlot> = listOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)
     private val gearTypes: List<String> = listOf("Helmet", "Chestplate", "Leggings", "Boots", "Sword", "Pickaxe", "Axe", "Shovel", "Hoe", "Rod", "Elytra", "Shield", "Crossbow", "Bow")
-    @JvmStatic val staticUUID: UUID = UUID.fromString("1c786ebf-50f7-408d-9bc6-02defd41c0a8")
 
-    @JvmStatic
-    fun loadUtils() {
-        prefix = colorcode(plugin.config.getString("prefix") ?: "")
-    }
+    val prefix: String = colorcode(plugin.config.getString("prefix") ?: "")
+
+
 
     /**
      * @param text The string of text to apply color/effects to
@@ -222,6 +221,13 @@ object Util {
         meta.playerProfile = profile
         item.setItemMeta(meta)
         return item
+    }
+
+    fun setBase64Texture(meta: ItemMeta, base64: String?) {
+        if (meta !is SkullMeta || base64 == null) return
+        val profile = Bukkit.createProfile(STATIC_UUID)
+        profile.properties.add(ProfileProperty("textures", base64))
+        meta.playerProfile = profile
     }
 
     fun hex2BukkitColor(colorStr: String): Color {

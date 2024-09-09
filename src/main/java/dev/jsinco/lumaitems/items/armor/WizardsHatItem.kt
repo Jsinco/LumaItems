@@ -1,10 +1,11 @@
 package dev.jsinco.lumaitems.items.armor
 
-import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.enums.Action
-import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.enums.DefaultAttributes
 import dev.jsinco.lumaitems.enums.Tier
+import dev.jsinco.lumaitems.items.ItemFactory
+import dev.jsinco.lumaitems.manager.CustomItem
+import dev.jsinco.lumaitems.util.NeedsEdits
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -14,10 +15,10 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.EquipmentSlotGroup
-import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.LeatherArmorMeta
 
+@NeedsEdits
 class WizardsHatItem : CustomItem {
 
     val colors = listOf(
