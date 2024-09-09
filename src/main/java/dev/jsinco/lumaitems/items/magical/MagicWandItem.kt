@@ -10,6 +10,7 @@ import dev.jsinco.lumaitems.particles.Particles
 import dev.jsinco.lumaitems.shapes.Sphere
 import dev.jsinco.lumaitems.util.AbilityUtil
 import dev.jsinco.lumaitems.util.MiniMessageUtil
+import dev.jsinco.lumaitems.util.NeedsEdits
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Location
 import org.bukkit.Material
@@ -29,9 +30,9 @@ import org.bukkit.potion.PotionEffectType
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Vector
 import java.awt.Color
-import java.util.UUID
 import java.util.concurrent.ConcurrentLinkedQueue
 
+@NeedsEdits
 class MagicWandItem : CustomItem {
 
     //private data class CoolDown(val playerUUID: UUID, val spell: Spell, val cooldownStart: Long)

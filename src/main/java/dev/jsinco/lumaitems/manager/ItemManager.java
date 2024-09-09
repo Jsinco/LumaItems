@@ -3,6 +3,7 @@ package dev.jsinco.lumaitems.manager;
 import com.google.common.reflect.ClassPath;
 import dev.jsinco.lumaitems.LumaItems;
 import dev.jsinco.lumaitems.items.astral.AstralSet;
+import dev.jsinco.lumaitems.util.NeedsEdits;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -117,6 +118,9 @@ public final class ItemManager {
                 if (CustomItem.class.isAssignableFrom(clazz) && !clazz.isInterface() && !Modifier.isAbstract(clazz.getModifiers())) {
                     CustomItem item = (CustomItem) clazz.getDeclaredConstructor().newInstance();
                     customItems.put(new NamespacedKey(plugin, item.createItem().component1()), item);
+                    if (clazz.getAnnotation(NeedsEdits.class) != null) {
+                        LumaItems.log("&cClass &6" + clazz.getSimpleName() + " &cneeds edits!");
+                    }
                 }
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();

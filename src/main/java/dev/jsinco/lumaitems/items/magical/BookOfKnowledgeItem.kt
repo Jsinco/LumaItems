@@ -5,11 +5,13 @@ import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.enums.Action
 import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.enums.Tier
+import dev.jsinco.lumaitems.util.NeedsEdits
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
+@NeedsEdits
 class BookOfKnowledgeItem : CustomItem {
 
     companion object {
