@@ -137,8 +137,14 @@ public final class ItemManager {
                 if (CustomItem.class.isAssignableFrom(clazz) && !clazz.isInterface() && !Modifier.isAbstract(clazz.getModifiers())) {
                     CustomItem item = (CustomItem) clazz.getDeclaredConstructor().newInstance();
                     customItems.put(new NamespacedKey(plugin, item.createItem().component1()), item);
-                    if (clazz.getAnnotation(NeedsEdits.class) != null) {
-                        LumaItems.log("&cClass &6" + clazz.getSimpleName() + " &cneeds edits!");
+
+                    NeedsEdits edits = clazz.getAnnotation(NeedsEdits.class);
+                    if (edits != null) {
+                        if (!edits.review()) {
+                            LumaItems.log("&cClass &6" + clazz.getSimpleName() + " &cneeds edits!");
+                        } else {
+                            LumaItems.log("&aClass &6" + clazz.getSimpleName() + " &ais ready for review!");
+                        }
                     }
                 }
             } catch (Exception e) {

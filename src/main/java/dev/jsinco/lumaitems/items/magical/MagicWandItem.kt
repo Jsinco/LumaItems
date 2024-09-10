@@ -22,23 +22,21 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Vector
-import java.awt.Color
 import java.util.concurrent.ConcurrentLinkedQueue
 
-@NeedsEdits
+@NeedsEdits(review = true)
 class MagicWandItem : CustomItem {
 
     enum class Spell(val cooldownInSecs: Int) {
         BOOST_EFFECTS(30),
         LAUNCH(10),
-        EXPLOSION_SPHERE(35),
+        EXPLOSION_SPHERE(60),
     }
 
     companion object {
@@ -49,17 +47,17 @@ class MagicWandItem : CustomItem {
 
     override fun createItem(): Pair<String, ItemStack> {
         return ItemFactory.builder()
-            .name("<b><#C7305D>M<#962F72>a<#642D87>g<#8D3A71>i<#B6475C>c <#C45078>W<#A94CAA>a<#A94CAA>n<#A94CAA>d</b>")
-            .customEnchants("<dark_purple>Illusion <gray>// <-- Change this")
-            .lore("<dark_purple>Boost <dark_gray>- <white>Temporarily", "gain multiple buff effects.",
+            .name("<b><#C7305D>M<#962F72>a<#642D87>g<#8D3A71>i<#B6475C>c <#C45078>W<#A94CAA>a<#A94CAA>n<#C55CC6>d</b>")
+            .customEnchants("<#B6475C>Illusion")
+            .lore("<gradient:#C7305D:#ff9ccb>Boost <dark_gray>- <white>Temporarily", "gain multiple buff effects. <red>30s</red>",
                 "",
-                "<dark_purple>Launch <dark_gray>- <white>Click to cast", "a spell which launches and", "damages nearby entities.",
+                "<gradient:#C7305D:#ff9ccb>Launch <dark_gray>- <white>Click to cast", "a spell which launches and", "damages nearby entities. <red>10s</red>",
                 "",
-                "<dark_purple>Clear <dark_gray>- <white>Cast a spell", "which clears out an area", "of blocks upon landing.")
+                "<gradient:#C7305D:#ff9ccb>Clear <dark_gray>- <white>Cast a spell", "which clears out an area", "of blocks upon landing. <red>1m</red>")
             .material(Material.BLAZE_ROD)
             .persistentData("magicwand")
             .tier(Tier.CARNIVAL_2024)
-            .vanillaEnchants(mutableMapOf(Enchantment.MENDING to 1))
+            .vanillaEnchants(mutableMapOf(Enchantment.BANE_OF_ARTHROPODS to 5, Enchantment.FIRE_ASPECT to 4, Enchantment.SHARPNESS to 5))
             .stringPersistentDatas(mutableMapOf(NamespacedKey(INSTANCE, SPELL_KEY) to DEFAULT_SPELL))
             .buildPair()
     }
@@ -140,7 +138,7 @@ class MagicWandItem : CustomItem {
         item.itemMeta = item.itemMeta?.apply {
             persistentDataContainer.set(NamespacedKey(INSTANCE, SPELL_KEY), PersistentDataType.STRING, nextSpell.name)
         }
-        MiniMessageUtil.msg(player, "Spell changed to <dark_purple>${Util.formatMaterialName(nextSpell.name)}")
+        MiniMessageUtil.msg(player, "Spell changed to <gradient:#C7305D:#ff9ccb>${Util.formatMaterialName(nextSpell.name)}")
     }
 
     // Spells

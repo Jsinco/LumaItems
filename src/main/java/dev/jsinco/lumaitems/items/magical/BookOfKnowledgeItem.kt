@@ -30,12 +30,12 @@ import org.bukkit.scheduler.BukkitRunnable
 import org.bukkit.util.Vector
 import java.util.concurrent.ConcurrentLinkedQueue
 
-@NeedsEdits
+@NeedsEdits(review = true)
 class BookOfKnowledgeItem : CustomItemFunctions() {
 
     enum class Spell(val cooldownInSecs: Int) {
         DRAIN(30),
-        VALIANT_EXPLODE(40)
+        VALIANT_EXPLODE(60)
     }
 
     companion object {
@@ -52,16 +52,16 @@ class BookOfKnowledgeItem : CustomItemFunctions() {
             .name("<b><#7A2E19>B<#8F4A2D>o<#A56541>o<#BA8154>k <#B48559>o<#9A6F49>f <#64412A>K<#724B2E>n<#815531>o<#8F5E35>w<#9D6838>l<#9D6838>e<#9D6838>d<#9D6838>g<#9D6838>e</b>")
             .customEnchants("<#CF9C68>Mastery")
             .lore("Experience orbs give more", "experience while holding this", "item.", "",
-                "Right-click to launch spells, left-click",
-                "to change spells.",
+                "Right-click to launch spells,",
+                "left-click to change spells.",
                 "",
-                "<#CF9C68>Drain <dark_gray>- <white>Click to siphon health", "from nearby entities. <red>30s</red>",
+                "<gradient:#CF9C68:#815531>Drain <dark_gray>- <white>Click to siphon health", "from nearby entities. <red>30s</red>",
                 "",
-                "<#CF9C68>Valiant Explosion <dark_gray>- <white>Cast a", "spell which will damage", "and explode entities. <red>40s</red>")
+                "<gradient:#CF9C68:#815531>Valiant Explosion <dark_gray>- <white>Cast a", "spell which will damage", "and explode entities. <red>1m</red>")
             .material(Material.BOOK)
             .persistentData(STRING_KEY)
             .tier(Tier.CARNIVAL_2024)
-            .vanillaEnchants(mutableMapOf(Enchantment.UNBREAKING to 10))
+            .vanillaEnchants(mutableMapOf(Enchantment.BANE_OF_ARTHROPODS to 5, Enchantment.FIRE_ASPECT to 4, Enchantment.SHARPNESS to 5))
             .stringPersistentDatas(mutableMapOf(NamespacedKey(INSTANCE, SPELL_KEY) to DEFAULT_SPELL))
             .buildPair()
     }
@@ -127,18 +127,13 @@ class BookOfKnowledgeItem : CustomItemFunctions() {
         val currentSpell = getSpell(item) ?: return
         val nextSpell = Spell.entries.let { spells ->
             val currentIndex = spells.indexOf(currentSpell)
-            val size = if (!Util.isItemInSlots(BookOfKnowledgeItem.STRING_KEY, listOf(EquipmentSlot.OFF_HAND, EquipmentSlot.HAND, EquipmentSlot.HEAD), player)) {
-                spells.size - 2
-            } else {
-                spells.size
-            }
-            val nextIndex = if (currentIndex >= size - 1) 0 else currentIndex + 1
+            val nextIndex = if (currentIndex >= spells.size - 1) 0 else currentIndex + 1
             spells[nextIndex]
         }
         item.itemMeta = item.itemMeta?.apply {
             persistentDataContainer.set(NamespacedKey(INSTANCE, SPELL_KEY), PersistentDataType.STRING, nextSpell.name)
         }
-        MiniMessageUtil.msg(player, "Spell changed to <#CF9C68>${Util.formatMaterialName(nextSpell.name)}")
+        MiniMessageUtil.msg(player, "Spell changed to <gradient:#CF9C68:#815531>${Util.formatMaterialName(nextSpell.name)}")
     }
 
 
@@ -185,7 +180,7 @@ class BookOfKnowledgeItem : CustomItemFunctions() {
             if (!AbilityUtil.noBuildPermission(player, target.location.block)) {
                 target.world.spawnParticle(Particle.FLAME, target.location, 25, 0.5, 0.5, 0.5, 0.5)
                 target.world.spawnParticle(Particle.EXPLOSION, target.location, 1, 0.0, 0.0, 0.0, 0.0)
-                target.world.createExplosion(target.location, 7.0f, true, true, player)
+                target.world.createExplosion(target.location, 4.0f, true, false, player)
             }
         })
         Particles.meguminExplosion(INSTANCE, 5.0, particleDisplay)
