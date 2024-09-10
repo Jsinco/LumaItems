@@ -30,8 +30,4 @@ class CarnivalTargetPracticeBowItem : CustomItemFunctions() {
         event.entity.setMetadata("carnival_target_practice_bow", FixedMetadataValue(LumaItems.getInstance(), true))
         event.isCancelled = true
     }
-
-    override fun onPlayerDropItem(player: Player, event: PlayerDropItemEvent) {
-        event.isCancelled = true
-    }
 }

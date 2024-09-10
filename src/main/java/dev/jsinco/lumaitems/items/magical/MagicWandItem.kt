@@ -49,7 +49,8 @@ class MagicWandItem : CustomItem {
         return ItemFactory.builder()
             .name("<b><#C7305D>M<#962F72>a<#642D87>g<#8D3A71>i<#B6475C>c <#C45078>W<#A94CAA>a<#A94CAA>n<#C55CC6>d</b>")
             .customEnchants("<#B6475C>Illusion")
-            .lore("<gradient:#C7305D:#ff9ccb>Boost <dark_gray>- <white>Temporarily", "gain multiple buff effects. <red>30s</red>",
+            .lore("Click to cast spells. Click while", "sneaking to change spells.", "",
+                "<gradient:#C7305D:#ff9ccb>Boost <dark_gray>- <white>Temporarily", "gain multiple buff effects. <red>30s</red>",
                 "",
                 "<gradient:#C7305D:#ff9ccb>Launch <dark_gray>- <white>Click to cast", "a spell which launches and", "damages nearby entities. <red>10s</red>",
                 "",
@@ -64,10 +65,10 @@ class MagicWandItem : CustomItem {
 
     override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Action.RIGHT_CLICK, Action.LEFT_CLICK -> {
+            Action.RIGHT_CLICK -> {
                 event as PlayerInteractEvent
 
-                if (player.isSneaking && event.action.isRightClick) {
+                if (player.isSneaking) {
                     nextSpell(player, event.item ?: return false)
                     return true
                 }
@@ -176,7 +177,7 @@ class MagicWandItem : CustomItem {
     private fun spawnExplosionSphere(loc: Location, player: Player) {
         if (AbilityUtil.noBuildPermission(player, loc.block)) return
         cooldowns.add(MagicItemCooldown(player.uniqueId, Spell.EXPLOSION_SPHERE, System.currentTimeMillis()))
-        val sphere = Sphere(loc, 3.0, 9.0)
+        val sphere = Sphere(loc, 4.0, 5.0)
         for (block in sphere.sphere) {
             block.breakNaturally(false, true)
         }

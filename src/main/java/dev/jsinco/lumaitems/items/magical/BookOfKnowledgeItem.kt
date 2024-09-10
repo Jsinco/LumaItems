@@ -51,9 +51,9 @@ class BookOfKnowledgeItem : CustomItemFunctions() {
         return ItemFactory.builder()
             .name("<b><#7A2E19>B<#8F4A2D>o<#A56541>o<#BA8154>k <#B48559>o<#9A6F49>f <#64412A>K<#724B2E>n<#815531>o<#8F5E35>w<#9D6838>l<#9D6838>e<#9D6838>d<#9D6838>g<#9D6838>e</b>")
             .customEnchants("<#CF9C68>Mastery")
-            .lore("Experience orbs give more", "experience while holding this", "item.", "",
-                "Right-click to launch spells,",
-                "left-click to change spells.",
+            .lore("Experience orbs give more", "experience while holding this", "book.", "",
+                "Click to cast spells. Click while",
+                "sneaking to change spells.",
                 "",
                 "<gradient:#CF9C68:#815531>Drain <dark_gray>- <white>Click to siphon health", "from nearby entities. <red>30s</red>",
                 "",
@@ -77,6 +77,11 @@ class BookOfKnowledgeItem : CustomItemFunctions() {
     }
 
     override fun onRightClick(player: Player, event: PlayerInteractEvent) {
+        if (player.isSneaking) {
+            nextSpell(player, event.item ?: return)
+            return
+        }
+
         val spell = event.item?.let { getSpell(it) } ?: return
 
         if (cooldowns.any { it.playerUUID == player.uniqueId && (it.spellEnum as Spell) == spell }) {
