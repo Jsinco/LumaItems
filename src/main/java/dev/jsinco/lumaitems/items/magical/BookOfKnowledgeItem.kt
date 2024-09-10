@@ -1,4 +1,3 @@
-@file:Suppress("Duplicates")
 package dev.jsinco.lumaitems.items.magical
 
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent
@@ -31,6 +30,7 @@ import org.bukkit.util.Vector
 import java.util.concurrent.ConcurrentLinkedQueue
 
 @NeedsEdits(review = true)
+@Suppress("Duplicates")
 class BookOfKnowledgeItem : CustomItemFunctions() {
 
     enum class Spell(val cooldownInSecs: Int) {
