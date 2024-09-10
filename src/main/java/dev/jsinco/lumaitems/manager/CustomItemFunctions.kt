@@ -85,6 +85,7 @@ abstract class CustomItemFunctions : CustomItem {
             Action.PLAYER_TELEPORT -> onPlayerTeleport(player, event as PlayerTeleportEvent)
             Action.PLAYER_QUIT -> onPlayerQuit(player, event as PlayerQuitEvent)
             Action.PLAYER_PICKUP_EXP -> onPlayerPickupExp(player, event as PlayerPickupExperienceEvent)
+            Action.MACE_SMASH_ATTACK -> onMaceSmashAttack(player, event as EntityDamageByEntityEvent)
         }
         return true
     }
@@ -134,4 +135,5 @@ abstract class CustomItemFunctions : CustomItem {
     open fun onPlayerTeleport(player: Player, event: PlayerTeleportEvent) {}
     open fun onPlayerQuit(player: Player, event: PlayerQuitEvent) {}
     open fun onPlayerPickupExp(player: Player, event: PlayerPickupExperienceEvent) {}
+    open fun onMaceSmashAttack(player: Player, event: EntityDamageByEntityEvent) {}
 }

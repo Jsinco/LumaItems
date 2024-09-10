@@ -5,16 +5,13 @@ import dev.jsinco.lumaitems.enums.Tier
 import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItemFunctions
 import dev.jsinco.lumaitems.manager.FileManager
-import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
-import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.EquipmentSlotGroup
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
@@ -26,7 +23,7 @@ class ClownMaskItem : CustomItemFunctions() {
         private const val KEY = "clownmask"
     }
 
-    private val NamespacedKey = NamespacedKey(INSTANCE, KEY)
+    private val namespacedKey = NamespacedKey(INSTANCE, KEY)
 
     override fun createItem(): Pair<String, ItemStack> {
 
@@ -44,7 +41,7 @@ class ClownMaskItem : CustomItemFunctions() {
     }
 
     override fun onRightClick(player: Player, event: PlayerInteractEvent) {
-        if (event.item?.itemMeta?.persistentDataContainer?.has(NamespacedKey, PersistentDataType.SHORT) == true) {
+        if (event.item?.itemMeta?.persistentDataContainer?.has(namespacedKey, PersistentDataType.SHORT) == true) {
             event.isCancelled = true
             if (player.equipment.helmet == null) {
                 player.equipment.helmet = event.item

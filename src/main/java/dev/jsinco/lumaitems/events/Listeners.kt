@@ -12,8 +12,11 @@ import dev.jsinco.lumaitems.util.FireForAllNBT
 import dev.jsinco.lumaitems.util.Util
 import io.papermc.paper.event.entity.EntityLoadCrossbowEvent
 import io.papermc.paper.event.entity.EntityMoveEvent
+import io.papermc.paper.registry.keys.DamageTypeKeys
 import org.bukkit.Bukkit
+import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.Registry
 import org.bukkit.entity.Player
 import org.bukkit.entity.Projectile
 import org.bukkit.event.EventHandler
@@ -80,6 +83,29 @@ class Listeners(val plugin: LumaItems) : Listener {
             for (customItem: MutableMap.MutableEntry<NamespacedKey, CustomItem> in ItemManager.customItems) {
                 if (!itemData.has(customItem.key, PersistentDataType.SHORT)) continue
                 customItem.value.executeActions(action, player, event)
+                break
+            }
+        }
+    }
+
+    private fun fire(data: List<PersistentDataContainer>,  action1: Action, action2: Action, player: Player, event: Any) {
+        for (itemData: PersistentDataContainer in data) {
+            for (customItem: MutableMap.MutableEntry<NamespacedKey, CustomItem> in ItemManager.customItems) {
+                if (!itemData.has(customItem.key, PersistentDataType.SHORT)) continue
+                customItem.value.executeActions(action1, player, event)
+                customItem.value.executeActions(action2, player, event)
+                break
+            }
+        }
+    }
+
+    private fun fire(data: List<PersistentDataContainer>, vararg actions: Action, player: Player, event: Any) {
+        for (itemData: PersistentDataContainer in data) {
+            for (customItem: MutableMap.MutableEntry<NamespacedKey, CustomItem> in ItemManager.customItems) {
+                if (!itemData.has(customItem.key, PersistentDataType.SHORT)) continue
+                for (action in actions) {
+                    customItem.value.executeActions(action, player, event)
+                }
                 break
             }
         }
@@ -157,7 +183,11 @@ class Listeners(val plugin: LumaItems) : Listener {
         val data: List<PersistentDataContainer> = Util.getAllEquipmentNBT(player)
 
         // TODO: Add special Ability type for when players are damaging an entity with no permission to damage them
-        fire(data, Action.ENTITY_DAMAGE, player, event)
+        if (player.inventory.itemInMainHand.type == Material.MACE && player.fallDistance >= 1.5f) {
+            fire(data, Action.MACE_SMASH_ATTACK, player, event)
+        } else {
+            fire(data, Action.ENTITY_DAMAGE, player, event)
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)

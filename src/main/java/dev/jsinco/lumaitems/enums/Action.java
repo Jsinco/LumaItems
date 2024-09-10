@@ -55,5 +55,5 @@ public enum Action {
     PLAYER_TELEPORT, // When a player teleports
     PLAYER_QUIT, // When a player quits the server
     PLAYER_PICKUP_EXP, // When a player picks up experience
-
+    MACE_SMASH_ATTACK, // When a player performs a smash attack with a mace
 }

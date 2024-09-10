@@ -27,7 +27,8 @@ public enum GenericMCToolType {
     SHIELD,
     ELYTRA,
     FISHING_ROD,
-    MAGICAL;
+    MAGICAL,
+    MACE;
 
     public static final List<String> magicMaterials = List.of("BLAZE_ROD");
 

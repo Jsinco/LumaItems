@@ -59,7 +59,6 @@ class MagiciansCloakItem : CustomItem {
                 if (event.isCancelled) return false
                 val damage = event.damage.toInt().toShort()
                 appendCloakDamage(player, damage)
-                showDamageStars(player)
             }
 
             Action.RIGHT_CLICK -> {
@@ -97,6 +96,7 @@ class MagiciansCloakItem : CustomItem {
         if (currentDamage >= 500) return
         meta.persistentDataContainer.set(key, PersistentDataType.SHORT, (currentDamage + amt).toShort())
         item.itemMeta = meta
+        showDamageStars(player)
     }
 
     private fun updateCloakDamage(player: Player, amt: Short) {

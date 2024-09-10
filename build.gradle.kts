@@ -9,8 +9,8 @@ plugins {
 }
 
 
-group = "dev.jsinco"
-version = "ver/1.21"
+group = "dev.jsinco.lumaitems"
+version = "ver/1.21.1"
 
 
 repositories {
@@ -35,7 +35,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     // PaperWeight
-    paperweight.paperDevBundle("1.21-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.21.1-R0.1-SNAPSHOT")
 }
 
 tasks {
