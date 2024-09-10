@@ -20,11 +20,11 @@ class PAPIManager(val plugin: LumaItems) : PlaceholderExpansion() {
     }
 
     override fun getAuthor(): String {
-        return "Jsinco"
+        return plugin.description.authors[0]
     }
 
     override fun getVersion(): String {
-        return "1.0.0"
+        return plugin.description.version
     }
 
     override fun onRequest(player: OfflinePlayer?, params: String): String? {

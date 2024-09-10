@@ -27,12 +27,12 @@ class GiveItemCommand : SubCommand {
 
         if (item != null) {
             Util.giveItem(player, item)
-            MiniMessageUtil.msg(player, item.itemMeta?.displayName()?.let { Component.text("You have been given ").append(it) })
+            MiniMessageUtil.msg(player, item.itemMeta?.displayName()?.let { MiniMessageUtil.mm("You have been given a custom item! <dark_gray>(</dark_gray>").append(it).append(MiniMessageUtil.mm("<dark_gray>)</dark_gray>")) })
         } else {
             for (customItem in ItemManager.getAllItems()) {
                 Util.giveItem(player, customItem)
             }
-            player.sendMessage("${Util.prefix} You have been given all custom items")
+            player.sendMessage("${Util.prefix} You have been given all custom items!")
         }
     }
 

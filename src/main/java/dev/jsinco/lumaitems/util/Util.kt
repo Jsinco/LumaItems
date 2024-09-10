@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.material.MapColor
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
-import org.bukkit.Color
+import org.bukkit.Color as BukkitColor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.block.Block
@@ -21,8 +21,8 @@ import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.inventory.meta.SkullMeta
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
-import org.bukkit.profile.PlayerTextures
 import java.util.UUID
+import kotlin.random.Random
 import net.md_5.bungee.api.ChatColor as BungeeChatColor
 import java.awt.Color as AwtColor
 
@@ -230,8 +230,8 @@ object Util {
         meta.playerProfile = profile
     }
 
-    fun hex2BukkitColor(colorStr: String): Color {
-        return Color.fromRGB(
+    fun hex2BukkitColor(colorStr: String): BukkitColor {
+        return BukkitColor.fromRGB(
             colorStr.substring(1, 3).toInt(16),
             colorStr.substring(3, 5).toInt(16),
             colorStr.substring(5, 7).toInt(16)
@@ -254,8 +254,8 @@ object Util {
         return AwtColor(mc.col)
     }
 
-    fun javaAwtColorToBukkitColor(color: AwtColor): Color {
-        return Color.fromARGB(color.alpha, color.red, color.green, color.blue)
+    fun javaAwtColorToBukkitColor(color: AwtColor): BukkitColor {
+        return BukkitColor.fromARGB(color.alpha, color.red, color.green, color.blue)
     }
 
     @JvmStatic
@@ -280,6 +280,14 @@ object Util {
         }
 
         return AwtColor(a shl 24 or (r shl 16) or (g shl 8) or b)
+    }
+
+    @JvmStatic
+    fun getRandomColor(): AwtColor {
+        val hue = Random.nextFloat();
+        val saturation = (Random.nextInt(2000) + 1000) / 10000f;
+        val luminance = 0.9f;
+        return AwtColor.getHSBColor(hue, saturation, luminance);
     }
 
 }

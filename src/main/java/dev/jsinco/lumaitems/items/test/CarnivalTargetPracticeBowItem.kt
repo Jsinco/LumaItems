@@ -4,6 +4,7 @@ import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.enums.Tier
 import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItemFunctions
+import dev.jsinco.lumaitems.util.NeedsEdits
 import org.bukkit.Material
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
@@ -12,6 +13,7 @@ import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.metadata.FixedMetadataValue
 
+@NeedsEdits
 class CarnivalTargetPracticeBowItem : CustomItemFunctions() {
 
     override fun createItem(): Pair<String, ItemStack> {
@@ -22,7 +24,7 @@ class CarnivalTargetPracticeBowItem : CustomItemFunctions() {
             .persistentData(mutableListOf("carnivaltargetpracticebow"))
             .tier(Tier.CARNIVAL_2024)
             .unbreakable(true)
-            .vanillaEnchants(mutableMapOf(Enchantment.QUICK_CHARGE to 1, Enchantment.INFINITY to 1))
+            .vanillaEnchants(mutableMapOf(Enchantment.QUICK_CHARGE to 2, Enchantment.INFINITY to 1))
             .buildPair()
     }
 

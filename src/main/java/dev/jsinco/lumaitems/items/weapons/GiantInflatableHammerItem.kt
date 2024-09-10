@@ -5,7 +5,6 @@ import dev.jsinco.lumaitems.items.ItemFactory
 import dev.jsinco.lumaitems.manager.CustomItemFunctions
 import dev.jsinco.lumaitems.shapes.ShapeUtil
 import dev.jsinco.lumaitems.util.AbilityUtil
-import dev.jsinco.lumaitems.util.NeedsEdits
 import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Location
 import org.bukkit.Material
@@ -19,7 +18,6 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import kotlin.random.Random
 
-@NeedsEdits
 class GiantInflatableHammerItem : CustomItemFunctions() {
 
     companion object {
@@ -54,8 +52,6 @@ class GiantInflatableHammerItem : CustomItemFunctions() {
             pushThruGround(loc)
         }
     }
-
-
 
     private fun pushThruGround(loc: Location) {
         for (block in ShapeUtil.circle(loc.subtract(0.0, 1.0, 0.0), 2, 7)) {

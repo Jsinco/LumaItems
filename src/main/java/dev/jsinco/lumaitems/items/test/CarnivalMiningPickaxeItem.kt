@@ -18,7 +18,7 @@ class CarnivalMiningPickaxeItem : CustomItemFunctions() {
             .customEnchants(mutableListOf("<gray>Unbreakable"))
             .material(Material.DIAMOND_PICKAXE)
             .persistentData("carnivalminingpickaxe")
-            .vanillaEnchants(mutableMapOf(Enchantment.EFFICIENCY to 1))
+            .vanillaEnchants(mutableMapOf(Enchantment.EFFICIENCY to 2))
             .tier(Tier.CARNIVAL_2024)
             .unbreakable(true)
             .buildPair()

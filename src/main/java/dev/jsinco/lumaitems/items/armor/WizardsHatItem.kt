@@ -18,7 +18,7 @@ import org.bukkit.inventory.EquipmentSlotGroup
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.LeatherArmorMeta
 
-@NeedsEdits
+
 class WizardsHatItem : CustomItem {
 
     val colors = listOf(

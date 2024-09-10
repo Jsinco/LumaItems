@@ -26,7 +26,7 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.bukkit.util.Vector
 
-@NeedsEdits
+
 class MagiciansCloakItem : CustomItem {
 
     private val colors = listOf(

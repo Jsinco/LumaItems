@@ -1,3 +1,4 @@
+@file:Suppress("Duplicates")
 package dev.jsinco.lumaitems.items.magical
 
 import dev.jsinco.lumaitems.enums.Action
@@ -18,7 +19,6 @@ import org.bukkit.NamespacedKey
 import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.enchantments.Enchantment
-import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.player.PlayerInteractEvent
@@ -35,20 +35,15 @@ import java.util.concurrent.ConcurrentLinkedQueue
 @NeedsEdits
 class MagicWandItem : CustomItem {
 
-    //private data class CoolDown(val playerUUID: UUID, val spell: Spell, val cooldownStart: Long)
-
     enum class Spell(val cooldownInSecs: Int) {
         BOOST_EFFECTS(30),
         LAUNCH(10),
         EXPLOSION_SPHERE(35),
-        DRAIN(30),
-        VALIANT_EXPLODE(40)
     }
 
     companion object {
         private const val SPELL_KEY = "magicwand_spell"
         private const val DEFAULT_SPELL = "BOOST_EFFECTS"
-        private val vector0 = Vector(0, 0, 0)
         private val cooldowns: ConcurrentLinkedQueue<MagicItemCooldown> = ConcurrentLinkedQueue()
     }
 
@@ -71,7 +66,7 @@ class MagicWandItem : CustomItem {
 
     override fun executeActions(type: Action, player: Player, event: Any): Boolean {
         when (type) {
-            Action.RIGHT_CLICK, Action.LEFT_CLICK, Action.GENERIC_INTERACT -> {
+            Action.RIGHT_CLICK, Action.LEFT_CLICK -> {
                 event as PlayerInteractEvent
 
                 if (player.isSneaking && event.action.isRightClick) {
@@ -90,8 +85,6 @@ class MagicWandItem : CustomItem {
                     Spell.BOOST_EFFECTS -> boostEffectsSpell(player)
                     Spell.LAUNCH -> spawnSpellBall(player, Spell.LAUNCH)
                     Spell.EXPLOSION_SPHERE -> spawnSpellBall(player, Spell.EXPLOSION_SPHERE)
-                    Spell.DRAIN -> drainSpell(player)
-                    Spell.VALIANT_EXPLODE -> spawnSpellBall(player, Spell.VALIANT_EXPLODE)
                 }
             }
 
@@ -103,7 +96,6 @@ class MagicWandItem : CustomItem {
                 when (spell) {
                     Spell.LAUNCH -> launchSpell(player, event.hitBlock?.location ?: event.hitEntity?.location ?: return false)
                     Spell.EXPLOSION_SPHERE -> spawnExplosionSphere(event.hitBlock?.location ?: event.hitEntity?.location ?: return false, player)
-                    Spell.VALIANT_EXPLODE -> valiantExplodeSpell(player, event.hitEntity as? LivingEntity ?: return false)
                     else -> return false
                 }
             }
@@ -126,7 +118,7 @@ class MagicWandItem : CustomItem {
 
 
     private fun spawnSpellBall(player: Player, spell: Spell) {
-        val particleDisplay = ParticleDisplay.of(Particle.DUST).withColor(Color.WHITE).mixWith(Color.GREEN)
+        val particleDisplay = ParticleDisplay.of(Particle.DUST).withColor(Util.getRandomColor())
         AbilityUtil.spawnSpell(player, null, "magicwand", 150) {
             Particles.sphere(0.2, 4.0, particleDisplay.withLocation(it.location))
         }.also {
@@ -142,12 +134,7 @@ class MagicWandItem : CustomItem {
         val currentSpell = getSpell(item) ?: return
         val nextSpell = Spell.entries.let { spells ->
             val currentIndex = spells.indexOf(currentSpell)
-            val size = if (!Util.isItemInSlots(BookOfKnowledgeItem.STRING_KEY, listOf(EquipmentSlot.OFF_HAND, EquipmentSlot.HAND, EquipmentSlot.HEAD), player)) {
-                spells.size - 2
-            } else {
-                spells.size
-            }
-            val nextIndex = if (currentIndex >= size - 1) 0 else currentIndex + 1
+            val nextIndex = if (currentIndex >= spells.size - 1) 0 else currentIndex + 1
             spells[nextIndex]
         }
         item.itemMeta = item.itemMeta?.apply {
@@ -166,9 +153,12 @@ class MagicWandItem : CustomItem {
     }
 
     private fun launchSpell(player: Player, loc: Location) {
+        val entities = loc.getNearbyLivingEntities(5.0)
+        if (entities.isEmpty()) return
+
         cooldowns.add(MagicItemCooldown(player.uniqueId, Spell.LAUNCH, System.currentTimeMillis()))
-        val particleDisplay = ParticleDisplay.of(Particle.DUST).withColor(Color.WHITE).mixWith(Color.YELLOW)
-        for (livingEntity in loc.getNearbyLivingEntities(5.0)) {
+        val particleDisplay = ParticleDisplay.of(Particle.DUST).withColor(Util.getRandomColor())
+        for (livingEntity in entities) {
             if (AbilityUtil.noDamagePermission(player, livingEntity)) continue
             object : BukkitRunnable() {
                 var i = 0
@@ -188,7 +178,7 @@ class MagicWandItem : CustomItem {
     private fun spawnExplosionSphere(loc: Location, player: Player) {
         if (AbilityUtil.noBuildPermission(player, loc.block)) return
         cooldowns.add(MagicItemCooldown(player.uniqueId, Spell.EXPLOSION_SPHERE, System.currentTimeMillis()))
-        val sphere = Sphere(loc, 4.0, 9.0)
+        val sphere = Sphere(loc, 3.0, 9.0)
         for (block in sphere.sphere) {
             block.breakNaturally(false, true)
         }
@@ -197,49 +187,5 @@ class MagicWandItem : CustomItem {
     }
 
 
-    private fun drainSpell(player: Player) {
-        cooldowns.add(MagicItemCooldown(player.uniqueId, Spell.DRAIN, System.currentTimeMillis()))
-        val particleDisplay = ParticleDisplay.of(Particle.DUST).withColor(Color.WHITE).mixWith(Color.RED)
-        val entities: List<LivingEntity> = player.getNearbyEntities(15.0, 15.0,15.0).filterIsInstance<LivingEntity>()
-        var i = 0
-        object : BukkitRunnable() {
-            override fun run() {
-                if (i++ > 5) {
-                    cancel()
-                    return
-                }
 
-                for (entity in entities) {
-                    if (AbilityUtil.noDamagePermission(player, entity) || entity.isDead) {
-                        continue
-                    }
-
-                    entity.damage(2.0)
-                    entity.world.playSound(entity.location, Sound.ENTITY_PLAYER_HURT, 1.0f, 1.0f)
-                    player.heal(2.0)
-                    Particles.line(player.boundingBox.center.toLocation(player.world), entity.boundingBox.center.toLocation(entity.world), 0.2, particleDisplay)
-                }
-            }
-        }.runTaskTimer(INSTANCE, 0, 20)
-    }
-
-    private fun valiantExplodeSpell(player: Player, target: LivingEntity) {
-        if (AbilityUtil.noDamagePermission(player, target)) return
-        cooldowns.add(MagicItemCooldown(player.uniqueId, Spell.VALIANT_EXPLODE, System.currentTimeMillis()))
-        val particleDisplay = ParticleDisplay.of(Particle.DUST).withColor(Color.WHITE).mixWith(Color.CYAN).withLocation(target.location)
-
-
-        AbilityUtil.damageOverTicks(target, player, target.health / 3, 4, {
-            target.velocity = vector0
-            target.world.playSound(target.location, Sound.ITEM_TOTEM_USE, 1.0f, 7f)
-        }, {
-            if (!AbilityUtil.noBuildPermission(player, target.location.block)) {
-                target.world.spawnParticle(Particle.FLAME, target.location, 25, 0.5, 0.5, 0.5, 0.5)
-                target.world.spawnParticle(Particle.EXPLOSION, target.location, 1, 0.0, 0.0, 0.0, 0.0)
-                target.world.createExplosion(target.location, 7.0f, true, true, player)
-            }
-        })
-        Particles.meguminExplosion(INSTANCE, 5.0, particleDisplay)
-        target.addPotionEffect(PotionEffect(PotionEffectType.SLOWNESS, 40, 50, false, false, false))
-    }
 }

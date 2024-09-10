@@ -1,49 +1,194 @@
+@file:Suppress("Duplicates")
 package dev.jsinco.lumaitems.items.magical
 
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent
-import dev.jsinco.lumaitems.items.ItemFactory
-import dev.jsinco.lumaitems.enums.Action
-import dev.jsinco.lumaitems.manager.CustomItem
 import dev.jsinco.lumaitems.enums.Tier
+import dev.jsinco.lumaitems.items.ItemFactory
+import dev.jsinco.lumaitems.manager.CustomItemFunctions
+import dev.jsinco.lumaitems.obj.MagicItemCooldown
+import dev.jsinco.lumaitems.particles.ParticleDisplay
+import dev.jsinco.lumaitems.particles.Particles
+import dev.jsinco.lumaitems.util.AbilityUtil
+import dev.jsinco.lumaitems.util.MiniMessageUtil
 import dev.jsinco.lumaitems.util.NeedsEdits
+import dev.jsinco.lumaitems.util.Util
 import org.bukkit.Material
+import org.bukkit.NamespacedKey
+import org.bukkit.Particle
+import org.bukkit.Sound
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
+import org.bukkit.event.entity.ProjectileHitEvent
+import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
+import org.bukkit.persistence.PersistentDataType
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
+import org.bukkit.scheduler.BukkitRunnable
+import org.bukkit.util.Vector
+import java.util.concurrent.ConcurrentLinkedQueue
 
 @NeedsEdits
-class BookOfKnowledgeItem : CustomItem {
+class BookOfKnowledgeItem : CustomItemFunctions() {
+
+    enum class Spell(val cooldownInSecs: Int) {
+        DRAIN(30),
+        VALIANT_EXPLODE(40)
+    }
 
     companion object {
+        private val vector0 = Vector(0, 0, 0)
+
+        private const val SPELL_KEY = "bookofknowledge_spell"
+        private const val DEFAULT_SPELL = "DRAIN"
         const val STRING_KEY = "bookofknowledge"
+        private val cooldowns: ConcurrentLinkedQueue<MagicItemCooldown> = ConcurrentLinkedQueue()
     }
 
     override fun createItem(): Pair<String, ItemStack> {
         return ItemFactory.builder()
             .name("<b><#7A2E19>B<#8F4A2D>o<#A56541>o<#BA8154>k <#B48559>o<#9A6F49>f <#64412A>K<#724B2E>n<#815531>o<#8F5E35>w<#9D6838>l<#9D6838>e<#9D6838>d<#9D6838>g<#9D6838>e</b>")
             .customEnchants("<#CF9C68>Mastery")
-            .lore("Experience orbs give more experience", "while holding this item.", "",
-                "If paired with a <b><#C7305D>M<#962F72>a<#642D87>g<#8D3A71>i<#B6475C>c <#C45078>W<#A94CAA>a<#A94CAA>n<#A94CAA>d</b><white>,",
-                "extra spells will be accessible.",
+            .lore("Experience orbs give more", "experience while holding this", "item.", "",
+                "Right-click to launch spells, left-click",
+                "to change spells.",
                 "",
-                "<#CF9C68>Drain <dark_gray>- <white>Click to siphon health", "from nearby entities.",
+                "<#CF9C68>Drain <dark_gray>- <white>Click to siphon health", "from nearby entities. <red>30s</red>",
                 "",
-                "<#CF9C68>Valiant Explosion <dark_gray>- <white>Cast a", "spell which will damage", "and explode entities.")
+                "<#CF9C68>Valiant Explosion <dark_gray>- <white>Cast a", "spell which will damage", "and explode entities. <red>40s</red>")
             .material(Material.BOOK)
             .persistentData(STRING_KEY)
             .tier(Tier.CARNIVAL_2024)
             .vanillaEnchants(mutableMapOf(Enchantment.UNBREAKING to 10))
+            .stringPersistentDatas(mutableMapOf(NamespacedKey(INSTANCE, SPELL_KEY) to DEFAULT_SPELL))
             .buildPair()
     }
 
-    override fun executeActions(type: Action, player: Player, event: Any): Boolean {
-        when(type) {
-            Action.PLAYER_PICKUP_EXP -> {
-                event as PlayerPickupExperienceEvent
-                event.experienceOrb.experience += 1
-            }
-            else -> return false
+    override fun onPlayerPickupExp(player: Player, event: PlayerPickupExperienceEvent) {
+        event.experienceOrb.experience += 1
+    }
+
+
+    override fun onLeftClick(player: Player, event: PlayerInteractEvent) {
+        if (!Util.isItemInSlot(STRING_KEY, EquipmentSlot.HAND, player)) return
+        nextSpell(player, event.item ?: return)
+    }
+
+    override fun onRightClick(player: Player, event: PlayerInteractEvent) {
+        val spell = event.item?.let { getSpell(it) } ?: return
+
+        if (cooldowns.any { it.playerUUID == player.uniqueId && (it.spellEnum as Spell) == spell }) {
+            return
         }
-        return true
+
+        when (spell) {
+            Spell.DRAIN -> drainSpell(player)
+            Spell.VALIANT_EXPLODE -> spawnSpellBall(player, Spell.VALIANT_EXPLODE)
+        }
+        player.playSound(player.location, Sound.BLOCK_ENCHANTMENT_TABLE_USE, 0.8f, 1.2f)
+    }
+
+    override fun onProjectileLand(player: Player, event: ProjectileHitEvent) {
+        val spell = event.entity.persistentDataContainer.get(NamespacedKey(INSTANCE, SPELL_KEY), PersistentDataType.STRING)?.uppercase()?.let { Spell.valueOf(it) } ?: return
+
+        when (spell) {
+            Spell.VALIANT_EXPLODE -> valiantExplodeSpell(player, event.hitEntity as? LivingEntity ?: return)
+            else -> return
+        }
+    }
+
+    override fun onAsyncRunnable(player: Player) {
+        if (cooldowns.isEmpty()) return
+
+        val currentTime = System.currentTimeMillis()
+        for (cooldown in cooldowns) {
+            if (cooldown.cooldown + ((cooldown.spellEnum as Spell).cooldownInSecs * 1000) < currentTime) {
+                cooldowns.remove(cooldown)
+            }
+        }
+    }
+
+
+
+
+
+    private fun spawnSpellBall(player: Player, spell: Spell) {
+        val particleDisplay = ParticleDisplay.of(Particle.DUST).withColor(Util.getRandomColor())
+        AbilityUtil.spawnSpell(player, null, STRING_KEY, 150) {
+            Particles.sphere(0.2, 4.0, particleDisplay.withLocation(it.location))
+        }.also {
+            it.persistentDataContainer.set(NamespacedKey(INSTANCE, SPELL_KEY), PersistentDataType.STRING, spell.name)
+        }
+    }
+
+    private fun nextSpell(player: Player, item: ItemStack) {
+        val currentSpell = getSpell(item) ?: return
+        val nextSpell = Spell.entries.let { spells ->
+            val currentIndex = spells.indexOf(currentSpell)
+            val size = if (!Util.isItemInSlots(BookOfKnowledgeItem.STRING_KEY, listOf(EquipmentSlot.OFF_HAND, EquipmentSlot.HAND, EquipmentSlot.HEAD), player)) {
+                spells.size - 2
+            } else {
+                spells.size
+            }
+            val nextIndex = if (currentIndex >= size - 1) 0 else currentIndex + 1
+            spells[nextIndex]
+        }
+        item.itemMeta = item.itemMeta?.apply {
+            persistentDataContainer.set(NamespacedKey(INSTANCE, SPELL_KEY), PersistentDataType.STRING, nextSpell.name)
+        }
+        MiniMessageUtil.msg(player, "Spell changed to <#CF9C68>${Util.formatMaterialName(nextSpell.name)}")
+    }
+
+
+    private fun getSpell(item: ItemStack) =
+        item.itemMeta?.persistentDataContainer?.get(NamespacedKey(INSTANCE, SPELL_KEY), PersistentDataType.STRING)?.uppercase()?.let { Spell.valueOf(it) }
+
+
+    private fun drainSpell(player: Player) {
+        cooldowns.add(MagicItemCooldown(player.uniqueId, Spell.DRAIN, System.currentTimeMillis()))
+        val particleDisplay = ParticleDisplay.of(Particle.DUST).withColor(Util.getRandomColor())
+        val entities: List<LivingEntity> = player.getNearbyEntities(15.0, 15.0,15.0).filterIsInstance<LivingEntity>()
+        var i = 0
+        object : BukkitRunnable() {
+            override fun run() {
+                if (i++ > 5) {
+                    cancel()
+                    return
+                }
+
+                for (entity in entities) {
+                    if (AbilityUtil.noDamagePermission(player, entity) || entity.isDead) {
+                        continue
+                    }
+
+                    entity.damage(2.0)
+                    entity.world.playSound(entity.location, Sound.ENTITY_PLAYER_HURT, 1.0f, 1.0f)
+                    player.heal(2.0)
+                    Particles.line(player.boundingBox.center.toLocation(player.world), entity.boundingBox.center.toLocation(entity.world), 0.2, particleDisplay)
+                }
+            }
+        }.runTaskTimer(INSTANCE, 0, 20)
+    }
+
+    private fun valiantExplodeSpell(player: Player, target: LivingEntity) {
+        if (AbilityUtil.noDamagePermission(player, target)) return
+        cooldowns.add(MagicItemCooldown(player.uniqueId, Spell.VALIANT_EXPLODE, System.currentTimeMillis()))
+        val particleDisplay = ParticleDisplay.of(Particle.DUST).withColor(Util.getRandomColor()).withLocation(target.location)
+
+
+        AbilityUtil.damageOverTicks(target, player, target.health / 3, 4, {
+            target.velocity = vector0
+            target.world.playSound(target.location, Sound.ITEM_TOTEM_USE, 1.0f, 7f)
+        }, {
+            if (!AbilityUtil.noBuildPermission(player, target.location.block)) {
+                target.world.spawnParticle(Particle.FLAME, target.location, 25, 0.5, 0.5, 0.5, 0.5)
+                target.world.spawnParticle(Particle.EXPLOSION, target.location, 1, 0.0, 0.0, 0.0, 0.0)
+                target.world.createExplosion(target.location, 7.0f, true, true, player)
+            }
+        })
+        Particles.meguminExplosion(INSTANCE, 5.0, particleDisplay)
+        target.addPotionEffect(PotionEffect(PotionEffectType.SLOWNESS, 40, 50, false, false, false))
     }
 }
