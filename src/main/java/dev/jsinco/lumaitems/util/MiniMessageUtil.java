@@ -35,6 +35,26 @@ public class MiniMessageUtil {
     }
 
 
+    /*public static String convertMiniMessageToLegacy(String miniMessage) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        String[] texts = miniMessage.split("<");
+        for (String text : texts) {
+            if (text.isEmpty()) continue;
+            if (text.charAt(0) == '#') {
+                stringBuilder.append("&").append(text);
+            } else if (text.charAt(0) == '/') {
+                stringBuilder.append("&").append(text.charAt(1));
+            }
+
+            else {
+                stringBuilder.append("&").append(text.charAt(0));
+            }
+            stringBuilder.append(text.substring(1));
+        }
+    }*/
+
+
     public static String convertLegacyToMiniMesssageString(String legacy) {
         String[] texts = legacy.split(String.format(Util.WITH_DELIMITER, "&"));
 
@@ -84,4 +104,8 @@ public class MiniMessageUtil {
             default -> throw new IllegalStateException("Unexpected value: " + namedColor);
         };
     }
+
+    /*public static String getLegacyNamedColor(String namedColor) {
+
+    }*/
 }

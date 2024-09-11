@@ -48,14 +48,14 @@ class ItemFactory(
     private val tierFormat = listOf(
         "",
         "&#EEE1D5&m       &r&#EEE1D5⋆⁺₊⋆ ★ ⋆⁺₊⋆&m       ",
-        "&#EEE1D5Tier • $tier",
+        "&#EEE1D5Tier • <PLACEHOLDER>",
         "&#EEE1D5&m       &r&#EEE1D5⋆⁺₊⋆ ★ ⋆⁺₊⋆&m       "
     )
 
     private val miniMessageTierFormat = listOf(
         "",
         "<#EEE1D5><st>       </st>⋆⁺₊⋆ ★ ⋆⁺₊⋆<st>       </st>",
-        "<#EEE1D5>Tier • $tier",
+        "<#EEE1D5>Tier • <PLACEHOLDER>",
         "<#EEE1D5><st>       </st>⋆⁺₊⋆ ★ ⋆⁺₊⋆<st>       </st>"
     )
 
@@ -105,13 +105,13 @@ class ItemFactory(
 
         if (!miniMessage) {
             combinedLore.addAll(lore.map { "&f$it" })
-            combinedLore.addAll(tierFormat)
+            combinedLore.addAll(tierFormat.map { it.replace("<PLACEHOLDER>", tier) })
 
             meta.setDisplayName(Util.colorcode(name))
             meta.lore = Util.colorcodeList(combinedLore)
         } else {
             combinedLore.addAll(lore.map { "<white>$it" })
-            combinedLore.addAll(miniMessageTierFormat)
+            combinedLore.addAll(miniMessageTierFormat.map { it.replace("<PLACEHOLDER>", tier) })
 
             meta.displayName(MiniMessageUtil.mm(name))
             meta.lore(MiniMessageUtil.mml(combinedLore))
