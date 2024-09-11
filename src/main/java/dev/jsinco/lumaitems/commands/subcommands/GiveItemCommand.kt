@@ -5,7 +5,6 @@ import dev.jsinco.lumaitems.commands.SubCommand
 import dev.jsinco.lumaitems.manager.ItemManager
 import dev.jsinco.lumaitems.util.MiniMessageUtil
 import dev.jsinco.lumaitems.util.Util
-import net.kyori.adventure.text.Component
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
@@ -24,6 +23,7 @@ class GiveItemCommand : SubCommand {
         } else {
             null
         }
+
 
         if (item != null) {
             Util.giveItem(player, item)

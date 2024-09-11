@@ -21,13 +21,15 @@ class AddTier : SubCommand {
         }
 
         val tier = args.joinToString(" ").replace(args[0], "").trim()
+        val meta = item.itemMeta
 
-        val lore: MutableList<String> = item.itemMeta?.lore ?: mutableListOf()
+        val lore: MutableList<String> = meta?.lore ?: mutableListOf()
         lore.add("")
         lore.add(Util.colorcode("&#EEE1D5&m       &r&#EEE1D5⋆⁺₊⋆ ★ ⋆⁺₊⋆&m       "))
         lore.add(Util.colorcode("&#EEE1D5Tier • $tier"))
         lore.add(Util.colorcode("&#EEE1D5&m       &r&#EEE1D5⋆⁺₊⋆ ★ ⋆⁺₊⋆&m       "))
-        item.itemMeta?.lore = lore
+        meta?.lore = lore
+        item.itemMeta = meta
         sender.sendMessage("${Util.prefix} Successfully added tier to item")
     }
 

@@ -52,10 +52,12 @@ public final class LumaItems extends JavaPlugin {
             log("Players are online, registering items asynchronously");
             Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
                 initItemManager(itemManager);
+                initListeners();
                 log("Finished asynchronous item registration!");
             });
         } else {
             initItemManager(itemManager);
+            initListeners();
         }
 
 
@@ -63,9 +65,6 @@ public final class LumaItems extends JavaPlugin {
         RelicCrafting.registerRecipes();
         RelicDisassembler.setupDisassemblerBlocks();
 
-        getServer().getPluginManager().registerEvents(new Listeners(this), this);
-        getServer().getPluginManager().registerEvents(new GeneralListeners(this), this);
-        getServer().getPluginManager().registerEvents(new ExternalListeners(this), this);
 
         getCommand("lumaitems").setExecutor(new CommandManager(this));
         getCommand("upgrade").setExecutor(new UpgradeCMD());
@@ -87,6 +86,12 @@ public final class LumaItems extends JavaPlugin {
             getLogger().log(Level.SEVERE, "An error occurred while registering items", e);
             Bukkit.getPluginManager().disablePlugin(this);
         }
+    }
+
+    private void initListeners() {
+        getServer().getPluginManager().registerEvents(new Listeners(this), this);
+        getServer().getPluginManager().registerEvents(new GeneralListeners(this), this);
+        getServer().getPluginManager().registerEvents(new ExternalListeners(this), this);
     }
 
     @Override
