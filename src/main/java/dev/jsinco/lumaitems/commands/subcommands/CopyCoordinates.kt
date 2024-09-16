@@ -19,7 +19,7 @@ class CopyCoordinates : SubCommand {
         return null
     }
 
-    override fun permission(): String? {
+    override fun permission(): String {
         return "lumaitems.command.copycoordinates"
     }
 

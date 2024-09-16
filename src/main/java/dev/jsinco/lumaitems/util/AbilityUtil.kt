@@ -18,6 +18,7 @@ import org.bukkit.entity.Entity
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.entity.Snowball
+import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
@@ -65,6 +66,13 @@ object AbilityUtil {
     @JvmStatic
     fun noBuildPermission(player: Player, block: Block): Boolean {
         val event = BlockPlaceEvent(block, block.state, block.getRelative(BlockFace.DOWN), ItemStack(Material.AIR), player, true, EquipmentSlot.HAND)
+        Bukkit.getPluginManager().callEvent(event)
+        return event.isCancelled
+    }
+
+    @JvmStatic
+    fun noBreakPermission(player: Player, block: Block): Boolean {
+        val event = BlockBreakEvent(block, player).apply { isDropItems = false }
         Bukkit.getPluginManager().callEvent(event)
         return event.isCancelled
     }

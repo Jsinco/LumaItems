@@ -33,9 +33,14 @@ class BlueGarnetMattockItem : CustomItem {
                 event as BlockBreakEvent
                 val b = event.block
 
+                if (AbilityUtil.noBreakPermission(player, b)) {
+                    return false
+                }
+
                 val blocklist = ShapeUtil.getCuboidBlocks(b.location.add(1.0, 1.0, 1.0), b.location.add(-1.0, -1.0, -1.0)).filter {
                     !AbilityUtil.blockTypeBlacklist.contains(it.type) && it.isSolid
                 }
+
 
                 for (block in blocklist) {
                     block.breakNaturally(player.inventory.itemInMainHand)

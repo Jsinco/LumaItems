@@ -5,6 +5,8 @@ import dev.jsinco.lumaitems.LumaItems
 import dev.jsinco.lumaitems.enums.Tier
 import dev.jsinco.lumaitems.util.MiniMessageUtil
 import dev.jsinco.lumaitems.util.Util
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attribute
@@ -113,8 +115,8 @@ class ItemFactory(
             combinedLore.addAll(lore.map { "<white>$it" })
             combinedLore.addAll(miniMessageTierFormat.map { it.replace("<PLACEHOLDER>", tier) })
 
-            meta.displayName(MiniMessageUtil.mm(name))
-            meta.lore(MiniMessageUtil.mml(combinedLore))
+            meta.displayName(MiniMessageUtil.mm(name).decorationIfAbsent(TextDecoration.BOLD, TextDecoration.State.TRUE))
+            meta.lore(MiniMessageUtil.mml(combinedLore).map { it.colorIfAbsent(NamedTextColor.WHITE) })
         }
 
         for (enchant in vanillaEnchants) {
