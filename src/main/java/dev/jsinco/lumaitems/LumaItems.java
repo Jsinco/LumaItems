@@ -109,6 +109,7 @@ public final class LumaItems extends JavaPlugin {
             papiManager.unregister();
         }
 
+        // here
         try {
             Field singleTonField = LumaItemsAPI.class.getDeclaredField("singleton");
             singleTonField.setAccessible(true);
@@ -120,6 +121,7 @@ public final class LumaItems extends JavaPlugin {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             LumaItems.log("Failed to reset API Singleton instance!", e);
         }
+        // here
     }
 
     public static LumaItems getInstance() {

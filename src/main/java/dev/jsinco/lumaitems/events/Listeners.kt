@@ -219,8 +219,9 @@ class Listeners(val plugin: LumaItems) : Listener {
         fire(data, Action.DROP_ITEM, player, event)
     }
 
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     fun onPlayerBreakBlock(event: BlockBreakEvent) {
+        if (event.isCancelled) return // TODO: remove?
         val player = event.player
         val data: PersistentDataContainer? = player.inventory.itemInMainHand.itemMeta?.persistentDataContainer
 

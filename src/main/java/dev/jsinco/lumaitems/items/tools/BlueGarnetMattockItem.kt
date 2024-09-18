@@ -33,7 +33,7 @@ class BlueGarnetMattockItem : CustomItem {
                 event as BlockBreakEvent
                 val b = event.block
 
-                if (AbilityUtil.noBreakPermission(player, b)) {
+                if (player.world.name.contains("event")) { // temp fix
                     return false
                 }
 
