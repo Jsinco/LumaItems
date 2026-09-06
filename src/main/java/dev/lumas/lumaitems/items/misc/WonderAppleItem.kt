@@ -22,7 +22,10 @@ import org.bukkit.Sound
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.entity.Donkey
+import org.bukkit.entity.Nautilus
 import org.bukkit.entity.Player
+import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerItemConsumeEvent
 import org.bukkit.event.player.PlayerTeleportEvent
 import org.bukkit.inventory.ItemStack
@@ -117,5 +120,9 @@ class WonderAppleItem : CustomItemFunctions() {
 
         attribute.removeModifier(KEY)
         player.world.playSound(player.location, Sound.ITEM_BOTTLE_EMPTY, 1f, 1f)
+    }
+
+    override fun onPlayerInteractEntity(player: Player, event: PlayerInteractEntityEvent) {
+        event.isCancelled = true
     }
 }
