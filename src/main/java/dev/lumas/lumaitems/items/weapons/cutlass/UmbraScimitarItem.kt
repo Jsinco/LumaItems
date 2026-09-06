@@ -48,7 +48,6 @@ class UmbraScimitarItem : CustomItemFunctions() {
         const val PULL_RADIUS = 15.0
         const val SEIZE_RELEASE_RADIUS = 5.0
         const val BURST_DAMAGE = 25.0
-        const val DAMAGE_RADIUS = 3.0
 
         val COLORS = listOf(
             "#210B2F",
@@ -136,7 +135,7 @@ class UmbraScimitarItem : CustomItemFunctions() {
                 }
 
 
-                if (damageTick && victim != player && victim.location.distanceSquared(location) <= DAMAGE_RADIUS * DAMAGE_RADIUS) {
+                if (damageTick && victim != player) {
                     (victim as? LivingEntity)?.damage(PULL_DAMAGE, player)
                     victim.velocity = BukkitVectors.ZERO
                 }
@@ -153,9 +152,7 @@ class UmbraScimitarItem : CustomItemFunctions() {
         world.spawnParticle(Particle.FLAME, center, 50, 0.5, 0.5, 0.5, 0.5)
         world.playSound(center, Sound.ENTITY_GENERIC_EXPLODE, 1.2f, 0.7f)
 
-        for (victim in victimsAround(center, player).filter {
-            it is LivingEntity && it.location.distanceSquared(center) <= DAMAGE_RADIUS * DAMAGE_RADIUS
-        }) {
+        for (victim in victimsAround(center, player).filter { it is LivingEntity }) {
             val outward = victim.location.toVector().subtract(center.toVector()).setY(0.0)
             if (outward.lengthSquared() < 0.01) {
                 outward.x = random().nextDouble(-1.0, 1.0)
@@ -204,7 +201,6 @@ class UmbraScimitarItem : CustomItemFunctions() {
             }
 
             var count = 0
-            var lastDistanceSquared = entity.location.distanceSquared(pin)
 
             pin.world.playSound(pin, Sound.ITEM_LEAD_BREAK, 2.0f, Random.nextDouble(0.5, 0.8).toFloat())
 
@@ -223,13 +219,6 @@ class UmbraScimitarItem : CustomItemFunctions() {
 
 
                 if (count % 10 == 0) {
-                    val distanceSquared = entity.location.distanceSquared(pin)
-                    if (distanceSquared >= lastDistanceSquared) {
-                        this.stop()
-                        return@syncTimer
-                    }
-                    lastDistanceSquared = distanceSquared
-
                     entity.damage(5.0, player)
                     val center = entity.boundingBox.center.toLocation(entity.world)
                     entity.world.spawnParticle(Particle.WAX_OFF, center, 3, 0.2, 0.2, 0.2, 0.9)
