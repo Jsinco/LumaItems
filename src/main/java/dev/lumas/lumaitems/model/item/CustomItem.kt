@@ -9,6 +9,7 @@ import dev.lumas.lumaitems.registry.NamespacedIdentifier
 import dev.lumas.lumaitems.registry.RegistryItem
 import dev.lumas.lumaitems.util.CanvasCompat
 import dev.lumas.lumaitems.util.extensions.Executors
+import io.papermc.paper.event.player.AbstractChatEvent
 import io.papermc.paper.persistence.PersistentDataContainerView
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask
 import kotlin.random.Random
@@ -16,6 +17,7 @@ import org.bukkit.Location
 import org.bukkit.entity.Player
 import org.bukkit.event.Cancellable
 import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.player.PlayerCommandPreprocessEvent
 import org.bukkit.event.player.PlayerItemHeldEvent
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.inventory.ItemStack
@@ -85,8 +87,10 @@ interface CustomItem : RegistryItem {
             && event is Cancellable
             && event !is PlayerMoveEvent
             && event !is PlayerJumpEvent
+            && event !is AbstractChatEvent
             && event !is PlayerItemHeldEvent
             && event !is InventoryClickEvent
+            && event !is PlayerCommandPreprocessEvent
             && !CanvasCompat.isEntityTeleportAsync(event)
         ) {
             event.isCancelled = true
