@@ -31,7 +31,7 @@ import org.bukkit.potion.PotionEffectType
 import org.bukkit.util.Vector
 
 @Disable(WorldKey.PINATA)
-class DarksunScythe : CustomItemFunctions() {
+class DarksunScytheItem : CustomItemFunctions() {
 
     private companion object {
         const val TARGET_ENTITY_RANGE = 50
