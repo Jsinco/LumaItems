@@ -25,6 +25,7 @@ import org.bukkit.block.data.BlockData
 import org.bukkit.block.data.Levelled
 import org.bukkit.block.data.Waterlogged
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.entity.Axolotl
 import org.bukkit.entity.Player
 import org.bukkit.entity.TropicalFish
 import org.bukkit.event.block.CauldronLevelChangeEvent
@@ -32,6 +33,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent
 import org.bukkit.event.player.PlayerBucketEmptyEvent
 import org.bukkit.event.player.PlayerBucketEntityEvent
 import org.bukkit.event.player.PlayerBucketFillEvent
+import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerItemConsumeEvent
 import org.bukkit.event.player.PlayerSwapHandItemsEvent
 import org.bukkit.inventory.ItemStack
@@ -176,6 +178,11 @@ class InfiniteTropicalFishBucketItem : CustomItemFunctions() {
             fish.setPersistentKey(INFINITE_FISH_KEY, PersistentDataType.SHORT, 1)
         }
         target.playBucketSound(player, Sound.ENTITY_TROPICAL_FISH_AMBIENT, SoundCategory.NEUTRAL)
+    }
+
+    override fun onPlayerInteractEntity(player: Player, event: PlayerInteractEntityEvent) {
+        if (event.rightClicked !is Axolotl) return
+        event.isCancelled = true
     }
 
 }
