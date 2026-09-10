@@ -403,7 +403,9 @@ class Listeners : ItemListener() {
 
     @EventHandler
     fun onPlayerInteractEntity(event: PlayerInteractEntityEvent) {
-        //fire(event.player.handSources(), Action.PLAYER_INTERACT_ENTITY, event.player, event)
+        fire(event.player.handSources(), Action.PLAYER_INTERACT_ENTITY, event.player, event)
+        if (event.isCancelled) return
+
         val item = event.player.inventory.getItem(event.hand)
         val animal = event.rightClicked as? Animals ?: return
         if (!item.isLumaItem() || !animal.isBreedItem(item)) return
